@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "me.constantindev.ccl.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "ChatControl",
+    "ShutdownHook",
+    "Updater"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

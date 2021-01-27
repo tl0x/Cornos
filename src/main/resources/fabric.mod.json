@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "ccl",
+  "version": "${version}",
+  "name": "CornClient",
+  "description": "Minimalist client 100% controlled by the console. Helps with duping and has some fun features. Designed to be used with another client",
+  "authors": [
+    "ConstantinDev"
+  ],
+  "contributors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/ccl/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "me.constantindev.ccl.CornClient"
+    ],
+    "client": [],
+    "server": [
+      "me.constantindev.ccl.ServerInitializerErrorHandler"
+    ]
+  },
+  "mixins": [
+    "ccl.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.1",
+    "fabric": "*"
+  }
+}
