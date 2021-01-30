@@ -1,7 +1,7 @@
 package me.constantindev.ccl;
 
 import me.constantindev.ccl.etc.config.ClientConfig;
-import me.constantindev.ccl.etc.config.ConfigHelper;
+import me.constantindev.ccl.etc.helper.ConfigHelper;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.fabricmc.api.ModInitializer;

@@ -1,6 +1,6 @@
 package me.constantindev.ccl.mixin;
 
-import me.constantindev.ccl.etc.config.ConfigHelper;
+import me.constantindev.ccl.etc.helper.ConfigHelper;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

@@ -10,11 +10,11 @@ import net.minecraft.util.math.Direction;
 
 import java.util.Objects;
 
-public class NukerModule extends Module {
+public class Nuker extends Module {
     int current = 0;
 
-    public NukerModule() {
-        super("nuker", "bonk");
+    public Nuker() {
+        super("Nuker", "Stabs blocks like there is no tomorrow");
         this.mconf.add(new ModuleConfig.ConfigKey("range", "5"));
     }
 

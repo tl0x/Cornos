@@ -5,7 +5,7 @@ import net.minecraft.client.MinecraftClient;
 
 public class Suicide extends Module {
     public Suicide() {
-        super("suicide", "You know what this does");
+        super("Suicide", "You know what this does");
     }
 
     @Override

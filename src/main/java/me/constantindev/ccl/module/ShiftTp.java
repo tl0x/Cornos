@@ -8,7 +8,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class ShiftTp extends Module {
     public ShiftTp() {
-        super("ShiftTp", "Teleports you 2 blocks. Useful for phasing through walls");
+        super("ShiftTp", "Teleports you when shifting. Useful for phasing through walls");
         this.mconf.add(new ModuleConfig.ConfigKey("multiplier", "3"));
     }
 

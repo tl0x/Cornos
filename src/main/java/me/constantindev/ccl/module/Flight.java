@@ -6,11 +6,11 @@ import me.constantindev.ccl.etc.helper.ClientHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.math.Vec3d;
 
-public class FlyModule extends Module {
+public class Flight extends Module {
     int counter = 0;
 
-    public FlyModule() {
-        super("flight", "weee");
+    public Flight() {
+        super("Flight", "Allows you to fly");
         this.mconf.add(new ModuleConfig.ConfigKey("mode", "vanilla"));
         this.mconf.add(new ModuleConfig.ConfigKey("toggleFast", "on"));
     }

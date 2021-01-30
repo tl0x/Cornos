@@ -6,9 +6,9 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 
 import java.util.Objects;
 
-public class NoFallModule extends Module {
-    public NoFallModule() {
-        super("nofall", "prevents you from dying from falling");
+public class NoFall extends Module {
+    public NoFall() {
+        super("NoFall", "prevents you from dying from falling");
     }
 
     @Override

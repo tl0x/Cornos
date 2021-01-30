@@ -11,13 +11,15 @@ public class ModuleRegistry {
     private static final List<Module> ml = new ArrayList<>();
 
     public static void init() {
-        ml.add(new TestModule());
-        ml.add(new FlyModule());
-        ml.add(new NoFallModule());
+        ml.add(new Test());
+        ml.add(new Flight());
+        ml.add(new NoFall());
         ml.add(new Suicide());
         ml.add(new ShiftTp());
-        ml.add(new NukerModule());
+        ml.add(new Nuker());
         ml.add(new MassBreak());
+        ml.add(new MoonGravity());
+        ml.add(new Hud());
     }
 
     public static List<Module> getAll() {

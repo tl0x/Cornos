@@ -1,7 +1,8 @@
-package me.constantindev.ccl.etc.config;
+package me.constantindev.ccl.etc.helper;
 
 import me.constantindev.ccl.CornClient;
 import me.constantindev.ccl.etc.base.Module;
+import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.MinecraftClient;
 import org.apache.logging.log4j.Level;

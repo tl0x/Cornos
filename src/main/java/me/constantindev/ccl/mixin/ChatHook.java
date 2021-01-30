@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayerEntity.class)
-public class ChatControl {
+public class ChatHook {
     @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true)
     public void onChatMessageSent(String msg, CallbackInfo cbi) {
         if (msg.toLowerCase().startsWith(ClientConfig.chatPrefix.toLowerCase())) {

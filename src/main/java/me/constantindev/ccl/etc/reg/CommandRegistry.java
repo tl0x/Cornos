@@ -13,7 +13,7 @@ public class CommandRegistry {
     public static void init() {
         cl.add(new Toggle());
         cl.add(new Config());
-        cl.add(new TestCommand());
+        cl.add(new Test());
         cl.add(new Help());
         cl.add(new Dupe());
     }

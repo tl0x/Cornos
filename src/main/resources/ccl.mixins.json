@@ -3,9 +3,11 @@
   "package": "me.constantindev.ccl.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ChatControl",
+    "ChatHook",
+    "IngameRendererHook",
+    "MainScreenHook",
     "ShutdownHook",
-    "Updater"
+    "TickHook"
   ],
   "client": [],
   "server": [],
