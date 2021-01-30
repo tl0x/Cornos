@@ -26,9 +26,6 @@ public class IngameRendererHook {
     @Shadow
     private int scaledWidth;
 
-    @Shadow
-    private int scaledHeight;
-
     @Inject(method = "render", at = @At("RETURN"))
     public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) throws InvalidStateException {
         rgbSeed++;
