@@ -1,13 +1,12 @@
 package me.constantindev.ccl.mixin;
 
 import com.google.common.collect.Lists;
+import me.constantindev.ccl.etc.InvalidStateException;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.crash.CrashException;
-import net.minecraft.util.crash.CrashReport;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,8 +26,11 @@ public class IngameRendererHook {
     @Shadow
     private int scaledWidth;
 
+    @Shadow
+    private int scaledHeight;
+
     @Inject(method = "render", at = @At("RETURN"))
-    public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+    public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) throws InvalidStateException {
         rgbSeed++;
         if (rgbSeed > 255) {
             rgbSeed = 0;
@@ -54,14 +56,7 @@ public class IngameRendererHook {
                 break;
             default:
                 // shit hit the fan how is stage above 2
-                r = 0;
-                g = 0;
-                b = 0;
-                CrashReport rp = CrashReport.create(new Throwable(), "How the fuck");
-                rp.addElement("Shit hit the fucking fan");
-                rp.addElement("How is the rgb stage above 2");
-                rp.addElement("Did you modify game memory?");
-                throw new CrashException(rp);
+                throw new InvalidStateException("RgbStage", stage + "");
         }
         int rgb = (0xFF << 24) + (r << 16) + (g << 8) + b;
         if (rgbSeed % 10 == 0) lastValues.add(rgb);
@@ -69,20 +64,24 @@ public class IngameRendererHook {
         if (ModuleRegistry.getByName("hud").isEnabled) {
             AtomicInteger offset = new AtomicInteger(1);
             List<Module> ml = ModuleRegistry.getAll();
-            ml.sort(Comparator.comparingInt(o -> MinecraftClient.getInstance().textRenderer.getWidth(o.name)));
-            List<Module> mlR = Lists.reverse(ml);
-            if (lastValues.size() > mlR.size()) {
+            List<Module> mlR = new ArrayList<>();
+            ml.forEach(module -> {
+                if (module.isEnabled) mlR.add(module);
+            });
+            mlR.sort(Comparator.comparingInt(o -> MinecraftClient.getInstance().textRenderer.getWidth(o.name)));
+            List<Module> mlR1 = Lists.reverse(mlR);
+            if (lastValues.size() > mlR1.size()) {
                 lastValues.subList(0, 1).clear();
             }
             AtomicInteger current = new AtomicInteger(0);
-            mlR.forEach(module -> {
+            mlR1.forEach(module -> {
                 int colorToUse;
                 try {
                     colorToUse = lastValues.get(current.addAndGet(1));
                 } catch (Exception ignored) {
                     colorToUse = rgb;
                 }
-                MinecraftClient.getInstance().textRenderer.draw(matrices, module.name, scaledWidth - 1 - MinecraftClient.getInstance().textRenderer.getWidth(module.name), offset.getAndAdd(10), colorToUse);
+                MinecraftClient.getInstance().textRenderer.draw(matrices, module.name, scaledWidth - MinecraftClient.getInstance().textRenderer.getWidth(module.name) - 1, 1 + offset.getAndAdd(10), colorToUse);
             });
         }
     }

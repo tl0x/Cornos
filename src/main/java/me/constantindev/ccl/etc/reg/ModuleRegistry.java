@@ -20,6 +20,7 @@ public class ModuleRegistry {
         ml.add(new MassBreak());
         ml.add(new MoonGravity());
         ml.add(new Hud());
+        ml.add(new AutoRespawn());
     }
 
     public static List<Module> getAll() {
