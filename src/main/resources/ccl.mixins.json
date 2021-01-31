@@ -6,8 +6,10 @@
     "ChatHook",
     "IngameRendererHook",
     "MainScreenHook",
+    "PumpkinOverlay",
     "ShutdownHook",
-    "TickHook"
+    "TickHook",
+    "WorldRenderMixin"
   ],
   "client": [],
   "server": [],
