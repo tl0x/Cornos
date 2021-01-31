@@ -1,24 +1,25 @@
 package me.constantindev.ccl.etc.config;
 
-import me.constantindev.ccl.etc.InvalidStateException;
-
 public class Toggleable extends ModuleConfig.ConfigKey {
     boolean enabled;
+
     public Toggleable(String name, boolean initialStatus) {
-        super(name, initialStatus?"on":"off");
+        super(name, initialStatus ? "on" : "off");
         enabled = initialStatus;
     }
+
     public void toggle() {
         enabled = !enabled;
-        this.setValue(enabled?"on":"off");
+        this.setValue(enabled ? "on" : "off");
     }
+
     public boolean isEnabled() {
         return enabled;
     }
 
     @Override
     public void setValue(String newV) {
-        switch(newV) {
+        switch (newV) {
             case "on":
                 enabled = true;
                 break;

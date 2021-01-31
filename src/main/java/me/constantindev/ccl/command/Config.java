@@ -6,7 +6,6 @@ import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Formatting;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -48,11 +47,11 @@ public class Config extends Command {
             ModuleConfig.ConfigKey cfk = m.mconf.getOrDefault(args[1], new ModuleConfig.ConfigKey(args[1], "0"));
             if (cfk instanceof Toggleable) {
                 ((Toggleable) cfk).toggle();
-                ClientHelper.sendChat("Toggled property "+cfk.key);
+                ClientHelper.sendChat("Toggled property " + cfk.key);
 
             } else {
                 cfk.setValue(String.join(" ", ArrayUtils.subarray(args, 2, args.length)));
-                ClientHelper.sendChat("Set property "+cfk.key+" to "+cfk.value);
+                ClientHelper.sendChat("Set property " + cfk.key + " to " + cfk.value);
             }
 
         }
