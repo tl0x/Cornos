@@ -4,12 +4,13 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "ChatHook",
+    "FireOverlayReplacement",
     "IngameRendererHook",
     "MainScreenHook",
-    "PumpkinOverlay",
+    "PumpkinOverlayReplacement",
     "ShutdownHook",
     "TickHook",
-    "WorldRenderMixin"
+    "WorldRenderHook"
   ],
   "client": [],
   "server": [],

@@ -7,7 +7,6 @@ import net.minecraft.client.MinecraftClient;
 import java.util.Objects;
 
 public class Test extends Command {
-    boolean isRunning = false;
 
     public Test() {
         super("Test", "bruh", new String[]{"test"});

@@ -4,6 +4,7 @@ import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.module.*;
 import me.constantindev.ccl.module.ext.BlockHighlighter;
 import me.constantindev.ccl.module.ext.Hud;
+import me.constantindev.ccl.module.ext.NoFireOverlay;
 import me.constantindev.ccl.module.ext.NoPumpkin;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class ModuleRegistry {
         ml.add(new AutoRespawn());
         ml.add(new NoPumpkin());
         ml.add(new BlockHighlighter());
+        ml.add(new NoFireOverlay());
     }
 
     public static List<Module> getAll() {

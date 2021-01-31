@@ -32,6 +32,11 @@ public class ConfigHelper {
             confFinal.add(module.name + "=" + String.join(",", configKeys));
         });
         String finalC = String.join(";", confFinal);
+        List<String> enabledM = new ArrayList<>();
+        for (Module m : ModuleRegistry.getAll()) {
+            if (m.isEnabled) enabledM.add(m.name);
+        }
+        String enabledMFinal = String.join(":", enabledM);
         try {
             File f = new File(MinecraftClient.getInstance().runDirectory + "/ccl_moduleconfig.bin");
             if (f.exists()) f.delete();
@@ -39,6 +44,7 @@ public class ConfigHelper {
             FileWriter fw = new FileWriter(f);
             fw.write(xor((char) 42069, finalC));
             fw.write("\n");
+            fw.write(xor((char) 694, enabledMFinal));
             fw.flush();
             fw.close();
         } catch (Exception ignored) {
@@ -48,11 +54,18 @@ public class ConfigHelper {
     public static void loadConfig() {
         try {
             File f = new File(MinecraftClient.getInstance().runDirectory + "/ccl_moduleconfig.bin");
+            if (!f.exists()) return;
             Scanner s = new Scanner(f);
             StringBuilder sb = new StringBuilder();
+            StringBuilder fileData = new StringBuilder();
             while (s.hasNextLine()) {
                 String data = s.nextLine();
-                sb.append(xor((char) 42069, data));
+                fileData.append(data + "\n");
+            }
+            String fileDataS = fileData.toString();
+            sb.append(xor((char) 42069, fileDataS.split("\n")[0]));
+            for (String str : xor((char) 694, fileDataS.split("\n")[1]).split(":")) {
+                ModuleRegistry.getByName(str).isEnabled = true;
             }
             //System.out.println(sb.toString());
             for (String ck : sb.toString().split(";")) {
