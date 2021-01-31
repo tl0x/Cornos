@@ -2,6 +2,7 @@ package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ModuleConfig;
+import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.math.Vec3d;
@@ -12,7 +13,7 @@ public class Flight extends Module {
     public Flight() {
         super("Flight", "Allows you to fly");
         this.mconf.add(new ModuleConfig.ConfigKey("mode", "vanilla"));
-        this.mconf.add(new ModuleConfig.ConfigKey("toggleFast", "on"));
+        this.mconf.add(new Toggleable("toggleFast", true));
     }
 
     @Override
@@ -23,18 +24,10 @@ public class Flight extends Module {
         } catch (Exception exc) {
             this.mconf.getByName("speed").setValue("1.0");
         }
-        switch (this.mconf.getByName("toggleFast").value) {
-            case "on":
-                if (counter > 10) counter = 0;
-                counter++;
-
-                break;
-            case "off":
-                counter = 0;
-                break;
-            default:
-                this.mconf.getByName("toggleFast").setValue("on");
-        }
+        if (((Toggleable) this.mconf.getByName("toggleFast")).isEnabled()) {
+            if (counter > 10) counter = 0;
+            counter++;
+        } else counter = 0;
         switch (this.mconf.getByName("mode").value) {
             case "vanilla":
                 assert MinecraftClient.getInstance().player != null;
