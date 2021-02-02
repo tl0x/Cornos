@@ -4,7 +4,7 @@ A small client useful for a variety of tasks ranging from raiding to duping.
 Note: Always use this with another client, this client is not good enough (yet) to be used single handed
 
 # Installation
-Since so many people ask me how to build this and cant read, apparently, I will say the following
+Since so many people ask me how to build this and cant read apparently, I will say the following
 
 **YOU DO NOT NEED TO BUILD IT YOURSELF. READ [How to obtain the mod without building](#prebuilds) TO DOWNLOAD A PREBUILD**
 
