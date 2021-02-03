@@ -9,10 +9,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class CornClient implements ModInitializer {
+public class Cornos implements ModInitializer {
 
     public static final String MOD_ID = "ccl";
-    public static final String MOD_NAME = "CornClient";
+    public static final String MOD_NAME = "Cornos";
     public static Logger LOGGER = LogManager.getLogger();
 
     public static void log(Level level, String message) {

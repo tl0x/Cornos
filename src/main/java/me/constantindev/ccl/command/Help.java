@@ -1,6 +1,6 @@
 package me.constantindev.ccl.command;
 
-import me.constantindev.ccl.CornClient;
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
@@ -31,7 +31,7 @@ public class Help extends Command {
                     ClientHelper.sendChat("All commands:");
                     CommandRegistry.getAll().forEach(command -> {
                         Style bonk = Text.of("").getStyle().withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.of("Triggers: " + String.join(", ", command.triggers))));
-                        LiteralText bruh1 = new net.minecraft.text.LiteralText(Formatting.DARK_AQUA + "[ " + Formatting.AQUA + CornClient.MOD_ID.toUpperCase() + Formatting.DARK_AQUA + " ]   " + Formatting.RESET + Formatting.AQUA + "  " + command.displayName + " (" + command.triggers[0] + ")" + ": " + Formatting.BLUE + command.description);
+                        LiteralText bruh1 = new net.minecraft.text.LiteralText(Formatting.DARK_AQUA + "[ " + Formatting.AQUA + Cornos.MOD_ID.toUpperCase() + Formatting.DARK_AQUA + " ]   " + Formatting.RESET + Formatting.AQUA + "  " + command.displayName + " (" + command.triggers[0] + ")" + ": " + Formatting.BLUE + command.description);
                         bruh1.setStyle(bonk);
                         assert MinecraftClient.getInstance().player != null;
                         MinecraftClient.getInstance().player.sendMessage(bruh1, false);

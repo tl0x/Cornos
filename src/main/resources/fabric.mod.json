@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "ccl",
   "version": "${version}",
-  "name": "CornClient",
+  "name": "Cornos",
   "description": "Minimalist client 100% controlled by the console. Helps with duping and has some fun features. Designed to be used with another client",
   "authors": [
     "ConstantinDev"
@@ -14,7 +14,7 @@
   "environment": "client",
   "entrypoints": {
     "main": [
-      "me.constantindev.ccl.CornClient"
+      "me.constantindev.ccl.Cornos"
     ],
     "client": [],
     "server": [

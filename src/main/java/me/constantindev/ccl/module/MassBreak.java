@@ -1,6 +1,6 @@
 package me.constantindev.ccl.module;
 
-import me.constantindev.ccl.CornClient;
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ModuleConfig;
 import net.minecraft.client.MinecraftClient;
@@ -34,7 +34,7 @@ public class MassBreak extends Module {
             return;
         }
         if (MinecraftClient.getInstance().options.keyAttack.isPressed()) {
-            CornClient.log(Level.INFO, "bruh");
+            Cornos.log(Level.INFO, "bruh");
             for (int x = 0; x < rad; x++) {
                 for (int y = 0; y < rad; y++) {
                     for (int z = 0; z < rad; z++) {

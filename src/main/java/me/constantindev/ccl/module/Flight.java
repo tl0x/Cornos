@@ -2,6 +2,7 @@ package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ModuleConfig;
+import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import net.minecraft.client.MinecraftClient;
@@ -12,7 +13,7 @@ public class Flight extends Module {
 
     public Flight() {
         super("Flight", "Allows you to fly");
-        this.mconf.add(new ModuleConfig.ConfigKey("mode", "vanilla"));
+        this.mconf.add(new MultiOption("mode", "vanilla", new String[]{"vanilla", "static"}));
         this.mconf.add(new Toggleable("toggleFast", true));
     }
 

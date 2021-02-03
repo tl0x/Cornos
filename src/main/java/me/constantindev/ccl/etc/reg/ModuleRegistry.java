@@ -28,6 +28,9 @@ public class ModuleRegistry {
         ml.add(new NoPumpkin());
         ml.add(new BlockHighlighter());
         ml.add(new NoFireOverlay());
+        ml.add(new AutoTool());
+        ml.add(new ServerCrasher());
+        ml.add(new Jesus());
     }
 
     public static List<Module> getAll() {

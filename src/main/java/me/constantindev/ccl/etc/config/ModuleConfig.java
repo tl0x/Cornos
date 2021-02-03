@@ -43,10 +43,6 @@ public class ModuleConfig {
             this.value = v;
         }
 
-        public void setKey(String newK) {
-            this.key = newK;
-        }
-
         public void setValue(String newV) {
             this.value = newV;
         }

@@ -8,7 +8,7 @@ public class ServerInitializerErrorHandler implements DedicatedServerModInitiali
 
     @Override
     public void onInitializeServer() {
-        CornClient.log(Level.INFO, "This mod (CornClient) is designed to be used on a client. Please remove this mod from your mods folder immediately. Server will now shut down.");
+        Cornos.log(Level.INFO, "This mod (Cornos) is designed to be used on a client. Please remove this mod from your mods folder immediately. Server will now shut down.");
         MinecraftClient.getInstance().stop();
     }
 }

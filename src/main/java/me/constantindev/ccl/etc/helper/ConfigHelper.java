@@ -1,6 +1,6 @@
 package me.constantindev.ccl.etc.helper;
 
-import me.constantindev.ccl.CornClient;
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
@@ -38,15 +38,20 @@ public class ConfigHelper {
         }
         String enabledMFinal = String.join(":", enabledM);
         try {
+            boolean garbage;
+            boolean garbage1 = true;
             File f = new File(MinecraftClient.getInstance().runDirectory + "/ccl_moduleconfig.bin");
-            if (f.exists()) f.delete();
-            f.createNewFile();
+            if (f.exists()) garbage1 = f.delete();
+            garbage = f.createNewFile();
             FileWriter fw = new FileWriter(f);
             fw.write(xor((char) 42069, finalC));
             fw.write("\n");
             fw.write(xor((char) 694, enabledMFinal));
             fw.flush();
             fw.close();
+            if (garbage && garbage1) {
+                Cornos.log(Level.INFO, "Successfully saved config");
+            }
         } catch (Exception ignored) {
         }
     }
@@ -60,7 +65,7 @@ public class ConfigHelper {
             StringBuilder fileData = new StringBuilder();
             while (s.hasNextLine()) {
                 String data = s.nextLine();
-                fileData.append(data + "\n");
+                fileData.append(data).append("\n");
             }
             String fileDataS = fileData.toString();
             sb.append(xor((char) 42069, fileDataS.split("\n")[0]));
@@ -77,13 +82,13 @@ public class ConfigHelper {
                 Module m = ModuleRegistry.getByName(mname);
                 //System.out.println(m);
                 if (m == null) continue;
-                CornClient.log(Level.INFO, "Loading config for module " + m.name);
+                Cornos.log(Level.INFO, "Loading config for module " + m.name);
                 if (config.isEmpty()) continue;
                 for (String v : config.split(",")) {
                     String k = v.split(":")[0];
                     String v1 = v.split(":")[1];
                     m.mconf.getOrDefault(k, new ModuleConfig.ConfigKey(k, v1)).setValue(v1);
-                    CornClient.log(Level.INFO, "  " + k + " = " + v1);
+                    Cornos.log(Level.INFO, "  " + k + " = " + v1);
                 }
             }
         } catch (Exception ignored) {
