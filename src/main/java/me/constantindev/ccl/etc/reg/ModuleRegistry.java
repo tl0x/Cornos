@@ -2,10 +2,7 @@ package me.constantindev.ccl.etc.reg;
 
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.module.*;
-import me.constantindev.ccl.module.ext.BlockHighlighter;
-import me.constantindev.ccl.module.ext.Hud;
-import me.constantindev.ccl.module.ext.NoFireOverlay;
-import me.constantindev.ccl.module.ext.NoPumpkin;
+import me.constantindev.ccl.module.ext.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +28,7 @@ public class ModuleRegistry {
         ml.add(new AutoTool());
         ml.add(new ServerCrasher());
         ml.add(new Jesus());
+        ml.add(new BuildingHeightPlus());
     }
 
     public static List<Module> getAll() {
