@@ -29,6 +29,7 @@ public class ModuleRegistry {
         ml.add(new ServerCrasher());
         ml.add(new Jesus());
         ml.add(new BuildingHeightPlus());
+        ml.add(new MidAirPlace());
     }
 
     public static List<Module> getAll() {

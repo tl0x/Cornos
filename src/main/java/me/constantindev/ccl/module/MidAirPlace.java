@@ -1,0 +1,30 @@
+package me.constantindev.ccl.module;
+
+import me.constantindev.ccl.etc.RenderableBlock;
+import me.constantindev.ccl.etc.base.Module;
+import me.constantindev.ccl.etc.helper.RenderHelper;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
+
+public class MidAirPlace extends Module  {
+    public MidAirPlace() {
+        super("MidAirPlace","Allows you to place blocks midair");
+    }
+    int timeout = 20;
+    @Override
+    public void onExecute() {
+        HitResult hr = MinecraftClient.getInstance().crosshairTarget;
+        if (!(hr instanceof BlockHitResult)) return;
+        RenderHelper.addToQueue(new RenderableBlock(((BlockHitResult) hr).getBlockPos(),255,50,50,255));
+        if(MinecraftClient.getInstance().options.keyUse.isPressed()) {
+            timeout--;
+            if (timeout != 19 && timeout > 0) return;
+            PlayerInteractBlockC2SPacket p = new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND,(BlockHitResult) hr);
+            MinecraftClient.getInstance().getNetworkHandler().sendPacket(p);
+        } else timeout = 20;
+        super.onExecute();
+    }
+}

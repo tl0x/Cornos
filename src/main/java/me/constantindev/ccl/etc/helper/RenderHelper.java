@@ -2,6 +2,7 @@ package me.constantindev.ccl.etc.helper;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.constantindev.ccl.etc.RenderType;
+import me.constantindev.ccl.etc.RenderableBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
@@ -11,7 +12,15 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RenderHelper {
+    public static List<RenderableBlock> queue = new ArrayList<>();
+    public static void addToQueue(RenderableBlock block) {
+        if (queue.contains(block)) return;
+        queue.add(block);
+    }
     public static void renderBlockOutline(BlockPos bpos, int r, int g, int b, int a, MatrixStack matrices, Camera camera) {
         Vec3d cameraPos = camera.getPos();
         VertexConsumerProvider.Immediate entityVertexConsumers = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
