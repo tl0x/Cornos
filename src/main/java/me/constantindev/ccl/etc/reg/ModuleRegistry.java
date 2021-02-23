@@ -30,6 +30,7 @@ public class ModuleRegistry {
         ml.add(new Jesus());
         ml.add(new BuildingHeightPlus());
         ml.add(new MidAirPlace());
+        ml.add(new XRAY());
     }
 
     public static List<Module> getAll() {

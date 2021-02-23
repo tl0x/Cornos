@@ -9,7 +9,7 @@ import net.minecraft.util.math.Vec3d;
 public class Jesus extends Module {
     public Jesus() {
         super("Jesus", "Yisus.");
-        this.mconf.add(new MultiOption("mode", "jump", new String[]{"jump", "velocity", "vanilla", "solid"}));
+        this.mconf.add(new MultiOption("mode", "jump", new String[]{"jump", "velocity", "vanilla", "dontfall"}));
     }
 
     @Override

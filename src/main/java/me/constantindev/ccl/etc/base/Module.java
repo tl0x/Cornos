@@ -16,4 +16,21 @@ public class Module {
 
     public void onExecute() {
     }
+
+    public void onEnable() {
+
+    }
+
+    public void onDisable() {
+
+    }
+
+    public final void setEnabled(boolean isEnabled) {
+        if (isEnabled) {
+            this.onEnable();
+        } else {
+            this.onDisable();
+        }
+        this.isEnabled = isEnabled;
+    }
 }

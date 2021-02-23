@@ -17,10 +17,12 @@ import java.util.List;
 
 public class RenderHelper {
     public static List<RenderableBlock> queue = new ArrayList<>();
+
     public static void addToQueue(RenderableBlock block) {
         if (queue.contains(block)) return;
         queue.add(block);
     }
+
     public static void renderBlockOutline(BlockPos bpos, int r, int g, int b, int a, MatrixStack matrices, Camera camera) {
         Vec3d cameraPos = camera.getPos();
         VertexConsumerProvider.Immediate entityVertexConsumers = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();

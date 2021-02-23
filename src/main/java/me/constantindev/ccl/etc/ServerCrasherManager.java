@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
 
+@SuppressWarnings("BusyWait")
 public class ServerCrasherManager {
     public static int strength = 100;
     public static String mode = "";
@@ -21,7 +22,6 @@ public class ServerCrasherManager {
                     ModuleRegistry.getByName("servercrasher").isEnabled = false;
                     continue;
                 }
-                System.out.println("Crasher called");
                 Random r = new Random();
                 switch (mode) {
                     case "rotation":

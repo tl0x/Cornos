@@ -1,6 +1,5 @@
 package me.constantindev.ccl.mixin;
 
-import me.constantindev.ccl.etc.RenderableBlock;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
@@ -20,9 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class WorldRenderHook {
     @Inject(method = "render", at = @At("TAIL"))
     public void render(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo ci) {
-        RenderHelper.queue.forEach(renderableBlock -> {
-            RenderHelper.renderBlockOutline(renderableBlock.bp, renderableBlock.r, renderableBlock.g, renderableBlock.b, renderableBlock.a, matrices,camera);
-        });
+        RenderHelper.queue.forEach(renderableBlock -> RenderHelper.renderBlockOutline(renderableBlock.bp, renderableBlock.r, renderableBlock.g, renderableBlock.b, renderableBlock.a, matrices, camera));
 
         if (!ModuleRegistry.getByName("blockhighlighter").isEnabled) return;
         String[] coordpair = ModuleRegistry.getByName("blockhighlighter").mconf.getByName("pos").value.split(" "); // forgive me god

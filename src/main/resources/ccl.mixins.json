@@ -11,7 +11,8 @@
     "PumpkinOverlayReplacement",
     "ShutdownHook",
     "TickHook",
-    "WorldRenderHook"
+    "WorldRenderHook",
+    "XrayHandler"
   ],
   "client": [],
   "server": [],
