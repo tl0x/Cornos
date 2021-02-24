@@ -2,6 +2,7 @@ package me.constantindev.ccl;
 
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.helper.ConfigHelper;
+import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.fabricmc.api.ModInitializer;
@@ -30,9 +31,13 @@ public class Cornos implements ModInitializer {
         CommandRegistry.init();
         log(Level.INFO, "Initializing module registry");
         ModuleRegistry.init();
+        log(Level.INFO, "Loading the configuration file");
+        ConfigHelper.loadConfig();
+        log(Level.INFO, "Registering all keybinds");
+        KeyBindManager.init();
         log(Level.INFO, "All features registered. Ready to load game");
 
-        ConfigHelper.loadConfig();
+
     }
 
 }

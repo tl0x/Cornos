@@ -28,9 +28,10 @@ public class ModuleRegistry {
         ml.add(new AutoTool());
         ml.add(new ServerCrasher());
         ml.add(new Jesus());
-        ml.add(new BuildingHeightPlus());
+        ml.add(new BuildLimit());
         ml.add(new MidAirPlace());
         ml.add(new XRAY());
+        ml.add(new AntiOffhandCrash());
     }
 
     public static List<Module> getAll() {

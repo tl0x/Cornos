@@ -46,8 +46,20 @@ public class Config extends Command {
             }
             ModuleConfig.ConfigKey cfk = m.mconf.getOrDefault(args[1], new ModuleConfig.ConfigKey(args[1], "0"));
             if (cfk instanceof Toggleable) {
-                ((Toggleable) cfk).toggle();
-                ClientHelper.sendChat("Toggled property " + cfk.key);
+                boolean newState;
+                if (args[2].equalsIgnoreCase("on")) newState = true;
+                else if (args[2].equalsIgnoreCase("off")) newState = false;
+                else if (args[2].equalsIgnoreCase("toggle")) {
+                    ((Toggleable) cfk).toggle();
+                    ClientHelper.sendChat("Toggled " + cfk.key + " to " + (cfk.value));
+                    return;
+                } else {
+                    ClientHelper.sendChat("Syntax: }config <module> <key> <<on/off/toggle>/value>");
+                    return;
+                }
+                cfk.setValue(newState ? "on" : "off");
+                ClientHelper.sendChat("Set " + cfk.key + " to " + cfk.value);
+
 
             } else {
                 cfk.setValue(String.join(" ", ArrayUtils.subarray(args, 2, args.length)));

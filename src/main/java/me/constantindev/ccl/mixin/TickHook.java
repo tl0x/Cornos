@@ -1,5 +1,6 @@
 package me.constantindev.ccl.mixin;
 
+import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -16,5 +17,6 @@ public class TickHook {
         ModuleRegistry.getAll().forEach(m -> {
             if (m.isEnabled) m.onExecute();
         });
+        KeyBindManager.tick();
     }
 }

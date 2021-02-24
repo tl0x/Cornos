@@ -3,6 +3,7 @@
   "package": "me.constantindev.ccl.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AntiOffhandCrash",
     "ChatHook",
     "FireOverlayReplacement",
     "IngameRendererHook",

@@ -12,6 +12,7 @@ public class Module {
         this.name = n;
         this.description = d;
         this.mconf = new ModuleConfig(this);
+        this.mconf.add(new ModuleConfig.ConfigKey("keybind", "-1"));
     }
 
     public void onExecute() {

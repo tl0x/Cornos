@@ -16,6 +16,8 @@ public class CommandRegistry {
         cl.add(new Test());
         cl.add(new Help());
         cl.add(new Dupe());
+        cl.add(new Crash());
+        cl.add(new Keybind());
     }
 
     public static List<Command> getAll() {
