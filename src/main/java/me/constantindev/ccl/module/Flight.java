@@ -1,8 +1,10 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.config.MultiOption;
+import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import net.minecraft.client.MinecraftClient;
@@ -12,7 +14,7 @@ public class Flight extends Module {
     int counter = 0;
 
     public Flight() {
-        super("Flight", "Allows you to fly");
+        super("Flight", "Allows you to fly", MType.MOVEMENT);
         this.mconf.add(new MultiOption("mode", "vanilla", new String[]{"vanilla", "static"}));
         this.mconf.add(new Toggleable("toggleFast", true));
     }
@@ -21,7 +23,7 @@ public class Flight extends Module {
     public void onExecute() {
         double speed = 1.0;
         try {
-            speed = Double.parseDouble(this.mconf.getOrDefault("speed", new ModuleConfig.ConfigKey("speed", "1.0")).value);
+            speed = Double.parseDouble(this.mconf.getOrDefault("speed", new Num("speed",1.0,30,0)).value);
         } catch (Exception exc) {
             this.mconf.getByName("speed").setValue("1.0");
         }

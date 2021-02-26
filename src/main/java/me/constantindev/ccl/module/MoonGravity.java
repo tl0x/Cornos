@@ -1,11 +1,12 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import net.minecraft.client.MinecraftClient;
 
 public class MoonGravity extends Module {
     public MoonGravity() {
-        super("MoonGravity", "Makes you go weee");
+        super("MoonGravity", "Makes you go weee", MType.MOVEMENT);
     }
 
     @Override

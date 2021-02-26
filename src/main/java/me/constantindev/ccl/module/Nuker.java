@@ -1,7 +1,9 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ModuleConfig;
+import me.constantindev.ccl.etc.config.Num;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
@@ -14,18 +16,13 @@ public class Nuker extends Module {
     int current = 0;
 
     public Nuker() {
-        super("Nuker", "Stabs blocks like there is no tomorrow");
-        this.mconf.add(new ModuleConfig.ConfigKey("range", "5"));
+        super("Nuker", "Stabs blocks like there is no tomorrow", MType.WORLD);
+        this.mconf.add(new Num("range",5,10,0));
     }
 
     @Override
     public void onExecute() {
-        int range = 5;
-        try {
-            range = Integer.parseInt(this.mconf.getByName("range").value);
-        } catch (Exception exc) {
-            this.mconf.getByName("range").setValue("5");
-        }
+        int range = (int) ((Num) this.mconf.getByName("range")).getValue();
         current++;
         if (current > 2) current = 0;
         else return;

@@ -1,8 +1,10 @@
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ModuleConfig;
+import me.constantindev.ccl.etc.config.Num;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.util.hit.BlockHitResult;
@@ -14,18 +16,13 @@ import java.util.Objects;
 
 public class MassBreak extends Module {
     public MassBreak() {
-        super("MassBreak", "Breaks a lot if you break a block");
-        this.mconf.add(new ModuleConfig.ConfigKey("radius", "3"));
+        super("MassBreak", "Breaks a lot if you break a block", MType.WORLD);
+        this.mconf.add(new Num("radius",3.0,10,0));
     }
 
     @Override
     public void onExecute() {
-        int rad = 3;
-        try {
-            rad = Integer.parseInt(this.mconf.getByName("radius").value);
-        } catch (Exception ignored) {
-            this.mconf.getByName("radius").setValue("3");
-        }
+        int rad = (int) ((Num) this.mconf.getByName("radius")).getValue();
         BlockPos latest;
         try {
             assert MinecraftClient.getInstance().crosshairTarget != null;

@@ -58,12 +58,12 @@ public class IngameRendererHook {
         int rgb = (0xFF << 24) + (r << 16) + (g << 8) + b;
         if (rgbSeed % 10 == 0) lastValues.add(rgb);
 
-        if (ModuleRegistry.getByName("hud").isEnabled) {
+        if (ModuleRegistry.getByName("hud").isOn.isOn()) {
             AtomicInteger offset = new AtomicInteger(1);
             List<Module> ml = ModuleRegistry.getAll();
             List<Module> mlR = new ArrayList<>();
             ml.forEach(module -> {
-                if (module.isEnabled) mlR.add(module);
+                if (module.isOn.isOn()) mlR.add(module);
             });
             mlR.sort(Comparator.comparingInt(o -> MinecraftClient.getInstance().textRenderer.getWidth(o.name)));
             List<Module> mlR1 = Lists.reverse(mlR);

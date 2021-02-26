@@ -14,12 +14,12 @@ public class ServerCrasherManager {
     public static Thread runner = new Thread(() -> {
         while (true) {
             try {
-                if (!ModuleRegistry.getByName("servercrasher").isEnabled) {
+                if (!ModuleRegistry.getByName("servercrasher").isOn.isOn()) {
                     Thread.sleep(10);
                     continue;
                 }
                 if (MinecraftClient.getInstance().getNetworkHandler() == null) {
-                    ModuleRegistry.getByName("servercrasher").isEnabled = false;
+                    ModuleRegistry.getByName("servercrasher").isOn.setState(false);
                     continue;
                 }
                 Random r = new Random();
@@ -46,7 +46,7 @@ public class ServerCrasherManager {
                 }
                 Thread.sleep(100 / strength - 1);
             } catch (Exception ignored) {
-                ModuleRegistry.getByName("servercrasher").isEnabled = false;
+                ModuleRegistry.getByName("servercrasher").isOn.setState(false);
             }
         }
     });

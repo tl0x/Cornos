@@ -22,6 +22,6 @@ public class Toggle extends Command {
             ClientHelper.sendChat("Module not found bruh");
             return;
         }
-        m.setEnabled(!m.isEnabled);
+        m.isOn.toggle();
     }
 }

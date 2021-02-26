@@ -3,6 +3,8 @@ package me.constantindev.ccl.mixin;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.gui.ClickGUI;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,7 +17,8 @@ public class TickHook {
     public void tick(CallbackInfo ci) {
         RenderHelper.queue.clear();
         ModuleRegistry.getAll().forEach(m -> {
-            if (m.isEnabled) m.onExecute();
+            m.updateVitals();
+            if (m.isOn.isOn()) m.onExecute();
         });
         KeyBindManager.tick();
     }

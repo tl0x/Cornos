@@ -1,11 +1,12 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import net.minecraft.client.MinecraftClient;
 
 public class Suicide extends Module {
     public Suicide() {
-        super("Suicide", "You know what this does");
+        super("Suicide", "You know what this does", MType.EXPLOIT);
     }
 
     @Override
@@ -19,7 +20,7 @@ public class Suicide extends Module {
             } catch (Exception ignored) {
             }
         }).start();
-        this.isEnabled = false;
+        this.isOn.setState(false);
         super.onExecute();
     }
 }

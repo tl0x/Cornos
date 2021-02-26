@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class FireOverlayReplacement {
     @Inject(method = "renderFireOverlay", cancellable = true, at = @At("HEAD"))
     private static void renderFireOverlay(MinecraftClient minecraftClient, MatrixStack matrixStack, CallbackInfo ci) {
-        if (ModuleRegistry.getByName("nofireoverlay").isEnabled) {
+        if (ModuleRegistry.getByName("nofireoverlay").isOn.isOn()) {
             ci.cancel();
         }
     }

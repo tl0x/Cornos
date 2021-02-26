@@ -17,7 +17,7 @@ public abstract class PacketTryUseItemOnBlockHook {
 
     @Inject(method = "getSide", at = @At("HEAD"), cancellable = true)
     public void constructor(CallbackInfoReturnable<Direction> cir) {
-        if (ModuleRegistry.getByName("buildlimit").isEnabled) {
+        if (ModuleRegistry.getByName("buildlimit").isOn.isOn()) {
             cir.setReturnValue(Direction.DOWN);
         }
     }

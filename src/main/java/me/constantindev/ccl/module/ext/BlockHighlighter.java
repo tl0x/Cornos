@@ -1,12 +1,13 @@
 package me.constantindev.ccl.module.ext;
 
+import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 
 public class BlockHighlighter extends Module {
     public BlockHighlighter() {
-        super("BlockHighlighter", "Highlights a specific block you set");
+        super("BlockHighlighter", "Highlights a specific block you set", MType.WORLD);
         this.mconf.add(new ModuleConfig.ConfigKey("pos", "0 0 0"));
     }
 

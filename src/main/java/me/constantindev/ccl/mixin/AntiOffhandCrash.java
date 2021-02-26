@@ -17,7 +17,7 @@ public class AntiOffhandCrash {
 
     @Inject(method = "apply", cancellable = true, at = @At("HEAD"))
     public void overrideApply(ClientPlayPacketListener clientPlayPacketListener, CallbackInfo ci) {
-        if (this.sound == SoundEvents.ITEM_ARMOR_EQUIP_GENERIC && ModuleRegistry.getByName("antioffhandcrash").isEnabled)
+        if (this.sound == SoundEvents.ITEM_ARMOR_EQUIP_GENERIC && ModuleRegistry.getByName("antioffhandcrash").isOn.isOn())
             ci.cancel();
     }
 }

@@ -1,25 +1,22 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ModuleConfig;
+import me.constantindev.ccl.etc.config.Num;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
 
 public class ShiftTp extends Module {
     public ShiftTp() {
-        super("ShiftTp", "Teleports you when shifting. Useful for phasing through walls");
-        this.mconf.add(new ModuleConfig.ConfigKey("multiplier", "3"));
+        super("ShiftTp", "Teleports you when shifting. Useful for phasing through walls", MType.MOVEMENT);
+        this.mconf.add(new Num("multiplier",4.0,15,1));
     }
 
     @Override
     public void onExecute() {
-        int mtp = 3;
-        try {
-            mtp = Integer.parseInt(this.mconf.getByName("multiplier").value);
-        } catch (Exception exc) {
-            this.mconf.getOrDefault("multiplier", new ModuleConfig.ConfigKey("multiplier", "3")).setValue("3");
-        }
+        int mtp = (int) ((Num) this.mconf.getByName("multiplier")).getValue();
         if (MinecraftClient.getInstance().options.keySneak.wasPressed()) {
             assert MinecraftClient.getInstance().player != null;
             Vec3d pos = MinecraftClient.getInstance().player.getPos();

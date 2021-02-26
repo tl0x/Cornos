@@ -3,7 +3,7 @@ package me.constantindev.ccl.etc.config;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 
 public class MultiOption extends ModuleConfig.ConfigKey {
-    String[] possibleValues;
+    public String[] possibleValues;
 
     public MultiOption(String k, String initialValue, String[] possible) {
         super(k, initialValue);

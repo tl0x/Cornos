@@ -10,6 +10,12 @@ group = project.maven_group
 minecraft {
 }
 
+repositories {
+	maven {
+		name = 'lukflug'
+		url = 'https://lukflug.github.io/maven'
+	}
+}
 dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -17,6 +23,10 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	modImplementation "com.lukflug:panelstudio-mc16:0.1.9"
+	modCompile "com.lukflug:panelstudio-mc16:0.1.9"
+	modImplementation "com.lukflug:panelstudio:0.1.8"
+	modCompile "com.lukflug:panelstudio:0.1.8"
 }
 
 processResources {

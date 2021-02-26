@@ -1,5 +1,6 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -10,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class AutoTool extends Module {
     public AutoTool() {
-        super("AutoTool", "Automatically picks the fastest tool out of your hotbar");
+        super("AutoTool", "Automatically picks the fastest tool out of your hotbar", MType.WORLD);
     }
 
     @Override

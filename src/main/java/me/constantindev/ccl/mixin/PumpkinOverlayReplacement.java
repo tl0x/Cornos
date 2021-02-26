@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PumpkinOverlayReplacement {
     @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
     public void renderPumpkinOverlayReplacement(CallbackInfo ci) {
-        if (ModuleRegistry.getByName("nopumpkin").isEnabled) {
+        if (ModuleRegistry.getByName("nopumpkin").isOn.isOn()) {
             ci.cancel();
             MatrixStack defaultM = new MatrixStack();
             int w2d = MinecraftClient.getInstance().getWindow().getScaledWidth() / 2;

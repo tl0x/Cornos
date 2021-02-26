@@ -1,5 +1,6 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MultiOption;
 import net.minecraft.client.MinecraftClient;
@@ -8,7 +9,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class Jesus extends Module {
     public Jesus() {
-        super("Jesus", "Yisus.");
+        super("Jesus", "Yisus.", MType.MOVEMENT);
         this.mconf.add(new MultiOption("mode", "jump", new String[]{"jump", "velocity", "vanilla", "dontfall"}));
     }
 

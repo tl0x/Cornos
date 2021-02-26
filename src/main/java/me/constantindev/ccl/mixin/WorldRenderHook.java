@@ -21,7 +21,7 @@ public class WorldRenderHook {
     public void render(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo ci) {
         RenderHelper.queue.forEach(renderableBlock -> RenderHelper.renderBlockOutline(renderableBlock.bp, renderableBlock.r, renderableBlock.g, renderableBlock.b, renderableBlock.a, matrices, camera));
 
-        if (!ModuleRegistry.getByName("blockhighlighter").isEnabled) return;
+        if (!ModuleRegistry.getByName("blockhighlighter").isOn.isOn()) return;
         String[] coordpair = ModuleRegistry.getByName("blockhighlighter").mconf.getByName("pos").value.split(" "); // forgive me god
         if (coordpair.length != 3) {
             ModuleRegistry.getByName("blockhighlighter").mconf.getByName("pos").setValue("0 0 0");

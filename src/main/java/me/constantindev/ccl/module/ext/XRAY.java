@@ -1,11 +1,12 @@
 package me.constantindev.ccl.module.ext;
 
+import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import net.minecraft.client.MinecraftClient;
 
 public class XRAY extends Module {
     public XRAY() {
-        super("xray", "When you just need some blocks");
+        super("xray", "When you just need some blocks", MType.WORLD);
     }
 
     @Override

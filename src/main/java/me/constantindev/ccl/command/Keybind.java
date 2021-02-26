@@ -40,8 +40,7 @@ public class Keybind extends Command {
             mod.mconf.getByName("keybind").setValue(((int) args[1].toUpperCase().charAt(0)) + "");
             ClientHelper.sendChat("Set " + mod.name + "'s keybind to " + args[1].toUpperCase().charAt(0));
             ClientHelper.sendChat("Reloading keybinds");
-            KeyBindManager.binds.clear();
-            KeyBindManager.init();
+            KeyBindManager.reload();
         }
         super.onExecute(args);
     }

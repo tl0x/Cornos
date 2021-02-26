@@ -1,5 +1,6 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.RenderableBlock;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.helper.RenderHelper;
@@ -15,7 +16,7 @@ public class MidAirPlace extends Module {
     int timeout = 20;
 
     public MidAirPlace() {
-        super("MidAirPlace", "Allows you to place blocks midair");
+        super("MidAirPlace", "Allows you to place blocks midair", MType.WORLD);
     }
 
     @Override

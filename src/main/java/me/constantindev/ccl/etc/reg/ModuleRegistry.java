@@ -12,7 +12,6 @@ public class ModuleRegistry {
     private static final List<Module> ml = new ArrayList<>();
 
     public static void init() {
-        ml.add(new Test());
         ml.add(new Flight());
         ml.add(new NoFall());
         ml.add(new Suicide());
@@ -32,6 +31,7 @@ public class ModuleRegistry {
         ml.add(new MidAirPlace());
         ml.add(new XRAY());
         ml.add(new AntiOffhandCrash());
+        ml.add(new ClickGUI());
     }
 
     public static List<Module> getAll() {
