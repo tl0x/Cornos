@@ -17,16 +17,12 @@ public class Flight extends Module {
         super("Flight", "Allows you to fly", MType.MOVEMENT);
         this.mconf.add(new MultiOption("mode", "vanilla", new String[]{"vanilla", "static"}));
         this.mconf.add(new Toggleable("toggleFast", true));
+        this.mconf.add(new Num("speed",1.0,30,0));
     }
 
     @Override
     public void onExecute() {
-        double speed = 1.0;
-        try {
-            speed = Double.parseDouble(this.mconf.getOrDefault("speed", new Num("speed",1.0,30,0)).value);
-        } catch (Exception exc) {
-            this.mconf.getByName("speed").setValue("1.0");
-        }
+        double speed = ((Num) this.mconf.getByName("speed")).getValue();
         if (((Toggleable) this.mconf.getByName("toggleFast")).isEnabled()) {
             if (counter > 10) counter = 0;
             counter++;

@@ -35,11 +35,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	/*modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	modCompile(include("com.lukflug:panelstudio-mc16:0.1.9"))
-	modCompile(include("com.lukflug:panelstudio:0.1.8"))
-	modImplementation(include("com.lukflug:panelstudio-mc16:0.1.9"))
-	modImplementation(include("com.lukflug:panelstudio:0.1.8"))*/
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 }
 
 processResources {

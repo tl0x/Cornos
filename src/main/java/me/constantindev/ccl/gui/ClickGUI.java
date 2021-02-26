@@ -144,7 +144,7 @@ public class ClickGUI extends MinecraftGUI {
 
                             @Override
                             public void setKey(int key) {
-                                if (key == 45) kc.setValue(-1+"");
+                                if (key == 47) kc.setValue(-1+"");
                                 else kc.setValue(key+"");
                                 KeyBindManager.reload();
                             }
@@ -154,6 +154,7 @@ public class ClickGUI extends MinecraftGUI {
                                 String ret;
                                 if (this.getKey() == -1) ret = "None";
                                 else ret = GLFW.glfwGetKeyName(this.getKey(),this.getKey());
+                                if (ret == null) ret = this.getKey()+"";
                                 return ret;
                             }
                         };
@@ -184,7 +185,7 @@ public class ClickGUI extends MinecraftGUI {
 
                             @Override
                             public int getPrecision() {
-                                return 2;
+                                return 1;
                             }
                         };
                         NumberComponent nc = new NumberComponent(" "+kc.key,null,theme.getComponentRenderer(),ns,((Num) kc).min,((Num) kc).max);
