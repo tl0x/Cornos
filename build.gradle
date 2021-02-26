@@ -1,6 +1,7 @@
 plugins {
 	id 'fabric-loom' version '0.5-SNAPSHOT'
 	id 'maven-publish'
+	id "com.github.johnrengelman.shadow" version "6.1.0"
 }
 
 archivesBaseName = project.archives_base_name
@@ -8,6 +9,18 @@ version = project.mod_version
 group = project.maven_group
 
 minecraft {
+	remapMod = true
+}
+
+shadowJar {
+	dependencies {
+		exclude(dependency("net.fabricmc:fabric-loader:${project.loader_version}"))
+		exclude(dependency("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"))
+		exclude(dependency("net.fabricmc.yarn:${project.yarn_mappings}:v2"))
+		include(dependency('com.lukflug:panelstudio'))
+		include(dependency('com.lukflug:panelstudio-mc16'))
+	}
+
 }
 
 repositories {
@@ -22,11 +35,11 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	modImplementation "com.lukflug:panelstudio-mc16:0.1.9"
-	modCompile "com.lukflug:panelstudio-mc16:0.1.9"
-	modImplementation "com.lukflug:panelstudio:0.1.8"
-	modCompile "com.lukflug:panelstudio:0.1.8"
+	/*modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	modCompile(include("com.lukflug:panelstudio-mc16:0.1.9"))
+	modCompile(include("com.lukflug:panelstudio:0.1.8"))
+	modImplementation(include("com.lukflug:panelstudio-mc16:0.1.9"))
+	modImplementation(include("com.lukflug:panelstudio:0.1.8"))*/
 }
 
 processResources {
