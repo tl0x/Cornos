@@ -13,7 +13,7 @@ public class KeyBindManager {
     public static void init() {
         ModuleRegistry.getAll().forEach(module -> {
             if (!module.mconf.getByName("keybind").value.equals("-1.0")) {
-                binds.put(module.name, new KeyBind((int)Double.parseDouble(module.mconf.getByName("keybind").value)));
+                binds.put(module.name, new KeyBind((int) Double.parseDouble(module.mconf.getByName("keybind").value)));
             }
         });
     }

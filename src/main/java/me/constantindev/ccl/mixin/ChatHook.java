@@ -4,6 +4,7 @@ import me.constantindev.ccl.etc.base.Command;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
+import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.Formatting;
 import org.apache.commons.lang3.ArrayUtils;
@@ -16,7 +17,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ChatHook {
     @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true)
     public void onChatMessageSent(String msg, CallbackInfo cbi) {
-        if (msg.toLowerCase().startsWith(ClientConfig.chatPrefix.toLowerCase())) {
+        String prefix = ModuleRegistry.getByName("clientconfig").mconf.getByName("prefix").value;
+        if (msg.toLowerCase().startsWith(prefix.toLowerCase())) {
             cbi.cancel();
             String trimmed = msg.substring(ClientConfig.chatPrefix.length());
             String[] args = trimmed.split(" +");

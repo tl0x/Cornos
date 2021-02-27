@@ -2,7 +2,6 @@ package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
@@ -17,7 +16,7 @@ public class Flight extends Module {
         super("Flight", "Allows you to fly", MType.MOVEMENT);
         this.mconf.add(new MultiOption("mode", "vanilla", new String[]{"vanilla", "static"}));
         this.mconf.add(new Toggleable("toggleFast", true));
-        this.mconf.add(new Num("speed",1.0,30,0));
+        this.mconf.add(new Num("speed", 1.0, 30, 0));
     }
 
     @Override

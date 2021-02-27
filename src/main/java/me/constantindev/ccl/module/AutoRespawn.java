@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class AutoRespawn extends Module {
     public AutoRespawn() {
-        super("AutoRespawn", "Automatically respawns you upon death", MType.UNCATEGORIZED);
+        super("AutoRespawn", "Automatically respawns you upon death", MType.MISC);
     }
 
     @Override

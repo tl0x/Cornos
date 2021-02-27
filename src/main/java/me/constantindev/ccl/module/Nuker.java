@@ -2,7 +2,6 @@ package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.config.Num;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -17,7 +16,7 @@ public class Nuker extends Module {
 
     public Nuker() {
         super("Nuker", "Stabs blocks like there is no tomorrow", MType.WORLD);
-        this.mconf.add(new Num("range",5,10,0));
+        this.mconf.add(new Num("range", 5, 10, 0));
     }
 
     @Override

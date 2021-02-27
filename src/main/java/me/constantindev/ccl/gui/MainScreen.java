@@ -1,6 +1,7 @@
 package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.etc.config.ClientConfig;
+import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -29,7 +30,7 @@ public class MainScreen extends Screen {
         this.addButton(new ButtonWidget(width / 2 - 125, height / 2 + 30, 120, 20, Text.of("Settings"), (b) -> MinecraftClient.getInstance().openScreen(new OptionsScreen(this, MinecraftClient.getInstance().options))));
         this.addButton(btnw);
         this.addButton(new ButtonWidget(width - 121, height - 21, 120, 20, Text.of("Return to pogn't menu"), (b) -> {
-            ClientConfig.blockNextMainScreenCall = false;
+            ModuleRegistry.getByName("ClientConfig").mconf.getByName("homescreen").setValue("vanilla");
             MinecraftClient.getInstance().openScreen(new TitleScreen());
         }));
         this.addButton(new TexturedButtonWidget(width - 20, 0, 20, 20, 0, 0, 0, new Identifier("ccl", "transparent.png"), (b) -> btnw.setMessage(Text.of("Roleplay"))));

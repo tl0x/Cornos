@@ -1,6 +1,7 @@
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.etc.config.ClientConfig;
+import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.gui.MainScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -20,13 +21,13 @@ public class MainScreenHook extends Screen {
 
     @Inject(method = "init", cancellable = true, at = @At("HEAD"))
     public void init(CallbackInfo cbi) {
-        if (ClientConfig.blockNextMainScreenCall) {
+        if (ModuleRegistry.getByName("ClientConfig").mconf.getByName("homescreen").value.equals("client")) {
             MinecraftClient.getInstance().openScreen(new MainScreen());
             cbi.cancel();
             return;
         }
         this.addButton(new ButtonWidget(width - 121, 1, 120, 20, Text.of("Return to pog menu"), (b) -> {
-            ClientConfig.blockNextMainScreenCall = true;
+            ModuleRegistry.getByName("ClientConfig").mconf.getByName("homescreen").setValue("client");
             MinecraftClient.getInstance().openScreen(this);
         }));
     }

@@ -3,7 +3,6 @@ package me.constantindev.ccl.module;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.config.Num;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
@@ -17,7 +16,7 @@ import java.util.Objects;
 public class MassBreak extends Module {
     public MassBreak() {
         super("MassBreak", "Breaks a lot if you break a block", MType.WORLD);
-        this.mconf.add(new Num("radius",3.0,10,0));
+        this.mconf.add(new Num("radius", 3.0, 10, 0));
     }
 
     @Override

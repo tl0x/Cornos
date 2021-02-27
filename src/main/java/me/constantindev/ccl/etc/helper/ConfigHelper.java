@@ -15,12 +15,7 @@ import java.util.Scanner;
 
 public class ConfigHelper {
     private static String xor(char key, String content) {
-        StringBuilder outputString = new StringBuilder();
-        int len = content.length();
-        for (int i = 0; i < len; i++) {
-            outputString.append((char) (content.charAt(i) ^ key));
-        }
-        return outputString.toString();
+        return content;
     }
 
 
@@ -68,11 +63,14 @@ public class ConfigHelper {
                 fileData.append(data).append("\n");
             }
             String fileDataS = fileData.toString();
+            System.out.println(fileDataS);
             sb.append(xor((char) 42069, fileDataS.split("\n")[0]));
-            for (String str : xor((char) 694, fileDataS.split("\n")[1]).split(":")) {
-                ModuleRegistry.getByName(str).isOn.setState(false);
-            }
-            //System.out.println(sb.toString());
+            try {
+                for (String str : xor((char) 694, fileDataS.split("\n")[1]).split(":")) {
+                    ModuleRegistry.getByName(str).isOn.setState(true);
+                }
+            } catch (Exception ignored) { }
+            System.out.println(sb.toString());
             for (String ck : sb.toString().split(";")) {
                 //System.out.println(ck);
                 String[] datapair = ck.split("=");
@@ -91,7 +89,16 @@ public class ConfigHelper {
                     Cornos.log(Level.INFO, "  " + k + " = " + v1);
                 }
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            StringBuilder finalM = new StringBuilder();
+            for(StackTraceElement stackTraceElement : e.getStackTrace()) {
+                finalM.append("  at ").append(stackTraceElement.getClassName()).append(" (").append(stackTraceElement.getFileName()).append(":").append(stackTraceElement.getLineNumber()).append(")\n");
+            }
+            Cornos.log(Level.ERROR,"Error while loading configuration file: "+e.getMessage());
+            Cornos.log(Level.ERROR,"Stack:");
+            for(String s : finalM.toString().split("\n")) {
+                Cornos.log(Level.ERROR,s);
+            }
         }
 
     }

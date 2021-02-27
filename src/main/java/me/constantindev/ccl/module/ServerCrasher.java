@@ -3,10 +3,8 @@ package me.constantindev.ccl.module;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.ServerCrasherManager;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.helper.ClientHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +14,7 @@ public class ServerCrasher extends Module {
     public ServerCrasher() {
         super("ServerCrasher", "Several ways to crash a server", MType.EXPLOIT);
         this.mconf.add(new MultiOption("mode", "rotation", new String[]{"rotation", "location", "biglocation", "swing", "nprtimeout"}));
-        this.mconf.add(new Num("strength",100.0,100,1));
+        this.mconf.add(new Num("strength", 100.0, 100, 1));
         ServerCrasherManager.runner.start();
     }
 

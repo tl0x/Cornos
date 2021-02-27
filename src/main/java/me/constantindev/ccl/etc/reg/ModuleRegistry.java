@@ -32,6 +32,7 @@ public class ModuleRegistry {
         ml.add(new XRAY());
         ml.add(new AntiOffhandCrash());
         ml.add(new ClickGUI());
+        ml.add(new Chat());
     }
 
     public static List<Module> getAll() {

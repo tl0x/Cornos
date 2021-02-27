@@ -2,7 +2,6 @@ package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.config.Num;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
@@ -11,7 +10,7 @@ import net.minecraft.util.math.Vec3d;
 public class ShiftTp extends Module {
     public ShiftTp() {
         super("ShiftTp", "Teleports you when shifting. Useful for phasing through walls", MType.MOVEMENT);
-        this.mconf.add(new Num("multiplier",4.0,15,1));
+        this.mconf.add(new Num("multiplier", 4.0, 15, 1));
     }
 
     @Override

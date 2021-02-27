@@ -15,7 +15,7 @@ public class Module {
     boolean calledVitalsOndisable = true;
 
     public Module(String n, String d) {
-        this(n, d, MType.UNCATEGORIZED);
+        this(n, d, MType.MISC);
     }
 
     public Module(String n, String d, MType type) {

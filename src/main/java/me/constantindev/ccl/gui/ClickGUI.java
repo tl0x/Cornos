@@ -1,19 +1,17 @@
 package me.constantindev.ccl.gui;
 
 import com.lukflug.panelstudio.CollapsibleContainer;
-import com.lukflug.panelstudio.Context;
 import com.lukflug.panelstudio.DraggableContainer;
 import com.lukflug.panelstudio.SettingsAnimation;
 import com.lukflug.panelstudio.mc16.MinecraftGUI;
 import com.lukflug.panelstudio.settings.*;
 import com.lukflug.panelstudio.theme.ColorScheme;
-import com.lukflug.panelstudio.theme.DescriptionRenderer;
 import com.lukflug.panelstudio.theme.GameSenseTheme;
 import com.lukflug.panelstudio.theme.Theme;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.*;
 import me.constantindev.ccl.etc.config.Toggleable;
+import me.constantindev.ccl.etc.config.*;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.MinecraftClient;
@@ -81,31 +79,32 @@ public class ClickGUI extends MinecraftGUI {
             public int getOpacity() {
                 return 150;
             }
-        }, MinecraftClient.getInstance().textRenderer.fontHeight, 2, 2);
+        }, MinecraftClient.getInstance().textRenderer.fontHeight, 4, 2);
         gui = new com.lukflug.panelstudio.ClickGUI(guiInterface, context -> {
             //int width = MinecraftClient.getInstance().textRenderer.getWidth(context.getDescription());
             int height = MinecraftClient.getInstance().textRenderer.fontHeight;
             int wH = MinecraftClient.getInstance().getWindow().getScaledHeight();
             //int wW = MinecraftClient.getInstance().getWindow().getScaledWidth();
-            MinecraftClient.getInstance().textRenderer.draw(new MatrixStack(),context.getDescription(),1,wH-height-1,0xFFFFFFFF);
+            MinecraftClient.getInstance().textRenderer.draw(new MatrixStack(), context.getDescription(), 1, wH - height - 1, 0xFFFFFFFF);
         });
         for (MType type : MType.ALL) {
-            int maxW = MinecraftClient.getInstance().textRenderer.getWidth(type.toString());
+            int maxW = MinecraftClient.getInstance().textRenderer.getWidth("antioffhandcrash");
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
-                maxW = Math.max(maxW,MinecraftClient.getInstance().textRenderer.getWidth(m.name));
+                maxW = Math.max(maxW, MinecraftClient.getInstance().textRenderer.getWidth(m.name));
             }
-            com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(" "+type.toString(), null, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), null, new Point(50, 50), maxW+(MinecraftClient.getInstance().textRenderer.getWidth(" ")*2));
+            com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(" " + type.toString(), null, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), null, new Point(50, 50), maxW + (MinecraftClient.getInstance().textRenderer.getWidth(" ") * 2));
 
             gui.addComponent(container);
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
-                maxW = Math.max(maxW,MinecraftClient.getInstance().textRenderer.getWidth(m.name));
-                CollapsibleContainer mc = new CollapsibleContainer(" "+m.name, m.description, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), m.isOn);
+                maxW = Math.max(maxW, MinecraftClient.getInstance().textRenderer.getWidth(m.name));
+                CollapsibleContainer mc = new CollapsibleContainer(" " + m.name, m.description, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), m.isOn);
                 container.addComponent(mc);
-                for(ModuleConfig.ConfigKey kc : m.mconf.config) {
+                for (ModuleConfig.ConfigKey kc : m.mconf.config) {
+                    maxW = Math.max(maxW, MinecraftClient.getInstance().textRenderer.getWidth(kc.key + ": " + kc.value));
                     if (kc instanceof Toggleable) {
-                        BooleanComponent bc = new BooleanComponent(" "+kc.key, null, theme.getComponentRenderer(), new com.lukflug.panelstudio.settings.Toggleable() {
+                        BooleanComponent bc = new BooleanComponent(kc.key, null, theme.getComponentRenderer(), new com.lukflug.panelstudio.settings.Toggleable() {
                             @Override
                             public void toggle() {
                                 ((Toggleable) kc).toggle();
@@ -124,7 +123,7 @@ public class ClickGUI extends MinecraftGUI {
                             @Override
                             public void increment() {
                                 current++;
-                                if(current > (((MultiOption) kc).possibleValues.length-1)) current = 0;
+                                if (current > (((MultiOption) kc).possibleValues.length - 1)) current = 0;
                                 kc.setValue(((MultiOption) kc).possibleValues[current]);
                             }
 
@@ -133,7 +132,7 @@ public class ClickGUI extends MinecraftGUI {
                                 return ((MultiOption) kc).possibleValues[current];
                             }
                         };
-                        EnumComponent ec = new EnumComponent(" "+kc.key,null,theme.getComponentRenderer(),es);
+                        EnumComponent ec = new EnumComponent(kc.key, null, theme.getComponentRenderer(), es);
                         mc.addComponent(ec);
                     } else if (kc instanceof Keybind) {
                         KeybindSetting ks = new KeybindSetting() {
@@ -144,8 +143,8 @@ public class ClickGUI extends MinecraftGUI {
 
                             @Override
                             public void setKey(int key) {
-                                if (key == 47) kc.setValue(-1+"");
-                                else kc.setValue(key+"");
+                                if (key == 47) kc.setValue(-1 + "");
+                                else kc.setValue(key + "");
                                 KeyBindManager.reload();
                             }
 
@@ -153,12 +152,12 @@ public class ClickGUI extends MinecraftGUI {
                             public String getKeyName() {
                                 String ret;
                                 if (this.getKey() == -1) ret = "None";
-                                else ret = GLFW.glfwGetKeyName(this.getKey(),this.getKey());
-                                if (ret == null) ret = this.getKey()+"";
+                                else ret = GLFW.glfwGetKeyName(this.getKey(), this.getKey());
+                                if (ret == null) ret = this.getKey() + "";
                                 return ret;
                             }
                         };
-                        KeybindComponent kc1 = new KeybindComponent(theme.getComponentRenderer(),ks);
+                        KeybindComponent kc1 = new KeybindComponent(theme.getComponentRenderer(), ks);
                         mc.addComponent(kc1);
                     } else if (kc instanceof Num) {
                         NumberSetting ns = new NumberSetting() {
@@ -170,7 +169,7 @@ public class ClickGUI extends MinecraftGUI {
 
                             @Override
                             public void setNumber(double value) {
-                                kc.setValue(value+"");
+                                kc.setValue(value + "");
                             }
 
                             @Override
@@ -188,7 +187,7 @@ public class ClickGUI extends MinecraftGUI {
                                 return 1;
                             }
                         };
-                        NumberComponent nc = new NumberComponent(" "+kc.key,null,theme.getComponentRenderer(),ns,((Num) kc).min,((Num) kc).max);
+                        NumberComponent nc = new NumberComponent(kc.key, null, theme.getComponentRenderer(), ns, ((Num) kc).min, ((Num) kc).max);
                         mc.addComponent(nc);
                     }
                 }
