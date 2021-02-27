@@ -12,6 +12,7 @@ public class ModuleRegistry {
     private static final List<Module> ml = new ArrayList<>();
 
     public static void init() {
+    	ml.add(new AntiHunger());
         ml.add(new Flight());
         ml.add(new NoFall());
         ml.add(new Suicide());
@@ -33,6 +34,7 @@ public class ModuleRegistry {
         ml.add(new AntiOffhandCrash());
         ml.add(new ClickGUI());
         ml.add(new Chat());
+        
     }
 
     public static List<Module> getAll() {
