@@ -9,7 +9,7 @@ import org.lwjgl.glfw.GLFW;
 public class ClickGUI extends Module {
     public ClickGUI() {
         super("ClickGUI", "Opens a graphical user interface for modules");
-        this.mconf.getByName("keybind").setValue(GLFW.GLFW_KEY_F6 + "");
+        this.mconf.getByName("keybind").setValue(GLFW.GLFW_KEY_RIGHT_SHIFT + "");
     }
 
     @Override
