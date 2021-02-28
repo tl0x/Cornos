@@ -19,6 +19,7 @@ public class CommandRegistry {
         cl.add(new Crash());
         cl.add(new Keybind());
         cl.add(new Clip());
+        cl.add(new VClip());
     }
 
     public static List<Command> getAll() {
