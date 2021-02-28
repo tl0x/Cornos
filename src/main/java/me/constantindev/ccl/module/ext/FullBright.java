@@ -11,6 +11,7 @@ public class FullBright extends Module {
     public FullBright() {
         super("FullBright", "Light up your world.", MType.MISC);
     }
+
     @Override
     public void onEnable() {
         oldgamma = MinecraftClient.getInstance().options.gamma;

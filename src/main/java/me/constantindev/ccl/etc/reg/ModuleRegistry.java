@@ -2,8 +2,8 @@ package me.constantindev.ccl.etc.reg;
 
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.module.*;
-import me.constantindev.ccl.module.ext.*;
 import me.constantindev.ccl.module.ext.FullBright;
+import me.constantindev.ccl.module.ext.*;
 
 import java.util.ArrayList;
 import java.util.List;
