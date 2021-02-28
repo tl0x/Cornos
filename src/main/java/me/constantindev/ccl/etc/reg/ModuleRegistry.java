@@ -34,6 +34,7 @@ public class ModuleRegistry {
         ml.add(new AntiOffhandCrash());
         ml.add(new ClickGUI());
         ml.add(new Chat());
+        ml.add(new FullBright());
 
     }
 
