@@ -1,6 +1,11 @@
 package me.constantindev.ccl.mixin;
 
+import me.constantindev.ccl.etc.event.EventHelper;
+import me.constantindev.ccl.etc.event.EventType;
+import me.constantindev.ccl.etc.event.arg.PacketApplyEvent;
+import me.constantindev.ccl.etc.event.arg.PacketEvent;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -17,7 +22,13 @@ public class AntiOffhandCrash {
 
     @Inject(method = "apply", cancellable = true, at = @At("HEAD"))
     public void overrideApply(ClientPlayPacketListener clientPlayPacketListener, CallbackInfo ci) {
+        boolean flag = EventHelper.BUS.invokeEventCall(EventType.ONPACKETHANDLE, new PacketApplyEvent((Packet<?>) this,clientPlayPacketListener));
+        if (!flag) ci.cancel();
+        /*
         if (this.sound == SoundEvents.ITEM_ARMOR_EQUIP_GENERIC && ModuleRegistry.getByName("antioffhandcrash").isOn.isOn())
-            ci.cancel();
+
+           ci.cancel();
+
+         */
     }
 }

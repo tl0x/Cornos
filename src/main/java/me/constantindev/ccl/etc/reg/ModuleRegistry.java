@@ -12,7 +12,7 @@ public class ModuleRegistry {
     private static final List<Module> ml = new ArrayList<>();
 
     public static void init() {
-    	ml.add(new AntiHunger());
+    	//ml.add(new AntiHunger()); // lemme disable this while i test the event bus
         ml.add(new Flight());
         ml.add(new NoFall());
         ml.add(new Suicide());

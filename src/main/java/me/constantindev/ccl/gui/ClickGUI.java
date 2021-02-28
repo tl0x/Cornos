@@ -22,7 +22,6 @@ import java.awt.*;
 
 public class ClickGUI extends MinecraftGUI {
     private final GUIInterface guiInterface;
-    private final Theme theme;
     private final com.lukflug.panelstudio.ClickGUI gui;
 
     public ClickGUI() {
@@ -49,7 +48,7 @@ public class ClickGUI extends MinecraftGUI {
                 return MinecraftClient.getInstance().textRenderer.fontHeight;
             }
         };
-        theme = new GameSenseTheme(new ColorScheme() {
+        Theme theme = new GameSenseTheme(new ColorScheme() {
             @Override
             public Color getActiveColor() {
                 return new Color(150, 150, 150);

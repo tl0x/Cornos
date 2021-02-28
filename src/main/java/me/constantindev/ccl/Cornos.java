@@ -1,6 +1,7 @@
 package me.constantindev.ccl;
 
 import me.constantindev.ccl.etc.config.ClientConfig;
+import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.helper.ConfigHelper;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
@@ -27,6 +28,8 @@ public class Cornos implements ModInitializer {
         log(Level.INFO, "Initializing configuration");
         ClientConfig.init();
 
+        log(Level.INFO, "Registering event bus");
+        EventHelper.BUS.init();
         log(Level.INFO, "Initializing command registry");
         CommandRegistry.init();
         log(Level.INFO, "Initializing module registry");
@@ -35,6 +38,7 @@ public class Cornos implements ModInitializer {
         ConfigHelper.loadConfig();
         log(Level.INFO, "Registering all keybinds");
         KeyBindManager.init();
+
         log(Level.INFO, "All features registered. Ready to load game");
 
 
