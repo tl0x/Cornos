@@ -20,6 +20,6 @@ public class XRAY extends Module {
         MinecraftClient.getInstance().worldRenderer.reload();
         super.onDisable();
     }
-    // Logic: XrayHandler.java
+    // Logic: XrayHandler.java & LuminanceHook.java
 
 }
