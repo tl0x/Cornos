@@ -12,6 +12,7 @@ public class KeyBind {
     }
 
     public boolean isPressed() {
+        if (keycode < 0) return false;
         boolean flag1 = InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), keycode);
         if (flag1 && !pressedbefore) {
             pressedbefore = true;
