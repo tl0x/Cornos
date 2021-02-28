@@ -11,9 +11,11 @@ package me.constantindev.ccl.etc.event.arg;
 public class Event {
     public boolean cancel = false;
     public boolean passed = true;
+
     public void cancel() {
         cancel = true;
     }
+
     public void endEventCallQueue() {
         passed = false;
     }

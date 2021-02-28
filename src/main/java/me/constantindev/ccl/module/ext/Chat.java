@@ -7,7 +7,7 @@ public class Chat extends Module {
     public Chat() {
         super("ClientConfig", "Configuration for the client.");
         this.mconf.add(new MultiOption("prefix", "}", new String[]{"}", ".", "-", "+", "#", "@", "&", "%", "$"}));
-        this.mconf.add(new MultiOption("homescreen","client",new String[]{"client","vanilla"}));
+        this.mconf.add(new MultiOption("homescreen", "client", new String[]{"client", "vanilla"}));
     }
 
     @Override

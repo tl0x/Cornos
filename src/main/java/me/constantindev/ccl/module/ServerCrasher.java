@@ -21,7 +21,7 @@ public class ServerCrasher extends Module {
         this.mconf.add(new MultiOption("mode", "rotation", new String[]{"rotation", "location", "biglocation", "swing", "nprtimeout"}));
         this.mconf.add(new Num("strength", 100.0, 100, 1));
         Module parent = this;
-        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND,eventArg -> {
+        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, eventArg -> {
             if (((PacketEvent) eventArg).packet instanceof KeepAliveC2SPacket) {
                 if (parent.mconf.getByName("mode").value.equals("nprtimeout") && parent.isOn.isOn()) {
                     eventArg.cancel();

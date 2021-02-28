@@ -150,8 +150,11 @@ public class ClickGUI extends MinecraftGUI {
                             @Override
                             public String getKeyName() {
                                 String ret;
-                                if (this.getKey() == -1) ret = "None";
-                                else ret = GLFW.glfwGetKeyName(this.getKey(), this.getKey());
+                                if (this.getKey() < 0) {
+                                    ret = "None";
+                                } else {
+                                    ret = GLFW.glfwGetKeyName(this.getKey(), this.getKey());
+                                }
                                 if (ret == null) ret = this.getKey() + "";
                                 return ret;
                             }

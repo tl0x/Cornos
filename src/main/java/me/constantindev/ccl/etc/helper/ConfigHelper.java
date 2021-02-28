@@ -69,7 +69,8 @@ public class ConfigHelper {
                 for (String str : xor((char) 694, fileDataS.split("\n")[1]).split(":")) {
                     ModuleRegistry.getByName(str).isOn.setState(true);
                 }
-            } catch (Exception ignored) { }
+            } catch (Exception ignored) {
+            }
             System.out.println(sb.toString());
             for (String ck : sb.toString().split(";")) {
                 //System.out.println(ck);
@@ -91,13 +92,13 @@ public class ConfigHelper {
             }
         } catch (Exception e) {
             StringBuilder finalM = new StringBuilder();
-            for(StackTraceElement stackTraceElement : e.getStackTrace()) {
+            for (StackTraceElement stackTraceElement : e.getStackTrace()) {
                 finalM.append("  at ").append(stackTraceElement.getClassName()).append(" (").append(stackTraceElement.getFileName()).append(":").append(stackTraceElement.getLineNumber()).append(")\n");
             }
-            Cornos.log(Level.ERROR,"Error while loading configuration file: "+e.getMessage());
-            Cornos.log(Level.ERROR,"Stack:");
-            for(String s : finalM.toString().split("\n")) {
-                Cornos.log(Level.ERROR,s);
+            Cornos.log(Level.ERROR, "Error while loading configuration file: " + e.getMessage());
+            Cornos.log(Level.ERROR, "Stack:");
+            for (String s : finalM.toString().split("\n")) {
+                Cornos.log(Level.ERROR, s);
             }
         }
 

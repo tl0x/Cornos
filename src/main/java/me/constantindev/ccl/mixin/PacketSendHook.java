@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PacketSendHook {
     @Inject(method = "sendPacket", cancellable = true, at = @At("HEAD"))
     public void callEventQueue(Packet<?> packet, CallbackInfo ci) {
-        boolean flag = EventHelper.BUS.invokeEventCall(EventType.ONPACKETSEND,new PacketEvent(packet));
+        boolean flag = EventHelper.BUS.invokeEventCall(EventType.ONPACKETSEND, new PacketEvent(packet));
         if (!flag) ci.cancel();
     }
 }

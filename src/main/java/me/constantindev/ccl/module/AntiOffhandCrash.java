@@ -16,7 +16,8 @@ public class AntiOffhandCrash extends Module {
             if (!parent.isOn.isOn()) return;
             PacketApplyEvent pae = (PacketApplyEvent) event;
             if (pae.packet instanceof PlaySoundS2CPacket) {
-                if (((PlaySoundS2CPacket) pae.packet).getSound() == SoundEvents.ITEM_ARMOR_EQUIP_GENERIC) event.cancel();
+                if (((PlaySoundS2CPacket) pae.packet).getSound() == SoundEvents.ITEM_ARMOR_EQUIP_GENERIC)
+                    event.cancel();
             }
         });
 

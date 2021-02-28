@@ -1,6 +1,5 @@
 package me.constantindev.ccl.mixin;
 
-import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.gui.MainScreen;
 import net.minecraft.client.MinecraftClient;

@@ -1,6 +1,5 @@
 package me.constantindev.ccl.gui;
 
-import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;

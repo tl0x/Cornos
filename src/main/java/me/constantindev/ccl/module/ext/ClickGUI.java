@@ -15,7 +15,7 @@ public class ClickGUI extends Module {
     @Override
     public void onEnable() {
         if (ClientConfig.cg == null) ClientConfig.cg = new me.constantindev.ccl.gui.ClickGUI();
-        MinecraftClient.getInstance().openScreen((Screen) ClientConfig.cg);
+        MinecraftClient.getInstance().openScreen(ClientConfig.cg);
         super.onEnable();
         this.isOn.setState(false);
     }

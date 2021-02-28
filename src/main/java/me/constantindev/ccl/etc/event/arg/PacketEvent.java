@@ -12,6 +12,7 @@ import net.minecraft.network.Packet;
 
 public class PacketEvent extends Event {
     public Packet<?> packet;
+
     public PacketEvent(Packet<?> packetSent) {
         this.packet = packetSent;
     }
