@@ -7,6 +7,7 @@
     "ChatHook",
     "FireOverlayReplacement",
     "IngameRendererHook",
+    "LuminanceHook",
     "MainScreenHook",
     "PacketSendHook",
     "PacketTryUseItemOnBlockHook",
