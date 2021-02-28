@@ -15,6 +15,7 @@ public class ModuleRegistry {
         ml.add(new AntiHunger()); // lemme disable this while i test the event bus
         ml.add(new Flight());
         ml.add(new NoFall());
+        ml.add(new FullBright());
         ml.add(new Suicide());
         ml.add(new ShiftTp());
         ml.add(new Nuker());
