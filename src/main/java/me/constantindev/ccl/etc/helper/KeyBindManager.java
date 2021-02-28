@@ -1,8 +1,8 @@
 package me.constantindev.ccl.etc.helper;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.KeyBind;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import net.minecraft.client.MinecraftClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class KeyBindManager {
     public static void tick() {
         binds.forEach((s, keyBinding) -> {
 
-            if (keyBinding.isPressed() && MinecraftClient.getInstance().currentScreen == null)
+            if (keyBinding.isPressed() && Cornos.minecraft.currentScreen == null)
                 ModuleRegistry.getByName(s).isOn.toggle();
         });
     }

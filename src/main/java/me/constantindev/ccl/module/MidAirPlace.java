@@ -1,10 +1,10 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.RenderableBlock;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.helper.RenderHelper;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -21,14 +21,14 @@ public class MidAirPlace extends Module {
 
     @Override
     public void onExecute() {
-        HitResult hr = MinecraftClient.getInstance().crosshairTarget;
+        HitResult hr = Cornos.minecraft.crosshairTarget;
         if (!(hr instanceof BlockHitResult)) return;
         RenderHelper.addToQueue(new RenderableBlock(((BlockHitResult) hr).getBlockPos(), 255, 50, 50, 255));
-        if (MinecraftClient.getInstance().options.keyUse.isPressed()) {
+        if (Cornos.minecraft.options.keyUse.isPressed()) {
             timeout--;
             if (timeout != 19 && timeout > 0) return;
             PlayerInteractBlockC2SPacket p = new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND, (BlockHitResult) hr);
-            Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).sendPacket(p);
+            Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(p);
         } else timeout = 20;
         super.onExecute();
     }

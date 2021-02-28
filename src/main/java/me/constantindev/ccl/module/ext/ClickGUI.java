@@ -1,8 +1,8 @@
 package me.constantindev.ccl.module.ext;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ClientConfig;
-import net.minecraft.client.MinecraftClient;
 import org.lwjgl.glfw.GLFW;
 
 public class ClickGUI extends Module {
@@ -14,7 +14,7 @@ public class ClickGUI extends Module {
     @Override
     public void onEnable() {
         if (ClientConfig.cg == null) ClientConfig.cg = new me.constantindev.ccl.gui.ClickGUI();
-        MinecraftClient.getInstance().openScreen(ClientConfig.cg);
+        Cornos.minecraft.openScreen(ClientConfig.cg);
         super.onEnable();
         this.isOn.setState(false);
     }

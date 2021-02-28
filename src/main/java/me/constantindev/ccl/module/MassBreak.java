@@ -4,7 +4,6 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Num;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -24,25 +23,25 @@ public class MassBreak extends Module {
         int rad = (int) ((Num) this.mconf.getByName("radius")).getValue();
         BlockPos latest;
         try {
-            assert MinecraftClient.getInstance().crosshairTarget != null;
-            latest = ((BlockHitResult) MinecraftClient.getInstance().crosshairTarget).getBlockPos();
+            assert Cornos.minecraft.crosshairTarget != null;
+            latest = ((BlockHitResult) Cornos.minecraft.crosshairTarget).getBlockPos();
         } catch (Exception ignored) {
             return;
         }
-        if (MinecraftClient.getInstance().options.keyAttack.isPressed()) {
+        if (Cornos.minecraft.options.keyAttack.isPressed()) {
             Cornos.log(Level.INFO, "bruh");
             for (int x = 0; x < rad; x++) {
                 for (int y = 0; y < rad; y++) {
                     for (int z = 0; z < rad; z++) {
                         BlockPos c = latest.add(x - (rad / 2), y - (rad / 2), z - (rad / 2));
                         if (c.equals(latest)) continue;
-                        Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, c, Direction.UP));
-                        MinecraftClient.getInstance().getNetworkHandler().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, c, Direction.UP));
+                        Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, c, Direction.UP));
+                        Cornos.minecraft.getNetworkHandler().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, c, Direction.UP));
                     }
                 }
             }
-            Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, latest, Direction.UP));
-            MinecraftClient.getInstance().getNetworkHandler().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, latest, Direction.UP));
+            Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, latest, Direction.UP));
+            Cornos.minecraft.getNetworkHandler().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, latest, Direction.UP));
         }
         super.onExecute();
     }

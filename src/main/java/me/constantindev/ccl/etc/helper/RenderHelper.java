@@ -1,9 +1,9 @@
 package me.constantindev.ccl.etc.helper;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.RenderType;
 import me.constantindev.ccl.etc.RenderableBlock;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -25,7 +25,7 @@ public class RenderHelper {
 
     public static void renderBlockOutline(BlockPos bpos, int r, int g, int b, int a, MatrixStack matrices, Camera camera) {
         Vec3d cameraPos = camera.getPos();
-        VertexConsumerProvider.Immediate entityVertexConsumers = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
+        VertexConsumerProvider.Immediate entityVertexConsumers = Cornos.minecraft.getBufferBuilders().getEntityVertexConsumers();
         VertexConsumer builder = entityVertexConsumers.getBuffer(RenderType.OVERLAY_LINES);
 
         matrices.push();

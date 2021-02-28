@@ -1,9 +1,9 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Num;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
 
@@ -16,14 +16,14 @@ public class ShiftTp extends Module {
     @Override
     public void onExecute() {
         int mtp = (int) ((Num) this.mconf.getByName("multiplier")).getValue();
-        if (MinecraftClient.getInstance().options.keySneak.wasPressed()) {
-            assert MinecraftClient.getInstance().player != null;
-            Vec3d pos = MinecraftClient.getInstance().player.getPos();
-            Vec3d rot = MinecraftClient.getInstance().player.getRotationVector();
+        if (Cornos.minecraft.options.keySneak.wasPressed()) {
+            assert Cornos.minecraft.player != null;
+            Vec3d pos = Cornos.minecraft.player.getPos();
+            Vec3d rot = Cornos.minecraft.player.getRotationVector();
             rot = rot.multiply(1, 0, 1);
             pos = pos.add(rot.multiply(mtp));
-            MinecraftClient.getInstance().player.world.sendPacket(new PlayerMoveC2SPacket.PositionOnly(pos.x, pos.y, pos.z, false));
-            MinecraftClient.getInstance().player.updatePosition(pos.x, pos.y, pos.z);
+            Cornos.minecraft.player.world.sendPacket(new PlayerMoveC2SPacket.PositionOnly(pos.x, pos.y, pos.z, false));
+            Cornos.minecraft.player.updatePosition(pos.x, pos.y, pos.z);
 
         }
         super.onExecute();

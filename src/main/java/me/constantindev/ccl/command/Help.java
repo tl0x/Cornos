@@ -5,7 +5,6 @@ import me.constantindev.ccl.etc.base.Command;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.HoverEvent;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
@@ -33,8 +32,8 @@ public class Help extends Command {
                         Style bonk = Text.of("").getStyle().withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.of("Triggers: " + String.join(", ", command.triggers))));
                         LiteralText bruh1 = new net.minecraft.text.LiteralText(Formatting.DARK_AQUA + "[ " + Formatting.AQUA + Cornos.MOD_ID.toUpperCase() + Formatting.DARK_AQUA + " ]   " + Formatting.RESET + Formatting.AQUA + "  " + command.displayName + " (" + command.triggers[0] + ")" + ": " + Formatting.BLUE + command.description);
                         bruh1.setStyle(bonk);
-                        assert MinecraftClient.getInstance().player != null;
-                        MinecraftClient.getInstance().player.sendMessage(bruh1, false);
+                        assert Cornos.minecraft.player != null;
+                        Cornos.minecraft.player.sendMessage(bruh1, false);
                     });
                     break;
                 default:

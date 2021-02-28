@@ -7,6 +7,7 @@ import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.client.MinecraftClient;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +17,7 @@ public class Cornos implements ModInitializer {
     public static final String MOD_ID = "ccl";
     public static final String MOD_NAME = "Cornos";
     public static Logger LOGGER = LogManager.getLogger();
+    public static MinecraftClient minecraft = MinecraftClient.getInstance();
 
     public static void log(Level level, String message) {
         LOGGER.log(level, "[" + MOD_NAME + "] " + message);
@@ -25,9 +27,9 @@ public class Cornos implements ModInitializer {
     public void onInitialize() {
         Runtime.getRuntime().addShutdownHook(new Thread(ConfigHelper::saveConfig));
         log(Level.INFO, "Initializing main client");
+
         log(Level.INFO, "Initializing configuration");
         ClientConfig.init();
-
         log(Level.INFO, "Registering event bus");
         EventHelper.BUS.init();
         log(Level.INFO, "Initializing command registry");

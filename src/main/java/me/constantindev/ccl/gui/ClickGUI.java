@@ -8,13 +8,13 @@ import com.lukflug.panelstudio.settings.*;
 import com.lukflug.panelstudio.theme.ColorScheme;
 import com.lukflug.panelstudio.theme.GameSenseTheme;
 import com.lukflug.panelstudio.theme.Theme;
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.config.*;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.glfw.GLFW;
 
@@ -34,18 +34,18 @@ public class ClickGUI extends MinecraftGUI {
             @Override
             public void drawString(Point pos, String s, Color c) {
                 end();
-                MinecraftClient.getInstance().textRenderer.draw(new MatrixStack(), s, pos.x, pos.y, c.getRGB());
+                Cornos.minecraft.textRenderer.draw(new MatrixStack(), s, pos.x, pos.y, c.getRGB());
                 begin();
             }
 
             @Override
             public int getFontWidth(String s) {
-                return MinecraftClient.getInstance().textRenderer.getWidth(s);
+                return Cornos.minecraft.textRenderer.getWidth(s);
             }
 
             @Override
             public int getFontHeight() {
-                return MinecraftClient.getInstance().textRenderer.fontHeight;
+                return Cornos.minecraft.textRenderer.fontHeight;
             }
         };
         Theme theme = new GameSenseTheme(new ColorScheme() {
@@ -78,30 +78,30 @@ public class ClickGUI extends MinecraftGUI {
             public int getOpacity() {
                 return 150;
             }
-        }, MinecraftClient.getInstance().textRenderer.fontHeight, 4, 2);
+        }, Cornos.minecraft.textRenderer.fontHeight, 4, 2);
         gui = new com.lukflug.panelstudio.ClickGUI(guiInterface, context -> {
-            //int width = MinecraftClient.getInstance().textRenderer.getWidth(context.getDescription());
-            int height = MinecraftClient.getInstance().textRenderer.fontHeight;
-            int wH = MinecraftClient.getInstance().getWindow().getScaledHeight();
-            //int wW = MinecraftClient.getInstance().getWindow().getScaledWidth();
-            MinecraftClient.getInstance().textRenderer.draw(new MatrixStack(), context.getDescription(), 1, wH - height - 1, 0xFFFFFFFF);
+            //int width = (Cornos).minecraft.textRenderer.getWidth(context.getDescription());
+            int height = Cornos.minecraft.textRenderer.fontHeight;
+            int wH = Cornos.minecraft.getWindow().getScaledHeight();
+            //int wW = (Cornos).minecraft.getWindow().getScaledWidth();
+            Cornos.minecraft.textRenderer.draw(new MatrixStack(), context.getDescription(), 1, wH - height - 1, 0xFFFFFFFF);
         });
         for (MType type : MType.ALL) {
-            int maxW = MinecraftClient.getInstance().textRenderer.getWidth("antioffhandcrash");
+            int maxW = Cornos.minecraft.textRenderer.getWidth("antioffhandcrash");
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
-                maxW = Math.max(maxW, MinecraftClient.getInstance().textRenderer.getWidth(m.name));
+                maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));
             }
-            com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(" " + type.toString(), null, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), null, new Point(50, 50), maxW + (MinecraftClient.getInstance().textRenderer.getWidth(" ") * 2));
+            com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(" " + type.toString(), null, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), null, new Point(50, 50), maxW + (Cornos.minecraft.textRenderer.getWidth(" ") * 2));
 
             gui.addComponent(container);
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
-                maxW = Math.max(maxW, MinecraftClient.getInstance().textRenderer.getWidth(m.name));
+                maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));
                 CollapsibleContainer mc = new CollapsibleContainer(" " + m.name, m.description, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), m.isOn);
                 container.addComponent(mc);
                 for (ModuleConfig.ConfigKey kc : m.mconf.config) {
-                    maxW = Math.max(maxW, MinecraftClient.getInstance().textRenderer.getWidth(kc.key + ": " + kc.value));
+                    maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(kc.key + ": " + kc.value));
                     if (kc instanceof Toggleable) {
                         BooleanComponent bc = new BooleanComponent(kc.key, null, theme.getComponentRenderer(), new com.lukflug.panelstudio.settings.Toggleable() {
                             @Override

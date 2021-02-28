@@ -1,10 +1,10 @@
 package me.constantindev.ccl.mixin;
 
 import com.google.common.collect.Lists;
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.InvalidStateException;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -65,7 +65,7 @@ public class IngameRendererHook {
             ml.forEach(module -> {
                 if (module.isOn.isOn()) mlR.add(module);
             });
-            mlR.sort(Comparator.comparingInt(o -> MinecraftClient.getInstance().textRenderer.getWidth(o.name)));
+            mlR.sort(Comparator.comparingInt(o -> Cornos.minecraft.textRenderer.getWidth(o.name)));
             List<Module> mlR1 = Lists.reverse(mlR);
             if (lastValues.size() > mlR1.size()) {
                 lastValues.subList(0, 1).clear();
@@ -78,7 +78,7 @@ public class IngameRendererHook {
                 } catch (Exception ignored) {
                     colorToUse = rgb;
                 }
-                MinecraftClient.getInstance().textRenderer.draw(matrices, module.name, scaledWidth - MinecraftClient.getInstance().textRenderer.getWidth(module.name) - 1, 1 + offset.getAndAdd(10), colorToUse);
+                Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 1, 1 + offset.getAndAdd(10), colorToUse);
             });
         }
     }

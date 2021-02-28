@@ -4,7 +4,6 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import net.minecraft.client.MinecraftClient;
 import org.apache.logging.log4j.Level;
 
 import java.io.File;
@@ -35,7 +34,7 @@ public class ConfigHelper {
         try {
             boolean garbage;
             boolean garbage1 = true;
-            File f = new File(MinecraftClient.getInstance().runDirectory + "/ccl_moduleconfig.bin");
+            File f = new File(Cornos.minecraft.runDirectory + "/ccl_moduleconfig.bin");
             if (f.exists()) garbage1 = f.delete();
             garbage = f.createNewFile();
             FileWriter fw = new FileWriter(f);
@@ -53,7 +52,7 @@ public class ConfigHelper {
 
     public static void loadConfig() {
         try {
-            File f = new File(MinecraftClient.getInstance().runDirectory + "/ccl_moduleconfig.bin");
+            File f = new File(Cornos.minecraft.runDirectory + "/ccl_moduleconfig.bin");
             if (!f.exists()) return;
             Scanner s = new Scanner(f);
             StringBuilder sb = new StringBuilder();

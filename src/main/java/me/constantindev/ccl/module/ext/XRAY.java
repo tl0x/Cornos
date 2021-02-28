@@ -1,8 +1,8 @@
 package me.constantindev.ccl.module.ext;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
-import net.minecraft.client.MinecraftClient;
 
 public class XRAY extends Module {
     public XRAY() {
@@ -11,13 +11,13 @@ public class XRAY extends Module {
 
     @Override
     public void onEnable() {
-        MinecraftClient.getInstance().worldRenderer.reload();
+        Cornos.minecraft.worldRenderer.reload();
         super.onEnable();
     }
 
     @Override
     public void onDisable() {
-        MinecraftClient.getInstance().worldRenderer.reload();
+        Cornos.minecraft.worldRenderer.reload();
         super.onDisable();
     }
     // Logic: XrayHandler.java & LuminanceHook.java

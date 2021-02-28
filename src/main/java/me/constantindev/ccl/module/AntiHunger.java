@@ -1,5 +1,6 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Toggleable;
@@ -11,11 +12,13 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 
+import java.util.Objects;
+
 public class AntiHunger extends Module {
     private boolean lastOnGround;
     private boolean sendOnGroundTruePacket;
     private boolean ignorePacket;
-    MinecraftClient mc = MinecraftClient.getInstance();
+    MinecraftClient mc = Cornos.minecraft;
 
     public AntiHunger() {
         super("AntiHunger", "Reduces hunger consumption.", MType.MISC);
@@ -32,19 +35,26 @@ public class AntiHunger extends Module {
                     event.cancel();
                 }
             }
-            if (PE.packet instanceof PlayerMoveC2SPacket && ((Toggleable) this.mconf.getByName("onGround")).isEnabled() && mc.player.isOnGround() && mc.player.fallDistance <= 0.0 && !mc.interactionManager.isBreakingBlock()) {
-                ((PlayerMoveC2SPacketAccessor) PE.packet).setOnGround(false);
+            if (PE.packet instanceof PlayerMoveC2SPacket && ((Toggleable) this.mconf.getByName("onGround")).isEnabled()) {
+                assert mc.player != null;
+                if (mc.player.isOnGround() && mc.player.fallDistance <= 0.0) {
+                    assert mc.interactionManager != null;
+                    if (!mc.interactionManager.isBreakingBlock()) {
+                        ((PlayerMoveC2SPacketAccessor) PE.packet).setOnGround(false);
+                    }
+                }
             }
         });
     }
 
     @Override
     public void onExecute() {
+        assert mc.player != null;
         if (mc.player.isOnGround() && !lastOnGround && !sendOnGroundTruePacket) sendOnGroundTruePacket = true;
 
         if (mc.player.isOnGround() && sendOnGroundTruePacket && ((Toggleable) this.mconf.getByName("onGround")).isEnabled()) {
             ignorePacket = true;
-            mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket(true));
+            Objects.requireNonNull(mc.getNetworkHandler()).sendPacket(new PlayerMoveC2SPacket(true));
             ignorePacket = false;
 
             sendOnGroundTruePacket = false;

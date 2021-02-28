@@ -1,8 +1,8 @@
 package me.constantindev.ccl.module.ext;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
-import net.minecraft.client.MinecraftClient;
 
 public class FullBright extends Module {
 
@@ -14,14 +14,14 @@ public class FullBright extends Module {
 
     @Override
     public void onEnable() {
-        oldgamma = MinecraftClient.getInstance().options.gamma;
-        MinecraftClient.getInstance().options.gamma = 10D;
+        oldgamma = Cornos.minecraft.options.gamma;
+        Cornos.minecraft.options.gamma = 10D;
         super.onEnable();
     }
 
     @Override
     public void onDisable() {
-        MinecraftClient.getInstance().options.gamma = oldgamma;
+        Cornos.minecraft.options.gamma = oldgamma;
         super.onDisable();
     }
 }

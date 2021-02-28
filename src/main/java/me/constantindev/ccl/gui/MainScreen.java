@@ -1,7 +1,7 @@
 package me.constantindev.ccl.gui;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
@@ -23,14 +23,14 @@ public class MainScreen extends Screen {
 
     @Override
     protected void init() {
-        AbstractButtonWidget btnw = new ButtonWidget(width / 2 + 5, height / 2 + 30, 120, 20, Text.of("Who plays realms"), (b) -> MinecraftClient.getInstance().openScreen(new RealmsMainScreen(this)));
-        this.addButton(new ButtonWidget(width / 2 - 125, height / 2, 120, 20, Text.of("Singleplayer"), (b) -> MinecraftClient.getInstance().openScreen(new SelectWorldScreen(this))));
-        this.addButton(new ButtonWidget(width / 2 + 5, height / 2, 120, 20, Text.of("Multiplayer"), (b) -> MinecraftClient.getInstance().openScreen(new MultiplayerScreen(this))));
-        this.addButton(new ButtonWidget(width / 2 - 125, height / 2 + 30, 120, 20, Text.of("Settings"), (b) -> MinecraftClient.getInstance().openScreen(new OptionsScreen(this, MinecraftClient.getInstance().options))));
+        AbstractButtonWidget btnw = new ButtonWidget(width / 2 + 5, height / 2 + 30, 120, 20, Text.of("Who plays realms"), (b) -> Cornos.minecraft.openScreen(new RealmsMainScreen(this)));
+        this.addButton(new ButtonWidget(width / 2 - 125, height / 2, 120, 20, Text.of("Singleplayer"), (b) -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
+        this.addButton(new ButtonWidget(width / 2 + 5, height / 2, 120, 20, Text.of("Multiplayer"), (b) -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));
+        this.addButton(new ButtonWidget(width / 2 - 125, height / 2 + 30, 120, 20, Text.of("Settings"), (b) -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));
         this.addButton(btnw);
         this.addButton(new ButtonWidget(width - 121, height - 21, 120, 20, Text.of("Return to pogn't menu"), (b) -> {
             ModuleRegistry.getByName("ClientConfig").mconf.getByName("homescreen").setValue("vanilla");
-            MinecraftClient.getInstance().openScreen(new TitleScreen());
+            Cornos.minecraft.openScreen(new TitleScreen());
         }));
         this.addButton(new TexturedButtonWidget(width - 20, 0, 20, 20, 0, 0, 0, new Identifier("ccl", "transparent.png"), (b) -> btnw.setMessage(Text.of("Roleplay"))));
         super.init();
@@ -38,9 +38,9 @@ public class MainScreen extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        MinecraftClient.getInstance().getTextureManager().bindTexture(new Identifier("ccl", "bg.png"));
+        Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl", "bg.png"));
         DrawableHelper.drawTexture(matrices, 0, 0, 0, 0, 0, width, height, height, width);
-        MinecraftClient.getInstance().getTextureManager().bindTexture(new Identifier("ccl", "logo.png"));
+        Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl", "logo.png"));
         DrawableHelper.drawTexture(matrices, width / 2 - (960 / 2 / 4), height / 6, 0, 0, 0, 960 / 4, 233 / 4, 233 / 4, 960 / 4);
         super.render(matrices, mouseX, mouseY, delta);
     }

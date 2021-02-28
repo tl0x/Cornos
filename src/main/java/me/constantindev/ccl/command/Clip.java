@@ -8,9 +8,9 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.command;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
 import me.constantindev.ccl.etc.helper.ClientHelper;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.math.Vec3d;
 
 public class Clip extends Command {
@@ -26,7 +26,8 @@ public class Clip extends Command {
             ClientHelper.sendChat("i need some arguments like \"v\" or \"h\" ygm");
             return;
         }
-        Vec3d p = MinecraftClient.getInstance().player.getPos();
+        assert Cornos.minecraft.player != null;
+        Vec3d p = Cornos.minecraft.player.getPos();
         Vec3d np = p;
         switch (args[0].toLowerCase()) {
             case "v":
@@ -55,7 +56,7 @@ public class Clip extends Command {
                     break;
                 }
                 int mtp = Integer.parseInt(args[1]);
-                Vec3d origv = MinecraftClient.getInstance().player.getRotationVector();
+                Vec3d origv = Cornos.minecraft.player.getRotationVector();
                 Vec3d newv = new Vec3d(origv.x, 0, origv.z).multiply(mtp);
                 np = new Vec3d(p.x + newv.x, p.y, p.z + newv.z);
                 break;
@@ -63,7 +64,7 @@ public class Clip extends Command {
                 ClientHelper.sendChat("run the command w/o arguments and follow the instructions please");
                 return;
         }
-        MinecraftClient.getInstance().player.updatePosition(np.x, np.y, np.z);
+        Cornos.minecraft.player.updatePosition(np.x, np.y, np.z);
         super.onExecute(args);
     }
 }

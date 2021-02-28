@@ -1,12 +1,12 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.helper.ClientHelper;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.math.Vec3d;
 
 public class Flight extends Module {
@@ -28,20 +28,20 @@ public class Flight extends Module {
         } else counter = 0;
         switch (this.mconf.getByName("mode").value) {
             case "vanilla":
-                assert MinecraftClient.getInstance().player != null;
-                MinecraftClient.getInstance().player.abilities.flying = !(counter > 9);
+                assert Cornos.minecraft.player != null;
+                Cornos.minecraft.player.abilities.flying = !(counter > 9);
                 break;
             case "static":
 
-                assert MinecraftClient.getInstance().player != null;
-                Vec3d rot = MinecraftClient.getInstance().player.getRotationVector();
+                assert Cornos.minecraft.player != null;
+                Vec3d rot = Cornos.minecraft.player.getRotationVector();
                 rot = rot.multiply(speed);
-                if (counter > 9) MinecraftClient.getInstance().player.setVelocity(0, -0.1, 0);
-                else if (MinecraftClient.getInstance().options.keyForward.isPressed())
-                    MinecraftClient.getInstance().player.setVelocity(rot.x, rot.y, rot.z);
-                else if (MinecraftClient.getInstance().options.keyBack.isPressed())
-                    MinecraftClient.getInstance().player.setVelocity(-rot.x, -rot.y, -rot.z);
-                else MinecraftClient.getInstance().player.setVelocity(0, 0, 0);
+                if (counter > 9) Cornos.minecraft.player.setVelocity(0, -0.1, 0);
+                else if (Cornos.minecraft.options.keyForward.isPressed())
+                    Cornos.minecraft.player.setVelocity(rot.x, rot.y, rot.z);
+                else if (Cornos.minecraft.options.keyBack.isPressed())
+                    Cornos.minecraft.player.setVelocity(-rot.x, -rot.y, -rot.z);
+                else Cornos.minecraft.player.setVelocity(0, 0, 0);
                 break;
             default:
                 ClientHelper.sendChat("Invalid flight mode. Please pick one of vanilla, static.");

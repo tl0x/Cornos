@@ -1,9 +1,9 @@
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.hit.BlockHitResult;
@@ -16,13 +16,13 @@ public class AutoTool extends Module {
 
     @Override
     public void onExecute() {
-        if (MinecraftClient.getInstance().options.keyAttack.isPressed()) {
-            if (!(MinecraftClient.getInstance().crosshairTarget instanceof BlockHitResult)) return;
-            BlockHitResult r = ((BlockHitResult) MinecraftClient.getInstance().crosshairTarget);
+        if (Cornos.minecraft.options.keyAttack.isPressed()) {
+            if (!(Cornos.minecraft.crosshairTarget instanceof BlockHitResult)) return;
+            BlockHitResult r = ((BlockHitResult) Cornos.minecraft.crosshairTarget);
             BlockPos b = r.getBlockPos();
-            assert MinecraftClient.getInstance().player != null;
-            BlockState bstate = MinecraftClient.getInstance().player.world.getBlockState(b);
-            PlayerInventory pinv = MinecraftClient.getInstance().player.inventory;
+            assert Cornos.minecraft.player != null;
+            BlockState bstate = Cornos.minecraft.player.world.getBlockState(b);
+            PlayerInventory pinv = Cornos.minecraft.player.inventory;
             float best = 1f;
             int bs1 = -1;
             for (int i = 0; i < 9; i++) {
