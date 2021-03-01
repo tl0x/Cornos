@@ -10,6 +10,7 @@ import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class WorldRenderHook {
     @Inject(method = "render", at = @At("TAIL"))
     public void render(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo ci) {
-        RenderHelper.queue.forEach(renderableBlock -> RenderHelper.renderBlockOutline(renderableBlock.bp, renderableBlock.r, renderableBlock.g, renderableBlock.b, renderableBlock.a, matrices, camera));
+        RenderHelper.queue.forEach(renderableBlock -> RenderHelper.renderBlockOutline(renderableBlock.bp, renderableBlock.dimensions, renderableBlock.r, renderableBlock.g, renderableBlock.b, renderableBlock.a, matrices, camera));
 
         if (!ModuleRegistry.getByName("blockhighlighter").isOn.isOn()) return;
         String[] coordpair = ModuleRegistry.getByName("blockhighlighter").mconf.getByName("pos").value.split(" "); // forgive me god
@@ -43,6 +44,6 @@ public class WorldRenderHook {
         int x = Integer.parseInt(coordpair[0]);
         int y = Integer.parseInt(coordpair[1]);
         int z = Integer.parseInt(coordpair[2]);
-        RenderHelper.renderBlockOutline(new BlockPos(x, y, z), 255, 255, 255, 255, matrices, camera);
+        RenderHelper.renderBlockOutline(new BlockPos(x, y, z), new Vec3d(1, 1, 1), 255, 255, 255, 255, matrices, camera);
     }
 }

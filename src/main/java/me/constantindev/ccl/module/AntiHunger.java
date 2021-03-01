@@ -15,10 +15,10 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import java.util.Objects;
 
 public class AntiHunger extends Module {
+    MinecraftClient mc = Cornos.minecraft;
     private boolean lastOnGround;
     private boolean sendOnGroundTruePacket;
     private boolean ignorePacket;
-    MinecraftClient mc = Cornos.minecraft;
 
     public AntiHunger() {
         super("AntiHunger", "Reduces hunger consumption.", MType.MISC);
