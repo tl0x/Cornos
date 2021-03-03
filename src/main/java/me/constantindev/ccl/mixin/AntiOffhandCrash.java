@@ -21,11 +21,5 @@ public class AntiOffhandCrash {
     public void overrideApply(ClientPlayPacketListener clientPlayPacketListener, CallbackInfo ci) {
         boolean flag = EventHelper.BUS.invokeEventCall(EventType.ONPACKETHANDLE, new PacketApplyEvent((Packet<?>) this, clientPlayPacketListener));
         if (!flag) ci.cancel();
-        /*
-        if (this.sound == SoundEvents.ITEM_ARMOR_EQUIP_GENERIC && ModuleRegistry.getByName("antioffhandcrash").isOn.isOn())
-
-           ci.cancel();
-
-         */
     }
 }

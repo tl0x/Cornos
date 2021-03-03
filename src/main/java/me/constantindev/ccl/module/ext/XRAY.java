@@ -6,7 +6,7 @@ import me.constantindev.ccl.etc.base.Module;
 
 public class XRAY extends Module {
     public XRAY() {
-        super("xray", "When you just need some blocks", MType.WORLD);
+        super("XRAY", "When you just need some blocks", MType.WORLD);
     }
 
     @Override

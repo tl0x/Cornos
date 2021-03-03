@@ -25,7 +25,6 @@ public class ModuleRegistry {
         ml.add(new Hud());
         ml.add(new AutoRespawn());
         ml.add(new NoPumpkin());
-        ml.add(new BlockHighlighter());
         ml.add(new NoFireOverlay());
         ml.add(new AutoTool());
         ml.add(new ServerCrasher());
@@ -35,9 +34,9 @@ public class ModuleRegistry {
         ml.add(new XRAY());
         ml.add(new AntiOffhandCrash());
         ml.add(new ClickGUI());
-        ml.add(new Chat());
-        ml.add(new FullBright());
-        ml.add(new ArrowJuke());
+        ml.add(new ClientConfig());
+        ml.add(new ArrowAvoid());
+        ml.add(new DiscordRPC());
 
     }
 

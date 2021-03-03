@@ -13,10 +13,6 @@ import java.awt.*;
  */
 public class ColorComponent extends CollapsibleContainer {
     /**
-     * The setting in question.
-     */
-    protected ColorSetting setting;
-    /**
      * Whether to render an alpha slider.
      */
     protected final boolean alpha;
@@ -24,6 +20,10 @@ public class ColorComponent extends CollapsibleContainer {
      * Whether to render a rainbow button.
      */
     protected final boolean rainbow;
+    /**
+     * The setting in question.
+     */
+    protected ColorSetting setting;
     /**
      * Custom {@link ColorScheme} that set the active color to the value of the setting.
      */

@@ -11,6 +11,40 @@ import java.awt.*;
  */
 public interface Renderer {
     /**
+     * Utility function to make a color brighter.
+     *
+     * @param color a color
+     * @return a brighter version of that color
+     */
+    static Color brighter(Color color) {
+        int r = color.getRed(), g = color.getGreen(), b = color.getBlue();
+        r += 64;
+        g += 64;
+        b += 64;
+        if (r > 255) r = 255;
+        if (g > 255) g = 255;
+        if (b > 255) b = 255;
+        return new Color(r, g, b, color.getAlpha());
+    }
+
+    /**
+     * Utility function to make a color darker.
+     *
+     * @param color a color
+     * @return a darker version of that color
+     */
+    static Color darker(Color color) {
+        int r = color.getRed(), g = color.getGreen(), b = color.getBlue();
+        r -= 64;
+        g -= 64;
+        b -= 64;
+        if (r < 0) r = 0;
+        if (g < 0) g = 0;
+        if (b < 0) b = 0;
+        return new Color(r, g, b, color.getAlpha());
+    }
+
+    /**
      * Returns the default height for components.
      *
      * @param open true if the component in question the the title bar for an open container
@@ -172,38 +206,4 @@ public interface Renderer {
      * Restores the default color scheme.
      */
     void restoreColorScheme();
-
-    /**
-     * Utility function to make a color brighter.
-     *
-     * @param color a color
-     * @return a brighter version of that color
-     */
-    static Color brighter(Color color) {
-        int r = color.getRed(), g = color.getGreen(), b = color.getBlue();
-        r += 64;
-        g += 64;
-        b += 64;
-        if (r > 255) r = 255;
-        if (g > 255) g = 255;
-        if (b > 255) b = 255;
-        return new Color(r, g, b, color.getAlpha());
-    }
-
-    /**
-     * Utility function to make a color darker.
-     *
-     * @param color a color
-     * @return a darker version of that color
-     */
-    static Color darker(Color color) {
-        int r = color.getRed(), g = color.getGreen(), b = color.getBlue();
-        r -= 64;
-        g -= 64;
-        b -= 64;
-        if (r < 0) r = 0;
-        if (g < 0) g = 0;
-        if (b < 0) b = 0;
-        return new Color(r, g, b, color.getAlpha());
-    }
 }

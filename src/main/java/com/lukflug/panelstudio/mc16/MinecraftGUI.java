@@ -16,6 +16,10 @@ import java.awt.*;
  */
 public abstract class MinecraftGUI extends Screen {
     /**
+     * Saved matrix stack;
+     */
+    protected MatrixStack matrixStack = null;
+    /**
      * The current mouse position.
      */
     private Point mouse = new Point();
@@ -27,10 +31,6 @@ public abstract class MinecraftGUI extends Screen {
      * Current right mouse button state.
      */
     private boolean rButton = false;
-    /**
-     * Saved matrix stack;
-     */
-    protected MatrixStack matrixStack = null;
 
     /**
      * Constructor.

@@ -111,10 +111,6 @@ public class HUDPanel extends DraggableContainer {
      */
     protected static class HUDRenderer extends RendererProxy {
         /**
-         * Base renderer.
-         */
-        Renderer renderer;
-        /**
          * Whether GUI is open.
          */
         protected Toggleable guiOpen;
@@ -122,6 +118,10 @@ public class HUDPanel extends DraggableContainer {
          * Minimum border.
          */
         protected int minBorder;
+        /**
+         * Base renderer.
+         */
+        Renderer renderer;
 
         /**
          * Constructor.

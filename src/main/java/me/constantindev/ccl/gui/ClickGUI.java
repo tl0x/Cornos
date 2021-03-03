@@ -5,8 +5,8 @@ import com.lukflug.panelstudio.DraggableContainer;
 import com.lukflug.panelstudio.SettingsAnimation;
 import com.lukflug.panelstudio.mc16.MinecraftGUI;
 import com.lukflug.panelstudio.settings.*;
+import com.lukflug.panelstudio.theme.ClearTheme;
 import com.lukflug.panelstudio.theme.ColorScheme;
-import com.lukflug.panelstudio.theme.GameSenseTheme;
 import com.lukflug.panelstudio.theme.Theme;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.MType;
@@ -48,10 +48,11 @@ public class ClickGUI extends MinecraftGUI {
                 return Cornos.minecraft.textRenderer.fontHeight;
             }
         };
-        Theme theme = new GameSenseTheme(new ColorScheme() {
+
+        Theme theme = new ClearTheme(new ColorScheme() {
             @Override
             public Color getActiveColor() {
-                return new Color(150, 150, 150);
+                return new Color(150, 200, 150);
             }
 
             @Override
@@ -76,9 +77,9 @@ public class ClickGUI extends MinecraftGUI {
 
             @Override
             public int getOpacity() {
-                return 150;
+                return 255;
             }
-        }, Cornos.minecraft.textRenderer.fontHeight, 4, 2);
+        }, true, 5, 4);
         gui = new com.lukflug.panelstudio.ClickGUI(guiInterface, context -> {
             //int width = (Cornos).minecraft.textRenderer.getWidth(context.getDescription());
             int height = Cornos.minecraft.textRenderer.fontHeight;
@@ -87,7 +88,7 @@ public class ClickGUI extends MinecraftGUI {
             Cornos.minecraft.textRenderer.draw(new MatrixStack(), context.getDescription(), 1, wH - height - 1, 0xFFFFFFFF);
         });
         for (MType type : MType.ALL) {
-            int maxW = Cornos.minecraft.textRenderer.getWidth("antioffhandcrash");
+            int maxW = Cornos.minecraft.textRenderer.getWidth("antioffhandcrash ");
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
                 maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));

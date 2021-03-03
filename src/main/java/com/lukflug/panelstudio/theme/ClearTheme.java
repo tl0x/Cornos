@@ -11,9 +11,9 @@ import java.awt.*;
  * @author lukflug
  */
 public class ClearTheme implements Theme {
+    protected final boolean gradient;
     protected ColorScheme scheme;
     protected Renderer componentRenderer, panelRenderer;
-    protected final boolean gradient;
 
     public ClearTheme(ColorScheme scheme, boolean gradient, int height, int border) {
         this.scheme = scheme;

@@ -40,12 +40,12 @@ public abstract class GLInterface implements Interface {
     /**
      * Clipping rectangle stack.
      */
-    private final Stack<Rectangle> clipRect = new Stack<Rectangle>();
+    private final Stack<Rectangle> clipRect = new Stack<>();
     /**
      * Boolean indicating whether to clip in the horizontal direction
      */
     protected boolean clipX;
-    protected List<Identifier> textures = new ArrayList<Identifier>();
+    protected List<Identifier> textures = new ArrayList<>();
 
     /**
      * Constructor.
@@ -54,6 +54,28 @@ public abstract class GLInterface implements Interface {
      */
     public GLInterface(boolean clipX) {
         this.clipX = clipX;
+    }
+
+    /**
+     * Set OpenGL to the state used by the rendering methods.
+     * Should be called before rendering.
+     */
+    public static void begin() {
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture();
+        GlStateManager.blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
+        GlStateManager.shadeModel(GL11.GL_SMOOTH);
+        GlStateManager.lineWidth(2);
+    }
+
+    /**
+     * Restore OpenGL to the state expected by Minecraft.
+     * Should be called after rendering.
+     */
+    public static void end() {
+        GlStateManager.shadeModel(GL11.GL_FLAT);
+        GlStateManager.enableTexture();
+        GlStateManager.disableBlend();
     }
 
     @Override
@@ -110,10 +132,7 @@ public abstract class GLInterface implements Interface {
                 textures.add(rl);
             }
             return textures.indexOf(rl);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            return 0;
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return 0;
         }
@@ -172,7 +191,7 @@ public abstract class GLInterface implements Interface {
                 coords[i] += matrix[i + 4 * j] * COORDS[j];
             }
         }
-        for (int i = 0; i < 4; i++) COORDS[i] = coords[i];
+        System.arraycopy(coords, 0, COORDS, 0, 4);
     }
 
     /**
@@ -265,28 +284,6 @@ public abstract class GLInterface implements Interface {
         GL11.glGetFloatv(GL11.GL_MODELVIEW_MATRIX, MODELVIEW);
         GL11.glGetFloatv(GL11.GL_PROJECTION_MATRIX, PROJECTION);
         GL11.glGetIntegerv(GL11.GL_VIEWPORT, VIEWPORT);
-    }
-
-    /**
-     * Set OpenGL to the state used by the rendering methods.
-     * Should be called before rendering.
-     */
-    public static void begin() {
-        GlStateManager.enableBlend();
-        GlStateManager.disableTexture();
-        GlStateManager.blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
-        GlStateManager.shadeModel(GL11.GL_SMOOTH);
-        GlStateManager.lineWidth(2);
-    }
-
-    /**
-     * Restore OpenGL to the state expected by Minecraft.
-     * Should be called after rendering.
-     */
-    public static void end() {
-        GlStateManager.shadeModel(GL11.GL_FLAT);
-        GlStateManager.enableTexture();
-        GlStateManager.disableBlend();
     }
 
     /**

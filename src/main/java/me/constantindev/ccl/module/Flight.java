@@ -7,6 +7,8 @@ import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.RandomHelper;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
 
 public class Flight extends Module {
@@ -14,7 +16,7 @@ public class Flight extends Module {
 
     public Flight() {
         super("Flight", "Allows you to fly", MType.MOVEMENT);
-        this.mconf.add(new MultiOption("mode", "vanilla", new String[]{"vanilla", "static"}));
+        this.mconf.add(new MultiOption("mode", "vanilla", new String[]{"vanilla", "static", "jetpack"}));
         this.mconf.add(new Toggleable("toggleFast", true));
         this.mconf.add(new Num("speed", 1.0, 30, 0));
     }
@@ -42,6 +44,17 @@ public class Flight extends Module {
                 else if (Cornos.minecraft.options.keyBack.isPressed())
                     Cornos.minecraft.player.setVelocity(-rot.x, -rot.y, -rot.z);
                 else Cornos.minecraft.player.setVelocity(0, 0, 0);
+                break;
+            case "jetpack":
+                if (Cornos.minecraft.world == null) return;
+                if (Cornos.minecraft.options.keyJump.isPressed()) {
+                    assert Cornos.minecraft.player != null;
+                    Cornos.minecraft.player.addVelocity(0, speed / 30, 0);
+                    Vec3d vp = Cornos.minecraft.player.getPos();
+                    for (int i = 0; i < 10; i++) {
+                        Cornos.minecraft.world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, vp.x, vp.y, vp.z, RandomHelper.rndD(.25) - .125, RandomHelper.rndD(.25) - .125, RandomHelper.rndD(.25) - .125);
+                    }
+                }
                 break;
             default:
                 ClientHelper.sendChat("Invalid flight mode. Please pick one of vanilla, static.");
