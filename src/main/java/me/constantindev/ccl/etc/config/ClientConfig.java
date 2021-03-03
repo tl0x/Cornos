@@ -11,6 +11,7 @@ public class ClientConfig {
     public static Block[] xrayBlocks;
     public static NumberSetting animSpeed;
     public static ClickGUI cg;
+    public static int latestRGBVal = 0;
 
     public static void init() {
         chatPrefix = "}";

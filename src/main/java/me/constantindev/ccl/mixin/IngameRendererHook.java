@@ -3,6 +3,7 @@ package me.constantindev.ccl.mixin;
 import com.google.common.collect.Lists;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
+import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.exc.InvalidStateException;
@@ -64,6 +65,7 @@ public class IngameRendererHook {
                 throw new InvalidStateException("RgbStage", stage + "");
         }
         int rgb = (0xFF << 24) + (r << 16) + (g << 8) + b;
+        ClientConfig.latestRGBVal = rgb;
         if (swap > 10) {
             lastValues.add(rgb);
             swap = 0;

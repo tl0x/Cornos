@@ -60,7 +60,7 @@ public class GameSenseTheme implements Theme {
             }
             Point stringPos = new Point(rectangle.getLocation());
             stringPos.translate(0, border);
-            context.getInterface().drawString(stringPos, text, getFontColor(focus));
+            context.getInterface().drawString(stringPos, " "+text, getFontColor(focus));
         }
 
         @Override

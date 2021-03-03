@@ -37,6 +37,7 @@ public class ModuleRegistry {
         ml.add(new ClientConfig());
         ml.add(new ArrowAvoid());
         ml.add(new DiscordRPC());
+        ml.add(new QuickMove());
 
     }
 

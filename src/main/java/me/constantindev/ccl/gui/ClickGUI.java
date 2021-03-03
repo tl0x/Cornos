@@ -7,6 +7,7 @@ import com.lukflug.panelstudio.mc16.MinecraftGUI;
 import com.lukflug.panelstudio.settings.*;
 import com.lukflug.panelstudio.theme.ClearTheme;
 import com.lukflug.panelstudio.theme.ColorScheme;
+import com.lukflug.panelstudio.theme.GameSenseTheme;
 import com.lukflug.panelstudio.theme.Theme;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
@@ -15,6 +16,7 @@ import me.constantindev.ccl.etc.config.*;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.glfw.GLFW;
 
@@ -48,38 +50,37 @@ public class ClickGUI extends MinecraftGUI {
                 return Cornos.minecraft.textRenderer.fontHeight;
             }
         };
-
-        Theme theme = new ClearTheme(new ColorScheme() {
+        Theme theme = new GameSenseTheme(new ColorScheme() {
             @Override
             public Color getActiveColor() {
-                return new Color(150, 200, 150);
+                return new Color(255, 255, 255);
             }
 
             @Override
             public Color getInactiveColor() {
-                return new Color(70, 70, 70);
+                return new Color(137, 137, 137);
             }
 
             @Override
             public Color getBackgroundColor() {
-                return new Color(40, 40, 40);
+                return new Color(107, 160, 124, 128);
             }
 
             @Override
             public Color getOutlineColor() {
-                return new Color(100, 100, 100);
+                return new Color(0, 0, 0);
             }
 
             @Override
             public Color getFontColor() {
-                return new Color(255, 250, 250);
+                return new Color(0, 0, 0);
             }
 
             @Override
             public int getOpacity() {
                 return 255;
             }
-        }, true, 5, 4);
+        }, 9, 4, 4);
         gui = new com.lukflug.panelstudio.ClickGUI(guiInterface, context -> {
             //int width = (Cornos).minecraft.textRenderer.getWidth(context.getDescription());
             int height = Cornos.minecraft.textRenderer.fontHeight;
@@ -87,19 +88,21 @@ public class ClickGUI extends MinecraftGUI {
             //int wW = (Cornos).minecraft.getWindow().getScaledWidth();
             Cornos.minecraft.textRenderer.draw(new MatrixStack(), context.getDescription(), 1, wH - height - 1, 0xFFFFFFFF);
         });
+        int offset = 10;
         for (MType type : MType.ALL) {
-            int maxW = Cornos.minecraft.textRenderer.getWidth("antioffhandcrash ");
+
+            int maxW = Cornos.minecraft.textRenderer.getWidth("antioffhandcrash  ");
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
                 maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));
             }
-            com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(" " + type.toString(), null, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), null, new Point(50, 50), maxW + (Cornos.minecraft.textRenderer.getWidth(" ") * 2));
+            com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(type.toString(), null, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), null, new Point(offset += 100, 50), maxW + (Cornos.minecraft.textRenderer.getWidth(" ") * 2));
 
             gui.addComponent(container);
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
                 maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));
-                CollapsibleContainer mc = new CollapsibleContainer(" " + m.name, m.description, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), m.isOn);
+                CollapsibleContainer mc = new CollapsibleContainer(m.name, m.description, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), m.isOn);
                 container.addComponent(mc);
                 for (ModuleConfig.ConfigKey kc : m.mconf.config) {
                     maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(kc.key + ": " + kc.value));
