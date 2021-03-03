@@ -8,8 +8,8 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.module;
 
-import me.constantindev.ccl.etc.DiscordRPCThread;
 import me.constantindev.ccl.etc.base.Module;
+import me.constantindev.ccl.etc.ms.DiscordRPCThread;
 
 public class DiscordRPC extends Module {
     DiscordRPCThread instance = null;

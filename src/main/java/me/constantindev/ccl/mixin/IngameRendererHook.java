@@ -2,10 +2,10 @@ package me.constantindev.ccl.mixin;
 
 import com.google.common.collect.Lists;
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.InvalidStateException;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
+import me.constantindev.ccl.etc.exc.InvalidStateException;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;

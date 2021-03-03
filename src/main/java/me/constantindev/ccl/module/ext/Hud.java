@@ -1,9 +1,9 @@
 package me.constantindev.ccl.module.ext;
 
-import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
+import me.constantindev.ccl.etc.ms.MType;
 
 public class Hud extends Module {
     public Hud() {

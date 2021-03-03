@@ -1,9 +1,9 @@
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Num;
+import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;

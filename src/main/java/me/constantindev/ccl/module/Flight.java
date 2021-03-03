@@ -1,13 +1,13 @@
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.helper.RandomHelper;
+import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
 

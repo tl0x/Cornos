@@ -1,16 +1,16 @@
 package me.constantindev.ccl.etc.base;
 
-import me.constantindev.ccl.etc.MType;
-import me.constantindev.ccl.etc.Toggleable;
 import me.constantindev.ccl.etc.config.Keybind;
 import me.constantindev.ccl.etc.config.ModuleConfig;
+import me.constantindev.ccl.etc.config.Toggleable$1;
+import me.constantindev.ccl.etc.ms.MType;
 
 public class Module {
     public final String name;
     public final String description;
     public final ModuleConfig mconf;
     public final MType type;
-    public final Toggleable isOn = new Toggleable(false);
+    public final Toggleable$1 isOn = new Toggleable$1(false);
     boolean calledVitalsOnenable = true;
     boolean calledVitalsOndisable = true;
 

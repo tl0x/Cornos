@@ -1,10 +1,10 @@
 package me.constantindev.ccl.command;
 
-import me.constantindev.ccl.etc.KeyBind;
 import me.constantindev.ccl.etc.base.Command;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
+import me.constantindev.ccl.etc.ms.KeyBind;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 
 public class Keybind extends Command {

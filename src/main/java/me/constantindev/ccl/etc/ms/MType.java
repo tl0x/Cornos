@@ -1,4 +1,4 @@
-package me.constantindev.ccl.etc;
+package me.constantindev.ccl.etc.ms;
 
 public class MType {
     public static MType MISC = new MType("Miscellaneous");

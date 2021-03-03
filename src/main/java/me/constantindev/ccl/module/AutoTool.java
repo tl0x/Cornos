@@ -1,8 +1,8 @@
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
+import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;

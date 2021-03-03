@@ -1,4 +1,4 @@
-package me.constantindev.ccl.etc;
+package me.constantindev.ccl.etc.render;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;

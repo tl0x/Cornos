@@ -1,8 +1,8 @@
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
+import me.constantindev.ccl.etc.ms.MType;
 
 public class FullBright extends Module {
 

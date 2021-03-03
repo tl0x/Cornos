@@ -1,10 +1,10 @@
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.MType;
-import me.constantindev.ccl.etc.RenderableBlock;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.helper.RenderHelper;
+import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.render.RenderableBlock;
 import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;

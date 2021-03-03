@@ -11,12 +11,12 @@ credits to bleachhack for providing most of the code here
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.MType;
-import me.constantindev.ccl.etc.RenderableBlock;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.helper.RenderHelper;
+import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.render.RenderableBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;

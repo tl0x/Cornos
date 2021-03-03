@@ -1,4 +1,4 @@
-package me.constantindev.ccl.etc;
+package me.constantindev.ccl.etc.render;
 
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexFormat;

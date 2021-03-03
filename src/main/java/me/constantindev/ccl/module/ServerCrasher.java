@@ -1,8 +1,6 @@
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.MType;
-import me.constantindev.ccl.etc.ServerCrasherManager;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Num;
@@ -11,6 +9,8 @@ import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.helper.RandomHelper;
+import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ServerCrasherManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;

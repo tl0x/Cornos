@@ -2,8 +2,8 @@ package me.constantindev.ccl.etc.helper;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.RenderType;
-import me.constantindev.ccl.etc.RenderableBlock;
+import me.constantindev.ccl.etc.render.RenderType;
+import me.constantindev.ccl.etc.render.RenderableBlock;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;

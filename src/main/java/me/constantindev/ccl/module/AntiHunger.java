@@ -1,12 +1,12 @@
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
+import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.mixin.PlayerMoveC2SPacketAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;

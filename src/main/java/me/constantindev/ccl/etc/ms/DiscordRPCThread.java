@@ -6,7 +6,7 @@
 PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 */
-package me.constantindev.ccl.etc;
+package me.constantindev.ccl.etc.ms;
 
 
 import club.minnced.discord.rpc.DiscordEventHandlers;

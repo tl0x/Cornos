@@ -1,4 +1,4 @@
-package me.constantindev.ccl.etc;
+package me.constantindev.ccl.etc.exc;
 
 public class InvalidStateException extends Exception {
     public InvalidStateException(String propname, String propvalue) {

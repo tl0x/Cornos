@@ -1,4 +1,4 @@
-package me.constantindev.ccl.etc;
+package me.constantindev.ccl.etc.ms;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.RandomHelper;

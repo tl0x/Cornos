@@ -1,10 +1,10 @@
 package me.constantindev.ccl.module;
 
-import me.constantindev.ccl.etc.MType;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketApplyEvent;
+import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.sound.SoundEvents;
 

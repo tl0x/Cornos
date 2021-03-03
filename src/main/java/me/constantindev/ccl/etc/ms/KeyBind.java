@@ -1,4 +1,4 @@
-package me.constantindev.ccl.etc;
+package me.constantindev.ccl.etc.ms;
 
 import me.constantindev.ccl.Cornos;
 import net.minecraft.client.util.InputUtil;

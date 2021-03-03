@@ -1,7 +1,7 @@
 package me.constantindev.ccl.etc.helper;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.KeyBind;
+import me.constantindev.ccl.etc.ms.KeyBind;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 
 import java.util.HashMap;

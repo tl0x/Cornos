@@ -1,6 +1,6 @@
-package me.constantindev.ccl.etc;
+package me.constantindev.ccl.etc.config;
 
-public class Toggleable implements com.lukflug.panelstudio.settings.Toggleable {
+public class Toggleable$1 implements com.lukflug.panelstudio.settings.Toggleable {
     boolean value;
 
     /**
@@ -8,7 +8,7 @@ public class Toggleable implements com.lukflug.panelstudio.settings.Toggleable {
      *
      * @param value intial sate
      */
-    public Toggleable(boolean value) {
+    public Toggleable$1(boolean value) {
         this.value = value;
     }
 
