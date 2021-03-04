@@ -26,14 +26,16 @@ import java.util.List;
 
 public class QuickMove extends Module {
     List<ColoredBlockEntry> bpl = new ArrayList<>();
+    int counter = 0;
+
     public QuickMove() {
-        super("QuickMove","Lets you draw a tail and then quickly travels alongside of it (Basically blink but poggers)");
+        super("QuickMove", "Lets you draw a tail and then quickly travels alongside of it (Basically blink but poggers)");
         Module parent = this;
-        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND,event -> {
+        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
             if (pe.packet instanceof PlayerMoveC2SPacket && parent.isOn.isOn()) event.cancel();
         });
-        this.mconf.add(new Num("delay",20,100,0));
+        this.mconf.add(new Num("delay", 20, 100, 0));
     }
 
     @Override
@@ -41,20 +43,20 @@ public class QuickMove extends Module {
 
         super.onEnable();
     }
-    int counter = 0;
+
     @Override
     public void onExecute() {
         ColoredBlockEntry latest = null;
-        for(ColoredBlockEntry bp : bpl) {
+        for (ColoredBlockEntry bp : bpl) {
             if (latest == null) latest = bp;
             Color c = bp.c;
-            RenderHelper.addToQueue(new RenderableLine(latest.bp,bp.bp,c.getRed(),c.getGreen(),c.getBlue(),c.getAlpha()));
+            RenderHelper.addToQueue(new RenderableLine(latest.bp, bp.bp, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha()));
             latest = bp;
         }
         counter++;
-        if(counter > 2) {
+        if (counter > 2) {
             assert Cornos.minecraft.player != null;
-            bpl.add(new ColoredBlockEntry(Cornos.minecraft.player.getPos(),new Color(ClientConfig.latestRGBVal)));
+            bpl.add(new ColoredBlockEntry(Cornos.minecraft.player.getPos(), new Color(ClientConfig.latestRGBVal)));
             counter = 0;
         }
         super.onExecute();
@@ -62,19 +64,21 @@ public class QuickMove extends Module {
 
     @Override
     public void onDisable() {
-        new Thread(()->{
-            for(ColoredBlockEntry bp : bpl) {
+        new Thread(() -> {
+            Cornos.minecraft.player.setNoGravity(true);
+            for (ColoredBlockEntry bp : bpl) {
                 try {
-                    Thread.sleep((long)((Num)this.mconf.getByName("delay")).getValue());
+                    Thread.sleep((long) ((Num) this.mconf.getByName("delay")).getValue());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 if (Cornos.minecraft.getNetworkHandler() == null) break;
                 assert Cornos.minecraft.player != null;
-                Cornos.minecraft.player.updatePosition(bp.bp.getX(),bp.bp.getY(),bp.bp.getZ());
+                Cornos.minecraft.player.updatePosition(bp.bp.getX(), bp.bp.getY(), bp.bp.getZ());
 
             }
             bpl.clear();
+            Cornos.minecraft.player.setNoGravity(false);
         }).start();
         super.onDisable();
     }

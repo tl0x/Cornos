@@ -17,6 +17,8 @@ public class WorldRenderHook {
     @Inject(method = "render", at = @At("TAIL"))
     public void render(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo ci) {
         RenderHelper.BPQueue.forEach(renderableBlock -> RenderHelper.renderBlockOutline(renderableBlock.bp, renderableBlock.dimensions, renderableBlock.r, renderableBlock.g, renderableBlock.b, renderableBlock.a, matrices, camera));
-        RenderHelper.B1B2LQueue.forEach(renderableLine -> RenderHelper.renderLine(renderableLine.bp1,renderableLine.bp2,renderableLine.c,matrices,camera));
+        RenderHelper.B1B2LQueue.forEach(renderableLine -> RenderHelper.renderLine(renderableLine.bp1, renderableLine.bp2, renderableLine.c, matrices, camera));
+        RenderHelper.B1S1TQueue.forEach(renderableText -> RenderHelper.drawText(renderableText.pos, renderableText.color, matrices, camera, renderableText.text, renderableText.size));
+        //MinecraftClient.getInstance().getBlockRenderManager()
     }
 }

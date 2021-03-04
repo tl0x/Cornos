@@ -2,6 +2,7 @@ package me.constantindev.ccl.etc.reg;
 
 import me.constantindev.ccl.command.*;
 import me.constantindev.ccl.etc.base.Command;
+import net.minecraft.server.command.DebugCommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,9 @@ public class CommandRegistry {
         cl.add(new Crash());
         cl.add(new Keybind());
         cl.add(new Clip());
+        cl.add(new CopyIP());
+        cl.add(new Leave());
+
     }
 
     public static List<Command> getAll() {

@@ -20,7 +20,6 @@ import me.constantindev.ccl.etc.render.RenderableBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 
@@ -49,7 +48,7 @@ public class ArrowAvoid extends Module {
                         nextPos.add(e.getBoundingBox().getXLength() / 2, e.getBoundingBox().getYLength(), e.getBoundingBox().getZLength() / 2));
                 bl.add(current);
                 boolean intc = playerHB.intersects(current);
-                RenderHelper.addToQueue(new RenderableBlock(new BlockPos(nextPos), intc ? 255 : 100, intc ? 50 : 255, 50, 255, new Vec3d(e.getBoundingBox().getXLength(), e.getBoundingBox().getYLength(), e.getBoundingBox().getZLength())));
+                RenderHelper.addToQueue(new RenderableBlock(nextPos, intc ? 255 : 100, intc ? 50 : 255, 50, 255, new Vec3d(e.getBoundingBox().getXLength(), e.getBoundingBox().getYLength(), e.getBoundingBox().getZLength())));
 
             }
             String mode = this.mconf.getByName("Type").value;

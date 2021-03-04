@@ -5,7 +5,6 @@ import com.lukflug.panelstudio.DraggableContainer;
 import com.lukflug.panelstudio.SettingsAnimation;
 import com.lukflug.panelstudio.mc16.MinecraftGUI;
 import com.lukflug.panelstudio.settings.*;
-import com.lukflug.panelstudio.theme.ClearTheme;
 import com.lukflug.panelstudio.theme.ColorScheme;
 import com.lukflug.panelstudio.theme.GameSenseTheme;
 import com.lukflug.panelstudio.theme.Theme;
@@ -16,7 +15,6 @@ import me.constantindev.ccl.etc.config.*;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.glfw.GLFW;
 

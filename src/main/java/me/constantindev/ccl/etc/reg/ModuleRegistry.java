@@ -38,6 +38,7 @@ public class ModuleRegistry {
         ml.add(new ArrowAvoid());
         ml.add(new DiscordRPC());
         ml.add(new QuickMove());
+        ml.add(new Tracers());
 
     }
 
