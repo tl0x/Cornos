@@ -14,7 +14,7 @@ import net.minecraft.text.Text;
 
 public class Leave extends Command {
     public Leave() {
-        super("Leave","Leaves the server",new String[]{"leave","l","quit"});
+        super("Leave", "Leaves the server", new String[]{"leave", "l", "quit"});
     }
 
     @Override

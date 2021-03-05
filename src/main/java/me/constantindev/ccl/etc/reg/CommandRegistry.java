@@ -2,7 +2,6 @@ package me.constantindev.ccl.etc.reg;
 
 import me.constantindev.ccl.command.*;
 import me.constantindev.ccl.etc.base.Command;
-import net.minecraft.server.command.DebugCommand;
 
 import java.util.ArrayList;
 import java.util.List;
