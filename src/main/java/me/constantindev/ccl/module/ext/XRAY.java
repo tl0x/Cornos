@@ -20,6 +20,6 @@ public class XRAY extends Module {
         Cornos.minecraft.worldRenderer.reload();
         super.onDisable();
     }
-    // Logic: XrayHandler.java & LuminanceHook.java
+    // Logic: XrayHandler.java & AbstractBlockStateHook.java
 
 }
