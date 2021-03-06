@@ -51,27 +51,27 @@ public class ClickGUI extends MinecraftGUI {
         Theme theme = new GameSenseTheme(new ColorScheme() {
             @Override
             public Color getActiveColor() {
-                return new Color(255, 255, 255);
+                return new Color(ClientConfig.latestRGBVal);
             }
 
             @Override
             public Color getInactiveColor() {
-                return new Color(137, 137, 137);
+                return new Color(35, 35, 35);
             }
 
             @Override
             public Color getBackgroundColor() {
-                return new Color(107, 160, 124, 128);
+                return new Color(14, 14, 14, 153);
             }
 
             @Override
             public Color getOutlineColor() {
-                return new Color(0, 0, 0);
+                return new Color(ClientConfig.latestRGBVal);
             }
 
             @Override
             public Color getFontColor() {
-                return new Color(0, 0, 0);
+                return new Color(255, 255, 255);
             }
 
             @Override
@@ -94,28 +94,34 @@ public class ClickGUI extends MinecraftGUI {
                 if (m.type != type) continue;
                 maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));
             }
-            com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(type.toString(), null, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), null, new Point(offset += 100, 50), maxW + (Cornos.minecraft.textRenderer.getWidth(" ") * 2));
+            com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(
+                    type.toString(), null,
+                    theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed),
+                    null, new Point(offset += 120, 50), maxW + (Cornos.minecraft.textRenderer.getWidth(" ") * 2)
+            );
 
             gui.addComponent(container);
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
                 maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));
-                CollapsibleContainer mc = new CollapsibleContainer(m.name, m.description, theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), m.isOn);
+                CollapsibleContainer mc = new CollapsibleContainer(m.name, m.description, theme.getContainerRenderer(),
+                        new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), m.isOn);
                 container.addComponent(mc);
                 for (ModuleConfig.ConfigKey kc : m.mconf.config) {
                     maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(kc.key + ": " + kc.value));
                     if (kc instanceof Toggleable) {
-                        BooleanComponent bc = new BooleanComponent(kc.key, null, theme.getComponentRenderer(), new com.lukflug.panelstudio.settings.Toggleable() {
-                            @Override
-                            public void toggle() {
-                                ((Toggleable) kc).toggle();
-                            }
+                        BooleanComponent bc = new BooleanComponent(kc.key, null, theme.getComponentRenderer(),
+                                new com.lukflug.panelstudio.settings.Toggleable() {
+                                    @Override
+                                    public void toggle() {
+                                        ((Toggleable) kc).toggle();
+                                    }
 
-                            @Override
-                            public boolean isOn() {
-                                return ((Toggleable) kc).isEnabled();
-                            }
-                        });
+                                    @Override
+                                    public boolean isOn() {
+                                        return ((Toggleable) kc).isEnabled();
+                                    }
+                                });
                         mc.addComponent(bc);
                     } else if (kc instanceof MultiOption) {
                         EnumSetting es = new EnumSetting() {
@@ -191,7 +197,8 @@ public class ClickGUI extends MinecraftGUI {
                                 return 1;
                             }
                         };
-                        NumberComponent nc = new NumberComponent(kc.key, null, theme.getComponentRenderer(), ns, ((Num) kc).min, ((Num) kc).max);
+                        NumberComponent nc = new NumberComponent(kc.key, null, theme.getComponentRenderer(), ns, ((Num) kc).min,
+                                ((Num) kc).max);
                         mc.addComponent(nc);
                     }
                 }

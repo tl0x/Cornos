@@ -39,6 +39,7 @@ public class ModuleRegistry {
         ml.add(new Tracers());
         ml.add(new ByteSizeViewer());
         ml.add(new ThunderAura());
+        ml.add(new NoFall());
 
     }
 
