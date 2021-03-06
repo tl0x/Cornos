@@ -21,7 +21,7 @@ public class AntiHunger extends Module {
     private boolean ignorePacket;
 
     public AntiHunger() {
-        super("AntiHunger", "Reduces hunger consumption.", MType.MISC);
+        super("AntiHunger", "Reduces hunger consumption.", MType.EXPLOIT);
         this.mconf.add(new Toggleable("sprint", true));
         this.mconf.add(new Toggleable("onGround", true));
         Module parent = this;

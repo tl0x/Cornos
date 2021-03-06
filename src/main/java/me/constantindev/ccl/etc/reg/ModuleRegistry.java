@@ -2,7 +2,6 @@ package me.constantindev.ccl.etc.reg;
 
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.module.*;
-import me.constantindev.ccl.module.ext.FullBright;
 import me.constantindev.ccl.module.ext.*;
 
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ public class ModuleRegistry {
     public static void init() {
         ml.add(new AntiHunger()); // lemme disable this while i test the event bus
         ml.add(new Flight());
-        ml.add(new NoFall());
         ml.add(new FullBright());
         ml.add(new Suicide());
         ml.add(new ShiftTp());
@@ -39,6 +37,8 @@ public class ModuleRegistry {
         ml.add(new DiscordRPC());
         ml.add(new QuickMove());
         ml.add(new Tracers());
+        ml.add(new ByteSizeViewer());
+        ml.add(new ThunderAura());
 
     }
 

@@ -17,6 +17,7 @@ import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
 import me.constantindev.ccl.etc.helper.RenderHelper;
+import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 
@@ -29,7 +30,7 @@ public class QuickMove extends Module {
     int counter = 0;
 
     public QuickMove() {
-        super("QuickMove", "Lets you draw a tail and then quickly travels alongside of it (Basically blink but poggers)");
+        super("QuickMove", "Lets you draw a tail and then quickly travels alongside of it (Basically blink but poggers)", MType.MOVEMENT);
         Module parent = this;
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
