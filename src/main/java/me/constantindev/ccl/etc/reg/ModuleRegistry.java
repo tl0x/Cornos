@@ -33,6 +33,7 @@ public class ModuleRegistry {
         ml.add(new MidAirPlace());
         ml.add(new XRAY());
         ml.add(new AntiOffhandCrash());
+        ml.add(new Freecam());
         ml.add(new ClickGUI());
         ml.add(new Chat());
 
