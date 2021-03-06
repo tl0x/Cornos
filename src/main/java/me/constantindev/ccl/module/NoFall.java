@@ -22,6 +22,7 @@ public class NoFall extends Module {
 
     @Override
     public void onExecute() {
+        // bruh
         Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(new PlayerMoveC2SPacket(true));
         super.onExecute();
     }
