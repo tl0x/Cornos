@@ -14,8 +14,9 @@ public class ModuleConfig {
         this.owner = owner;
     }
 
-    public void add(ConfigKey pair) {
+    public ConfigKey add(ConfigKey pair) {
         config.add(pair);
+        return pair;
     }
 
     public ConfigKey getByName(String name) {

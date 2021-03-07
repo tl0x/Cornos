@@ -19,6 +19,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ClickGUI extends MinecraftGUI {
     private final GUIInterface guiInterface;
@@ -86,10 +89,10 @@ public class ClickGUI extends MinecraftGUI {
             //int wW = (Cornos).minecraft.getWindow().getScaledWidth();
             Cornos.minecraft.textRenderer.draw(new MatrixStack(), context.getDescription(), 1, wH - height - 1, 0xFFFFFFFF);
         });
-        int offset = 10;
+        int offset = 10 - 114;
         for (MType type : MType.ALL) {
 
-            int maxW = Cornos.minecraft.textRenderer.getWidth("antioffhandcrash  ");
+            int maxW = 96;
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
                 maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));
@@ -97,7 +100,7 @@ public class ClickGUI extends MinecraftGUI {
             com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(
                     type.toString(), null,
                     theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed),
-                    null, new Point(offset += 120, 50), maxW + (Cornos.minecraft.textRenderer.getWidth(" ") * 2)
+                    null, new Point(offset += 114, 10), maxW + 8
             );
 
             gui.addComponent(container);
@@ -124,8 +127,10 @@ public class ClickGUI extends MinecraftGUI {
                                 });
                         mc.addComponent(bc);
                     } else if (kc instanceof MultiOption) {
+                        List<String> l = new ArrayList<>(Arrays.asList(((MultiOption) kc).possibleValues));
+
                         EnumSetting es = new EnumSetting() {
-                            int current = 0;
+                            int current = l.indexOf(kc.value);
 
                             @Override
                             public void increment() {

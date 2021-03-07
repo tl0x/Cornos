@@ -2,6 +2,7 @@ package me.constantindev.ccl.etc.ms;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.RandomHelper;
+import me.constantindev.ccl.etc.mod.PlayerBlockPacket;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
@@ -9,7 +10,10 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
-import net.minecraft.network.packet.c2s.play.*;
+import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
+import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
+import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
+import net.minecraft.network.packet.c2s.play.RequestCommandCompletionsC2SPacket;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -93,8 +97,7 @@ public class ServerCrasherManager {
                         ct.put("pages", listTag);
                         ist.setTag(ct);
                         ist.putSubTag("pages", listTag);
-                        CreativeInventoryActionC2SPacket p2 = new CreativeInventoryActionC2SPacket(20, ist);
-
+                        PlayerBlockPacket p2 = new PlayerBlockPacket(Cornos.minecraft.player.getBlockPos().down(2), 1, ist, 0, 0, 0);
                         Cornos.minecraft.getNetworkHandler().sendPacket(p2);
                         break;
                 }
