@@ -83,15 +83,12 @@ public class ClickGUI extends MinecraftGUI {
             }
         }, 9, 4, 4);
         gui = new com.lukflug.panelstudio.ClickGUI(guiInterface, context -> {
-            //int width = (Cornos).minecraft.textRenderer.getWidth(context.getDescription());
             int height = Cornos.minecraft.textRenderer.fontHeight;
             int wH = Cornos.minecraft.getWindow().getScaledHeight();
-            //int wW = (Cornos).minecraft.getWindow().getScaledWidth();
             Cornos.minecraft.textRenderer.draw(new MatrixStack(), context.getDescription(), 1, wH - height - 1, 0xFFFFFFFF);
         });
         int offset = 10 - 114;
         for (MType type : MType.ALL) {
-
             int maxW = 96;
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
