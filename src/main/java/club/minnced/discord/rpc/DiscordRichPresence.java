@@ -62,7 +62,8 @@ public class DiscordRichPresence extends Structure {
             "matchSecret",
             "joinSecret",
             "spectateSecret",
-            "instance"
+            "instance",
+            "buttons"
     ));
     /**
      * The user's current party status.
@@ -163,6 +164,11 @@ public class DiscordRichPresence extends Structure {
      * <br>Example: 1
      */
     public byte instance;
+    /**
+     * The buttons to display on the users popout or profile, as JSON string
+     * <br>Example: [{"label":"bruh","url":"https://youtube.com/"}]
+     */
+    public String buttons;
 
     public DiscordRichPresence(String encoding) {
         super();
@@ -200,7 +206,7 @@ public class DiscordRichPresence extends Structure {
     @Override
     public int hashCode() {
         return Objects.hash(state, details, startTimestamp, endTimestamp, largeImageKey, largeImageText, smallImageKey,
-                smallImageText, partyId, partySize, partyMax, matchSecret, joinSecret, spectateSecret, instance);
+                smallImageText, partyId, partySize, partyMax, matchSecret, joinSecret, spectateSecret, instance, buttons);
     }
 
     @Override

@@ -35,6 +35,8 @@ public class DiscordRPCThread {
         presence.startTimestamp = System.currentTimeMillis() / 1000;
         presence.state = getStateAccordingToGame();
         presence.details = "Using Cornos";
+        //presence.writeField("buttons", "[{\"label\":\"Get Cornos\", \"url\": \"https://github.com/AriliusClient/Cornos\"}]");
+        presence.buttons = "[{\"label\":\"Get Cornos\", \"url\": \"https://github.com/AriliusClient/Cornos\"}]";
         discordRPC.Discord_UpdatePresence(presence);
         runner = new Thread(() -> {
             while (!stopped) {
@@ -48,6 +50,7 @@ public class DiscordRPCThread {
                 discordRPC.Discord_RunCallbacks();
                 presence.largeImageKey = currentCatS;
                 presence.largeImageText = "cat #" + currentCat;
+
                 discordRPC.Discord_UpdatePresence(presence);
                 try {
                     Thread.sleep(2000);
