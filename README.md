@@ -2,7 +2,7 @@
 A small client useful for a variety of tasks ranging from raiding to duping.
 
 <img src="https://img.shields.io/github/stars/AriliusClient/Cornos?color=000000&style=for-the-badge" /><br>
-<img src="https://img.shields.io/github/downloads/AriliusClient/Cornos/total?color=000000&style=for-the-badge&label=Downloads_via_releases">
+<img src="https://img.shields.io/github/downloads/AriliusClient/Cornos/total?color=000000&style=for-the-badge&label=Downloads%20via%20releases">
 # Installation
 Since so many people ask me how to build this and cant read apparently, I will say the following
 
