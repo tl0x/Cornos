@@ -15,6 +15,7 @@ import me.constantindev.ccl.etc.config.*;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.glfw.GLFW;
 
@@ -54,7 +55,7 @@ public class ClickGUI extends MinecraftGUI {
         Theme theme = new GameSenseTheme(new ColorScheme() {
             @Override
             public Color getActiveColor() {
-                return new Color(ClientConfig.latestRGBVal);
+                return new Color(47, 47, 47, 134);
             }
 
             @Override
@@ -221,5 +222,13 @@ public class ClickGUI extends MinecraftGUI {
     @Override
     protected int getScrollSpeed() {
         return 1;
+    }
+
+    @Override
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float partialTicks) {
+        int h = Cornos.minecraft.getWindow().getScaledHeight();
+        int w = Cornos.minecraft.getWindow().getScaledWidth();
+        DrawableHelper.fill(matrices, 0, 0, w, h, new Color(0, 0, 0, 100).getRGB());
+        super.render(matrices, mouseX, mouseY, partialTicks);
     }
 }
