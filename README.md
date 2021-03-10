@@ -1,8 +1,8 @@
 # CornClient
 A small client useful for a variety of tasks ranging from raiding to duping.
 
-Note: Always use this with another client, this client is not good enough (yet) to be used single handed
-
+<img src="https://img.shields.io/github/stars/AriliusClient/Cornos?color=000000&style=for-the-badge" /><br>
+<img src="https://img.shields.io/github/downloads/AriliusClient/Cornos/total?color=000000&style=for-the-badge">
 # Installation
 Since so many people ask me how to build this and cant read apparently, I will say the following
 
@@ -17,45 +17,50 @@ If you want to contribute or really build it yourself, [read this](https://githu
 4. Jarfile will be in build/libs, ccl-(version).jar
 
 ## Prebuilds
-The prebuild jarfile can be found in build/libs.
 
+The prebuilt jarfile can be found in build/libs.
 
-After you obtained the jarfile, put it into your mods folder in your fabric installation for any minecraft version. Fabric API is needed.
+After you obtained the jarfile, put it into your mods folder in your fabric installation for any minecraft version.
+Fabric API is needed.
 
 # Commands
-Prefix: `}`
+
+Prefix: `}` (Configurable)
 
 `}help` in chat for commands and modules.
 
- `}help modules` in chat for modules, `}help commands` for commands.
+`}help modules` in chat for modules, `}help commands` for commands.
 
 # Features (GUI)
-Block Position highlighter
-No Fire overlay
-Autotool
-ClickGui
-Antihunger
-Autorespawn
-NoPumpkin overlay
-Client configuration (prefix, enable or disable custom prefix/homescreen)
-Nuker
-Massbreak
-Buildlimit (adds 1 extra layer to build limit)
-Midairplace
-Xray
-Flight
-Nofall
-Moongravity
-Jesus
-Suicide
-Servercrasher
-Antioffhandcrash
+
+- No Fire overlay
+- Autotool
+- ClickGui
+- Antihunger
+- Autorespawn
+- No Pumpkin overlay
+- Client configuration (prefix, enable or disable custom prefix/homescreen)
+- Nuker
+- Massbreak
+- Buildlimit (allows you to place blocks below you (or at build limit))
+- Midairplace
+- Xray
+- Flight
+- Nofall
+- Moongravity
+- Jesus
+- Suicide
+- Servercrasher
+- Antioffhandcrash
+- And more
 
 # Features (Commands)
-Toggle (t), toggles a module on or off
-Config
-Help
-Dupe
-Crash
-Keybind
-Clip
+
+- Toggle (t), toggles a module on or off
+- Config
+- Help
+- Dupe
+- Crash
+- Keybind
+- Clip
+- And more
