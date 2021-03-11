@@ -9,6 +9,7 @@
     "ChatHook",
     "ClientPlayerEntityHook",
     "FireOverlayReplacement",
+    "IdentifierMixin",
     "IngameRendererHook",
     "MainScreenHook",
     "PacketSendHook",
