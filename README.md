@@ -20,10 +20,9 @@ A small client useful for a variety of tasks ranging from raiding to duping.
 
 # Support
 
-join the discord
+join the [discord](https://discord.gg/9ZwmhUDE5w)
 
 it is neat
-<iframe src="https://discord.com/widget?id=819683133154000958&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
 
 # Installation
 
