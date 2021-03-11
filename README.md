@@ -7,21 +7,34 @@ A small client useful for a variety of tasks ranging from raiding to duping.
 # Screenshots
 
 ## Click GUI
+
 ![image](https://user-images.githubusercontent.com/80022388/110660734-250b4200-81c4-11eb-9a47-f1ba6be19d60.png)
 
 ## Home screen
+
 ![image](https://user-images.githubusercontent.com/80022388/110660767-2dfc1380-81c4-11eb-8d29-88f73da43bd2.png)
 
 ## HUD (more to come)
+
 ![image](https://user-images.githubusercontent.com/80022388/110660817-3bb19900-81c4-11eb-9027-b2337b096101.png)
 
+# Support
+
+join the discord
+
+it is neat
+<iframe src="https://discord.com/widget?id=819683133154000958&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
 
 # Installation
+
 Since so many people ask me how to build this and cant read apparently, I will say the following
 
-**YOU DO NOT NEED TO BUILD IT YOURSELF. READ [How to obtain the mod without building](https://github.com/AriliusClient/CornClient/wiki/How-to-obtain-the-mod-without-building%3F) TO DOWNLOAD A PREBUILD**
+**YOU DO NOT NEED TO BUILD IT YOURSELF.
+READ [How to obtain the mod without building](https://github.com/AriliusClient/CornClient/wiki/How-to-obtain-the-mod-without-building%3F)
+TO DOWNLOAD A PREBUILD**
 
-If you want to contribute or really build it yourself, [read this](https://github.com/AriliusClient/CornClient/wiki/Building-and-contributing)
+If you want to contribute or really build it
+yourself, [read this](https://github.com/AriliusClient/CornClient/wiki/Building-and-contributing)
 
 ## Building
 1. Clone this repo
