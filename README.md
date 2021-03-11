@@ -1,8 +1,7 @@
 # CornClient
 A small client useful for a variety of tasks ranging from raiding to duping.
 
-[![Discord](https://img.shields.io/discord/694337597371056198?label=discord&logo=discord&logoColor=white)](https://discord.gg/9ZwmhUDE5w)
-
+<img src="https://img.shields.io/discord/819683133154000958?style=for-the-badge" /><br>
 <img src="https://img.shields.io/github/stars/AriliusClient/Cornos?color=000000&style=for-the-badge" /><br>
 <img src="https://img.shields.io/github/downloads/AriliusClient/Cornos/total?color=000000&style=for-the-badge&label=Downloads%20via%20releases">
 
