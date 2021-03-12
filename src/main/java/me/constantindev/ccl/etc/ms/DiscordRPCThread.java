@@ -64,19 +64,22 @@ public class DiscordRPCThread {
     }
 
     public static String getStateAccordingToGame() {
-        if (MinecraftClient.getInstance().world != null && MinecraftClient.getInstance().getServer() != null)
-            return "Playing on a local world with a client..?";
-        if (MinecraftClient.getInstance().world != null) {
-            String addr = Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).getConnection().getAddress().toString();
-            String host = addr.split("/")[0];
-            if (host.isEmpty()) host = addr.split("/")[1].split(":")[0];
-            String port = addr.split("/")[1].split(":")[1];
-            if (port.equals("25565")) port = "";
-            else port = ":" + port;
-            return "Playing on " + host + "" + port;
+        try {
+            if (MinecraftClient.getInstance().world != null && MinecraftClient.getInstance().getServer() != null)
+                return "Playing on a local world with a client..?";
+            if (MinecraftClient.getInstance().world != null) {
+                String addr = Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).getConnection().getAddress().toString();
+                String host = addr.split("/")[0];
+                if (host.isEmpty()) host = addr.split("/")[1].split(":")[0];
+                String port = addr.split("/")[1].split(":")[1];
+                if (port.equals("25565")) port = "";
+                else port = ":" + port;
+                return "Playing on " + host + "" + port;
+            }
+            if (MinecraftClient.getInstance().currentScreen instanceof TitleScreen || MinecraftClient.getInstance().currentScreen instanceof MainScreen)
+                return "At the home screen";
+        } catch (Exception ignored) {
         }
-        if (MinecraftClient.getInstance().currentScreen instanceof TitleScreen || MinecraftClient.getInstance().currentScreen instanceof MainScreen)
-            return "At the home screen";
 
         return "Doing something";
     }

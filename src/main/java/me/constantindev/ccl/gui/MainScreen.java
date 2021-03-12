@@ -23,12 +23,12 @@ public class MainScreen extends Screen {
 
     @Override
     protected void init() {
-        AbstractButtonWidget btnw = new ButtonWidget(width / 2 + 5, height / 2 + 30, 120, 20, Text.of("Who plays realms"), (b) -> Cornos.minecraft.openScreen(new RealmsMainScreen(this)));
-        this.addButton(new ButtonWidget(width / 2 - 125, height / 2, 120, 20, Text.of("Singleplayer"), (b) -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
-        this.addButton(new ButtonWidget(width / 2 + 5, height / 2, 120, 20, Text.of("Multiplayer"), (b) -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));
-        this.addButton(new ButtonWidget(width / 2 - 125, height / 2 + 30, 120, 20, Text.of("Settings"), (b) -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));
+        AbstractButtonWidget btnw = new ButtonWidget(width - 125, height - 125, 120, 20, Text.of("Who plays realms"), (b) -> Cornos.minecraft.openScreen(new RealmsMainScreen(this)));
+        this.addButton(new ButtonWidget(width - 125, height - 100, 120, 20, Text.of("Singleplayer"), (b) -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
+        this.addButton(new ButtonWidget(width - 125, height - 75, 120, 20, Text.of("Multiplayer"), (b) -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));
+        this.addButton(new ButtonWidget(width - 125, height - 50, 120, 20, Text.of("Settings"), (b) -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));
         this.addButton(btnw);
-        this.addButton(new ButtonWidget(width - 121, height - 21, 120, 20, Text.of("Return to pogn't menu"), (b) -> {
+        this.addButton(new ButtonWidget(width - 125, height - 25, 120, 20, Text.of("Return to pogn't menu"), (b) -> {
             ModuleRegistry.getByName("ClientConfig").mconf.getByName("homescreen").setValue("vanilla");
             Cornos.minecraft.openScreen(new TitleScreen());
         }));
