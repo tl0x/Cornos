@@ -21,6 +21,8 @@
     "gui.FireOverlayReplacement",
     "gui.IngameRendererHook",
     "gui.MainScreenHook",
+    "gui.MPScreenMixin",
+    "gui.ScanningEntryMixin",
     "gui.ScreenMixin",
     "gui.SelectWorldScreenMixin",
     "gui.WorldRenderHook"
