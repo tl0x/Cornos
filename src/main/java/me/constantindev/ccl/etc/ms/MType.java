@@ -12,4 +12,8 @@ public enum MType {
     MType(String name) {
         this.n = name;
     }
+
+    public String getN() {
+        return n;
+    }
 }

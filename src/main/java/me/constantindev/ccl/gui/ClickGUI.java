@@ -93,10 +93,10 @@ public class ClickGUI extends MinecraftGUI {
             int maxW = 96;
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
-                maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));
+                maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.type.getN()));
             }
             com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(
-                    type.name(), null,
+                    type.getN(), null,
                     theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed),
                     null, new Point(offset += 114, 10), maxW + 8
             );

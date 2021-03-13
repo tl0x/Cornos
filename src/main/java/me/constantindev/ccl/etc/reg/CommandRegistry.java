@@ -22,6 +22,7 @@ public class CommandRegistry {
         cl.add(new CopyIP());
         cl.add(new Leave());
         cl.add(new Scan());
+        cl.add(new Drop());
     }
 
     public static List<Command> getAll() {
