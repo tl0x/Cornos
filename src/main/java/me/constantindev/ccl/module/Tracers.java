@@ -26,7 +26,6 @@ public class Tracers extends Module {
         super("PlayerInfo", "Shows nearby entities and/or players");
         this.mconf.add(new Toggleable("Entities", true));
         this.mconf.add(new Toggleable("Players", true));
-        this.mconf.add(new Toggleable("DrawBox", true));
         this.mconf.add(new Num("Distance", 100, 1000, 10));
         this.mconf.add(new Toggleable("debug", false));
     }
@@ -35,11 +34,11 @@ public class Tracers extends Module {
     public void onExecute() {
         boolean e = ((Toggleable) this.mconf.getByName("Entities")).isEnabled();
         boolean p = ((Toggleable) this.mconf.getByName("Players")).isEnabled();
-        boolean db = ((Toggleable) this.mconf.getByName("DrawBox")).isEnabled();
         boolean debug = ((Toggleable) this.mconf.getByName("debug")).isEnabled();
         double dist = ((Num) this.mconf.getByName("Distance")).getValue();
         for (Entity currE : Cornos.minecraft.world.getEntities()) {
-            if (currE.distanceTo(Cornos.minecraft.player) < dist && currE.getUuid() != Cornos.minecraft.player.getUuid()) {
+            if (currE.getUuid() == Cornos.minecraft.player.getUuid()) continue;
+            if (currE.distanceTo(Cornos.minecraft.player) < dist) {
                 double distance = currE.distanceTo(Cornos.minecraft.player);
                 int rInit = 255;
                 int gInit;
@@ -51,8 +50,6 @@ public class Tracers extends Module {
                 }
                 if (!p && (currE instanceof AbstractClientPlayerEntity)) continue;
                 else if (!e) continue;
-                //double distance = currE.distanceTo(Cornos.minecraft.player);
-                //RenderHelper.addToQueue(new RenderableText(currE.getPos().add(0, currE.getHeight()+.5,0),new Vec2d(distance/10,distance/10),"Distance: "+Math.round(distance),new Color(255,255,255,255)));
                 Vec3d off = new Vec3d(currE.getWidth(), currE.getHeight(), currE.getWidth());
                 RenderableBlock rb = new RenderableBlock(currE.getPos().add(off.multiply(-.5)).add(0, off.y / 2, 0), gInit, (int) rInit2, 50, 255, off);
                 RenderHelper.addToQueue(rb);

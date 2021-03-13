@@ -2,6 +2,15 @@ package me.constantindev.ccl.etc.reg;
 
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.module.*;
+import me.constantindev.ccl.module.EXPLOIT.AntiHunger;
+import me.constantindev.ccl.module.EXPLOIT.AntiOffhandCrash;
+import me.constantindev.ccl.module.EXPLOIT.BoatPhase;
+import me.constantindev.ccl.module.EXPLOIT.CRASH.BoatCrash;
+import me.constantindev.ccl.module.EXPLOIT.CRASH.MovementCrash;
+import me.constantindev.ccl.module.EXPLOIT.CRASH.OffhandCrash;
+import me.constantindev.ccl.module.EXPLOIT.Suicide;
+import me.constantindev.ccl.module.MOVEMENT.*;
+import me.constantindev.ccl.module.WORLD.*;
 import me.constantindev.ccl.module.ext.*;
 
 import java.util.ArrayList;
@@ -25,7 +34,6 @@ public class ModuleRegistry {
         ml.add(new NoPumpkin());
         ml.add(new NoFireOverlay());
         ml.add(new AutoTool());
-        ml.add(new ServerCrasher());
         ml.add(new Jesus());
         ml.add(new BuildLimit());
         ml.add(new MidAirPlace());
@@ -41,7 +49,13 @@ public class ModuleRegistry {
         ml.add(new ByteSizeViewer());
         ml.add(new ThunderAura());
         ml.add(new NoFall());
-
+        ml.add(new AutoSign());
+        ml.add(new OffhandCrash());
+        ml.add(new MovementCrash());
+        ml.add(new BoatCrash());
+        ml.add(new BoatPhase());
+        ml.add(new NoRender());
+        ml.add(new NoArmorstandRender());
     }
 
     public static List<Module> getAll() {

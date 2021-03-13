@@ -1,24 +1,15 @@
 package me.constantindev.ccl.etc.ms;
 
-public class MType {
-    public static MType MISC = new MType("Miscellaneous");
-    public static MType EXPLOIT = new MType("Exploit");
-    public static MType WORLD = new MType("World");
-    public static MType MOVEMENT = new MType("Movement");
-    public static MType[] ALL = new MType[]{
-            MISC,
-            EXPLOIT,
-            WORLD,
-            MOVEMENT
-    };
+public enum MType {
+    MISC("Miscellaneous"),
+    EXPLOIT("Exploit"),
+    WORLD("World"),
+    MOVEMENT("Movement"),
+    CRASH("Crash");
+
     String n;
 
-    public MType(String name) {
+    MType(String name) {
         this.n = name;
-    }
-
-    @Override
-    public String toString() {
-        return this.n;
     }
 }

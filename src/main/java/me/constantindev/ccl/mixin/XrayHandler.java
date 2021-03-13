@@ -28,7 +28,6 @@ public abstract class XrayHandler {
 
     @Inject(method = "isTranslucent", cancellable = true, at = @At("HEAD"))
     public void checkTranslucent(BlockState state, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-
         if (ModuleRegistry.getByName("xray").isOn.isOn()) {
             boolean isIncluded = false;
             for (Block b : ClientConfig.xrayBlocks) {

@@ -21,5 +21,6 @@ public class TickHook {
             if (m.isOn.isOn()) m.onExecute();
         });
         KeyBindManager.tick();
+
     }
 }

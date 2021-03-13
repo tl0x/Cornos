@@ -5,6 +5,7 @@
   "mixins": [
     "AbstractBlockStateHook",
     "AntiOffhandCrash",
+    "ArmorStandRenderHook",
     "ByteSizeViewerHandler",
     "ChatHook",
     "ClientPlayerEntityHook",
@@ -15,6 +16,8 @@
     "PlayerMoveC2SPacketAccessor",
     "PumpkinOverlayReplacement",
     "ShutdownHook",
+    "SignBlockMixin",
+    "SignEditorOpenS2CPacketHook",
     "TickHook",
     "XrayHandler",
     "gui.EntryListWidgetMixin",

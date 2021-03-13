@@ -89,14 +89,14 @@ public class ClickGUI extends MinecraftGUI {
             Cornos.minecraft.textRenderer.draw(new MatrixStack(), context.getDescription(), 1, wH - height - 1, 0xFFFFFFFF);
         });
         int offset = 10 - 114;
-        for (MType type : MType.ALL) {
+        for (MType type : MType.values()) {
             int maxW = 96;
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
                 maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));
             }
             com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(
-                    type.toString(), null,
+                    type.name(), null,
                     theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed),
                     null, new Point(offset += 114, 10), maxW + 8
             );
