@@ -1,5 +1,6 @@
 package me.constantindev.ccl.etc.reg;
 
+import me.constantindev.ccl.etc.TabManager;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.module.*;
 import me.constantindev.ccl.module.EXPLOIT.AntiHunger;
@@ -19,6 +20,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ModuleRegistry {
     private static final List<Module> ml = new ArrayList<>();
+    private static TabManager tabManager; // Probably not the best place for this but whatever -FreakingChicken
 
     public static void init() {
         ml.add(new AntiHunger()); // lemme disable this while i test the event bus
@@ -41,6 +43,7 @@ public class ModuleRegistry {
         ml.add(new AntiOffhandCrash());
         ml.add(new Freecam());
         ml.add(new ClickGUI());
+        ml.add(new TabGUI());
         ml.add(new ClientConfig());
         ml.add(new ArrowAvoid());
         ml.add(new DiscordRPC());
@@ -56,10 +59,16 @@ public class ModuleRegistry {
         ml.add(new BoatPhase());
         ml.add(new NoRender());
         ml.add(new NoArmorstandRender());
+
+        tabManager = new TabManager();
     }
 
     public static List<Module> getAll() {
         return ml;
+    }
+
+    public static TabManager getTabManager() {
+        return tabManager;
     }
 
     public static Module getByName(String name) {

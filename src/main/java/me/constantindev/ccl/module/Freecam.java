@@ -9,6 +9,7 @@ import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
 import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.network.packet.c2s.play.*;
 import net.minecraft.util.math.Box;
 
@@ -95,14 +96,17 @@ public class Freecam extends Module {
     @Override
     public void onExecute() {
         this.speed = (float) ((Num) this.mconf.getByName("speed")).getValue();
-        Cornos.minecraft.player.abilities.setFlySpeed(this.speed);
         if (Objects.nonNull(Cornos.minecraft.world) && Objects.nonNull(Cornos.minecraft.player) && freecam) {
+            Cornos.minecraft.player.abilities.setFlySpeed(this.speed);
             ClientPlayerEntity player = Cornos.minecraft.player;
             player.setVelocity(0D, 0D, 0D);
             player.setOnGround(false);
             player.noClip = true;
             player.fallDistance = 0;
             player.abilities.flying = true;
+            if (player.getPose() == EntityPose.SWIMMING) {
+                player.setPose(EntityPose.STANDING);
+            }
             /*
             if (Cornos.minecraft.currentScreen == null) {
                 Vec3d vec3d = player.getRotationVector();

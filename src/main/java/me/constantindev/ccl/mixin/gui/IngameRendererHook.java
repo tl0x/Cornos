@@ -8,6 +8,7 @@ import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.exc.InvalidStateException;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.gui.TabGUI;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -94,6 +95,9 @@ public class IngameRendererHook {
                 }
                 Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 1, 1 + offset.getAndAdd(10), doRgb ? colorToUse : 0xFFFFFFFF);
             });
+        }
+        if (ModuleRegistry.getByName("TabGUI").isOn.isOn() && ClientConfig.tabGUI != null) {
+            ClientConfig.tabGUI.render(matrices, tickDelta);
         }
     }
 }
