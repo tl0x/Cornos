@@ -23,6 +23,7 @@ public class CommandRegistry {
         cl.add(new Leave());
         cl.add(new Scan());
         cl.add(new Drop());
+        cl.add(new Give());
     }
 
     public static List<Command> getAll() {
