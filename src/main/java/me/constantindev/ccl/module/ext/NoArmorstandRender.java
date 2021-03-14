@@ -12,6 +12,6 @@ import me.constantindev.ccl.etc.base.Module;
 
 public class NoArmorstandRender extends Module {
     public NoArmorstandRender() {
-        super("NoStandRender", "Doesn't render armor stands");
+        super("NoArmorstandRender", "Doesn't render armor stands");
     }
 }

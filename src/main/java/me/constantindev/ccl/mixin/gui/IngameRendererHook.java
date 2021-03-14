@@ -8,6 +8,7 @@ import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.exc.InvalidStateException;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.gui.TabGUI;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;

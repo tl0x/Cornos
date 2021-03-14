@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ArmorStandRenderHook<T extends LivingEntity, M extends EntityModel<T>> {
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void render(T livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        if (livingEntity instanceof ArmorStandEntity && ModuleRegistry.getByName("NoStandRender").isOn.isOn())
+        if (livingEntity instanceof ArmorStandEntity && ModuleRegistry.getByName("NoArmorstandRender").isOn.isOn())
             ci.cancel();
     }
 }
