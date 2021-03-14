@@ -3,6 +3,7 @@ package me.constantindev.ccl.etc.helper;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.ms.KeyBind;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.TabGUI;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +16,10 @@ public class KeyBindManager {
             if (!module.mconf.getByName("keybind").value.equals("-1.0")) {
                 binds.put(module.name, new KeyBind((int) Double.parseDouble(module.mconf.getByName("keybind").value)));
             }
+            binds.put("TAB_UP", new KeyBind(265));
+            binds.put("TAB_DOWN", new KeyBind(264));
+            binds.put("TAB_LEFT", new KeyBind(263));
+            binds.put("TAB_RIGHT", new KeyBind(262));
         });
     }
 
@@ -22,7 +27,13 @@ public class KeyBindManager {
         binds.forEach((s, keyBinding) -> {
 
             if (keyBinding.isPressed() && Cornos.minecraft.currentScreen == null)
-                ModuleRegistry.getByName(s).isOn.toggle();
+                if (s.contains("TAB_")) {
+                    if (ModuleRegistry.getByName("TabGUI").isOn.isOn()) {
+                        ModuleRegistry.getTabManager().keyPressed(keyBinding.keycode);
+                    }
+                } else {
+                    ModuleRegistry.getByName(s).isOn.toggle();
+                }
         });
     }
 
