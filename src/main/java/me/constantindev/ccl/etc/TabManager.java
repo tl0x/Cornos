@@ -4,18 +4,18 @@ import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.ms.Tab;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 public class TabManager {
 
-    private HashMap<MType, Tab> tabs;
-    private ArrayList<MType> tabType;
+    private final HashMap<MType, Tab> tabs;
+    private final ArrayList<MType> tabType;
     private int currentTab;
-    private HashMap<MType, ArrayList<Module>> mods;
-    private HashMap<MType, Integer> currentMods;
+    private final HashMap<MType, ArrayList<Module>> mods;
+    private final HashMap<MType, Integer> currentMods;
 
     public TabManager() {
         tabs = new HashMap<>();
@@ -34,25 +34,30 @@ public class TabManager {
             modsList.add(m);
         }
     }
+
     public HashMap<MType, Tab> getTabs() {
         return tabs;
     }
+
     public HashMap<MType, ArrayList<Module>> getMods() {
         return mods;
     }
+
     public HashMap<MType, Integer> getCurrentMods() {
         return currentMods;
     }
+
     public int getCurrentTab() {
         return currentTab;
     }
+
     public ArrayList<MType> getTabType() {
         return tabType;
     }
 
     public void keyPressed(int k) {
         switch (k) {
-            case 265: // Up Arrow
+            case GLFW.GLFW_KEY_UP: // Up Arrow
                 if (tabs.get(tabType.get(currentTab)).isExpanded()) {
                     int i = currentMods.get(tabType.get(currentTab));
                     if (i != 0) {
@@ -65,7 +70,7 @@ public class TabManager {
                     }
                 }
                 break;
-            case 264: // Down Arrow
+            case GLFW.GLFW_KEY_DOWN: // Down Arrow
                 if (tabs.get(tabType.get(currentTab)).isExpanded()) {
                     int i = currentMods.get(tabType.get(currentTab));
                     if (i <= mods.get(tabType.get(currentTab)).size() - 2) {
@@ -78,15 +83,19 @@ public class TabManager {
                     }
                 }
                 break;
-            case 262: // Right Arrow
+            case GLFW.GLFW_KEY_RIGHT: // Right key
+            case GLFW.GLFW_KEY_ENTER: // Enter key
                 if (tabs.get(tabType.get(currentTab)).isExpanded()) {
-                    Module m = mods.get(tabType.get(currentTab)).get(currentMods.get(tabType.get(currentTab)));
+                    Module m = mods.get(tabType.get(currentTab))
+                            .get(currentMods.get(
+                                    tabType.get(currentTab)
+                            ));
                     m.isOn.toggle();
                 } else {
                     tabs.get(tabType.get(currentTab)).setExpanded(true);
                 }
                 break;
-            case 263: // Left Arrow
+            case GLFW.GLFW_KEY_LEFT: // Left Arrow
                 if (tabs.get(tabType.get(currentTab)).isExpanded()) {
                     tabs.get(tabType.get(currentTab)).setExpanded(false);
                 }
