@@ -3,7 +3,7 @@ package me.constantindev.ccl.etc.helper;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.ms.KeyBind;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.ext.TabGUI;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +20,7 @@ public class KeyBindManager {
             binds.put("TAB_DOWN", new KeyBind(264));
             binds.put("TAB_LEFT", new KeyBind(263));
             binds.put("TAB_RIGHT", new KeyBind(262));
+            binds.put("TAB_ENTER", new KeyBind(GLFW.GLFW_KEY_ENTER));
         });
     }
 
