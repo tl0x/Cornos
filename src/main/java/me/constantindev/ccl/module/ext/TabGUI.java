@@ -1,5 +1,6 @@
 package me.constantindev.ccl.module.ext;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ClientConfig;
 
