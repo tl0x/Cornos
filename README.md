@@ -7,7 +7,8 @@ A small utility mod for Minecraft useful for a variety of tasks ranging from rai
 
 # Support
 
-Join the [discord](https://discord.gg/9ZwmhUDE5w) for support. 
+Join the [discord](https://discord.gg/9ZwmhUDE5w) for support.
+
 I will be sad if you don't, don't make me sad please. 
 
 # Installation
@@ -17,27 +18,25 @@ Since so many people ask me how to build this and cant read apparently, I will s
 **YOU DO NOT NEED TO BUILD IT YOURSELF.
 READ [How to obtain the mod without building](https://github.com/AriliusClient/CornClient/wiki/How-to-obtain-the-mod-without-building%3F)
 TO DOWNLOAD A PRE-BUILT JAR**
-<-- Please make a CI thing or use releases or something -->
-Step 1. Install the [fabric loader](https://fabricmc.net/use/) 
-
-Step 2. Drag the jar file and the [fabric api](https://www.curseforge.com/minecraft/mc-mods/fabric-api) to .minecraft/mods. If there is no mods folder, create one. 
-
-Step 3. Launch fabric using the minecraft launcher. 
 
 If you want to contribute or really build it yourself, [read this](https://github.com/AriliusClient/CornClient/wiki/Building-and-contributing)
+
+## Installing the jarfile
+1. Install the [fabric loader](https://fabricmc.net/use/) 
+2. Drag the jar file and the [fabric api](https://www.curseforge.com/minecraft/mc-mods/fabric-api) to `(Minecraft folder)/mods`. If there is no `mods` folder, create one.<br>Side note: you may have selected a custom installation path for the fabric launcher profile. If that's the case, use that folder as minecraft folder.
+3. Launch fabric using your launcher of choice.
 
 ## Building
 1. Clone this repo
 2. Open the new folder in your terminal
 3. `./gradlew build`
 4. Jarfile will be in build/libs, ccl-(version).jar
-<--
+
 ## Prebuilds
 
-The prebuilt jarfile can be found in build/libs.
+The prebuilt jarfile can be found in the `builds` folder.
 
-After you obtained the jarfile, put it into your mods folder in your fabric installation for any minecraft version.
-Fabric API is needed.-->
+After you obtained the jarfile, read the section above, "Installing the jarfile".
 
 # Modules
 
@@ -74,9 +73,7 @@ Fabric API is needed.-->
 - Clip
 - And more
 
-`}help` in chat for commands and modules.
-
-`}help modules` in chat for modules, `}help commands` for a list of commands.
+`.help modules` in chat for modules, `.help commands` for a list of commands.
 
 # Screenshots
 
