@@ -1,5 +1,6 @@
 package me.constantindev.ccl;
 
+import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.helper.ConfigHelper;
@@ -18,6 +19,7 @@ public class Cornos implements ModInitializer {
     public static final String MOD_NAME = "Cornos";
     public static Logger LOGGER = LogManager.getLogger();
     public static MinecraftClient minecraft = MinecraftClient.getInstance();
+    public static Thread fastUpdater;
 
     public static void log(Level level, String message) {
         LOGGER.log(level, "[" + MOD_NAME + "] " + message);
@@ -42,7 +44,20 @@ public class Cornos implements ModInitializer {
         KeyBindManager.init();
 
         log(Level.INFO, "All features registered. Ready to load game");
-
+        fastUpdater = new Thread(() -> {
+            while (true) {
+                try {
+                    if (Cornos.minecraft.player != null) {
+                        for (Module m : ModuleRegistry.getAll()) {
+                            if (m.isOn.isOn()) m.onFastUpdate();
+                        }
+                    }
+                    Thread.sleep(10);
+                } catch (Exception ignored) {
+                }
+            }
+        });
+        fastUpdater.start();
 
     }
 

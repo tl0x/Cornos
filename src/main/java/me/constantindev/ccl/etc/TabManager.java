@@ -13,9 +13,9 @@ public class TabManager {
 
     private final HashMap<MType, Tab> tabs;
     private final ArrayList<MType> tabType;
-    private int currentTab;
     private final HashMap<MType, ArrayList<Module>> mods;
     private final HashMap<MType, Integer> currentMods;
+    private int currentTab;
 
     public TabManager() {
         tabs = new HashMap<>();

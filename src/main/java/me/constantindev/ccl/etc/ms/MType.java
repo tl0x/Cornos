@@ -5,6 +5,7 @@ public enum MType {
     EXPLOIT("Exploit"),
     WORLD("World"),
     MOVEMENT("Movement"),
+    COMBAT("Combat"),
     CRASH("Crash");
 
     String n;

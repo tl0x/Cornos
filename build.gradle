@@ -29,6 +29,7 @@ repositories {
 		name = 'lukflug'
 		url = 'https://lukflug.github.io/maven'
 	}
+	mavenCentral()
 }
 dependencies {
 	//to change the versions see the gradle.properties file

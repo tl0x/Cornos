@@ -16,7 +16,7 @@ import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
-import me.constantindev.ccl.etc.render.RenderableBlock;
+import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
@@ -41,6 +41,7 @@ public class ArrowAvoid extends Module {
             assert Cornos.minecraft.player != null;
             Box playerHB = Cornos.minecraft.player.getBoundingBox().expand(0.555);
             List<Box> bl = new ArrayList<>();
+            Vec3d prevPos = null;
             for (int i = 0; i < 100; i++) {
                 Vec3d nextPos = e.getPos().add(e.getVelocity().multiply(i / 5d));
                 Box current = new Box(
@@ -48,7 +49,11 @@ public class ArrowAvoid extends Module {
                         nextPos.add(e.getBoundingBox().getXLength() / 2, e.getBoundingBox().getYLength(), e.getBoundingBox().getZLength() / 2));
                 bl.add(current);
                 boolean intc = playerHB.intersects(current);
-                RenderHelper.addToQueue(new RenderableBlock(nextPos, intc ? 255 : 100, intc ? 50 : 255, 50, 255, new Vec3d(e.getBoundingBox().getXLength(), e.getBoundingBox().getYLength(), e.getBoundingBox().getZLength())));
+                if (prevPos != null) {
+                    RenderableLine rl = new RenderableLine(prevPos, nextPos, intc ? 255 : 100, intc ? 50 : 255, 50, 255);
+                    RenderHelper.addToQueue(rl);
+                }
+                prevPos = nextPos;
 
             }
             String mode = this.mconf.getByName("Type").value;
