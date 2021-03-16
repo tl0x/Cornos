@@ -64,6 +64,7 @@ public class ModuleRegistry {
         ml.add(new BoatPhase());
         ml.add(new NoRender());
         ml.add(new NoArmorstandRender());
+        ml.add(new NameTags());
         ml.add(new ResourcePackSpoof());
         ml.add(new Boost());
         ml.add(new Target());
