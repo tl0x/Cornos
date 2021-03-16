@@ -1,29 +1,15 @@
 # CornClient
-A small client useful for a variety of tasks ranging from raiding to duping.
+A small utility mod for Minecraft useful for a variety of tasks ranging from raiding to duping.
 
 <img src="https://img.shields.io/discord/819683133154000958?style=for-the-badge" /><br>
 <img src="https://img.shields.io/github/stars/AriliusClient/Cornos?color=000000&style=for-the-badge" /><br>
 <img src="https://img.shields.io/github/downloads/AriliusClient/Cornos/total?color=000000&style=for-the-badge&label=Downloads%20via%20releases">
 
-# Screenshots
-
-## Click GUI
-
-![image](https://user-images.githubusercontent.com/80022388/110660734-250b4200-81c4-11eb-9a47-f1ba6be19d60.png)
-
-## Home screen
-
-![image](https://user-images.githubusercontent.com/80022388/110660767-2dfc1380-81c4-11eb-8d29-88f73da43bd2.png)
-
-## HUD (more to come)
-
-![image](https://user-images.githubusercontent.com/80022388/110660817-3bb19900-81c4-11eb-9027-b2337b096101.png)
-
 # Support
 
-join the [discord](https://discord.gg/9ZwmhUDE5w)
+Join the [discord](https://discord.gg/9ZwmhUDE5w) for support.
 
-it is neat
+I will be sad if you don't, don't make me sad please. 
 
 # Installation
 
@@ -31,10 +17,14 @@ Since so many people ask me how to build this and cant read apparently, I will s
 
 **YOU DO NOT NEED TO BUILD IT YOURSELF.
 READ [How to obtain the mod without building](https://github.com/AriliusClient/CornClient/wiki/How-to-obtain-the-mod-without-building%3F)
-TO DOWNLOAD A PREBUILD**
+TO DOWNLOAD A PRE-BUILT JAR**
 
-If you want to contribute or really build it
-yourself, [read this](https://github.com/AriliusClient/CornClient/wiki/Building-and-contributing)
+If you want to contribute or really build it yourself, [read this](https://github.com/AriliusClient/CornClient/wiki/Building-and-contributing)
+
+## Installing the jarfile
+1. Install the [fabric loader](https://fabricmc.net/use/) 
+2. Drag the jar file and the [fabric api](https://www.curseforge.com/minecraft/mc-mods/fabric-api) to `(Minecraft folder)/mods`. If there is no `mods` folder, create one.<br>Side note: you may have selected a custom installation path for the fabric launcher profile. If that's the case, use that folder as minecraft folder.
+3. Launch fabric using your launcher of choice.
 
 ## Building
 1. Clone this repo
@@ -44,20 +34,11 @@ yourself, [read this](https://github.com/AriliusClient/CornClient/wiki/Building-
 
 ## Prebuilds
 
-The prebuilt jarfile can be found in build/libs.
+The prebuilt jarfile can be found in the `builds` folder.
 
-After you obtained the jarfile, put it into your mods folder in your fabric installation for any minecraft version.
-Fabric API is needed.
+After you obtained the jarfile, read the section above, "Installing the jarfile".
 
-# Commands
-
-Prefix: `}` (Configurable)
-
-`}help` in chat for commands and modules.
-
-`}help modules` in chat for modules, `}help commands` for commands.
-
-# Features (GUI)
+# Modules
 
 - No Fire overlay
 - Autotool
@@ -80,7 +61,8 @@ Prefix: `}` (Configurable)
 - Antioffhandcrash
 - And more
 
-# Features (Commands)
+
+# Commands
 
 - Toggle (t), toggles a module on or off
 - Config
@@ -90,3 +72,19 @@ Prefix: `}` (Configurable)
 - Keybind
 - Clip
 - And more
+
+`.help modules` in chat for modules, `.help commands` for a list of commands.
+
+# Screenshots
+
+## Click GUI
+
+![image](https://user-images.githubusercontent.com/80022388/110660734-250b4200-81c4-11eb-9a47-f1ba6be19d60.png)
+
+## Home screen
+
+![image](https://user-images.githubusercontent.com/80022388/110660767-2dfc1380-81c4-11eb-8d29-88f73da43bd2.png)
+
+## HUD (more to come)
+
+![image](https://user-images.githubusercontent.com/80022388/110660817-3bb19900-81c4-11eb-9027-b2337b096101.png)

@@ -45,6 +45,9 @@ public class Module {
     public void onExecute() {
     }
 
+    public void onFastUpdate() {
+    }
+
     public void onEnable() {
 
     }

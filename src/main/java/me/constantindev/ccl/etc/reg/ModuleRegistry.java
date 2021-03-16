@@ -2,7 +2,10 @@ package me.constantindev.ccl.etc.reg;
 
 import me.constantindev.ccl.etc.TabManager;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.module.*;
+import me.constantindev.ccl.module.AutoRespawn;
+import me.constantindev.ccl.module.COMBAT.Target;
+import me.constantindev.ccl.module.COMBAT.ThunderAura;
+import me.constantindev.ccl.module.DiscordRPC;
 import me.constantindev.ccl.module.EXPLOIT.AntiHunger;
 import me.constantindev.ccl.module.EXPLOIT.AntiOffhandCrash;
 import me.constantindev.ccl.module.EXPLOIT.BoatPhase;
@@ -10,7 +13,9 @@ import me.constantindev.ccl.module.EXPLOIT.CRASH.BoatCrash;
 import me.constantindev.ccl.module.EXPLOIT.CRASH.MovementCrash;
 import me.constantindev.ccl.module.EXPLOIT.CRASH.OffhandCrash;
 import me.constantindev.ccl.module.EXPLOIT.Suicide;
+import me.constantindev.ccl.module.Freecam;
 import me.constantindev.ccl.module.MOVEMENT.*;
+import me.constantindev.ccl.module.Tracers;
 import me.constantindev.ccl.module.WORLD.*;
 import me.constantindev.ccl.module.ext.*;
 
@@ -60,6 +65,9 @@ public class ModuleRegistry {
         ml.add(new NoRender());
         ml.add(new NoArmorstandRender());
         ml.add(new NameTags());
+        ml.add(new ResourcePackSpoof());
+        ml.add(new Boost());
+        ml.add(new Target());
 
         tabManager = new TabManager();
     }

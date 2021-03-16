@@ -24,7 +24,7 @@ public class Dupe extends Command {
                 new Thread(() -> {
                     for (int i = 0; i < ((9 * 4) - 1); i++) {
 
-                        Cornos.minecraft.player.inventory.setStack(i, Cornos.minecraft.player.inventory.getMainHandStack());
+                        Cornos.minecraft.player.inventory.setStack(i, Cornos.minecraft.player.inventory.getMainHandStack().copy());
                         for (int ii = 0; ii < 64; ii++) {
                             Cornos.minecraft.player.inventory.getStack(i).setCount(ii);
                             try {
@@ -38,7 +38,7 @@ public class Dupe extends Command {
                 break;
             case "11/11":
                 Cornos.minecraft.player.dropSelectedItem(true);
-                Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).getConnection().disconnect(Text.of("bruh"));
+                Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).getConnection().disconnect(Text.of("[CCL controlled disconnect] Reconnect real quick please"));
         }
         super.onExecute(args);
     }

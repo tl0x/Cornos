@@ -16,6 +16,7 @@
     "PlayerEntityHook",
     "PlayerMoveC2SPacketAccessor",
     "PumpkinOverlayReplacement",
+    "ResourcePackStatusMixin",
     "SessionAccessor",
     "ShutdownHook",
     "SignBlockMixin",
