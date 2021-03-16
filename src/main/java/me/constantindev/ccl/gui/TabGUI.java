@@ -55,7 +55,7 @@ public class TabGUI extends DrawableHelper {
     public static void drawBorderedRect(int x, int y, int x1, int y1, int size, int borderC, int insideC, Matrix4f matrix4f) {
         drawGuiRect(x + size, y + size, x1 - size, y1 - size, insideC, matrix4f);
         drawGuiRect(x + size, y + size, x1, y, borderC, matrix4f);
-        drawGuiRect(x, y, x + size, y1, borderC, matrix4f);
+        drawGuiRect(x, y + 1, x + size, y1, borderC, matrix4f);
         drawGuiRect(x1, y1, x1 - size, y + size, borderC, matrix4f);
         drawGuiRect(x, y1 - size, x1, y1, borderC, matrix4f);
     }

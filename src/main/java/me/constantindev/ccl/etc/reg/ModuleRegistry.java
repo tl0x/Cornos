@@ -59,6 +59,7 @@ public class ModuleRegistry {
         ml.add(new BoatPhase());
         ml.add(new NoRender());
         ml.add(new NoArmorstandRender());
+        ml.add(new NameTags());
 
         tabManager = new TabManager();
     }

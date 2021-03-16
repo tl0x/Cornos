@@ -9,6 +9,7 @@
     "ByteSizeViewerHandler",
     "ChatHook",
     "ClientPlayerEntityHook",
+    "EntityRendererMixin",
     "IdentifierMixin",
     "PacketSendHook",
     "PacketTryUseItemOnBlockHook",
