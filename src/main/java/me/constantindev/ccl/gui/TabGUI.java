@@ -16,41 +16,9 @@ import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Matrix4f;
 
+import java.awt.*;
+
 public class TabGUI extends DrawableHelper {
-
-    public void render(MatrixStack matrices, float delta) {
-        drawTabs(matrices, delta);
-    }
-
-    private void drawTabs(MatrixStack matrices, float delta) {
-        if (ModuleRegistry.getTabManager() != null) {
-            TabManager tabManager = ModuleRegistry.getTabManager();
-            int i = 0;
-            int k = 0;
-            for (MType mType : tabManager.getTabType()) {
-                drawGuiRect(7, 10 + i, 81, 20 + i, 0x90000000, matrices.peek().getModel());
-                if (k == tabManager.getCurrentTab()) {
-                    drawGuiRect(7, 10 + i, 81, 20 + i, ClientConfig.latestRGBVal, matrices.peek().getModel());
-                }
-                Cornos.minecraft.textRenderer.drawWithShadow(matrices, mType.getN(), 9, 11 + i, 0xffffff, true);
-                if (tabManager.getTabs().get(mType).isExpanded()) {
-                    int j = 0;
-                    int l = 0;
-                    for (Module m : tabManager.getMods().get(mType)) {
-                        drawGuiRect(172, 10 + j, 81, 20 + j, 0x90000000, matrices.peek().getModel());
-                        if (l == tabManager.getCurrentMods().get(mType)) {
-                            drawGuiRect(172, 10 + j, 81, 20 + j, ClientConfig.latestRGBVal, matrices.peek().getModel());
-                        }
-                        Cornos.minecraft.textRenderer.drawWithShadow(matrices, m.name, 84, 11 + j, 0xffffff, true);
-                        j = j + 10;
-                        l++;
-                    }
-                }
-                i = i + 10;
-                k++;
-            }
-        }
-    }
 
     public static void drawBorderedRect(int x, int y, int x1, int y1, int size, int borderC, int insideC, Matrix4f matrix4f) {
         drawGuiRect(x + size, y + size, x1 - size, y1 - size, insideC, matrix4f);
@@ -94,5 +62,43 @@ public class TabGUI extends DrawableHelper {
         RenderSystem.disableAlphaTest();
         GlStateManager.enableTexture();
         GlStateManager.disableBlend();
+    }
+
+    public void render(MatrixStack matrices, float delta) {
+        drawTabs(matrices, delta);
+    }
+
+    private void drawTabs(MatrixStack matrices, float delta) {
+        if (ModuleRegistry.getTabManager() != null) {
+            TabManager tabManager = ModuleRegistry.getTabManager();
+            int i = 0;
+            int k = 0;
+            for (MType mType : tabManager.getTabType()) {
+                drawGuiRect(5, 5 + i, 79, 15 + i, 0x90000000, matrices.peek().getModel());
+                if (k == tabManager.getCurrentTab()) {
+                    drawGuiRect(5, 5 + i, 79, 15 + i, ClientConfig.latestRGBVal, matrices.peek().getModel());
+                }
+                Cornos.minecraft.textRenderer.drawWithShadow(matrices, mType.getN(), 7, 6 + i, 0xffffff, true);
+                if (tabManager.getTabs().get(mType).isExpanded()) {
+                    int j = 0;
+                    int l = 0;
+                    for (Module m : tabManager.getMods().get(mType)) {
+                        int off = m.isOn.isOn() ? 2 : 0;
+                        drawGuiRect(172 + off, 5 + j, 81 + off, 15 + j, new Color(35, 35, 35).getRGB(), matrices.peek().getModel());
+                        if (m.isOn.isOn()) {
+                            drawGuiRect(174, 5 + j, 83, 15 + j, new Color(47, 47, 47, 134).getRGB(), matrices.peek().getModel());
+                        }
+                        if (l == tabManager.getCurrentMods().get(mType)) {
+                            drawGuiRect(172 + off, 5 + j, 81 + off, 15 + j, ClientConfig.latestRGBVal, matrices.peek().getModel());
+                        }
+                        Cornos.minecraft.textRenderer.drawWithShadow(matrices, m.name, 84 + off, 6 + j, 0xffffff, true);
+                        j += 10;
+                        l++;
+                    }
+                }
+                i += 10;
+                k++;
+            }
+        }
     }
 }
