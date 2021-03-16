@@ -61,7 +61,7 @@ public class Clip extends Command {
                 np = new Vec3d(p.x + newv.x, p.y, p.z + newv.z);
                 break;
             default:
-                ClientHelper.sendChat("run the command w/o arguments and follow the instructions please");
+                ClientHelper.sendChat("What letter is that? I only know of the letters \"v\" and \"h\"");
                 return;
         }
         Cornos.minecraft.player.updatePosition(np.x, np.y, np.z);
