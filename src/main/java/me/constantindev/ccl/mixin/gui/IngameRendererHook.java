@@ -5,9 +5,9 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.exc.InvalidStateException;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.Hud;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,6 +33,7 @@ public class IngameRendererHook {
 
     @Inject(method = "render", at = @At("RETURN"))
     public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) throws InvalidStateException {
+
         double rgbMulti = ((Num) ModuleRegistry.getByName("hud").mconf.getByName("rgbSpeed")).getValue();
         long elapsed = System.currentTimeMillis() - latestTime;
         if (elapsed != 0) latestTime = System.currentTimeMillis();
@@ -72,7 +73,7 @@ public class IngameRendererHook {
         }
 
         if (ModuleRegistry.getByName("hud").isOn.isOn()) {
-            boolean doRgb = ((Toggleable) ModuleRegistry.getByName("hud").mconf.getByName("rgbModList")).isEnabled();
+            boolean doRgb = Hud.themeColor.isRainbow();
             AtomicInteger offset = new AtomicInteger(1);
             List<Module> ml = ModuleRegistry.getAll();
             List<Module> mlR = new ArrayList<>();
@@ -90,13 +91,14 @@ public class IngameRendererHook {
                 try {
                     colorToUse = lastValues.get(current.addAndGet(1));
                 } catch (Exception ignored) {
-                    colorToUse = rgb;
+                    colorToUse = Hud.themeColor.getRGB();
                 }
-                Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 1, 1 + offset.getAndAdd(10), doRgb ? colorToUse : 0xFFFFFFFF);
+                Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 1, 1 + offset.getAndAdd(10), doRgb ? colorToUse : Hud.themeColor.getRGB());
             });
         }
         if (ModuleRegistry.getByName("TabGUI").isOn.isOn() && ClientConfig.tabGUI != null) {
             ClientConfig.tabGUI.render(matrices, tickDelta);
         }
+
     }
 }

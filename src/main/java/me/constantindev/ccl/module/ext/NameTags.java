@@ -7,7 +7,6 @@ import me.constantindev.ccl.etc.EnchantEntry;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.ms.MType;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.gui.TabGUI;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.*;
@@ -28,17 +27,21 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class NameTags extends Module {
 
+    Toggleable health = new Toggleable("Health", true);
+    Toggleable items = new Toggleable("Items", true);
+    Toggleable renderSelf = new Toggleable("RenderSelf", false);
     private float scale;
-
     private EntityRenderDispatcher dispatcher;
-    
+
     public NameTags() {
         super("NameTags", "Shows bigger better nametags that give you more info about the player", MType.MISC);
-        this.mconf.add(new Toggleable("Health", true));
-        this.mconf.add(new Toggleable("Items", true));
+        this.mconf.add(health);
+        this.mconf.add(items);
+        this.mconf.add(renderSelf);
     }
 
     public void renderCustomLabel(Entity entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, EntityRenderDispatcher dispatcher) {
@@ -47,39 +50,34 @@ public class NameTags extends Module {
         if (d > 4096) {
             return;
         }
-        boolean bl = !entity.isSneaky();
         String tag = text.asString();
         float f = entity.getHeight() + 0.5F;
-        int i = "deadmau5".equals(text.getString()) ? -10 : 0;
         if (entity instanceof PlayerEntity) {
             matrices.push();
-            scale = 4F;
+            scale = 3F;
             scale /= 50.0f;
-            scale *= (float)0.55;
-            if(Cornos.minecraft.player.distanceTo(entity) > 10)
+            scale *= (float) 0.55;
+            assert Cornos.minecraft.player != null;
+            if (Cornos.minecraft.player.distanceTo(entity) > 10)
                 scale *= Cornos.minecraft.player.distanceTo(entity) / 10;
             matrices.translate(0.0D, f + (scale * 6), 0.0D);
             matrices.multiply(dispatcher.getRotation());
             matrices.scale(-scale, -scale, scale);
             TextRenderer textRenderer = dispatcher.getTextRenderer();
-            if (entity.getEntityName().equals(Cornos.minecraft.getName())) {
+            if (entity.getUuid() == Cornos.minecraft.player.getUuid() && !renderSelf.isEnabled()) {
                 return;
             }
-            Color color = Color.WHITE;
-            int health = (int)((PlayerEntity) entity).getHealth();
-            if (health <= ((PlayerEntity) entity).getMaxHealth() * 0.25) {
+            int health = (int) ((PlayerEntity) entity).getHealth();
+            if (health <= ((PlayerEntity) entity).getMaxHealth() * 0.25) { // If health is below 25%
                 tag += "§4";
-            }
-            else if (health <= ((PlayerEntity) entity).getMaxHealth() * 0.5) {
+            } else if (health <= ((PlayerEntity) entity).getMaxHealth() * 0.5) { // If health is below 50%
                 tag += "§6";
-            }
-            else if (health <= ((PlayerEntity) entity).getMaxHealth() * 0.75) {
+            } else if (health <= ((PlayerEntity) entity).getMaxHealth() * 0.75) { // If health is below 75%
                 tag += "§e";
-            }
-            else if (health <= ((PlayerEntity) entity).getMaxHealth()) {
+            } else if (health <= ((PlayerEntity) entity).getMaxHealth()) { // If health is below 100% (aka. everything else)
                 tag += "§2";
             }
-            tag = ((Toggleable) ModuleRegistry.getByName("NameTags").mconf.getByName("Health")).isEnabled() ? tag + " " + health : tag;
+            tag = this.health.isEnabled() ? tag + " " + health : tag;
             int width = textRenderer.getWidth(tag) / 2;
             GL11.glPushMatrix();
             GL11.glDisable(2896);
@@ -89,10 +87,10 @@ public class NameTags extends Module {
             GlStateManager.enableBlend();
             GL11.glEnable(GL11.GL_DEPTH_TEST);
             GL11.glDepthFunc(GL11.GL_ALWAYS);
-            me.constantindev.ccl.gui.TabGUI.drawBorderedRect(-width - 4, (textRenderer.fontHeight + 2), width + 4, 1, 1, new Color(0, 0, 0, 255).getRGB(),new Color(2, 20, 50, 150).getRGB(), matrices.peek().getModel());
-            Cornos.minecraft.textRenderer.draw(matrices, tag,-Cornos.minecraft.textRenderer.getWidth(tag) / 2F, f, Color.WHITE.getRGB());
+            me.constantindev.ccl.gui.TabGUI.drawBorderedRect(-width - 4, (textRenderer.fontHeight + 2), width + 4, 1, 1, new Color(0, 0, 0, 255).getRGB(), new Color(2, 20, 50, 150).getRGB(), matrices.peek().getModel());
+            Cornos.minecraft.textRenderer.draw(matrices, tag, -Cornos.minecraft.textRenderer.getWidth(tag) / 2F, f, Color.WHITE.getRGB());
             matrices.pop();
-            if (((Toggleable) ModuleRegistry.getByName("NameTags").mconf.getByName("Items")).isEnabled()) {
+            if (items.isEnabled()) {
 
                 getCurrentItemsAndRenderThem((PlayerEntity) entity, 0, -(Cornos.minecraft.textRenderer.fontHeight + 1), matrices, width, vertexConsumers);
 
@@ -139,7 +137,7 @@ public class NameTags extends Module {
         RenderSystem.disableLighting();
         GL11.glDepthFunc(GL11.GL_ALWAYS);
         matrices.push();
-        matrices.translate(0D,  (entity.getHeight() + 0.5F) + (scale * 6), 0D);
+        matrices.translate(0D, (entity.getHeight() + 0.5F) + (scale * 6), 0D);
         matrices.multiply(dispatcher.getRotation());
         matrices.scale(-scale, -scale, scale);
         matrices.translate(x + 7F, y - Cornos.minecraft.textRenderer.fontHeight + 8F, 0);
@@ -147,27 +145,27 @@ public class NameTags extends Module {
         drawItem(stack, 0, 0, 16, 16, matrices, vertexConsumers);
         Cornos.minecraft.getItemRenderer().zOffset -= 100;
         if (stack.isDamageable()) {
-            matrices.translate(1-8.5F, y + Cornos.minecraft.textRenderer.fontHeight + 7.5D, 0);
+            matrices.translate(1 - 8.5F, y + Cornos.minecraft.textRenderer.fontHeight + 7.5D, 0);
             if (stack.isDamaged()) {
                 drawItemDura(stack, 0, 0, matrices.peek().getModel());
             }
         }
         matrices.pop();
         matrices.push();
-        matrices.translate(0D,  (entity.getHeight() + 0.5F) + (scale * 6), 0D);
+        matrices.translate(0D, (entity.getHeight() + 0.5F) + (scale * 6), 0D);
         matrices.multiply(dispatcher.getRotation());
         matrices.scale(-scale, -scale, scale);
         matrices.translate(x + 9F, y - Cornos.minecraft.textRenderer.fontHeight + 12F, 0);
-        matrices.scale(0.5F,0.5F,1);
+        matrices.scale(0.5F, 0.5F, 1);
         if (stack.getCount() > 1) {
-            Cornos.minecraft.textRenderer.drawWithShadow(matrices,"§f" + stack.getCount(), 1.0f, 0.0f, Color.WHITE.getRGB());
+            Cornos.minecraft.textRenderer.drawWithShadow(matrices, "§f" + stack.getCount(), 1.0f, 0.0f, Color.WHITE.getRGB());
         }
         matrices.pop();
         matrices.push();
-        matrices.translate(0D,  (entity.getHeight() + 0.5F) + (scale * 6), 0D);
+        matrices.translate(0D, (entity.getHeight() + 0.5F) + (scale * 6), 0D);
         matrices.multiply(dispatcher.getRotation());
         matrices.scale(-scale, -scale, scale);
-        EnchantEntry[] enchants = { new EnchantEntry(Enchantments.PROTECTION, "Prot"),
+        EnchantEntry[] enchants = {new EnchantEntry(Enchantments.PROTECTION, "Prot"),
                 new EnchantEntry(Enchantments.THORNS, "Th"),
                 new EnchantEntry(Enchantments.SHARPNESS, "Sh"),
                 new EnchantEntry(Enchantments.FIRE_ASPECT, "Fir"),
@@ -184,7 +182,7 @@ public class NameTags extends Module {
                 new EnchantEntry(Enchantments.IMPALING, "Imp"),
                 new EnchantEntry(Enchantments.MULTISHOT, "Multi"),
                 new EnchantEntry(Enchantments.EFFICIENCY, "Eff"),
-                new EnchantEntry(Enchantments.MENDING, "Men") };
+                new EnchantEntry(Enchantments.MENDING, "Men")};
         for (EnchantEntry enchant : enchants) {
             int level = EnchantmentHelper.getLevel(enchant.getEnchant(), stack);
             String levelDisplay = "" + level;
@@ -192,14 +190,14 @@ public class NameTags extends Module {
                 levelDisplay = "10+";
             }
             if (level > 0) {
-                float scale = 0.35f;
-                matrices.translate((float)(x + 1), (float)(y + 1), 0.0f);
+                float scale = 0.55f;
+                matrices.translate((float) (x + 1), (float) (y + 1), 0.0f);
                 matrices.scale(scale, scale, scale);
-                Cornos.minecraft.textRenderer.drawWithShadow(matrices,"§f" + enchant.getName() + " " + levelDisplay, 1.0f, 0.0f, Color.WHITE.getRGB());
+                Cornos.minecraft.textRenderer.draw(matrices, "§f" + enchant.getName() + " " + levelDisplay, 1.0f, 0.0f, Color.WHITE.getRGB());
 
                 matrices.scale(1.0f / scale, 1.0f / scale, 1.0f / scale);
-                matrices.translate((float)(-x - 1), (float)(-y - 1), 0.0f);
-                y += (int)((Cornos.minecraft.textRenderer.fontHeight + 1) * scale);
+                matrices.translate((float) (-x - 1), (float) (-y - 1), 0.0f);
+                y += (int) ((Cornos.minecraft.textRenderer.fontHeight + 1) * scale);
             }
         }
         GL11.glDepthFunc(GL11.GL_LEQUAL);
@@ -211,26 +209,26 @@ public class NameTags extends Module {
 
     private void drawItem(ItemStack stack, int x, int y, int imageWidth, int imageHeight, MatrixStack matrices, VertexConsumerProvider vertexConsumers) {
         if (stack.getItem() instanceof BlockItem || stack.getItem() instanceof DyeableArmorItem || stack.getItem() == Items.SHIELD || stack.getItem() instanceof SpawnEggItem) {
-            GL11.glColor4f(1,1,1,1);
+            GL11.glColor4f(1, 1, 1, 1);
             if (stack.getItem() instanceof BlockItem || stack.getItem() == Items.SHIELD || stack.getItem() instanceof SpawnEggItem || stack.getItem() instanceof DyeableArmorItem) {
                 matrices.scale(1, -1, -0.01F);
             } else {
                 matrices.scale(1, 1, -0.01F);
             }
             RenderSystem.disableRescaleNormal();
-            RenderSystem.normal3f(1,1,1);
+            RenderSystem.normal3f(1, 1, 1);
             RenderSystem.colorMask(true, true, true, true);
-            matrices.scale(16,16,1);
+            matrices.scale(16, 16, 1);
             ItemStack itemStack = stack.copy();
             itemStack.removeSubTag("Enchantments");
             itemStack.removeSubTag("StoredEnchantments");
             Cornos.minecraft.getTextureManager().bindTexture(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
-            Cornos.minecraft.getTextureManager().getTexture(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).setFilter(false, false);
+            Objects.requireNonNull(Cornos.minecraft.getTextureManager().getTexture(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)).setFilter(false, false);
             VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
             Cornos.minecraft.getItemRenderer().renderItem(itemStack, ModelTransformation.Mode.GUI, 15728880, OverlayTexture.DEFAULT_UV, matrices, immediate);
             immediate.draw();
             RenderSystem.enableRescaleNormal();
-            matrices.scale(0.0625F,0.0625F,1);
+            matrices.scale(0.0625F, 0.0625F, 1);
             if (stack.getItem() instanceof BlockItem || stack.getItem() == Items.SHIELD || stack.getItem() instanceof SpawnEggItem || stack.getItem() instanceof DyeableArmorItem) {
                 matrices.scale(1, -1, 0F);
             } else {
@@ -248,8 +246,8 @@ public class NameTags extends Module {
     }
 
     private void drawItemDura(ItemStack stack, int x, int y, Matrix4f matrix4f) {
-        float f = (float)stack.getDamage();
-        float g = (float)stack.getMaxDamage();
+        float f = (float) stack.getDamage();
+        float g = (float) stack.getMaxDamage();
         float h = Math.max(0.0F, (g - f) / g);
         int i = Math.round(13.0F - f * 13.0F / g);
         Color j = Color.getHSBColor(h / 3.0F, 1.0F, 1.0F);
@@ -288,10 +286,10 @@ public class NameTags extends Module {
     private void drawTexturedQuad(Matrix4f matrices, int x0, int x1, int y0, int y1, int z, float u0, float u1, float v0, float v1, boolean glint) {
         BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
         bufferBuilder.begin(7, VertexFormats.POSITION_TEXTURE);
-        bufferBuilder.vertex(matrices, (float)x0, (float)y1, (float)z).texture(u0, v1).next();
-        bufferBuilder.vertex(matrices, (float)x1, (float)y1, (float)z).texture(u1, v1).next();
-        bufferBuilder.vertex(matrices, (float)x1, (float)y0, (float)z).texture(u1, v0).next();
-        bufferBuilder.vertex(matrices, (float)x0, (float)y0, (float)z).texture(u0, v0).next();
+        bufferBuilder.vertex(matrices, (float) x0, (float) y1, (float) z).texture(u0, v1).next();
+        bufferBuilder.vertex(matrices, (float) x1, (float) y1, (float) z).texture(u1, v1).next();
+        bufferBuilder.vertex(matrices, (float) x1, (float) y0, (float) z).texture(u1, v0).next();
+        bufferBuilder.vertex(matrices, (float) x0, (float) y0, (float) z).texture(u0, v0).next();
         bufferBuilder.end();
         RenderSystem.enableAlphaTest();
         BufferRenderer.draw(bufferBuilder);
@@ -300,10 +298,10 @@ public class NameTags extends Module {
     private void drawColoredTexturedQuad(Matrix4f matrices, int x0, int x1, int y0, int y1, int z, float u0, float u1, float v0, float v1, boolean glint, Color color) {
         BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
         bufferBuilder.begin(7, VertexFormats.POSITION_COLOR_TEXTURE);
-        bufferBuilder.vertex(matrices, (float)x0, (float)y1, (float)z).color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()).texture(u0, v1).next();
-        bufferBuilder.vertex(matrices, (float)x1, (float)y1, (float)z).color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()).texture(u1, v1).next();
-        bufferBuilder.vertex(matrices, (float)x1, (float)y0, (float)z).color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()).texture(u1, v0).next();
-        bufferBuilder.vertex(matrices, (float)x0, (float)y0, (float)z).color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()).texture(u0, v0).next();
+        bufferBuilder.vertex(matrices, (float) x0, (float) y1, (float) z).color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()).texture(u0, v1).next();
+        bufferBuilder.vertex(matrices, (float) x1, (float) y1, (float) z).color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()).texture(u1, v1).next();
+        bufferBuilder.vertex(matrices, (float) x1, (float) y0, (float) z).color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()).texture(u1, v0).next();
+        bufferBuilder.vertex(matrices, (float) x0, (float) y0, (float) z).color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()).texture(u0, v0).next();
         bufferBuilder.end();
         RenderSystem.enableAlphaTest();
         BufferRenderer.draw(bufferBuilder);

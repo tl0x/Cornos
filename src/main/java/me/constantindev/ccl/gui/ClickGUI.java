@@ -15,6 +15,7 @@ import me.constantindev.ccl.etc.config.*;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.Hud;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.glfw.GLFW;
@@ -55,22 +56,22 @@ public class ClickGUI extends MinecraftGUI {
         Theme theme = new GameSenseTheme(new ColorScheme() {
             @Override
             public Color getActiveColor() {
-                return new Color(47, 47, 47, 134);
+                return new Color(47, 47, 47, 153);
             }
 
             @Override
             public Color getInactiveColor() {
-                return new Color(35, 35, 35);
+                return new Color(30, 30, 30, 153);
             }
 
             @Override
             public Color getBackgroundColor() {
-                return new Color(14, 14, 14, 153);
+                return new Color(20, 20, 20, 153);
             }
 
             @Override
             public Color getOutlineColor() {
-                return new Color(ClientConfig.latestRGBVal);
+                return Hud.themeColor.getColor();
             }
 
             @Override
@@ -203,6 +204,51 @@ public class ClickGUI extends MinecraftGUI {
                         NumberComponent nc = new NumberComponent(kc.key, null, theme.getComponentRenderer(), ns, ((Num) kc).min,
                                 ((Num) kc).max);
                         mc.addComponent(nc);
+                    } else if (kc instanceof RGBAColor) {
+                        RGBAColor rgbaColor = (RGBAColor) kc;
+                        ColorSetting c = new ColorSetting() {
+                            @Override
+                            public Color getValue() {
+                                return rgbaColor.getColor();
+                            }
+
+                            @Override
+                            public void setValue(Color value) {
+                                rgbaColor.setColor(value);
+                            }
+
+                            @Override
+                            public Color getColor() {
+                                return rgbaColor.getColor();
+                            }
+
+                            @Override
+                            public boolean getRainbow() {
+                                return rgbaColor.isRainbow();
+                            }
+
+                            @Override
+                            public void setRainbow(boolean rainbow) {
+                                rgbaColor.setRainbow(rainbow);
+                            }
+                        };
+
+                        ColorComponent cc = new ColorComponent(kc.key, null, theme.getComponentRenderer(),
+                                new SettingsAnimation(ClientConfig.animSpeed), theme.getComponentRenderer(), c, false, true,
+                                new com.lukflug.panelstudio.settings.Toggleable() {
+                                    boolean bruh = false;
+
+                                    @Override
+                                    public void toggle() {
+                                        bruh = !bruh;
+                                    }
+
+                                    @Override
+                                    public boolean isOn() {
+                                        return bruh;
+                                    }
+                                });
+                        mc.addComponent(cc);
                     }
                 }
             }

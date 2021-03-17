@@ -3,6 +3,7 @@ package me.constantindev.ccl.etc.reg;
 import me.constantindev.ccl.etc.TabManager;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.module.AutoRespawn;
+import me.constantindev.ccl.module.COMBAT.Confuse;
 import me.constantindev.ccl.module.COMBAT.Target;
 import me.constantindev.ccl.module.COMBAT.ThunderAura;
 import me.constantindev.ccl.module.DiscordRPC;
@@ -46,7 +47,7 @@ public class ModuleRegistry {
         ml.add(new MidAirPlace());
         ml.add(new XRAY());
         ml.add(new AntiOffhandCrash());
-        ml.add(new Freecam());
+        ml.add(new Freecam()); // freecam broke
         ml.add(new ClickGUI());
         ml.add(new TabGUI());
         ml.add(new ClientConfig());
@@ -68,6 +69,7 @@ public class ModuleRegistry {
         ml.add(new ResourcePackSpoof());
         ml.add(new Boost());
         ml.add(new Target());
+        ml.add(new Confuse());
 
         tabManager = new TabManager();
     }

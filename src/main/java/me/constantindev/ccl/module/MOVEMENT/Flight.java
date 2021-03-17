@@ -18,7 +18,7 @@ public class Flight extends Module {
         super("Flight", "Allows you to fly", MType.MOVEMENT);
         this.mconf.add(new MultiOption("mode", "vanilla", new String[]{"vanilla", "static", "jetpack"}));
         this.mconf.add(new Toggleable("toggleFast", true));
-        this.mconf.add(new Num("speed", 1.0, 30, 0));
+        this.mconf.add(new Num("speed", 1.0, 10, 0));
     }
 
     @Override
