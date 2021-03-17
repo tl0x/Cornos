@@ -5,25 +5,45 @@ import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.helper.RandomHelper;
 import me.constantindev.ccl.etc.ms.MType;
+import net.minecraft.entity.player.PlayerAbilities;
+import net.minecraft.network.packet.c2s.play.UpdatePlayerAbilitiesC2SPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.Objects;
+
 public class Flight extends Module {
     int counter = 0;
+    int counter1 = 0;
+    MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "static", "jetpack"});
+    Toggleable toggleFast = new Toggleable("toggleFast", true);
+    Num speed = new Num("speed", 1.0, 10, 0);
+    Toggleable sendAbilitiesUpdate = new Toggleable("abilities", true);
+    PlayerAbilities abilitiesBefore = null;
 
     public Flight() {
         super("Flight", "Allows you to fly", MType.MOVEMENT);
-        this.mconf.add(new MultiOption("mode", "vanilla", new String[]{"vanilla", "static", "jetpack"}));
-        this.mconf.add(new Toggleable("toggleFast", true));
-        this.mconf.add(new Num("speed", 1.0, 10, 0));
+        this.mconf.add(mode);
+        this.mconf.add(toggleFast);
+        this.mconf.add(sendAbilitiesUpdate);
+        this.mconf.add(speed);
+
     }
 
     @Override
     public void onExecute() {
         double speed = ((Num) this.mconf.getByName("speed")).getValue();
+        counter1++;
+        if (counter1 > 10) {
+            counter1 = 0;
+            assert Cornos.minecraft.player != null;
+            PlayerAbilities pa = Cornos.minecraft.player.abilities;
+            pa.allowFlying = true;
+            UpdatePlayerAbilitiesC2SPacket p = new UpdatePlayerAbilitiesC2SPacket(pa);
+            Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(p);
+        }
         if (((Toggleable) this.mconf.getByName("toggleFast")).isEnabled()) {
             if (counter > 10) counter = 0;
             counter++;
@@ -32,6 +52,7 @@ public class Flight extends Module {
             case "vanilla":
                 assert Cornos.minecraft.player != null;
                 Cornos.minecraft.player.abilities.flying = !(counter > 9);
+                Cornos.minecraft.player.abilities.setFlySpeed((float) (speed / 10));
                 break;
             case "static":
 
@@ -56,11 +77,23 @@ public class Flight extends Module {
                     }
                 }
                 break;
-            default:
-                ClientHelper.sendChat("Invalid flight mode. Please pick one of vanilla, static.");
-                this.mconf.getByName("mode").setValue("vanilla");
-                break;
         }
         super.onExecute();
+    }
+
+    @Override
+    public void onEnable() {
+        assert Cornos.minecraft.player != null;
+        abilitiesBefore = Cornos.minecraft.player.abilities;
+        super.onEnable();
+    }
+
+    @Override
+    public void onDisable() {
+        assert Cornos.minecraft.player != null;
+        Cornos.minecraft.player.abilities.setFlySpeed(abilitiesBefore.getFlySpeed());
+        Cornos.minecraft.player.abilities.allowFlying = abilitiesBefore.allowFlying;
+        Cornos.minecraft.player.abilities.flying = abilitiesBefore.flying;
+        super.onDisable();
     }
 }

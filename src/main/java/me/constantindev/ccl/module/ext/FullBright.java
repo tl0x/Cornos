@@ -9,7 +9,7 @@ public class FullBright extends Module {
     private double oldgamma;
 
     public FullBright() {
-        super("FullBright", "Light up your world.", MType.WORLD);
+        super("FullBright", "Light up your world.", MType.RENDER);
     }
 
     @Override

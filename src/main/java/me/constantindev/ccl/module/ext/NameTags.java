@@ -38,7 +38,7 @@ public class NameTags extends Module {
     private EntityRenderDispatcher dispatcher;
 
     public NameTags() {
-        super("NameTags", "Shows bigger better nametags that give you more info about the player", MType.MISC);
+        super("NameTags", "Shows bigger better nametags that give you more info about the player", MType.RENDER);
         this.mconf.add(health);
         this.mconf.add(items);
         this.mconf.add(renderSelf);

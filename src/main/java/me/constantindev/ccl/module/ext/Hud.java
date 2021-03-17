@@ -11,7 +11,7 @@ public class Hud extends Module {
     public static RGBAColor themeColor = new RGBAColor("theme", new Color(255, 255, 255));
 
     public Hud() {
-        super("HUD", "Will make shit fancy", MType.MISC);
+        super("HUD", "Will make shit fancy", MType.RENDER);
         this.isOn.setState(true);
         this.mconf.add(new Num("rgbSpeed", 5, 20, 1));
         this.mconf.add(themeColor);
