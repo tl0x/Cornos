@@ -6,7 +6,8 @@ public enum MType {
     WORLD("World"),
     MOVEMENT("Movement"),
     COMBAT("Combat"),
-    CRASH("Crash");
+    CRASH("Crash"),
+    RENDER("Render");
 
     String n;
 

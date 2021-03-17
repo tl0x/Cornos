@@ -8,7 +8,6 @@ import net.minecraft.block.Blocks;
 
 public class ClientConfig {
     public static String chatPrefix;
-    public static boolean blockNextMainScreenCall;
     public static Block[] xrayBlocks;
     public static NumberSetting animSpeed;
     public static ClickGUI cg;
@@ -17,7 +16,6 @@ public class ClientConfig {
 
     public static void init() {
         chatPrefix = "}";
-        blockNextMainScreenCall = true;
         xrayBlocks = new Block[]{
                 Blocks.DIAMOND_ORE,
                 Blocks.COAL_ORE,

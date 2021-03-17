@@ -8,6 +8,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.mixin.gui;
 
+import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerServerListWidget;
@@ -29,6 +30,8 @@ public class ScanningEntryMixin {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void render(MatrixStack matrices, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta, CallbackInfo ci) {
+        if (ModuleRegistry.getByName("clientconfig").mconf.getByName("mpscreen").value.equalsIgnoreCase("vanilla"))
+            return;
         ci.cancel();
         int var10000 = y + entryHeight / 2;
         int i = var10000 - 9 / 2;
