@@ -13,7 +13,6 @@
     "IdentifierMixin",
     "PacketSendHook",
     "PacketTryUseItemOnBlockHook",
-    "PlayerEntityHook",
     "PlayerMoveC2SPacketAccessor",
     "PumpkinOverlayReplacement",
     "ResourcePackStatusMixin",

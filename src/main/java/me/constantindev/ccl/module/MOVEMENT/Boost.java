@@ -15,7 +15,7 @@ import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.util.math.Vec3d;
 
 public class Boost extends Module {
-    Num strength = new Num("strength", 4.0, 30, 1);
+    Num strength = new Num("strength", 4.0, 10, 1);
 
     public Boost() {
         super("Boost", "Boosts you upwards", MType.MOVEMENT);
