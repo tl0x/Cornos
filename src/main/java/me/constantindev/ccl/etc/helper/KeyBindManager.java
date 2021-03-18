@@ -3,6 +3,8 @@ package me.constantindev.ccl.etc.helper;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.ms.KeyBind;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.mixin.ChatHook;
+import net.minecraft.client.gui.screen.ChatScreen;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.HashMap;
@@ -10,6 +12,7 @@ import java.util.Map;
 
 public class KeyBindManager {
     public static Map<String, KeyBind> binds = new HashMap<>();
+    public static boolean freezeTabGui;
 
     public static void init() {
         ModuleRegistry.getAll().forEach(module -> {
@@ -30,7 +33,11 @@ public class KeyBindManager {
             if (keyBinding.isPressed() && Cornos.minecraft.currentScreen == null)
                 if (s.contains("TAB_")) {
                     if (ModuleRegistry.getByName("TabGUI").isOn.isOn()) {
-                        ModuleRegistry.getTabManager().keyPressed(keyBinding.keycode);
+                        if (!freezeTabGui) {
+                            ModuleRegistry.getTabManager().keyPressed(keyBinding.keycode);
+                        } else {
+                            freezeTabGui = false;
+                        }
                     }
                 } else {
                     ModuleRegistry.getByName(s).isOn.toggle();

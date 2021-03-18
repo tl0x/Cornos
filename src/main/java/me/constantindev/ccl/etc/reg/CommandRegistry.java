@@ -25,6 +25,7 @@ public class CommandRegistry {
         cl.add(new Drop());
         cl.add(new Give());
         cl.add(new Hologram());
+        cl.add(new Panic());
     }
 
     public static List<Command> getAll() {

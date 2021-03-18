@@ -2,6 +2,7 @@ package me.constantindev.ccl.etc.config;
 
 import com.lukflug.panelstudio.settings.NumberSetting;
 import me.constantindev.ccl.gui.ClickGUI;
+import me.constantindev.ccl.gui.HudElements;
 import me.constantindev.ccl.gui.TabGUI;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -11,6 +12,7 @@ public class ClientConfig {
     public static Block[] xrayBlocks;
     public static NumberSetting animSpeed;
     public static ClickGUI cg;
+    public static HudElements hudElements;
     public static TabGUI tabGUI;
     public static int latestRGBVal = 0;
 
@@ -54,6 +56,7 @@ public class ClientConfig {
                 return 0;
             }
         };
+        hudElements = new HudElements();
         tabGUI = new TabGUI();
     }
 }

@@ -78,7 +78,7 @@ public class TabManager {
                         currentMods.put(tabType.get(currentTab), i);
                     }
                 } else {
-                    if (currentTab <= mods.get(tabType.get(currentTab)).size() - 1) {
+                    if (currentTab < tabType.size() - 1) {
                         currentTab++;
                     }
                 }

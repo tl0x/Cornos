@@ -6,6 +6,7 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.TabManager;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ClientConfig;
+import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.gui.DrawableHelper;
@@ -14,11 +15,15 @@ import net.minecraft.client.render.BufferRenderer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
 public class TabGUI extends DrawableHelper {
+
+    private final Identifier rainbowLogo = new Identifier("ccl", "white_logo.png");
 
     public static void drawBorderedRect(int x, int y, int x1, int y1, int size, int borderC, int insideC, Matrix4f matrix4f) {
         drawGuiRect(x + size, y + size, x1 - size, y1 - size, insideC, matrix4f);
@@ -66,6 +71,13 @@ public class TabGUI extends DrawableHelper {
 
     public void render(MatrixStack matrices, float delta) {
         drawTabs(matrices, delta);
+        GL11.glPushMatrix();
+        Color color = new Color(ClientConfig.latestRGBVal);
+        GL11.glColor4f(1,1,1,1);
+        GL11.glColor4f(color.getRed()/255F, color.getGreen()/255F, color.getBlue()/255F, color.getAlpha()/255F);
+        RenderHelper.drawImage(matrices, rainbowLogo, 1, 1, 80, 18);
+        GL11.glColor4f(1,1,1,1);
+        GL11.glPopMatrix();
     }
 
     private void drawTabs(MatrixStack matrices, float delta) {
@@ -74,24 +86,24 @@ public class TabGUI extends DrawableHelper {
             int i = 0;
             int k = 0;
             for (MType mType : tabManager.getTabType()) {
-                drawGuiRect(5, 5 + i, 79, 15 + i, 0x90000000, matrices.peek().getModel());
+                drawGuiRect(5, 20 + i, 79, 30 + i, 0x90000000, matrices.peek().getModel());
                 if (k == tabManager.getCurrentTab()) {
-                    drawGuiRect(5, 5 + i, 79, 15 + i, ClientConfig.latestRGBVal, matrices.peek().getModel());
+                    drawGuiRect(5, 20 + i, 79, 30 + i, ClientConfig.latestRGBVal, matrices.peek().getModel());
                 }
-                Cornos.minecraft.textRenderer.drawWithShadow(matrices, mType.getN(), 7, 6 + i, 0xffffff, true);
+                Cornos.minecraft.textRenderer.drawWithShadow(matrices, mType.getN(), 7, 21 + i, 0xffffff, true);
                 if (tabManager.getTabs().get(mType).isExpanded()) {
                     int j = 0;
                     int l = 0;
                     for (Module m : tabManager.getMods().get(mType)) {
                         int off = m.isOn.isOn() ? 2 : 0;
-                        drawGuiRect(172 + off, 5 + j, 81 + off, 15 + j, new Color(35, 35, 35).getRGB(), matrices.peek().getModel());
+                        drawGuiRect(172 + off, 20 + j, 81 + off, 30 + j, new Color(35, 35, 35).getRGB(), matrices.peek().getModel());
                         if (m.isOn.isOn()) {
-                            drawGuiRect(174, 5 + j, 83, 15 + j, new Color(47, 47, 47, 134).getRGB(), matrices.peek().getModel());
+                            drawGuiRect(174, 20 + j, 83, 30 + j, new Color(47, 47, 47, 134).getRGB(), matrices.peek().getModel());
                         }
                         if (l == tabManager.getCurrentMods().get(mType)) {
-                            drawGuiRect(172 + off, 5 + j, 81 + off, 15 + j, ClientConfig.latestRGBVal, matrices.peek().getModel());
+                            drawGuiRect(172 + off, 20 + j, 81 + off, 30 + j, ClientConfig.latestRGBVal, matrices.peek().getModel());
                         }
-                        Cornos.minecraft.textRenderer.drawWithShadow(matrices, m.name, 84 + off, 6 + j, 0xffffff, true);
+                        Cornos.minecraft.textRenderer.drawWithShadow(matrices, m.name, 84 + off, 21 + j, 0xffffff, true);
                         j += 10;
                         l++;
                     }
