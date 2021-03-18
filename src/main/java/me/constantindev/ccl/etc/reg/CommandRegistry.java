@@ -24,6 +24,7 @@ public class CommandRegistry {
         cl.add(new Scan());
         cl.add(new Drop());
         cl.add(new Give());
+        cl.add(new Hologram());
     }
 
     public static List<Command> getAll() {
