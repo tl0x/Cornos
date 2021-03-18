@@ -9,9 +9,7 @@ import me.constantindev.ccl.module.COMBAT.ThunderAura;
 import me.constantindev.ccl.module.EXPLOIT.AntiHunger;
 import me.constantindev.ccl.module.EXPLOIT.AntiOffhandCrash;
 import me.constantindev.ccl.module.EXPLOIT.BoatPhase;
-import me.constantindev.ccl.module.EXPLOIT.CRASH.BoatCrash;
-import me.constantindev.ccl.module.EXPLOIT.CRASH.MovementCrash;
-import me.constantindev.ccl.module.EXPLOIT.CRASH.OffhandCrash;
+import me.constantindev.ccl.module.EXPLOIT.CRASH.*;
 import me.constantindev.ccl.module.EXPLOIT.Suicide;
 import me.constantindev.ccl.module.MOVEMENT.*;
 import me.constantindev.ccl.module.WORLD.*;
@@ -68,6 +66,9 @@ public class ModuleRegistry {
         ml.add(new Target());
         ml.add(new Confuse());
         ml.add(new Test());
+        ml.add(new EntityCrash());
+        ml.add(new SignCrash());
+        ml.add(new TryUseCrash());
 
         tabManager = new TabManager();
     }
