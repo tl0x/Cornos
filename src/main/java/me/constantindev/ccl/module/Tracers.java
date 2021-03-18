@@ -13,6 +13,7 @@ import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.helper.RenderHelper;
+import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.render.RenderableBlock;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
@@ -23,7 +24,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class Tracers extends Module {
     public Tracers() {
-        super("PlayerInfo", "Shows nearby entities and/or players");
+        super("PlayerInfo", "Shows nearby entities and/or players", MType.RENDER);
         this.mconf.add(new Toggleable("Entities", true));
         this.mconf.add(new Toggleable("Players", true));
         this.mconf.add(new Num("Distance", 100, 1000, 10));
