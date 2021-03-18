@@ -90,18 +90,23 @@ public class ClickGUI extends MinecraftGUI {
             Cornos.minecraft.textRenderer.draw(new MatrixStack(), context.getDescription(), 1, wH - height - 1, 0xFFFFFFFF);
         });
         int offset = 10 - 114;
+        int offsetY = 10;
         for (MType type : MType.values()) {
             int maxW = 96;
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
                 maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.type.getN()));
             }
+            offset += 114;
+            if (offset > Cornos.minecraft.getWindow().getScaledWidth()) {
+                offset = 10;
+                offsetY += 114;
+            }
             com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(
                     type.getN(), null,
                     theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed),
-                    null, new Point(offset += 114, 10), maxW + 8
+                    null, new Point(offset, offsetY), maxW + 8
             );
-
             gui.addComponent(container);
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
