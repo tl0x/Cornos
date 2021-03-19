@@ -95,10 +95,10 @@ public class IngameRendererHook {
                 }
                 Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 1, 1 + offset.getAndAdd(10), doRgb ? colorToUse : Hud.themeColor.getRGB());
             });
+            ClientConfig.hudElements.render(matrices, tickDelta);
         }
         if (ModuleRegistry.getByName("TabGUI").isOn.isOn() && ClientConfig.tabGUI != null) {
             ClientConfig.tabGUI.render(matrices, tickDelta);
         }
-
     }
 }

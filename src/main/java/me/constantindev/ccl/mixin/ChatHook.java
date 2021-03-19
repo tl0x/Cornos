@@ -3,6 +3,7 @@ package me.constantindev.ccl.mixin;
 import me.constantindev.ccl.etc.base.Command;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.MinecraftClient;
@@ -24,6 +25,7 @@ public class ChatHook {
 
     @Inject(method = "sendMessage(Ljava/lang/String;)V", at = @At("HEAD"), cancellable = true)
     public void onChatMessageSent(String msg, CallbackInfo cbi) {
+        KeyBindManager.freezeTabGui = true;
         String prefix = ModuleRegistry.getByName("clientconfig").mconf.getByName("prefix").value;
         if (msg.toLowerCase().startsWith(prefix.toLowerCase())) {
             cbi.cancel();

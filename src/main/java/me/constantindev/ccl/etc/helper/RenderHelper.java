@@ -9,14 +9,17 @@ import me.constantindev.ccl.etc.render.RenderableLine;
 import me.constantindev.ccl.etc.render.RenderableText;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3d;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,5 +94,21 @@ public class RenderHelper {
         final float x = (float) bp.getX(), y = (float) bp.getY(), z = (float) bp.getZ();
 
         WorldRenderer.drawBox(matrices, builder, x, y, z, x + dim.x, y + dim.y, z + dim.z, r, g, b, a);
+    }
+
+    public static void drawImage(MatrixStack matrices, Identifier identifier, int x, int y, int imageWidth, int imageHeight) {
+
+        RenderSystem.enableAlphaTest();
+        RenderSystem.pushMatrix();
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(770, 771);
+
+        Cornos.minecraft.getTextureManager().bindTexture(identifier);
+        Screen.drawTexture(matrices, x, y, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
+
+        RenderSystem.disableAlphaTest();
+        RenderSystem.disableBlend();
+        RenderSystem.popMatrix();
+
     }
 }
