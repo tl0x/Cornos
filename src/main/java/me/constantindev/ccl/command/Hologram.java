@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.*;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 public class Hologram extends Command {
@@ -26,7 +25,7 @@ public class Hologram extends Command {
     @Override
     public void onExecute(String[] args) {
         if (!Cornos.minecraft.player.isCreative()) {
-            ClientHelper.sendChat("You need to be in creative");
+            ClientHelper.sendChat("You need to be in creative (or provide --force)");
             return;
         }
         if (args.length < 1) {

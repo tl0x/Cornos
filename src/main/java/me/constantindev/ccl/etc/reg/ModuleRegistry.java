@@ -69,6 +69,7 @@ public class ModuleRegistry {
         ml.add(new EntityCrash());
         ml.add(new SignCrash());
         ml.add(new TryUseCrash());
+        ml.add(new LoginCrash());
 
         tabManager = new TabManager();
     }

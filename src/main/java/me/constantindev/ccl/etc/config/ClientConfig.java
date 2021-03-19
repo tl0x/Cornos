@@ -1,6 +1,7 @@
 package me.constantindev.ccl.etc.config;
 
 import com.lukflug.panelstudio.settings.NumberSetting;
+import com.thealtening.auth.TheAlteningAuthentication;
 import me.constantindev.ccl.gui.ClickGUI;
 import me.constantindev.ccl.gui.TabGUI;
 import net.minecraft.block.Block;
@@ -13,6 +14,7 @@ public class ClientConfig {
     public static ClickGUI cg;
     public static TabGUI tabGUI;
     public static int latestRGBVal = 0;
+    public static TheAlteningAuthentication authentication;
 
     public static void init() {
         chatPrefix = "}";
