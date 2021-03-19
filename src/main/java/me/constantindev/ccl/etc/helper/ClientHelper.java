@@ -4,6 +4,8 @@ import me.constantindev.ccl.Cornos;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
+import java.lang.reflect.Field;
+
 public class ClientHelper {
     public static void sendChat(String msg) {
         assert Cornos.minecraft.player != null;
@@ -19,5 +21,22 @@ public class ClientHelper {
             isValid = false;
         }
         return isValid;
+    }
+    public static void setField(Object t, String n1, String n2, Object value) {
+        Field f;
+        try {
+            f = t.getClass().getField(n1);
+        } catch (Exception exc) {
+            try {
+                f = t.getClass().getField(n2);
+            } catch (Exception ignored) {
+                return;
+            }
+        }
+        if(!f.isAccessible()) f.setAccessible(true);
+        try {
+            f.set(t,value);
+        } catch (Exception ignored) {
+        }
     }
 }
