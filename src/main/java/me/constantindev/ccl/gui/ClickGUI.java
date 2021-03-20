@@ -116,6 +116,8 @@ public class ClickGUI extends MinecraftGUI {
                 container.addComponent(mc);
                 for (ModuleConfig.ConfigKey kc : m.mconf.config) {
                     maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(kc.key + ": " + kc.value));
+                    // it works.
+                    // dont question it.
                     if (kc instanceof Toggleable) {
                         BooleanComponent bc = new BooleanComponent(kc.key, null, theme.getComponentRenderer(),
                                 new com.lukflug.panelstudio.settings.Toggleable() {

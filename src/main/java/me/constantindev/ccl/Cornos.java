@@ -1,5 +1,6 @@
 package me.constantindev.ccl;
 
+import com.thealtening.auth.TheAlteningAuthentication;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.event.EventHelper;
@@ -42,7 +43,6 @@ public class Cornos implements ModInitializer {
         ConfigHelper.loadConfig();
         log(Level.INFO, "Registering all keybinds");
         KeyBindManager.init();
-
         log(Level.INFO, "All features registered. Ready to load game");
         fastUpdater = new Thread(() -> {
             while (true) {
@@ -56,6 +56,9 @@ public class Cornos implements ModInitializer {
                 } catch (Exception ignored) {
                 }
             }
+        });
+        ClientConfig.authentication = TheAlteningAuthentication.mojang(yggdrasilEnvironment -> {
+
         });
         fastUpdater.start();
 

@@ -94,7 +94,7 @@ public class Flight extends Module {
         assert Cornos.minecraft.player != null;
         Cornos.minecraft.player.abilities.setFlySpeed(abilitiesBefore.getFlySpeed());
         Cornos.minecraft.player.abilities.allowFlying = abilitiesBefore.allowFlying;
-        Cornos.minecraft.player.abilities.flying = abilitiesBefore.flying;
+        Cornos.minecraft.player.abilities.flying = false;
         super.onDisable();
     }
 }
