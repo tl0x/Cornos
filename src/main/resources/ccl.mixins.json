@@ -11,6 +11,7 @@
     "ClientMixin",
     "ClientPlayerEntityHook",
     "EntityRendererMixin",
+    "GameRendererHook",
     "GameProfileMixin",
     "IdentifierMixin",
     "PacketSendHook",
