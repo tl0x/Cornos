@@ -10,6 +10,7 @@
     "ChatHook",
     "ClientPlayerEntityHook",
     "EntityRendererMixin",
+    "GameRendererHook",
     "IdentifierMixin",
     "PacketSendHook",
     "PacketTryUseItemOnBlockHook",

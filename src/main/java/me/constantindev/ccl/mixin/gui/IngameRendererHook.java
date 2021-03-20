@@ -101,4 +101,11 @@ public class IngameRendererHook {
             ClientConfig.tabGUI.render(matrices, tickDelta);
         }
     }
+
+    @Inject(at = {@At("HEAD")}, method = "renderStatusEffectOverlay", cancellable = true)
+    private void renderStatusEffectOverlay(MatrixStack matrices, CallbackInfo ci) {
+        if (ModuleRegistry.getByName("hud").isOn.isOn()) {
+            ci.cancel();
+        }
+    }
 }
