@@ -50,7 +50,7 @@ public class NameTags extends Module {
         if (d > 4096) {
             return;
         }
-        String tag = text.asString();
+        String tag = entity.getEntityName();
         float f = entity.getHeight() + 0.5F;
         if (entity instanceof PlayerEntity) {
             matrices.push();
