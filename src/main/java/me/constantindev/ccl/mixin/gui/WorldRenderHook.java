@@ -2,7 +2,7 @@ package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.Freecam;
+import me.constantindev.ccl.module.RENDER.Freecam;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.LightmapTextureManager;

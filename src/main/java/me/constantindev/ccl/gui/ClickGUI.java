@@ -92,6 +92,7 @@ public class ClickGUI extends MinecraftGUI {
         int offset = 10 - 114;
         int offsetY = 10;
         for (MType type : MType.values()) {
+            if (type == MType.HIDDEN) continue;
             int maxW = 96;
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
