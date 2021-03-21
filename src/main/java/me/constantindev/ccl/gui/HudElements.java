@@ -3,7 +3,6 @@ package me.constantindev.ccl.gui;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
 import net.minecraft.client.font.TextRenderer;
