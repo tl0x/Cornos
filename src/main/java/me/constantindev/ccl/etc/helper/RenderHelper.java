@@ -10,14 +10,14 @@ import me.constantindev.ccl.etc.render.RenderableText;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.*;
-import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
+import net.minecraft.client.render.Camera;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.*;
-import org.lwjgl.opengl.GL11;
+import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3d;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -97,6 +97,7 @@ public class RenderHelper {
     }
 
     public static void drawImage(MatrixStack matrices, Identifier identifier, int x, int y, int imageWidth, int imageHeight) {
+
         RenderSystem.enableAlphaTest();
         RenderSystem.pushMatrix();
         RenderSystem.enableBlend();
@@ -108,58 +109,6 @@ public class RenderHelper {
         RenderSystem.disableAlphaTest();
         RenderSystem.disableBlend();
         RenderSystem.popMatrix();
-    }
-    public static void renderTracerLine(Vec3d pos, Color color, float lineWdith, float tickdelta) {
 
-        GL11.glPushMatrix();
-
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glEnable(GL11.GL_LINE_SMOOTH);
-        GL11.glLineWidth(lineWdith);
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glEnable(GL11.GL_CULL_FACE);
-        GL11.glDisable(GL11.GL_DEPTH_TEST);
-        GL11.glDisable(GL11.GL_LIGHTING);
-
-        Camera camera = BlockEntityRenderDispatcher.INSTANCE.camera;
-
-        GL11.glRotated(MathHelper.wrapDegrees(camera.getPitch()), 1, 0, 0);
-        GL11.glRotated(MathHelper.wrapDegrees(camera.getYaw() + 180.0), 0, 1, 0);
-
-        GL11.glTranslated(-camera.getPos().x, -camera.getPos().y, -camera.getPos().z);
-
-        Vec3d start = getClientLookVec().add(camera.getPos());
-
-        GL11.glColor4f(color.getRed()/255F, color.getGreen()/255F, color.getBlue()/255F, color.getAlpha()/255F);
-
-        GL11.glBegin(GL11.GL_LINES);
-        {
-            GL11.glVertex3d(start.x, start.y, start.z);
-            GL11.glVertex3d(pos.x, pos.y, pos.z);
-        }
-        GL11.glEnd();
-
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glDisable(GL11.GL_LINE_SMOOTH);
-
-        GL11.glPopMatrix();
-    }
-
-    public static Vec3d getClientLookVec()
-    {
-        ClientPlayerEntity player = Cornos.minecraft.player;
-        float f = 0.017453292F;
-        float pi = (float)Math.PI;
-
-        assert player != null;
-        float f1 = MathHelper.cos(-player.yaw * f - pi);
-        float f2 = MathHelper.sin(-player.yaw * f - pi);
-        float f3 = -MathHelper.cos(-player.pitch * f);
-        float f4 = MathHelper.sin(-player.pitch * f);
-
-        return new Vec3d(f2 * f3, f4, f1 * f3);
     }
 }

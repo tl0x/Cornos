@@ -13,6 +13,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class TickHook {
     @Inject(method = "tick", at = @At("HEAD"))
     public void tick(CallbackInfo ci) {
+        RenderHelper.BPQueue.clear();
+        RenderHelper.B1B2LQueue.clear();
+        RenderHelper.B1S1TQueue.clear();
         ModuleRegistry.getAll().forEach(m -> {
             m.updateVitals();
             if (m.isOn.isOn()) m.onExecute();

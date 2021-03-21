@@ -4,7 +4,6 @@ import me.constantindev.ccl.etc.config.Keybind;
 import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.config.Toggleable$1;
 import me.constantindev.ccl.etc.ms.MType;
-import net.minecraft.client.util.math.MatrixStack;
 
 public class Module {
     public final String name;
@@ -54,14 +53,6 @@ public class Module {
     }
 
     public void onDisable() {
-
-    }
-
-    public void onRender(MatrixStack matrices, float tickdelta) {
-
-    }
-
-    public void onPreRender(MatrixStack matrices, float tickdelta) {
 
     }
 
