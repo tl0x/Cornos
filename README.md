@@ -1,13 +1,12 @@
 # CornClient
 A small utility mod for Minecraft useful for a variety of tasks ranging from raiding to duping.
 
-<img src="https://img.shields.io/discord/819683133154000958?style=for-the-badge" /><br>
 <img src="https://img.shields.io/github/stars/AriliusClient/Cornos?color=000000&style=for-the-badge" /><br>
 <img src="https://img.shields.io/github/downloads/AriliusClient/Cornos/total?color=000000&style=for-the-badge&label=Downloads%20via%20releases">
 
 # Support
 
-Join the [discord](https://discord.gg/9ZwmhUDE5w) for support.
+Join the [guilded](https://www.guilded.gg/i/P2ZolzLk) for support.
 
 I will be sad if you don't, don't make me sad please. 
 

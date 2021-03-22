@@ -5,6 +5,7 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.config.Num;
+import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.exc.InvalidStateException;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
@@ -33,7 +34,7 @@ public class IngameRendererHook {
 
     @Inject(method = "render", at = @At("RETURN"))
     public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) throws InvalidStateException {
-
+        Hud hud = (Hud) ModuleRegistry.getByName("hud");
         double rgbMulti = ((Num) ModuleRegistry.getByName("hud").mconf.getByName("rgbSpeed")).getValue();
         long elapsed = System.currentTimeMillis() - latestTime;
         if (elapsed != 0) latestTime = System.currentTimeMillis();
@@ -73,28 +74,31 @@ public class IngameRendererHook {
         }
 
         if (ModuleRegistry.getByName("hud").isOn.isOn()) {
-            boolean doRgb = Hud.themeColor.isRainbow();
-            AtomicInteger offset = new AtomicInteger(1);
-            List<Module> ml = ModuleRegistry.getAll();
-            List<Module> mlR = new ArrayList<>();
-            ml.forEach(module -> {
-                if (module.isOn.isOn()) mlR.add(module);
-            });
-            mlR.sort(Comparator.comparingInt(o -> Cornos.minecraft.textRenderer.getWidth(o.name)));
-            List<Module> mlR1 = Lists.reverse(mlR);
-            if (lastValues.size() > mlR1.size()) {
-                lastValues.subList(0, 1).clear();
-            }
-            AtomicInteger current = new AtomicInteger(0);
-            mlR1.forEach(module -> {
-                int colorToUse;
-                try {
-                    colorToUse = lastValues.get(current.addAndGet(1));
-                } catch (Exception ignored) {
-                    colorToUse = Hud.themeColor.getRGB();
+
+            if (((Toggleable) hud.mconf.getByName("modules")).isEnabled()) {
+                boolean doRgb = Hud.themeColor.isRainbow();
+                AtomicInteger offset = new AtomicInteger(1);
+                List<Module> ml = ModuleRegistry.getAll();
+                List<Module> mlR = new ArrayList<>();
+                ml.forEach(module -> {
+                    if (module.isOn.isOn()) mlR.add(module);
+                });
+                mlR.sort(Comparator.comparingInt(o -> Cornos.minecraft.textRenderer.getWidth(o.name)));
+                List<Module> mlR1 = Lists.reverse(mlR);
+                if (lastValues.size() > mlR1.size()) {
+                    lastValues.subList(0, 1).clear();
                 }
-                Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 1, 1 + offset.getAndAdd(10), doRgb ? colorToUse : Hud.themeColor.getRGB());
-            });
+                AtomicInteger current = new AtomicInteger(0);
+                mlR1.forEach(module -> {
+                    int colorToUse;
+                    try {
+                        colorToUse = lastValues.get(current.addAndGet(1));
+                    } catch (Exception ignored) {
+                        colorToUse = Hud.themeColor.getRGB();
+                    }
+                    Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 1, 1 + offset.getAndAdd(10), doRgb ? colorToUse : Hud.themeColor.getRGB());
+                });
+            }
             ClientConfig.hudElements.render(matrices, tickDelta);
         }
         if (ModuleRegistry.getByName("TabGUI").isOn.isOn() && ClientConfig.tabGUI != null) {
