@@ -11,7 +11,6 @@ package me.constantindev.ccl.mixin;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.FastUse;
 import net.minecraft.client.MinecraftClient;
-import org.spongepowered.asm.mixin.Implements;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,11 +19,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftClient.class)
 public class ClientMixin {
-    @Shadow private int itemUseCooldown;
+    @Shadow
+    protected int attackCooldown;
+    @Shadow
+    private int itemUseCooldown;
 
-    @Shadow protected int attackCooldown;
-
-    @Inject(method="tick",at=@At("TAIL"))
+    @Inject(method = "tick", at = @At("TAIL"))
     public void tick(CallbackInfo ci) {
         FastUse fuse = (FastUse) ModuleRegistry.getByName("fast");
         if (!fuse.isOn.isOn()) return;

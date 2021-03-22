@@ -9,33 +9,23 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.gui;
 
 import com.mojang.authlib.Agent;
-import com.mojang.authlib.Environment;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import com.thealtening.auth.service.AlteningServiceType;
 import me.constantindev.ccl.etc.config.ClientConfig;
-import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.mixin.SessionAccessor;
 import me.constantindev.ccl.module.Alts;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.network.PlayerListEntry;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
-import net.minecraft.client.texture.AbstractTexture;
 import net.minecraft.client.util.Session;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.data.client.model.Texture;
 import net.minecraft.text.Text;
 
-import java.awt.*;
 import java.net.Proxy;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AltManagerScreen extends Screen {
     TextFieldWidget email;
@@ -43,6 +33,7 @@ public class AltManagerScreen extends Screen {
     TextFieldWidget emailpasswd;
     String errormsg = "";
     boolean hasSavedAlts = false;
+
     public AltManagerScreen() {
         super(Text.of("Cornos alt manager"));
     }
@@ -50,8 +41,8 @@ public class AltManagerScreen extends Screen {
     @Override
     protected void init() {
         ClientConfig.authentication.updateService(AlteningServiceType.MOJANG);
-        ButtonWidget w = new ButtonWidget(width-161,1,160,20,Text.of(ClientConfig.authentication.getService().equals(AlteningServiceType.THEALTENING)?"TheAltening":"Mojang"),button -> {
-            switch(button.getMessage().asString()) {
+        ButtonWidget w = new ButtonWidget(width - 161, 1, 160, 20, Text.of(ClientConfig.authentication.getService().equals(AlteningServiceType.THEALTENING) ? "TheAltening" : "Mojang"), button -> {
+            switch (button.getMessage().asString()) {
                 case "Mojang":
                     ClientConfig.authentication.updateService(AlteningServiceType.THEALTENING);
                     button.setMessage(Text.of("TheAltening"));
@@ -64,27 +55,27 @@ public class AltManagerScreen extends Screen {
                     break;
             }
         });
-        email = new TextFieldWidget(textRenderer,width/2-(200/2),height/2-(20/2)-35,200,20,Text.of("Email"));
+        email = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) - 35, 200, 20, Text.of("Email"));
         email.setMaxLength(1000);
-        passwd = new TextFieldWidget(textRenderer,width/2-(200/2),height/2-(20/2),200,20,Text.of("Password"));
+        passwd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2), 200, 20, Text.of("Password"));
         passwd.setMaxLength(1000);
-        emailpasswd = new TextFieldWidget(textRenderer,width/2-(200/2),height/2-(20/2)+35,200,20,Text.of("Username:password"));
+        emailpasswd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) + 35, 200, 20, Text.of("Username:password"));
         emailpasswd.setMaxLength(2000);
-        ButtonWidget login = new ButtonWidget(width/2-(120/2),height/2-(20/2)+60,120,20,Text.of("Login"),button -> {
-            YggdrasilUserAuthentication auth = (YggdrasilUserAuthentication) (new YggdrasilAuthenticationService(Proxy.NO_PROXY,"")).createUserAuthentication(Agent.MINECRAFT);
+        ButtonWidget login = new ButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 60, 120, 20, Text.of("Login"), button -> {
+            YggdrasilUserAuthentication auth = (YggdrasilUserAuthentication) (new YggdrasilAuthenticationService(Proxy.NO_PROXY, "")).createUserAuthentication(Agent.MINECRAFT);
             auth.setUsername(this.email.getText());
-            auth.setPassword(ClientConfig.authentication.getService().equals(AlteningServiceType.THEALTENING)?"CornosOnTOP":this.passwd.getText());
+            auth.setPassword(ClientConfig.authentication.getService().equals(AlteningServiceType.THEALTENING) ? "CornosOnTOP" : this.passwd.getText());
             try {
                 auth.logIn();
-                Session newS = new Session(auth.getSelectedProfile().getName(),auth.getSelectedProfile().getId().toString(),auth.getAuthenticatedToken(),"mojang");
-                errormsg = "§aSuccessfully logged in! Username: "+newS.getUsername();
+                Session newS = new Session(auth.getSelectedProfile().getName(), auth.getSelectedProfile().getId().toString(), auth.getAuthenticatedToken(), "mojang");
+                errormsg = "§aSuccessfully logged in! Username: " + newS.getUsername();
                 ((SessionAccessor) this.client).setSession(newS);
 
             } catch (Exception exc) {
-                errormsg = "§cSomething went wrong: "+exc.getMessage();
+                errormsg = "§cSomething went wrong: " + exc.getMessage();
             }
         });
-        ButtonWidget saveAlt = new ButtonWidget(width/2-(120/2),height/2-(20/2)+85,120,20,Text.of("Save alt"),button -> {
+        ButtonWidget saveAlt = new ButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 85, 120, 20, Text.of("Save alt"), button -> {
             String email = this.email.getText();
             String passwd = this.passwd.getText();
             if (email.isEmpty()) {
@@ -95,7 +86,7 @@ public class AltManagerScreen extends Screen {
                 this.errormsg = "§cPassword cannot be empty";
                 return;
             }
-            Alts.k.setValue(Alts.k.value+((char) 999)+encStr(email,6001)+((char) 998)+encStr(passwd,6000));
+            Alts.k.setValue(Alts.k.value + ((char) 999) + encStr(email, 6001) + ((char) 998) + encStr(passwd, 6000));
             this.client.openScreen(new AltManagerScreen());
         });
         this.addButton(login);
@@ -103,35 +94,35 @@ public class AltManagerScreen extends Screen {
         this.addButton(saveAlt);
 
         List<List<String>> goodalts = new ArrayList<>();
-        for(String s : Alts.k.value.substring(1).split(((char) 999)+"")) {
-            String[] keypair = s.split(((char) 998)+"");
+        for (String s : Alts.k.value.substring(1).split(((char) 999) + "")) {
+            String[] keypair = s.split(((char) 998) + "");
             if (keypair.length > 1) {
                 System.out.println(s);
                 List<String> bruh = new ArrayList<>();
-                bruh.add(encStr(keypair[0],-6001));
-                bruh.add(encStr(keypair[1],-6000));
+                bruh.add(encStr(keypair[0], -6001));
+                bruh.add(encStr(keypair[1], -6000));
                 goodalts.add(bruh);
             }
         }
         List<String> fal = new ArrayList<>();
         int offset = 55;
-        for(List<String> good : goodalts) {
+        for (List<String> good : goodalts) {
             hasSavedAlts = true;
-            fal.add(encStr(good.get(0),6001)+((char) 998)+encStr(good.get(1),6000));
-            ButtonWidget alt = new ButtonWidget(width-141,offset,140,20,Text.of(good.get(0)),button -> {
+            fal.add(encStr(good.get(0), 6001) + ((char) 998) + encStr(good.get(1), 6000));
+            ButtonWidget alt = new ButtonWidget(width - 141, offset, 140, 20, Text.of(good.get(0)), button -> {
                 this.email.setText(good.get(0));
                 this.passwd.setText(good.get(1));
             });
-            ButtonWidget delete = new ButtonWidget(width-141-21,offset,20,20,Text.of("X"),button -> {
-                 fal.remove(encStr(good.get(0),6001)+((char) 998)+encStr(good.get(1),6000));
-                 Alts.k.setValue("0"+String.join(((char) 999)+"",fal));
-                 this.client.openScreen(new AltManagerScreen());
+            ButtonWidget delete = new ButtonWidget(width - 141 - 21, offset, 20, 20, Text.of("X"), button -> {
+                fal.remove(encStr(good.get(0), 6001) + ((char) 998) + encStr(good.get(1), 6000));
+                Alts.k.setValue("0" + String.join(((char) 999) + "", fal));
+                this.client.openScreen(new AltManagerScreen());
             });
             offset += 25;
             this.addButton(alt);
             this.addButton(delete);
         }
-        Alts.k.setValue("0"+String.join(((char) 999)+"",fal));
+        Alts.k.setValue("0" + String.join(((char) 999) + "", fal));
 
         super.init();
     }
@@ -150,7 +141,7 @@ public class AltManagerScreen extends Screen {
 
     String encStr(String s2c, int off) {
         StringBuilder ret = new StringBuilder();
-        for(char c : s2c.toCharArray()) {
+        for (char c : s2c.toCharArray()) {
             ret.append((char) ((int) c + off));
         }
         return ret.toString();
@@ -159,15 +150,16 @@ public class AltManagerScreen extends Screen {
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
-        DrawableHelper.drawCenteredString(matrices,textRenderer,"Email",width/2,height/2-(20/2)-45,0xFFFFFF);
+        DrawableHelper.drawCenteredString(matrices, textRenderer, "Email", width / 2, height / 2 - (20 / 2) - 45, 0xFFFFFF);
         email.render(matrices, mouseX, mouseY, delta);
-        DrawableHelper.drawCenteredString(matrices,textRenderer,"Password",width/2,height/2-(20/2)-10,0xFFFFFF);
+        DrawableHelper.drawCenteredString(matrices, textRenderer, "Password", width / 2, height / 2 - (20 / 2) - 10, 0xFFFFFF);
         passwd.render(matrices, mouseX, mouseY, delta);
-        DrawableHelper.drawCenteredString(matrices,textRenderer,"Or email:password",width/2,height/2-(20/2)+25,0xFFFFFF);
+        DrawableHelper.drawCenteredString(matrices, textRenderer, "Or email:password", width / 2, height / 2 - (20 / 2) + 25, 0xFFFFFF);
         emailpasswd.render(matrices, mouseX, mouseY, delta);
-        if (hasSavedAlts) DrawableHelper.drawCenteredString(matrices,textRenderer,"Saved alts",width-80,40,0xFFFFFF);
+        if (hasSavedAlts)
+            DrawableHelper.drawCenteredString(matrices, textRenderer, "Saved alts", width - 80, 40, 0xFFFFFF);
         if (!errormsg.isEmpty()) {
-            textRenderer.draw(matrices,errormsg,1,1,0xFFFFFF);
+            textRenderer.draw(matrices, errormsg, 1, 1, 0xFFFFFF);
             //DrawableHelper.drawCenteredString(matrices,textRenderer,errormsg,width/2,height/2+30,0xFFFFFF);
         }
         super.render(matrices, mouseX, mouseY, delta);
@@ -175,7 +167,7 @@ public class AltManagerScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        email.mouseClicked(mouseX,mouseY,button);
+        email.mouseClicked(mouseX, mouseY, button);
         passwd.mouseClicked(mouseX, mouseY, button);
         emailpasswd.mouseClicked(mouseX, mouseY, button);
         return super.mouseClicked(mouseX, mouseY, button);

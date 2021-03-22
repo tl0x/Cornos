@@ -73,10 +73,10 @@ public class TabGUI extends DrawableHelper {
         drawTabs(matrices, delta);
         GL11.glPushMatrix();
         Color color = new Color(ClientConfig.latestRGBVal);
-        GL11.glColor4f(1,1,1,1);
-        GL11.glColor4f(color.getRed()/255F, color.getGreen()/255F, color.getBlue()/255F, color.getAlpha()/255F);
+        GL11.glColor4f(1, 1, 1, 1);
+        GL11.glColor4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
         RenderHelper.drawImage(matrices, rainbowLogo, 1, 1, 80, 18);
-        GL11.glColor4f(1,1,1,1);
+        GL11.glColor4f(1, 1, 1, 1);
         GL11.glPopMatrix();
     }
 

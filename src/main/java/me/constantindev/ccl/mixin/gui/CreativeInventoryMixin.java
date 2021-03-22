@@ -10,11 +10,8 @@ package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.gui.FunnyItemsScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,9 +24,9 @@ public class CreativeInventoryMixin extends Screen {
         super(Text.of(""));
     }
 
-    @Inject(method="init",at=@At("RETURN"))
+    @Inject(method = "init", at = @At("RETURN"))
     public void init(CallbackInfo ci) {
-        this.addButton(new ButtonWidget(1,1,120,20,Text.of("Funny items"),button -> {
+        this.addButton(new ButtonWidget(1, 1, 120, 20, Text.of("Funny items"), button -> {
             this.client.openScreen(new FunnyItemsScreen());
         }));
     }

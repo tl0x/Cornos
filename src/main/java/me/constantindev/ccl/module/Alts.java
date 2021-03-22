@@ -11,10 +11,10 @@ package me.constantindev.ccl.module;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.ms.MType;
-import org.objectweb.asm.tree.ModuleExportNode;
 
 public class Alts extends Module {
-    public static ModuleConfig.ConfigKey k = new ModuleConfig.ConfigKey("list","0");
+    public static ModuleConfig.ConfigKey k = new ModuleConfig.ConfigKey("list", "0");
+
     public Alts() {
         super("alts", "you are not supposed to look at this shit", MType.HIDDEN);
         this.mconf.add(k);

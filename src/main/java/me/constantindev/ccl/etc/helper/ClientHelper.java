@@ -22,6 +22,7 @@ public class ClientHelper {
         }
         return isValid;
     }
+
     public static void setField(Object t, String n1, String n2, Object value) {
         Field f;
         try {
@@ -33,9 +34,9 @@ public class ClientHelper {
                 return;
             }
         }
-        if(!f.isAccessible()) f.setAccessible(true);
+        if (!f.isAccessible()) f.setAccessible(true);
         try {
-            f.set(t,value);
+            f.set(t, value);
         } catch (Exception ignored) {
         }
     }

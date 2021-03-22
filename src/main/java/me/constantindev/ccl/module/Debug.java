@@ -12,8 +12,6 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.ms.MType;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import net.minecraft.item.Items;
 
 public class Debug extends Module {
     public Debug() {
@@ -22,7 +20,7 @@ public class Debug extends Module {
 
     @Override
     public void onExecute() {
-        ClientHelper.sendChat("[DEBUG] MinecraftClient.currentScreen = "+Cornos.minecraft.currentScreen);
+        ClientHelper.sendChat("[DEBUG] MinecraftClient.currentScreen = " + Cornos.minecraft.currentScreen);
         super.onExecute();
     }
 }

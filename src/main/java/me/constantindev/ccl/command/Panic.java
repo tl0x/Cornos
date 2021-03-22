@@ -3,8 +3,6 @@ package me.constantindev.ccl.command;
 import me.constantindev.ccl.etc.base.Command;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class Panic extends Command {
     public Panic() {

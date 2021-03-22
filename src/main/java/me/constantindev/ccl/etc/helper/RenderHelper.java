@@ -19,7 +19,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3d;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;

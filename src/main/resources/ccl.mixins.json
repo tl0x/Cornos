@@ -26,6 +26,7 @@
     "TimeUpdateS2CPacketHook",
     "XrayHandler",
     "gui.CreativeInventoryMixin",
+    "gui.EditGameRulesScreenMixin",
     "gui.EntryListWidgetMixin",
     "gui.FireOverlayReplacement",
     "gui.IngameRendererHook",

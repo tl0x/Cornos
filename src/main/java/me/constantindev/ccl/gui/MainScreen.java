@@ -24,10 +24,10 @@ public class MainScreen extends Screen {
 
     @Override
     protected void init() {
-        this.addButton(new ButtonWidget(width-125,height-175,120,20,Text.of("Alts"),button -> {
+        this.addButton(new ButtonWidget(width - 125, height - 175, 120, 20, Text.of("Alts"), button -> {
             this.client.openScreen(new AltManagerScreen());
         }));
-        this.addButton(new ButtonWidget(width-125,height-150,120,20,Text.of("Click GUI"), button -> {
+        this.addButton(new ButtonWidget(width - 125, height - 150, 120, 20, Text.of("Click GUI"), button -> {
             ModuleRegistry.getByName("clickgui").onEnable();
         }));
         this.addButton(new ButtonWidget(width - 125, height - 125, 120, 20, Text.of("Settings"), (b) -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));

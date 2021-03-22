@@ -17,13 +17,31 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(net.minecraft.network.packet.s2c.play.WorldTimeUpdateS2CPacket.class)
 public class TimeUpdateS2CPacketHook {
-    long lastRecv = 0;
-    double calcTps(double n) {
-        return (20/Math.max((n-1)/.5,1));
+    boolean calledAlready = false;
+
+    double roundToDecPlace(double i, int n) {
+        return (Math.round(i * n) / (double) n);
     }
-    @Inject(method="apply",at=@At("HEAD"))
+
+    double calcTps(double n) {
+        return (20.0 / Math.max((n - 1000.0) / (500.0), 1.0));
+    }
+
+    @Inject(method = "apply", at = @At("HEAD"))
     public void received(ClientPlayPacketListener clientPlayPacketListener, CallbackInfo ci) {
-        HudElements.tps = calcTps(System.currentTimeMillis()-lastRecv)+" (Last time update: "+(System.currentTimeMillis()-lastRecv)+" ns)";
-        lastRecv = System.currentTimeMillis();
+        if (calledAlready) return;
+        calledAlready = true;
+        double current = roundToDecPlace(calcTps(System.currentTimeMillis() - HudElements.lastRecv), 2);
+        HudElements.minAvg.add(current);
+        while (HudElements.minAvg.size() > 60) {
+            HudElements.minAvg.subList(0, 1).clear();
+        }
+        double avg = 0.0;
+        for (double d : HudElements.minAvg) {
+            avg += d;
+        }
+        avg /= HudElements.minAvg.size();
+        HudElements.tps = current + ", Last 60 average: " + avg;
+        HudElements.lastRecv = System.currentTimeMillis();
     }
 }

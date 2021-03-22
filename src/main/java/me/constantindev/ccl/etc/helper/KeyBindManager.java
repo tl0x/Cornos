@@ -3,8 +3,6 @@ package me.constantindev.ccl.etc.helper;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.ms.KeyBind;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.mixin.ChatHook;
-import net.minecraft.client.gui.screen.ChatScreen;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.HashMap;
