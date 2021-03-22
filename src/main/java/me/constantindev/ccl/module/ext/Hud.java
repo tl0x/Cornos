@@ -20,6 +20,7 @@ public class Hud extends Module {
         this.mconf.add(new Toggleable("coords", true));
         this.mconf.add(new Toggleable("effects", true));
         this.mconf.add(new Toggleable("time", true));
+        this.mconf.add(new Toggleable("tps", true));
         themeColor.setRainbow(true);
     }
     // Logic: IngameRenderHook.java

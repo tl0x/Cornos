@@ -23,6 +23,7 @@
     "SignBlockMixin",
     "SignEditorOpenS2CPacketHook",
     "TickHook",
+    "TimeUpdateS2CPacketHook",
     "XrayHandler",
     "gui.CreativeInventoryMixin",
     "gui.EntryListWidgetMixin",

@@ -11,12 +11,13 @@ package me.constantindev.ccl.module;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.item.Items;
 
 public class Debug extends Module {
     public Debug() {
-        super("Debug", "uhh");
+        super("Debug", "uhh", MType.HIDDEN);
     }
 
     @Override

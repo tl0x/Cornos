@@ -3,6 +3,7 @@ package me.constantindev.ccl.gui;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.config.Toggleable;
+import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
 import net.minecraft.client.font.TextRenderer;
@@ -14,6 +15,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 import java.awt.*;
@@ -22,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class HudElements extends DrawableHelper {
-
+    public static String tps = "Calculating...";
     private final DateFormat dateFormat = new SimpleDateFormat("h:mm aa");
 
     public void render(MatrixStack matrices, float delta) {
@@ -32,8 +34,12 @@ public class HudElements extends DrawableHelper {
         TextRenderer textRenderer = Cornos.minecraft.textRenderer;
 
         if (((Toggleable) hud.mconf.getByName("fps")).isEnabled()) {
-            drawTextWithShadow(matrices, textRenderer, new LiteralText("FPS:"), 2, Cornos.minecraft.getWindow().getScaledHeight() - (Cornos.minecraft.currentScreen instanceof ChatScreen ? 34 : 20), ClientConfig.latestRGBVal);
-            drawTextWithShadow(matrices, textRenderer, new LiteralText(" " + Cornos.minecraft.fpsDebugString.split(" ")[0]), 2 + textRenderer.getWidth(new LiteralText("FPS:")), Cornos.minecraft.getWindow().getScaledHeight() - (Cornos.minecraft.currentScreen instanceof ChatScreen ? 34 : 20), Color.LIGHT_GRAY.getRGB());
+            drawTextWithShadow(matrices, textRenderer, new LiteralText("FPS:"), 2, Cornos.minecraft.getWindow().getScaledHeight() - (Cornos.minecraft.currentScreen instanceof ChatScreen ? 44 : 30), ClientConfig.latestRGBVal);
+            drawTextWithShadow(matrices, textRenderer, new LiteralText(" " + Cornos.minecraft.fpsDebugString.split(" ")[0]), 2 + textRenderer.getWidth(new LiteralText("FPS:")), Cornos.minecraft.getWindow().getScaledHeight() - (Cornos.minecraft.currentScreen instanceof ChatScreen ? 44 : 30), Color.LIGHT_GRAY.getRGB());
+        }
+        if (((Toggleable) hud.mconf.getByName("tps")).isEnabled()) {
+            drawTextWithShadow(matrices, textRenderer, new LiteralText("TPS:"), 2, Cornos.minecraft.getWindow().getScaledHeight() - (Cornos.minecraft.currentScreen instanceof ChatScreen ? 34 : 20), ClientConfig.latestRGBVal);
+            drawTextWithShadow(matrices, textRenderer, new LiteralText(" " + tps), 2 + textRenderer.getWidth(new LiteralText("FPS:")), Cornos.minecraft.getWindow().getScaledHeight() - (Cornos.minecraft.currentScreen instanceof ChatScreen ? 34 : 20), Color.LIGHT_GRAY.getRGB());
         }
         if (((Toggleable) hud.mconf.getByName("coords")).isEnabled()) {
             drawTextWithShadow(matrices, textRenderer, new LiteralText("XYZ:"), 2, Cornos.minecraft.getWindow().getScaledHeight() - (Cornos.minecraft.currentScreen instanceof ChatScreen ? 24 : 10), ClientConfig.latestRGBVal);
