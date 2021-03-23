@@ -18,11 +18,11 @@ public class HUDClickGUI extends ClickGUI implements Toggleable {
     /**
      * List of all components.
      */
-    protected List<FixedComponent> allComponents = new ArrayList<FixedComponent>();
+    protected List<FixedComponent> allComponents = new ArrayList<>();
     /**
      * List of HUD components.
      */
-    protected List<FixedComponent> hudComponents = new ArrayList<FixedComponent>();
+    protected List<FixedComponent> hudComponents = new ArrayList<>();
     /**
      * Whether the GUI components are shown or not.
      */

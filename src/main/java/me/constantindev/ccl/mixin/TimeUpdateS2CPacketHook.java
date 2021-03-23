@@ -20,7 +20,8 @@ public class TimeUpdateS2CPacketHook {
     boolean calledAlready = false;
 
     double roundToDecPlace(double i, int n) {
-        return (Math.round(i * n) / (double) n);
+        double mtp = Math.pow(10, n);
+        return (Math.round(i * mtp) / mtp);
     }
 
     double calcTps(double n) {

@@ -49,7 +49,7 @@ public class TabGUIContainer implements TabGUIComponent {
     public TabGUIContainer(String title, TabGUIRenderer renderer, Animation animation) {
         this.title = title;
         this.renderer = renderer;
-        components = new ArrayList<TabGUIComponent>();
+        components = new ArrayList<>();
         if (animation != null) {
             animation.initValue(selected);
             selectedAnimation = animation;

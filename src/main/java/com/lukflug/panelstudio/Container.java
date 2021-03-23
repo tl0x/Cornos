@@ -29,7 +29,7 @@ public class Container extends FocusableComponent {
      */
     public Container(String title, String description, Renderer renderer) {
         super(title, description, renderer);
-        components = new ArrayList<Component>();
+        components = new ArrayList<>();
     }
 
     /**

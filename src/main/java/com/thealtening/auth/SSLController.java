@@ -59,6 +59,7 @@ public final class SSLController {
             e.printStackTrace();
         }
 
+        assert sc != null;
         this.allTrustingFactory = sc.getSocketFactory();
         this.originalFactory = HttpsURLConnection.getDefaultSSLSocketFactory();
         this.originalHostVerifier = HttpsURLConnection.getDefaultHostnameVerifier();

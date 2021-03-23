@@ -17,11 +17,11 @@ public class ClickGUI implements PanelManager {
      * List of direct child components (i.e. panels).
      * The must all be {@link FixedComponent}.
      */
-    protected List<FixedComponent> components = new ArrayList<FixedComponent>();
+    protected List<FixedComponent> components = new ArrayList<>();
     /**
      * List of permanent components.
      */
-    protected List<FixedComponent> permanentComponents = new ArrayList<FixedComponent>();
+    protected List<FixedComponent> permanentComponents = new ArrayList<>();
     /**
      * The {@link Interface} to be used by the GUI.
      */
@@ -80,10 +80,7 @@ public class ClickGUI implements PanelManager {
      * Render the GUI (lowest component first, highest component last).
      */
     public void render() {
-        List<FixedComponent> components = new ArrayList<FixedComponent>();
-        for (FixedComponent component : this.components) {
-            components.add(component);
-        }
+        List<FixedComponent> components = new ArrayList<>(this.components);
         Context descriptionContext = null;
         int highest = 0;
         FixedComponent focusComponent = null;
@@ -217,10 +214,7 @@ public class ClickGUI implements PanelManager {
      * @param function the function to execute in the loop
      */
     protected void doComponentLoop(LoopFunction function) {
-        List<FixedComponent> components = new ArrayList<FixedComponent>();
-        for (FixedComponent component : this.components) {
-            components.add(component);
-        }
+        List<FixedComponent> components = new ArrayList<>(this.components);
         boolean highest = true;
         FixedComponent focusComponent = null;
         for (int i = components.size() - 1; i >= 0; i--) {
