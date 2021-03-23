@@ -10,14 +10,16 @@ import me.constantindev.ccl.etc.render.RenderableText;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.*;
+import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -55,43 +57,58 @@ public class RenderHelper {
         entityVertexConsumers.draw(RenderType.OVERLAY_LINES);
     }
 
-    public static void renderLine(Vec3d from, Vec3d to, Color col, MatrixStack matrices, Camera camera) {
-        Vec3d cameraPos = camera.getPos();
-        VertexConsumerProvider.Immediate entityVertexConsumers = Cornos.minecraft.getBufferBuilders().getEntityVertexConsumers();
-        VertexConsumer builder = entityVertexConsumers.getBuffer(RenderType.OVERLAY_LINES);
+    public static void renderLine(Vec3d from, Vec3d to, Color col, int width) {
+        Camera c = BlockEntityRenderDispatcher.INSTANCE.camera;
+        GL11.glPushMatrix();
 
-        matrices.push();
-        matrices.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
-        Matrix4f m = matrices.peek().getModel();
-        builder.vertex(m, (float) from.x, (float) from.y, (float) from.z).color(col.getRed(), col.getGreen(), col.getBlue(), col.getAlpha()).next();
-        builder.vertex(m, (float) to.x, (float) to.y, (float) to.z).color(col.getRed(), col.getGreen(), col.getBlue(), col.getAlpha()).next();
-        RenderSystem.disableDepthTest();
-        matrices.pop();
-        entityVertexConsumers.draw(RenderType.OVERLAY_LINES);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glLineWidth(width);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_CULL_FACE);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glRotated(MathHelper.wrapDegrees(c.getPitch()), 1, 0, 0);
+        GL11.glRotated(MathHelper.wrapDegrees(c.getYaw() + 180.0), 0, 1, 0);
+        GL11.glTranslated(-c.getPos().x, -c.getPos().y, -c.getPos().z);
+
+        GL11.glColor4f(col.getRed()/255F, col.getGreen()/255F, col.getBlue()/255F, col.getAlpha()/255F);
+
+        GL11.glBegin(GL11.GL_LINES);
+        {
+            GL11.glVertex3d(from.x, from.y, from.z);
+            GL11.glVertex3d(to.x, to.y, to.z);
+        }
+        GL11.glEnd();
+
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+
+        GL11.glPopMatrix();
     }
+    public static Vec3d getClientLookVec()
+    {
+        ClientPlayerEntity player = Cornos.minecraft.player;
+        double f = 0.017453292;
+        double pi = Math.PI;
 
-    public static void drawText(Vec3d pos, Color col, MatrixStack matrices, Camera camera, String text, Vec2d size) {
-        Vec3d cameraPos = camera.getPos();
-        matrices.push();
-        matrices.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
-        matrices.translate(pos.x, pos.y, pos.z);
-        matrices.scale(1, -1, 1);
-        matrices.scale(0.1f, 0.1f, 0.1f);
-        matrices.scale((float) size.x, (float) size.y, 1);
-        //Cornos.minecraft.textRenderer.draw(matrices,text,0,0,col.getRGB());
-        DrawableHelper.drawCenteredString(matrices, MinecraftClient.getInstance().textRenderer, text, 0, 0, col.getRGB());
-        matrices.scale(-1, 1, -1);
-        DrawableHelper.drawCenteredString(matrices, MinecraftClient.getInstance().textRenderer, text, 0, 0, col.getRGB());
-        RenderSystem.disableDepthTest();
-        matrices.pop();
+        assert player != null;
+        double f1 = Math.cos(-player.yaw * f - pi);
+        double f2 = Math.sin(-player.yaw * f - pi);
+        double f3 = -Math.cos(-player.pitch * f);
+        double f4 = Math.sin(-player.pitch * f);
+
+        return new Vec3d(f2 * f3, f4, f1 * f3);
     }
-
     private static void renderBlockBounding(MatrixStack matrices, Vec3d dim, VertexConsumer builder, Vec3d bp, float r, float g, float b, float a) {
         if (bp == null) {
             return;
         }
-        final float x = (float) bp.getX(), y = (float) bp.getY(), z = (float) bp.getZ();
-
+        final double x = bp.getX(), y = bp.getY(), z = bp.getZ();
+        //MinecraftClient.getInstance().gameRenderer.render();
         WorldRenderer.drawBox(matrices, builder, x, y, z, x + dim.x, y + dim.y, z + dim.z, r, g, b, a);
     }
 

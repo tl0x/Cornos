@@ -51,7 +51,7 @@ public class QuickMove extends Module {
         for (ColoredBlockEntry bp : bpl) {
             if (latest == null) latest = bp;
             Color c = bp.c;
-            RenderHelper.addToQueue(new RenderableLine(latest.bp, bp.bp, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha()));
+            RenderHelper.addToQueue(new RenderableLine(latest.bp, bp.bp, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha(), 2));
             latest = bp;
         }
         counter++;

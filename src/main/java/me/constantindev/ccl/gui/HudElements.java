@@ -8,6 +8,7 @@ import me.constantindev.ccl.module.ext.Hud;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.ChatScreen;
+import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectType;
@@ -45,10 +46,12 @@ public class HudElements extends DrawableHelper {
                     Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
         }
         if (((Toggleable) hud.mconf.getByName("ping")).isEnabled() && !chatOpen) {
+            if (Cornos.minecraft.getNetworkHandler() == null || Cornos.minecraft.player == null) return;
+            PlayerListEntry ple = Cornos.minecraft.getNetworkHandler().getPlayerListEntry(Cornos.minecraft.player.getUuid());
             offset += 10;
             drawTextWithShadow(matrices, textRenderer, new LiteralText("Ping:"),
                     2, Cornos.minecraft.getWindow().getScaledHeight() - (offset), ClientConfig.latestRGBVal);
-            drawTextWithShadow(matrices, textRenderer, new LiteralText(" " + Cornos.minecraft.getNetworkHandler().getPlayerListEntry(Cornos.minecraft.player.getUuid()).getLatency() + " ms"),
+            drawTextWithShadow(matrices, textRenderer, new LiteralText(" " + (ple == null?"?":ple.getLatency()) + " ms"),
                     2 + textRenderer.getWidth(new LiteralText("Ping:")),
                     Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
         }

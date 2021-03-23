@@ -27,6 +27,7 @@ public class CreativeInventoryMixin extends Screen {
     @Inject(method = "init", at = @At("RETURN"))
     public void init(CallbackInfo ci) {
         this.addButton(new ButtonWidget(1, 1, 120, 20, Text.of("Funny items"), button -> {
+            if (this.client == null) return;
             this.client.openScreen(new FunnyItemsScreen());
         }));
     }

@@ -20,8 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MinecraftClient.class)
 public class ClientMixin {
     @Shadow
-    protected int attackCooldown;
-    @Shadow
     private int itemUseCooldown;
 
     @Inject(method = "tick", at = @At("TAIL"))

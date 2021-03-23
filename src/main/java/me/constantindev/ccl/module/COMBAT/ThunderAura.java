@@ -70,7 +70,7 @@ public class ThunderAura extends Module {
                 }
             }
             //if (Cornos.minecraft.player.getAir() == 0) Cornos.minecraft.player.jump();
-            rlCurrent = new RenderableLine(playerP, new Vec3d(attv.x, coordZ, attv.z), 255, 50, 50, 255);
+            rlCurrent = new RenderableLine(playerP, new Vec3d(attv.x, coordZ, attv.z), 255, 50, 50, 255, 2);
             Cornos.minecraft.player.updatePosition(attv.x, coordZ, attv.z);
 
             //ClientHelper.sendChat(attv.x+", "+coordZ+", "+attv.z);

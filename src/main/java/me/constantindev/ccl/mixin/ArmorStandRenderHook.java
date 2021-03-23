@@ -11,7 +11,6 @@ package me.constantindev.ccl.mixin;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.decoration.ArmorStandEntity;
@@ -21,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntityRenderer.class)
-public class ArmorStandRenderHook<T extends LivingEntity, M extends EntityModel<T>> {
+public class ArmorStandRenderHook<T extends LivingEntity> {
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void render(T livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
         if (livingEntity instanceof ArmorStandEntity && ModuleRegistry.getByName("NoStandRender").isOn.isOn())

@@ -50,11 +50,11 @@ public class Raycast {
                 passes = true;
                 if (!visualize) break;
                 if (last != null) {
-                    lastVisualization.add(new RenderableLine(last, current, 255, 50, 50, 255));
+                    lastVisualization.add(new RenderableLine(last, current, 255, 50, 50, 255, 2));
                 }
             } else {
                 if (last != null) {
-                    lastVisualization.add(new RenderableLine(last, current, 50, 255, 50, 255));
+                    lastVisualization.add(new RenderableLine(last, current, 50, 255, 50, 255,2 ));
                 }
             }
             for (RenderableLine line : lastVisualization) {

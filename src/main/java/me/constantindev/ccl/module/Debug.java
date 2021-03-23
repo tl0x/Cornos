@@ -12,6 +12,8 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.ms.MType;
+import net.minecraft.client.render.Camera;
+import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 
 public class Debug extends Module {
     public Debug() {
@@ -20,7 +22,10 @@ public class Debug extends Module {
 
     @Override
     public void onExecute() {
-        ClientHelper.sendChat("[DEBUG] MinecraftClient.currentScreen = " + Cornos.minecraft.currentScreen);
+        ClientHelper.sendChat("[D] MinecraftClient.currentScreen = " + Cornos.minecraft.currentScreen);
+        Camera c = BlockEntityRenderDispatcher.INSTANCE.camera;
+        ClientHelper.sendChat("[D] Camera: "+c);
+        ClientHelper.sendChat("[D] CameraRot: "+c.getRotation());
         super.onExecute();
     }
 }

@@ -1,5 +1,6 @@
 package me.constantindev.ccl.mixin;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
@@ -18,7 +19,10 @@ public class TickHook {
         RenderHelper.B1S1TQueue.clear();
         ModuleRegistry.getAll().forEach(m -> {
             m.updateVitals();
-            if (m.isOn.isOn()) m.onExecute();
+            if (Cornos.minecraft.player == null) return; // so this mf will stop complaining
+            try {
+                if (m.isOn.isOn()) m.onExecute();
+            } catch (Exception ignored) {}
         });
         KeyBindManager.tick();
 

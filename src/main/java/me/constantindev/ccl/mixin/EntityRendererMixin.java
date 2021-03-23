@@ -23,10 +23,6 @@ public abstract class EntityRendererMixin<T extends Entity> {
     @Shadow
     @Final
     protected EntityRenderDispatcher dispatcher;
-    private float scale;
-
-    @Shadow
-    public abstract TextRenderer getFontRenderer();
 
     @Inject(at = {@At("HEAD")}, method = "renderLabelIfPresent", cancellable = true)
     private void onRenderLabel(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {

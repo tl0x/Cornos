@@ -41,6 +41,7 @@ public class ByteSizeViewerHandler {
             }
             float fs = 0;
             for (String key : ct.getKeys()) {
+                if (ct.get(key) == null) continue;
                 fs += key.length();
                 fs += ct.get(key).copy().toString().length();
             }

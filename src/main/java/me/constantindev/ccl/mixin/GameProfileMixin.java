@@ -21,12 +21,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LoginHelloC2SPacket.class)
 public abstract class GameProfileMixin {
 
-    @Shadow
-    private GameProfile profile;
-
-    @Shadow
-    public abstract GameProfile getProfile();
-
     @Inject(method = "write", cancellable = true, at = @At("HEAD"))
     public void gid(PacketByteBuf buf, CallbackInfo ci) {
         if (ModuleRegistry.getByName("logincrash").isOn.isOn()) {

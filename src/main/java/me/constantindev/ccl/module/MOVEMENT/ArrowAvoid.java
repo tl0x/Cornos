@@ -50,7 +50,7 @@ public class ArrowAvoid extends Module {
                 bl.add(current);
                 boolean intc = playerHB.intersects(current);
                 if (prevPos != null) {
-                    RenderableLine rl = new RenderableLine(prevPos, nextPos, intc ? 255 : 100, intc ? 50 : 255, 50, 255);
+                    RenderableLine rl = new RenderableLine(prevPos, nextPos, intc ? 255 : 100, intc ? 50 : 255, 50, 255, 2);
                     RenderHelper.addToQueue(rl);
                 }
                 prevPos = nextPos;
