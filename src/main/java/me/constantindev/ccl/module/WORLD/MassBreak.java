@@ -6,6 +6,7 @@ import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.apache.logging.log4j.Level;
@@ -22,12 +23,9 @@ public class MassBreak extends Module {
     public void onExecute() {
         int rad = (int) ((Num) this.mconf.getByName("radius")).getValue();
         BlockPos latest;
-        try {
-            assert Cornos.minecraft.crosshairTarget != null;
+            if(Cornos.minecraft.crosshairTarget == null) return;
+            if (!Cornos.minecraft.crosshairTarget.getType().equals(HitResult.Type.BLOCK)) return;
             latest = ((BlockHitResult) Cornos.minecraft.crosshairTarget).getBlockPos();
-        } catch (Exception ignored) {
-            return;
-        }
         if (Cornos.minecraft.options.keyAttack.isPressed()) {
             Cornos.log(Level.INFO, "bruh");
             for (int x = 0; x < rad; x++) {

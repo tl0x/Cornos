@@ -20,7 +20,6 @@ public class AutoTool extends Module {
             if (!(Cornos.minecraft.crosshairTarget instanceof BlockHitResult)) return;
             BlockHitResult r = ((BlockHitResult) Cornos.minecraft.crosshairTarget);
             BlockPos b = r.getBlockPos();
-            assert Cornos.minecraft.player != null;
             BlockState bstate = Cornos.minecraft.player.world.getBlockState(b);
             PlayerInventory pinv = Cornos.minecraft.player.inventory;
             float best = 1f;

@@ -66,6 +66,7 @@ public class QuickMove extends Module {
     @Override
     public void onDisable() {
         new Thread(() -> {
+            if (Cornos.minecraft.player == null) return;
             Cornos.minecraft.player.setNoGravity(true);
             for (ColoredBlockEntry bp : bpl) {
                 try {
@@ -74,7 +75,7 @@ public class QuickMove extends Module {
                     e.printStackTrace();
                 }
                 if (Cornos.minecraft.getNetworkHandler() == null) break;
-                assert Cornos.minecraft.player != null;
+                if (Cornos.minecraft.player == null) continue;
                 Cornos.minecraft.player.updatePosition(bp.bp.getX(), bp.bp.getY(), bp.bp.getZ());
 
             }

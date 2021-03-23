@@ -30,6 +30,7 @@ public class AutoSign extends Module {
             PacketApplyEvent PE = (PacketApplyEvent) event;
             if (PE.packet instanceof SignEditorOpenS2CPacket && parent.isOn.isOn()) {
                 event.cancel();
+                if (Cornos.minecraft.getNetworkHandler() == null) return;
                 SignEditorOpenS2CPacket p = (SignEditorOpenS2CPacket) PE.packet;
                 String[] lines = new String[4];
                 switch (type.value) {

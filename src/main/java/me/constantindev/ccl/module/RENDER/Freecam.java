@@ -19,14 +19,13 @@ public class Freecam extends Module {
     @Override
     public void onEnable() {
         currentOffset = new Vec3d(0, 0, 0);
-        assert Cornos.minecraft.player != null;
+        if (Cornos.minecraft.player == null) return;
         startloc = Cornos.minecraft.player.getPos();
         super.onEnable();
     }
 
     @Override
     public void onExecute() {
-        assert Cornos.minecraft.player != null;
         Cornos.minecraft.player.setVelocity(0, 0, 0);
         Cornos.minecraft.player.updatePosition(startloc.x, startloc.y, startloc.z);
         if (Cornos.minecraft.currentScreen == null) {

@@ -57,9 +57,7 @@ public class Cornos implements ModInitializer {
                 }
             }
         });
-        ClientConfig.authentication = TheAlteningAuthentication.mojang(yggdrasilEnvironment -> {
-
-        });
+        ClientConfig.authentication = TheAlteningAuthentication.mojang(yggdrasilEnvironment -> {});
         fastUpdater.start();
 
     }

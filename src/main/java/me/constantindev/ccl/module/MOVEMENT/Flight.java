@@ -34,7 +34,10 @@ public class Flight extends Module {
 
     @Override
     public void onExecute() {
-        if (abilitiesBefore == null) abilitiesBefore = Cornos.minecraft.player.abilities;
+        if (abilitiesBefore == null) {
+            assert Cornos.minecraft.player != null;
+            abilitiesBefore = Cornos.minecraft.player.abilities;
+        }
         double speed = ((Num) this.mconf.getByName("speed")).getValue();
         counter1++;
         if (counter1 > 10) {

@@ -27,6 +27,7 @@ public class NoFall extends Module {
     @Override
     public void onExecute() {
         // bruh moment #2
+        if (Cornos.minecraft.player == null) return;
         if (Cornos.minecraft.player.fallDistance >= fallDistance.getValue())
             Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(new PlayerMoveC2SPacket(true));
         super.onExecute();

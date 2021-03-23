@@ -24,8 +24,8 @@ public class Debug extends Module {
     public void onExecute() {
         ClientHelper.sendChat("[D] MinecraftClient.currentScreen = " + Cornos.minecraft.currentScreen);
         Camera c = BlockEntityRenderDispatcher.INSTANCE.camera;
-        ClientHelper.sendChat("[D] Camera: "+c);
-        ClientHelper.sendChat("[D] CameraRot: "+c.getRotation());
+        ClientHelper.sendChat("[D] Camera: " + c);
+        ClientHelper.sendChat("[D] CameraRot: " + c.getRotation());
         super.onExecute();
     }
 }

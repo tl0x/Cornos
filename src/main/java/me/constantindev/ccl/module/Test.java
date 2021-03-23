@@ -9,6 +9,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.etc.base.Module;
+import me.constantindev.ccl.etc.ms.MType;
 import net.fabricmc.fabric.api.renderer.v1.RendererAccess;
 import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
 import net.minecraft.client.util.math.Vector3f;
@@ -17,15 +18,11 @@ import java.util.Objects;
 
 public class Test extends Module {
     public Test() {
-        super("TestModule", "Poggê");
+        super("TestModule", "Poggê", MType.HIDDEN);
     }
 
     @Override
     public void onExecute() {
-        QuadEmitter qe = Objects.requireNonNull(RendererAccess.INSTANCE.getRenderer()).meshBuilder().getEmitter();
-        qe.pos(0, new Vector3f(0, 0, 0))
-                .pos(0, new Vector3f(1, 1, 1)).emit();
-
         super.onExecute();
     }
 }

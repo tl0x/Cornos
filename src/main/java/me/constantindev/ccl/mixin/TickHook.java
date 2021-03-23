@@ -22,7 +22,8 @@ public class TickHook {
             if (Cornos.minecraft.player == null) return; // so this mf will stop complaining
             try {
                 if (m.isOn.isOn()) m.onExecute();
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         });
         KeyBindManager.tick();
 

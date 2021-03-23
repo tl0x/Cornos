@@ -17,7 +17,6 @@ public class ShiftTp extends Module {
     public void onExecute() {
         int mtp = (int) ((Num) this.mconf.getByName("multiplier")).getValue();
         if (Cornos.minecraft.options.keySneak.wasPressed()) {
-            assert Cornos.minecraft.player != null;
             Vec3d pos = Cornos.minecraft.player.getPos();
             Vec3d rot = Cornos.minecraft.player.getRotationVector();
             rot = rot.multiply(1, 0, 1);

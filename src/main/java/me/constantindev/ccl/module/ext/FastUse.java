@@ -31,6 +31,8 @@ public class FastUse extends Module {
     public void onExecute() {
         if (nbd.isEnabled()) {
             if (Cornos.minecraft.options.keyAttack.isPressed()) {
+                if (Cornos.minecraft.crosshairTarget == null) return;
+                if (Cornos.minecraft.getNetworkHandler() == null) return;
                 if (Cornos.minecraft.crosshairTarget.getType().equals(HitResult.Type.BLOCK)) {
                     BlockHitResult bhr = (BlockHitResult) Cornos.minecraft.crosshairTarget;
                     PlayerActionC2SPacket p = new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, bhr.getBlockPos(), Direction.DOWN);

@@ -51,7 +51,7 @@ public class HudElements extends DrawableHelper {
             offset += 10;
             drawTextWithShadow(matrices, textRenderer, new LiteralText("Ping:"),
                     2, Cornos.minecraft.getWindow().getScaledHeight() - (offset), ClientConfig.latestRGBVal);
-            drawTextWithShadow(matrices, textRenderer, new LiteralText(" " + (ple == null?"?":ple.getLatency()) + " ms"),
+            drawTextWithShadow(matrices, textRenderer, new LiteralText(" " + (ple == null ? "?" : ple.getLatency()) + " ms"),
                     2 + textRenderer.getWidth(new LiteralText("Ping:")),
                     Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
         }

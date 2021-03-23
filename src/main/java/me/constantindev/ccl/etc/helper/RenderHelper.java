@@ -1,23 +1,21 @@
 package me.constantindev.ccl.etc.helper;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.sun.javafx.geom.Vec2d;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.render.RenderType;
 import me.constantindev.ccl.etc.render.RenderableBlock;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import me.constantindev.ccl.etc.render.RenderableText;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.Camera;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
@@ -73,7 +71,7 @@ public class RenderHelper {
         GL11.glRotated(MathHelper.wrapDegrees(c.getYaw() + 180.0), 0, 1, 0);
         GL11.glTranslated(-c.getPos().x, -c.getPos().y, -c.getPos().z);
 
-        GL11.glColor4f(col.getRed()/255F, col.getGreen()/255F, col.getBlue()/255F, col.getAlpha()/255F);
+        GL11.glColor4f(col.getRed() / 255F, col.getGreen() / 255F, col.getBlue() / 255F, col.getAlpha() / 255F);
 
         GL11.glBegin(GL11.GL_LINES);
         {
@@ -89,8 +87,8 @@ public class RenderHelper {
 
         GL11.glPopMatrix();
     }
-    public static Vec3d getClientLookVec()
-    {
+
+    public static Vec3d getClientLookVec() {
         ClientPlayerEntity player = Cornos.minecraft.player;
         double f = 0.017453292;
         double pi = Math.PI;
@@ -103,6 +101,7 @@ public class RenderHelper {
 
         return new Vec3d(f2 * f3, f4, f1 * f3);
     }
+
     private static void renderBlockBounding(MatrixStack matrices, Vec3d dim, VertexConsumer builder, Vec3d bp, float r, float g, float b, float a) {
         if (bp == null) {
             return;

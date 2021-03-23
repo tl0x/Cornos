@@ -6,9 +6,7 @@ A small utility mod for Minecraft useful for a variety of tasks ranging from rai
 
 # Support
 
-Join the [guilded](https://www.guilded.gg/i/P2ZolzLk) for support.
-
-I will be sad if you don't, don't make me sad please. 
+You can open an issue for help or feature requests. If that is not the right thing for you, you can DM 0x150#9893 on discord.
 
 # Installation
 

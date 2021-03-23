@@ -2,7 +2,6 @@ package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.NameTags;
-import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;

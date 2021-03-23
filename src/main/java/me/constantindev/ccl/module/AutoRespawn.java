@@ -16,7 +16,8 @@ public class AutoRespawn extends Module {
     public void onExecute() {
         assert Cornos.minecraft.player != null;
         if (Cornos.minecraft.player.isDead()) {
-            Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(new ClientStatusC2SPacket(ClientStatusC2SPacket.Mode.PERFORM_RESPAWN));
+            if (Cornos.minecraft.getNetworkHandler() == null) return;
+            Cornos.minecraft.getNetworkHandler().sendPacket(new ClientStatusC2SPacket(ClientStatusC2SPacket.Mode.PERFORM_RESPAWN));
         }
         super.onExecute();
     }

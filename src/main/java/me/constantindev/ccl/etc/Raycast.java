@@ -54,7 +54,7 @@ public class Raycast {
                 }
             } else {
                 if (last != null) {
-                    lastVisualization.add(new RenderableLine(last, current, 50, 255, 50, 255,2 ));
+                    lastVisualization.add(new RenderableLine(last, current, 50, 255, 50, 255, 2));
                 }
             }
             for (RenderableLine line : lastVisualization) {
