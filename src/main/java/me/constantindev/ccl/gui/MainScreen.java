@@ -1,6 +1,7 @@
 package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -33,8 +34,8 @@ public class MainScreen extends Screen {
         this.addButton(new ButtonWidget(width - 125, height - 125, 120, 20, Text.of("Settings"), (b) -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));
         this.addButton(new ButtonWidget(width - 125, height - 100, 120, 20, Text.of("Singleplayer"), (b) -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
         this.addButton(new ButtonWidget(width - 125, height - 75, 120, 20, Text.of("Multiplayer"), (b) -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));
-        ButtonWidget btnw = new ButtonWidget(width - 125, height - 50, 120, 20, Text.of("Who plays realms"), (b) -> Cornos.minecraft.openScreen(new RealmsMainScreen(this)));
-        this.addButton(new ButtonWidget(width - 125, height - 25, 120, 20, Text.of("Return to pogn't menu"), (b) -> {
+        ButtonWidget btnw = new ButtonWidget(width - 125, height - 50, 120, 20, Text.of("Realms"), (b) -> Cornos.minecraft.openScreen(new RealmsMainScreen(this)));
+        this.addButton(new ButtonWidget(width - 125, height - 25, 120, 20, Text.of("Vanilla homescreen"), (b) -> {
             ModuleRegistry.getByName("ClientConfig").mconf.getByName("homescreen").setValue("vanilla");
             Cornos.minecraft.openScreen(new TitleScreen());
         }));
@@ -47,6 +48,7 @@ public class MainScreen extends Screen {
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         Cornos.minecraft.getTextureManager().bindTexture(bg);
         DrawableHelper.drawTexture(matrices, 0, 0, 0, 0, 0, width, height, height, width);
+        RenderHelper.drawImage(matrices, new Identifier("ccl","logo.png"),-25,1,960/4,233/4);
         super.render(matrices, mouseX, mouseY, delta);
     }
 }

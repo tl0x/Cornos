@@ -12,10 +12,12 @@ package me.constantindev.ccl.etc.ms;
 import club.minnced.discord.rpc.DiscordEventHandlers;
 import club.minnced.discord.rpc.DiscordRPC;
 import club.minnced.discord.rpc.DiscordRichPresence;
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.gui.MainScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 
 import java.util.Objects;
 
@@ -36,7 +38,7 @@ public class DiscordRPCThread {
         DiscordRichPresence presence = new DiscordRichPresence();
         presence.startTimestamp = System.currentTimeMillis() / 1000;
         presence.state = getStateAccordingToGame();
-        presence.details = "https://ariliusclient.github.io/";
+        presence.details = "https://cornos.cf/";
         discordRPC.Discord_UpdatePresence(presence);
         runner = new Thread(() -> {
             while (!stopped) {
@@ -49,7 +51,7 @@ public class DiscordRPCThread {
                 String currentCatS = "c" + currentCat;
                 discordRPC.Discord_RunCallbacks();
                 presence.largeImageKey = currentCatS;
-                presence.largeImageText = "bruh #" + currentCat;
+                presence.largeImageText = "Using the swag";
                 presence.state = getStateAccordingToGame();
                 discordRPC.Discord_UpdatePresence(presence);
                 try {
@@ -66,7 +68,7 @@ public class DiscordRPCThread {
     public static String getStateAccordingToGame() {
         try {
             if (MinecraftClient.getInstance().world != null && MinecraftClient.getInstance().getServer() != null)
-                return "Playing on a local world with a client..?";
+                return "Playing locally with a client";
             if (MinecraftClient.getInstance().world != null) {
                 String addr = Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).getConnection().getAddress().toString();
                 String host = addr.split("/")[0];
@@ -78,6 +80,9 @@ public class DiscordRPCThread {
             }
             if (MinecraftClient.getInstance().currentScreen instanceof TitleScreen || MinecraftClient.getInstance().currentScreen instanceof MainScreen)
                 return "At the home screen";
+            if (Cornos.minecraft.currentScreen instanceof InventoryScreen) {
+                return "Looking for something in the inv";
+            }
         } catch (Exception ignored) {
         }
 

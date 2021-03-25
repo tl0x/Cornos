@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ScreenMixin {
     @Inject(method = "renderBackgroundTexture", at = @At("HEAD"), cancellable = true)
     public void renderBG(int vOffset, CallbackInfo ci) {
-        Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl", "bgblur.png"));
+        Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl", "bg.png"));
         int width = Cornos.minecraft.getWindow().getScaledWidth();
         int height = Cornos.minecraft.getWindow().getScaledHeight();
         DrawableHelper.drawTexture(new MatrixStack(), 0, 0, 0, 0, 0, width, height, height, width);
