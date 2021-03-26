@@ -5,8 +5,6 @@ import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.network.packet.c2s.play.ClientStatusC2SPacket;
 
-import java.util.Objects;
-
 public class AutoRespawn extends Module {
     public AutoRespawn() {
         super("AutoRespawn", "Automatically respawns you upon death", MType.MISC);

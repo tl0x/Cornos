@@ -23,9 +23,9 @@ public class MassBreak extends Module {
     public void onExecute() {
         int rad = (int) ((Num) this.mconf.getByName("radius")).getValue();
         BlockPos latest;
-            if(Cornos.minecraft.crosshairTarget == null) return;
-            if (!Cornos.minecraft.crosshairTarget.getType().equals(HitResult.Type.BLOCK)) return;
-            latest = ((BlockHitResult) Cornos.minecraft.crosshairTarget).getBlockPos();
+        if (Cornos.minecraft.crosshairTarget == null) return;
+        if (!Cornos.minecraft.crosshairTarget.getType().equals(HitResult.Type.BLOCK)) return;
+        latest = ((BlockHitResult) Cornos.minecraft.crosshairTarget).getBlockPos();
         if (Cornos.minecraft.options.keyAttack.isPressed()) {
             Cornos.log(Level.INFO, "bruh");
             for (int x = 0; x < rad; x++) {

@@ -26,6 +26,7 @@ public class CommandRegistry {
         cl.add(new Give());
         cl.add(new Hologram());
         cl.add(new Panic());
+        cl.add(new Enchant());
     }
 
     public static List<Command> getAll() {
