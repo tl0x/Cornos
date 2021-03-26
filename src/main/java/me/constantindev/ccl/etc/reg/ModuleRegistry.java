@@ -33,8 +33,6 @@ public class ModuleRegistry {
         ml.add(new MoonGravity());
         ml.add(new Hud());
         ml.add(new AutoRespawn());
-        ml.add(new NoPumpkin());
-        ml.add(new NoFireOverlay());
         ml.add(new AutoTool());
         ml.add(new Jesus());
         ml.add(new BuildLimit());
@@ -57,8 +55,6 @@ public class ModuleRegistry {
         ml.add(new MovementCrash());
         ml.add(new BoatCrash());
         ml.add(new BoatPhase());
-        ml.add(new NoRender());
-        ml.add(new NoArmorstandRender());
         ml.add(new NameTags());
         ml.add(new ResourcePackSpoof());
         ml.add(new Boost());
@@ -73,6 +69,7 @@ public class ModuleRegistry {
         ml.add(new FastUse());
         ml.add(new HologramAura());
         ml.add(new Alts());
+        ml.add(new NoRender());
 
         tabManager = new TabManager();
     }

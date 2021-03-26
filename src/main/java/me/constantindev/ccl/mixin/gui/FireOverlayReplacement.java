@@ -1,6 +1,7 @@
 package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.NoRender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameOverlayRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -13,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class FireOverlayReplacement {
     @Inject(method = "renderFireOverlay", cancellable = true, at = @At("HEAD"))
     private static void renderFireOverlay(MinecraftClient minecraftClient, MatrixStack matrixStack, CallbackInfo ci) {
-        if (ModuleRegistry.getByName("nofireoverlay").isOn.isOn()) {
+        if (NoRender.fire.isEnabled() && ModuleRegistry.getByName("norender").isOn.isOn()) {
             ci.cancel();
         }
     }

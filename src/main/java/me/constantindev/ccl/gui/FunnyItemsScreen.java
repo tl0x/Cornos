@@ -73,7 +73,7 @@ public class FunnyItemsScreen extends Screen {
             x = Double.parseDouble(coords[0]);
             y = Double.parseDouble(coords[1]);
             z = Double.parseDouble(coords[2]);
-            Hologram.spawnHologram(new Vec3d(x, y, z), armorStandName.getText(), armorStandSpawnegg.isChecked(), false);
+            Hologram.spawnHologram(new Vec3d(x, y, z), armorStandName.getText(), armorStandSpawnegg.isChecked(), false, "armor_stand");
         });
         standAuraName = new TextFieldWidget(textRenderer, 5, 130, 200, 20, Text.of("Sus"));
         standAuraName.setMaxLength(65535);

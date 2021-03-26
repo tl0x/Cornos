@@ -9,6 +9,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.NoRender;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -23,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ArmorStandRenderHook<T extends LivingEntity> {
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void render(T livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        if (livingEntity instanceof ArmorStandEntity && ModuleRegistry.getByName("NoStandRender").isOn.isOn())
+        if (livingEntity instanceof ArmorStandEntity && NoRender.armorstand.isEnabled() && ModuleRegistry.getByName("norender").isOn.isOn())
             ci.cancel();
     }
 }

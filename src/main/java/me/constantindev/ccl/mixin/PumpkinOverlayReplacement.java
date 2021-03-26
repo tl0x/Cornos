@@ -2,6 +2,7 @@ package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.NoRender;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PumpkinOverlayReplacement {
     @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
     public void renderPumpkinOverlayReplacement(CallbackInfo ci) {
-        if (ModuleRegistry.getByName("nopumpkin").isOn.isOn()) {
+        if (NoRender.pumpkin.isEnabled() && ModuleRegistry.getByName("norender").isOn.isOn()) {
             ci.cancel();
             MatrixStack defaultM = new MatrixStack();
             int w2d = Cornos.minecraft.getWindow().getScaledWidth() / 2;
