@@ -81,7 +81,7 @@ public class IngameRendererHook {
                 List<Module> ml = ModuleRegistry.getAll();
                 List<Module> mlR = new ArrayList<>();
                 ml.forEach(module -> {
-                    if (module.isOn.isOn()) mlR.add(module);
+                    if (module.isOn.isOn() && (((Toggleable) module.mconf.getByName("visible")).isEnabled())) mlR.add(module);
                 });
                 mlR.sort(Comparator.comparingInt(o -> Cornos.minecraft.textRenderer.getWidth(o.name)));
                 List<Module> mlR1 = Lists.reverse(mlR);

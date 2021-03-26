@@ -2,6 +2,7 @@ package me.constantindev.ccl.etc.base;
 
 import me.constantindev.ccl.etc.config.Keybind;
 import me.constantindev.ccl.etc.config.ModuleConfig;
+import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.config.Toggleable$1;
 import me.constantindev.ccl.etc.ms.MType;
 
@@ -24,6 +25,7 @@ public class Module {
         this.type = type;
         this.mconf = new ModuleConfig(this);
         this.mconf.add(new Keybind("keybind", -1));
+        this.mconf.add(new Toggleable("visible",true));
     }
 
     public final void updateVitals() {

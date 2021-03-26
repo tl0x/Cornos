@@ -16,6 +16,7 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.server.command.DataCommand;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.registry.Registry;
 import org.apache.commons.lang3.ArrayUtils;
@@ -65,6 +66,7 @@ public class Enchant extends Command {
                     ItemStack is = Cornos.minecraft.player.inventory.getStack(Cornos.minecraft.player.inventory.selectedSlot);
                     CompoundTag ct = is.getOrCreateTag();
                     if (!ct.contains("Enchantments", 9)) ct.put("Enchantments", new ListTag());
+
                     ListTag lt = ct.getList("Enchantments", 10);
                     CompoundTag ct1 = new CompoundTag();
                     ct1.putString("id", String.valueOf(Registry.ENCHANTMENT.getId(bruh)));
