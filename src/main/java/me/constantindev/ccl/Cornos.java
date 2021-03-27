@@ -10,9 +10,13 @@ import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.resource.ResourceType;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.InputStream;
 
 public class Cornos implements ModInitializer {
 
@@ -30,6 +34,7 @@ public class Cornos implements ModInitializer {
     public void onInitialize() {
         Runtime.getRuntime().addShutdownHook(new Thread(ConfigHelper::saveConfig));
         log(Level.INFO, "Initializing main client");
+        // *the void*
 
         log(Level.INFO, "Initializing configuration");
         ClientConfig.init();
@@ -60,7 +65,11 @@ public class Cornos implements ModInitializer {
         ClientConfig.authentication = TheAlteningAuthentication.mojang(yggdrasilEnvironment -> {
         });
         fastUpdater.start();
+    }
 
+    public static void onMinecraftCreate() {
+        InputStream inputStream = Cornos.class.getClassLoader().getResourceAsStream("assets/ccl/icon1.png");
+        Cornos.minecraft.getWindow().setIcon(inputStream, inputStream);
     }
 
 }

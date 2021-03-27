@@ -26,6 +26,7 @@ import net.minecraft.text.Text;
 import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class AltManagerScreen extends Screen {
     TextFieldWidget email;
@@ -44,14 +45,22 @@ public class AltManagerScreen extends Screen {
         ButtonWidget w = new ButtonWidget(width - 161, 1, 160, 20, Text.of(ClientConfig.authentication.getService().equals(AlteningServiceType.THEALTENING) ? "TheAltening" : "Mojang"), button -> {
             switch (button.getMessage().asString()) {
                 case "Mojang":
+                    ClientConfig.authentication.updateService(AlteningServiceType.MOJANG);
+                    button.setMessage(Text.of("Cracked"));
+                    passwd.setEditable(false);
+                    emailpasswd.setEditable(false);
+                    break;
+                case "Cracked":
                     ClientConfig.authentication.updateService(AlteningServiceType.THEALTENING);
                     button.setMessage(Text.of("TheAltening"));
                     passwd.setEditable(false);
+                    emailpasswd.setEditable(false);
                     break;
                 case "TheAltening":
-                    passwd.setEditable(true);
                     ClientConfig.authentication.updateService(AlteningServiceType.MOJANG);
                     button.setMessage(Text.of("Mojang"));
+                    passwd.setEditable(true);
+                    emailpasswd.setEditable(true);
                     break;
             }
         });
@@ -62,6 +71,12 @@ public class AltManagerScreen extends Screen {
         emailpasswd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) + 35, 200, 20, Text.of("Username:password"));
         emailpasswd.setMaxLength(2000);
         ButtonWidget login = new ButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 60, 120, 20, Text.of("Login"), button -> {
+            if (w.getMessage().asString().equalsIgnoreCase("cracked")) {
+                Session newS = new Session(this.email.getText(), UUID.randomUUID().toString(), "CornosOnTOP", "mojang");
+                ((SessionAccessor) this.client).setSession(newS);
+                errormsg = "§aSet username to "+this.email.getText();
+                return;
+            }
             YggdrasilUserAuthentication auth = (YggdrasilUserAuthentication) (new YggdrasilAuthenticationService(Proxy.NO_PROXY, "")).createUserAuthentication(Agent.MINECRAFT);
             auth.setUsername(this.email.getText());
             auth.setPassword(ClientConfig.authentication.getService().equals(AlteningServiceType.THEALTENING) ? "CornosOnTOP" : this.passwd.getText());
@@ -82,9 +97,12 @@ public class AltManagerScreen extends Screen {
                 this.errormsg = "§cEmail cannot be empty";
                 return;
             }
-            if (passwd.isEmpty()) {
+            if (passwd.isEmpty() && !w.getMessage().asString().equalsIgnoreCase("cracked")) {
                 this.errormsg = "§cPassword cannot be empty";
                 return;
+            }
+            if (w.getMessage().asString().equalsIgnoreCase("cracked")) {
+                passwd = "ThisDoesNotMatterSinceTheAccountIsCracked";
             }
             Alts.k.setValue(Alts.k.value + ((char) 999) + encStr(email, 6001) + ((char) 998) + encStr(passwd, 6000));
             this.client.openScreen(new AltManagerScreen());
@@ -111,7 +129,7 @@ public class AltManagerScreen extends Screen {
             fal.add(encStr(good.get(0), 6001) + ((char) 998) + encStr(good.get(1), 6000));
             ButtonWidget alt = new ButtonWidget(width - 141, offset, 140, 20, Text.of(good.get(0)), button -> {
                 this.email.setText(good.get(0));
-                this.passwd.setText(good.get(1));
+                if (!good.get(1).equalsIgnoreCase("ThisDoesNotMatterSinceTheAccountIsCracked")) this.passwd.setText(good.get(1));
             });
             ButtonWidget delete = new ButtonWidget(width - 141 - 21, offset, 20, 20, Text.of("X"), button -> {
                 fal.remove(encStr(good.get(0), 6001) + ((char) 998) + encStr(good.get(1), 6000));

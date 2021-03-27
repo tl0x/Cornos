@@ -10,7 +10,7 @@
   "contributors": [],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/ccl/icon.png",
+  "icon": "assets/ccl/icon1.png",
   "environment": "client",
   "entrypoints": {
     "main": [
