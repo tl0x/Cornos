@@ -74,7 +74,7 @@ public class AltManagerScreen extends Screen {
             if (w.getMessage().asString().equalsIgnoreCase("cracked")) {
                 Session newS = new Session(this.email.getText(), UUID.randomUUID().toString(), "CornosOnTOP", "mojang");
                 ((SessionAccessor) this.client).setSession(newS);
-                errormsg = "§aSet username to "+this.email.getText();
+                errormsg = "§aSet username to " + this.email.getText();
                 return;
             }
             YggdrasilUserAuthentication auth = (YggdrasilUserAuthentication) (new YggdrasilAuthenticationService(Proxy.NO_PROXY, "")).createUserAuthentication(Agent.MINECRAFT);
@@ -129,7 +129,8 @@ public class AltManagerScreen extends Screen {
             fal.add(encStr(good.get(0), 6001) + ((char) 998) + encStr(good.get(1), 6000));
             ButtonWidget alt = new ButtonWidget(width - 141, offset, 140, 20, Text.of(good.get(0)), button -> {
                 this.email.setText(good.get(0));
-                if (!good.get(1).equalsIgnoreCase("ThisDoesNotMatterSinceTheAccountIsCracked")) this.passwd.setText(good.get(1));
+                if (!good.get(1).equalsIgnoreCase("ThisDoesNotMatterSinceTheAccountIsCracked"))
+                    this.passwd.setText(good.get(1));
             });
             ButtonWidget delete = new ButtonWidget(width - 141 - 21, offset, 20, 20, Text.of("X"), button -> {
                 fal.remove(encStr(good.get(0), 6001) + ((char) 998) + encStr(good.get(1), 6000));

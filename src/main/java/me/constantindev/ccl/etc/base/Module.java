@@ -25,7 +25,7 @@ public class Module {
         this.type = type;
         this.mconf = new ModuleConfig(this);
         this.mconf.add(new Keybind("keybind", -1));
-        this.mconf.add(new Toggleable("visible",true));
+        this.mconf.add(new Toggleable("visible", true));
     }
 
     public final void updateVitals() {

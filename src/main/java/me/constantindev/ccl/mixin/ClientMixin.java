@@ -19,8 +19,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.io.InputStream;
-
 @Mixin(MinecraftClient.class)
 public class ClientMixin {
     @Shadow
@@ -33,7 +31,7 @@ public class ClientMixin {
         if (fuse.fastuse.isEnabled()) this.itemUseCooldown = 0;
     }
 
-    @Inject(method="<init>",at=@At("TAIL"))
+    @Inject(method = "<init>", at = @At("TAIL"))
     public void createClient(RunArgs args, CallbackInfo ci) {
         Cornos.onMinecraftCreate();
     }

@@ -13,8 +13,6 @@ import me.constantindev.ccl.etc.base.Command;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.packet.c2s.play.CreativeInventoryActionC2SPacket;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 
 public class Rename extends Command {
@@ -35,7 +33,7 @@ public class Rename extends Command {
             return;
         }
         CompoundTag compoundTag = is.getOrCreateSubTag("display");
-        compoundTag.putString("Name", Text.Serializer.toJson(Text.of("§r"+String.join(" ",args).replaceAll("&", "§"))));
+        compoundTag.putString("Name", Text.Serializer.toJson(Text.of("§r" + String.join(" ", args).replaceAll("&", "§"))));
 
         super.onExecute(args);
     }
