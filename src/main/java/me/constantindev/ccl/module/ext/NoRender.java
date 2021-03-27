@@ -10,6 +10,7 @@ package me.constantindev.ccl.module.ext;
 
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Toggleable;
+import me.constantindev.ccl.etc.ms.MType;
 
 public class NoRender extends Module {
     public static Toggleable fire = new Toggleable("fire", true);
@@ -18,7 +19,7 @@ public class NoRender extends Module {
     public static Toggleable armorstand = new Toggleable("armorstands", true);
 
     public NoRender() {
-        super("NoRender", "Does not render some things");
+        super("NoRender", "Does not render some things", MType.RENDER);
         this.mconf.add(fire);
         this.mconf.add(pumpkin);
         this.mconf.add(sign);

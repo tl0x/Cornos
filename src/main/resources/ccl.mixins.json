@@ -13,6 +13,7 @@
     "EntityRendererMixin",
     "GameProfileMixin",
     "IdentifierMixin",
+    "JumpingCooldownAccessor",
     "PacketSendHook",
     "PacketTryUseItemOnBlockHook",
     "PlayerMoveC2SPacketAccessor",

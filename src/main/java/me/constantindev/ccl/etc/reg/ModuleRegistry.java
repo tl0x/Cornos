@@ -70,6 +70,8 @@ public class ModuleRegistry {
         ml.add(new HologramAura());
         ml.add(new Alts());
         ml.add(new NoRender());
+        ml.add(new VelocityCap());
+        ml.add(new NoJumpingCooldown());
 
         tabManager = new TabManager();
     }
