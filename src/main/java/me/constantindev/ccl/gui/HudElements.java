@@ -3,11 +3,14 @@ package me.constantindev.ccl.gui;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.config.Toggleable;
+import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.ChatScreen;
+import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -24,17 +27,27 @@ import java.util.Date;
 import java.util.List;
 
 public class HudElements extends DrawableHelper {
+    double tick = 0;
     public static String tps = "Calculating...";
     public static long lastRecv = 0;
     public static List<Double> minAvg = new ArrayList<>();
     private final DateFormat dateFormat = new SimpleDateFormat("h:mm aa");
 
     public void render(MatrixStack matrices, float delta) {
+        tick += .2;
+        if (tick > 360) tick = 0;
+        double sin = Math.sin(Math.toRadians(tick));
+        if (ModuleRegistry.getByName("debug").isOn.isOn()) ClientHelper.sendChat(sin+", "+tick+", "+Math.toRadians(tick)+", "+Math.toDegrees(tick));
         boolean chatOpen = Cornos.minecraft.currentScreen instanceof ChatScreen;
         Hud hud = (Hud) ModuleRegistry.getByName("hud");
 
         TextRenderer textRenderer = Cornos.minecraft.textRenderer;
         int offset = 0;
+        if (((Toggleable) hud.mconf.getByName("miniplayer")).isEnabled() && !chatOpen) {
+            double yaw = sin*100;
+
+            InventoryScreen.drawEntity(Cornos.minecraft.getWindow().getScaledWidth()-20,Cornos.minecraft.getWindow().getScaledHeight()-1,25, (float) (yaw),Cornos.minecraft.player.pitch,Cornos.minecraft.player);
+        }
         if (((Toggleable) hud.mconf.getByName("coords")).isEnabled() && !chatOpen) {
             offset += 10;
             drawTextWithShadow(matrices, textRenderer, new LiteralText("XYZ:"), 2, Cornos.minecraft.getWindow().getScaledHeight() - (offset), ClientConfig.latestRGBVal);

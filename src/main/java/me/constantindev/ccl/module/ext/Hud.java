@@ -5,6 +5,7 @@ import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.RGBAColor;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.gui.HudElements;
 
 import java.awt.*;
 
@@ -23,6 +24,7 @@ public class Hud extends Module {
         this.mconf.add(new Toggleable("tps", true));
         this.mconf.add(new Toggleable("ping", true));
         this.mconf.add(new Toggleable("modules", true));
+        this.mconf.add(new Toggleable("miniplayer", true));
         themeColor.setRainbow(true);
     }
     // Logic: IngameRenderHook.java
