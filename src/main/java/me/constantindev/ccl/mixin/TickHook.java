@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class TickHook {
     @Inject(method = "tick", at = @At("HEAD"))
     public void tick(CallbackInfo ci) {
+        if (System.currentTimeMillis() % 120000 == 0) System.gc();
         ModuleRegistry.getAll().forEach(m -> {
             m.updateVitals();
             if (Cornos.minecraft.player == null) return; // so this mf will stop complaining

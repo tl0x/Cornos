@@ -79,7 +79,13 @@ public class ModuleRegistry {
     public static List<Module> getAll() {
         return ml;
     }
-
+    public static void reload() {
+        ml.forEach(module -> {
+            module.setEnabled(false);
+        });
+        ml.clear();
+        init();
+    }
     public static TabManager getTabManager() {
         return tabManager;
     }
