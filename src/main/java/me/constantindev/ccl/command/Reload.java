@@ -14,7 +14,7 @@ import me.constantindev.ccl.etc.reg.ModuleRegistry;
 
 public class Reload extends Command {
     public Reload() {
-        super("Reload", "Reloads all commands and modules", new String[]{"reload","rl","mcrl"});
+        super("Reload", "Reloads all commands and modules", new String[]{"reload", "rl", "mcrl"});
     }
 
     @Override

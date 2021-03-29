@@ -10,6 +10,7 @@ import java.awt.*;
 
 public class Hud extends Module {
     public static RGBAColor themeColor = new RGBAColor("theme", new Color(255, 255, 255));
+    public static String currentContext = "";
 
     public Hud() {
         super("HUD", "Will make shit fancy", MType.RENDER);
@@ -24,6 +25,7 @@ public class Hud extends Module {
         this.mconf.add(new Toggleable("ping", true));
         this.mconf.add(new Toggleable("modules", true));
         this.mconf.add(new Toggleable("miniplayer", true));
+        this.mconf.add(new Toggleable("context", true));
         themeColor.setRainbow(true);
     }
     // Logic: IngameRenderHook.java

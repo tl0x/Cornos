@@ -86,6 +86,11 @@ public class HudElements extends DrawableHelper {
                     2 + textRenderer.getWidth(new LiteralText("FPS:")),
                     Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
         }
+        if (((Toggleable) hud.mconf.getByName("context")).isEnabled()) {
+            int w = Cornos.minecraft.getWindow().getScaledWidth();
+            int h = Cornos.minecraft.getWindow().getScaledHeight();
+            DrawableHelper.drawCenteredString(new MatrixStack(), Cornos.minecraft.textRenderer, Hud.currentContext, w / 2, h / 2 + 10, 0xFFFFFFFF);
+        }
 
 
         if (((Toggleable) hud.mconf.getByName("effects")).isEnabled()) {

@@ -34,10 +34,12 @@ public class CommandRegistry {
     public static List<Command> getAll() {
         return cl;
     }
+
     public static void reload() {
         cl.clear();
         init();
     }
+
     public static Command getByName(String name) {
         AtomicReference<Command> mr = new AtomicReference<>(null);
         CommandRegistry.getAll().forEach(module -> {
