@@ -30,6 +30,7 @@
     "gui.EditGameRulesScreenMixin",
     "gui.EntryListWidgetMixin",
     "gui.FireOverlayReplacement",
+    "gui.GameRendererHook",
     "gui.IngameRendererHook",
     "gui.MainScreenHook",
     "gui.MPScreenMixin",

@@ -40,19 +40,61 @@ public class RenderHelper {
         if (!B1S1TQueue.contains(text)) B1S1TQueue.add(text);
     }
 
-    public static void renderBlockOutline(Vec3d bpos, Vec3d dimensions, int r, int g, int b, int a, MatrixStack matrices, Camera camera) {
-        Vec3d cameraPos = camera.getPos();
-        VertexConsumerProvider.Immediate entityVertexConsumers = Cornos.minecraft.getBufferBuilders().getEntityVertexConsumers();
-        VertexConsumer builder = entityVertexConsumers.getBuffer(RenderType.OVERLAY_LINES);
-
-        matrices.push();
-        matrices.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
-
-        RenderHelper.renderBlockBounding(matrices, dimensions, builder, bpos, (float) r / 255, (float) g / 255, (float) b / 255, (float) a / 255);
-
-        RenderSystem.disableDepthTest();
-        matrices.pop();
-        entityVertexConsumers.draw(RenderType.OVERLAY_LINES);
+    public static void renderBlockOutline(Vec3d bpos, Vec3d dimensions, int r, int g, int b, int a) {
+        Camera c = BlockEntityRenderDispatcher.INSTANCE.camera;
+        Vec3d s = bpos.subtract(c.getPos());
+        Vec3d e = s.add(dimensions);
+        double f = s.x;
+        double g1 = s.y;
+        double h = s.z;
+        double i = e.x;
+        double j = e.y;
+        double k = e.z;
+        GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glLineWidth(2);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_CULL_FACE);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glRotated(MathHelper.wrapDegrees(c.getPitch()), 1, 0, 0);
+        GL11.glRotated(MathHelper.wrapDegrees(c.getYaw() + 180.0), 0, 1, 0);
+        //GL11.glTranslated(-c.getPos().x, -c.getPos().y, -c.getPos().z);
+        //GL11.glTranslated(0, -c.getPos().y, 0);
+        GL11.glColor4f(r / 255F, g / 255F, b / 255F, a / 255F);
+        GL11.glBegin(GL11.GL_LINES);
+        GL11.glVertex3d(f, g1, h);
+        GL11.glVertex3d(i, g1, h);
+        GL11.glVertex3d(f, g1, h);
+        GL11.glVertex3d(f, j, h);
+        GL11.glVertex3d(f, g1, h);
+        GL11.glVertex3d(f, g1, k);
+        GL11.glVertex3d(i, g1, h);
+        GL11.glVertex3d(i, j, h);
+        GL11.glVertex3d(i, j, h);
+        GL11.glVertex3d(f, j, h);
+        GL11.glVertex3d(f, j, h);
+        GL11.glVertex3d(f, j, k);
+        GL11.glVertex3d(f, j, k);
+        GL11.glVertex3d(f, g1, k);
+        GL11.glVertex3d(f, g1, k);
+        GL11.glVertex3d(i, g1, k);
+        GL11.glVertex3d(i, g1, k);
+        GL11.glVertex3d(i, g1, h);
+        GL11.glVertex3d(f, j, k);
+        GL11.glVertex3d(i, j, k);
+        GL11.glVertex3d(i, g1, k);
+        GL11.glVertex3d(i, j, k);
+        GL11.glVertex3d(i, j, h);
+        GL11.glVertex3d(i, j, k);
+        GL11.glEnd();
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GL11.glPopMatrix();
     }
 
     public static void renderLine(Vec3d from, Vec3d to, Color col, int width) {
@@ -69,14 +111,16 @@ public class RenderHelper {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glRotated(MathHelper.wrapDegrees(c.getPitch()), 1, 0, 0);
         GL11.glRotated(MathHelper.wrapDegrees(c.getYaw() + 180.0), 0, 1, 0);
-        GL11.glTranslated(-c.getPos().x, -c.getPos().y, -c.getPos().z);
+        //GL11.glTranslated(-c.getPos().x, -c.getPos().y, -c.getPos().z);
 
         GL11.glColor4f(col.getRed() / 255F, col.getGreen() / 255F, col.getBlue() / 255F, col.getAlpha() / 255F);
 
         GL11.glBegin(GL11.GL_LINES);
         {
-            GL11.glVertex3d(from.x, from.y, from.z);
-            GL11.glVertex3d(to.x, to.y, to.z);
+            Vec3d f1 = from.subtract(c.getPos());
+            Vec3d t1 = to.subtract(c.getPos());
+            GL11.glVertex3d(f1.x, f1.y, f1.z);
+            GL11.glVertex3d(t1.x, t1.y, t1.z);
         }
         GL11.glEnd();
 
@@ -107,6 +151,7 @@ public class RenderHelper {
             return;
         }
         final double x = bp.getX(), y = bp.getY(), z = bp.getZ();
+
         //MinecraftClient.getInstance().gameRenderer.render();
         WorldRenderer.drawBox(matrices, builder, x, y, z, x + dim.x, y + dim.y, z + dim.z, r, g, b, a);
     }

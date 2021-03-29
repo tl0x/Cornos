@@ -19,6 +19,7 @@ import me.constantindev.ccl.etc.event.arg.PacketEvent;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.render.RenderableLine;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 
 import java.awt.*;
@@ -46,22 +47,23 @@ public class QuickMove extends Module {
     }
 
     @Override
-    public void onExecute() {
+    public void onRender(MatrixStack ms, float td) {
         ColoredBlockEntry latest = null;
         for (ColoredBlockEntry bp : bpl) {
             if (latest == null) latest = bp;
             Color c = bp.c;
-            RenderHelper.addToQueue(new RenderableLine(latest.bp, bp.bp, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha(), 2));
+            rlq.add(new RenderableLine(latest.bp, bp.bp, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha(), 2));
             latest = bp;
         }
         counter++;
-        if (counter > 2) {
+        if (counter > 10) {
             assert Cornos.minecraft.player != null;
             bpl.add(new ColoredBlockEntry(Cornos.minecraft.player.getPos(), new Color(ClientConfig.latestRGBVal)));
             counter = 0;
         }
-        super.onExecute();
+        super.onRender(ms, td);
     }
+
 
     @Override
     public void onDisable() {

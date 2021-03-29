@@ -17,6 +17,7 @@ import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.render.RenderableLine;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
@@ -27,10 +28,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArrowAvoid extends Module {
+    RenderableLine rlL = null;
     public ArrowAvoid() {
         super("ArrowAvoid", "Avoids arrows, if possible", MType.MOVEMENT);
         this.mconf.add(new MultiOption("Type", "Packet", new String[]{"Client", "Packet"}));
         this.mconf.add(new Num("Speed", 1, 2, 0.1));
+    }
+
+    @Override
+    public void onRender(MatrixStack ms, float td) {
+        if (rlL != null) this.rlq.add(rlL);
+        super.onRender(ms, td);
     }
 
     @Override
@@ -50,8 +58,7 @@ public class ArrowAvoid extends Module {
                 bl.add(current);
                 boolean intc = playerHB.intersects(current);
                 if (prevPos != null) {
-                    RenderableLine rl = new RenderableLine(prevPos, nextPos, intc ? 255 : 100, intc ? 50 : 255, 50, 255, 2);
-                    RenderHelper.addToQueue(rl);
+                    rlL = new RenderableLine(prevPos, nextPos, intc ? 255 : 100, intc ? 50 : 255, 50, 255, 2);
                 }
                 prevPos = nextPos;
 

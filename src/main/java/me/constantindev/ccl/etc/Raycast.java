@@ -10,6 +10,7 @@ package me.constantindev.ccl.etc;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.RenderHelper;
+import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -58,7 +59,8 @@ public class Raycast {
                 }
             }
             for (RenderableLine line : lastVisualization) {
-                RenderHelper.addToQueue(line);
+                //RenderHelper.addToQueue(line);
+                ModuleRegistry.getByName("tracers").rlq.add(line);
             }
             last = current;
         }

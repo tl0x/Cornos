@@ -15,6 +15,7 @@ import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.util.math.BlockPos;
@@ -35,9 +36,14 @@ public class ThunderAura extends Module {
     }
 
     @Override
+    public void onRender(MatrixStack ms, float td) {
+        if (rlCurrent != null) this.rlq.add(rlCurrent);
+        super.onRender(ms, td);
+    }
+
+    @Override
     public void onExecute() {
         tick++;
-        if (rlCurrent != null) RenderHelper.addToQueue(rlCurrent);
         assert Cornos.minecraft.player != null;
         Vec3d init = Cornos.minecraft.player.getPos().add(-4, -4, -4);
         Vec3d goal = init.add(8, 8, 8);

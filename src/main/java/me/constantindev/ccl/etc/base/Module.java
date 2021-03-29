@@ -4,9 +4,18 @@ import me.constantindev.ccl.etc.config.Keybind;
 import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.config.Toggleable$1;
+import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.render.RenderableBlock;
+import me.constantindev.ccl.etc.render.RenderableLine;
+import net.minecraft.client.util.math.MatrixStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Module {
+    public List<RenderableBlock> rbq = new ArrayList<>();
+    public List<RenderableLine> rlq = new ArrayList<>();
     public final String name;
     public final String description;
     public final ModuleConfig mconf;
@@ -56,6 +65,13 @@ public class Module {
 
     public void onDisable() {
 
+    }
+
+    public void onRender(MatrixStack ms, float td) {
+        rlq.forEach(RenderHelper::addToQueue);
+        rbq.forEach(RenderHelper::addToQueue);
+        rlq.clear();
+        rbq.clear();
     }
 
     public final void setEnabled(boolean isEnabled) {

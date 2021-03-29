@@ -16,6 +16,7 @@ import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.render.RenderableBlock;
 import net.minecraft.client.network.OtherClientPlayerEntity;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.text.Text;
@@ -32,7 +33,7 @@ public class Tracers extends Module {
     }
 
     @Override
-    public void onExecute() {
+    public void onRender(MatrixStack ms, float td) {
         boolean e = ((Toggleable) this.mconf.getByName("Entities")).isEnabled();
         boolean p = ((Toggleable) this.mconf.getByName("Players")).isEnabled();
         boolean debug = ((Toggleable) this.mconf.getByName("debug")).isEnabled();
@@ -55,10 +56,11 @@ public class Tracers extends Module {
                 else if (!e && !(currE instanceof OtherClientPlayerEntity)) continue;
                 Vec3d off = new Vec3d(currE.getWidth(), currE.getHeight(), currE.getWidth());
                 RenderableBlock rb = new RenderableBlock(currE.getPos().add(off.multiply(-.5)).add(0, off.y / 2, 0), gInit, (int) rInit2, 50, 255, off);
-                RenderHelper.addToQueue(rb);
+                //RenderHelper.addToQueue(rb);
+                this.rbq.add(rb);
             }
         }
-        super.onExecute();
+        super.onRender(ms, td);
     }
 
     Vec3d getRV(EntityAnchorArgumentType.EntityAnchor entityAnchor, Vec3d target) {
