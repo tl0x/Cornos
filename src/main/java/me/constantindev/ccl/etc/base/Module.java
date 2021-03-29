@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Module {
-    public List<RenderableBlock> rbq = new ArrayList<>();
-    public List<RenderableLine> rlq = new ArrayList<>();
     public final String name;
     public final String description;
     public final ModuleConfig mconf;
     public final MType type;
     public final Toggleable$1 isOn = new Toggleable$1(false);
+    public List<RenderableBlock> rbq = new ArrayList<>();
+    public List<RenderableLine> rlq = new ArrayList<>();
     boolean calledVitalsOnenable = true;
     boolean calledVitalsOndisable = true;
 

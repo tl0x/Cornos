@@ -2,7 +2,6 @@ package me.constantindev.ccl.etc.helper;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.render.RenderType;
 import me.constantindev.ccl.etc.render.RenderableBlock;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import me.constantindev.ccl.etc.render.RenderableText;
@@ -10,7 +9,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;

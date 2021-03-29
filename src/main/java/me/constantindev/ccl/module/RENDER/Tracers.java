@@ -12,15 +12,12 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.render.RenderableBlock;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 public class Tracers extends Module {
@@ -61,25 +58,5 @@ public class Tracers extends Module {
             }
         }
         super.onRender(ms, td);
-    }
-
-    Vec3d getRV(EntityAnchorArgumentType.EntityAnchor entityAnchor, Vec3d target) {
-        // oh god
-
-        assert Cornos.minecraft.player != null;
-        Vec3d vec3d = entityAnchor.positionAt(Cornos.minecraft.player);
-        double d = target.x - vec3d.x;
-        double e = target.y - vec3d.y;
-        double f = target.z - vec3d.z;
-        double g = MathHelper.sqrt(d * d + f * f);
-        double pitch = MathHelper.wrapDegrees((float) (-(MathHelper.atan2(e, g) * 57.2957763671875D)));
-        double yaw = MathHelper.wrapDegrees((float) (MathHelper.atan2(f, d) * 57.2957763671875D) - 90.0F);
-        float f1 = (float) (pitch * 0.017453292F);
-        float g1 = (float) (-yaw * 0.017453292F);
-        float h = MathHelper.cos(g1);
-        float i = MathHelper.sin(g1);
-        float j = MathHelper.cos(f1);
-        float k = MathHelper.sin(f1);
-        return new Vec3d(i * j, -k, h * j);
     }
 }

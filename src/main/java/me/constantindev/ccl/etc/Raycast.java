@@ -9,7 +9,6 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.etc;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.block.Blocks;

@@ -16,7 +16,6 @@ import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
-import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.client.util.math.MatrixStack;

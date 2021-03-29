@@ -14,7 +14,6 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.client.util.math.MatrixStack;
@@ -29,6 +28,7 @@ import java.util.List;
 
 public class ArrowAvoid extends Module {
     RenderableLine rlL = null;
+
     public ArrowAvoid() {
         super("ArrowAvoid", "Avoids arrows, if possible", MType.MOVEMENT);
         this.mconf.add(new MultiOption("Type", "Packet", new String[]{"Client", "Packet"}));

@@ -5,7 +5,6 @@ import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.RGBAColor;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.ms.MType;
-import me.constantindev.ccl.gui.HudElements;
 
 import java.awt.*;
 

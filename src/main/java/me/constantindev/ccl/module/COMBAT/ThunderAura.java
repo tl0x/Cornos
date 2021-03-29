@@ -11,7 +11,6 @@ package me.constantindev.ccl.module.COMBAT;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.block.Blocks;

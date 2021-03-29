@@ -18,6 +18,7 @@ public class VelocityCap extends Module {
     Num x = new Num("x", 5, 10, 0);
     Num y = new Num("y", 5, 10, 0);
     Num z = new Num("z", 5, 10, 0);
+
     public VelocityCap() {
         super("VelocityCap", "Prevents you from going faster than the velocity you specified", MType.MOVEMENT);
         this.mconf.add(x);
@@ -27,20 +28,21 @@ public class VelocityCap extends Module {
 
     @Override
     public void onExecute() {
+        assert Cornos.minecraft.player != null;
         Vec3d vel = Cornos.minecraft.player.getVelocity();
         double nx = vel.x;
         double ny = vel.y;
         double nz = vel.z;
         if (Math.abs(nx) > x.getValue()) {
-            nx = nx<0?-x.getValue():x.getValue();
+            nx = nx < 0 ? -x.getValue() : x.getValue();
         }
         if (Math.abs(ny) > y.getValue()) {
-            ny = ny<0?-y.getValue():y.getValue();
+            ny = ny < 0 ? -y.getValue() : y.getValue();
         }
         if (Math.abs(nz) > z.getValue()) {
-            nz = nz<0?-z.getValue():z.getValue();
+            nz = nz < 0 ? -z.getValue() : z.getValue();
         }
-        Cornos.minecraft.player.setVelocity(nx,ny,nz);
+        Cornos.minecraft.player.setVelocity(nx, ny, nz);
         super.onExecute();
     }
 }
