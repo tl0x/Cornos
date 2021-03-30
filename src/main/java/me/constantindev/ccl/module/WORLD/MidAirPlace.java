@@ -24,23 +24,23 @@ public class MidAirPlace extends Module {
 
     @Override
     public void onRender(MatrixStack ms, float td) {
-        if (rlB != null) this.rbq.add(rlB);
+        HitResult hr = Cornos.minecraft.crosshairTarget;
+        if (hr instanceof BlockHitResult) {
+            BlockPos bp = ((BlockHitResult) hr).getBlockPos();
+            Vec3d vec3d = new Vec3d(bp.getX(), bp.getY(), bp.getZ());
+            this.rbq.add(new RenderableBlock(vec3d, 255, 50, 50, 255));
+            if (Cornos.minecraft.options.keyUse.isPressed()) {
+                timeout--;
+                if (timeout != 19 && timeout > 0) return;
+                PlayerInteractBlockC2SPacket p = new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND, (BlockHitResult) hr);
+                Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(p);
+            } else timeout = 20;
+        }
         super.onRender(ms, td);
     }
 
     @Override
     public void onExecute() {
-        HitResult hr = Cornos.minecraft.crosshairTarget;
-        if (!(hr instanceof BlockHitResult)) return;
-        BlockPos bp = ((BlockHitResult) hr).getBlockPos();
-        Vec3d vec3d = new Vec3d(bp.getX(), bp.getY(), bp.getZ());
-        rlB = new RenderableBlock(vec3d, 255, 50, 50, 255);
-        if (Cornos.minecraft.options.keyUse.isPressed()) {
-            timeout--;
-            if (timeout != 19 && timeout > 0) return;
-            PlayerInteractBlockC2SPacket p = new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND, (BlockHitResult) hr);
-            Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(p);
-        } else timeout = 20;
         super.onExecute();
     }
 }
