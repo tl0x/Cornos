@@ -8,7 +8,8 @@ public enum MType {
     COMBAT("Combat"),
     CRASH("Crash"),
     HIDDEN("Hidden"),
-    RENDER("Render");
+    RENDER("Render"),
+    FUN("Fun");
 
     String n;
 
