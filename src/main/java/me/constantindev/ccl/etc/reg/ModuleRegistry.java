@@ -72,6 +72,7 @@ public class ModuleRegistry {
         ml.add(new NoRender());
         ml.add(new VelocityCap());
         ml.add(new NoJumpingCooldown());
+        ml.add(new Headless());
 
         tabManager = new TabManager();
     }

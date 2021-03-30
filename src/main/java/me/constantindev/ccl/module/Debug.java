@@ -26,6 +26,7 @@ public class Debug extends Module {
         Camera c = BlockEntityRenderDispatcher.INSTANCE.camera;
         ClientHelper.sendChat("[D] Camera: " + c);
         ClientHelper.sendChat("[D] CameraRot: " + c.getRotation());
+
         super.onExecute();
     }
 }

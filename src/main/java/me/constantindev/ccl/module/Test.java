@@ -10,6 +10,7 @@ package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.ms.MType;
+import net.minecraft.client.util.math.MatrixStack;
 
 public class Test extends Module {
     public Test() {
@@ -17,7 +18,8 @@ public class Test extends Module {
     }
 
     @Override
-    public void onExecute() {
-        super.onExecute();
+    public void onRender(MatrixStack ms, float td) {
+
+        super.onRender(ms, td);
     }
 }
