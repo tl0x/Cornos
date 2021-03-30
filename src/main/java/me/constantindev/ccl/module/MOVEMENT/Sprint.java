@@ -2,7 +2,6 @@ package me.constantindev.ccl.module.MOVEMENT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.ms.MType;
 
 public class Sprint extends Module {

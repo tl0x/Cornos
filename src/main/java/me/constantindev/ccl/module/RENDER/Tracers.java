@@ -18,6 +18,9 @@ import me.constantindev.ccl.etc.render.RenderableBlock;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 
@@ -60,10 +63,11 @@ public class Tracers extends Module {
                 //RenderHelper.addToQueue(rb);
                 this.rbq.add(rb);
                 if (((Toggleable) this.mconf.getByName("Tracers")).isEnabled()) {
-                    //RenderableLine rl = new RenderableLine(currE.getPos(), Cornos.minecraft.player.getPos(), 1, 0, 0, 1, 1);
-                    //RenderHelper.addToQueue(rl);
-
-                    RenderHelper.renderLine(currE.getPos(), RenderHelper.getCrosshairVector(), Color.CYAN, 1);
+                    Color c = Color.GREEN;
+                    if (currE instanceof HostileEntity) c = Color.YELLOW;
+                    if (currE instanceof PlayerEntity) c = Color.RED;
+                    if (currE instanceof ItemEntity) c = Color.CYAN;
+                    RenderHelper.renderLine(currE.getPos(), RenderHelper.getCrosshairVector(), c, 1);
                 }
             }
         }

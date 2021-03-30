@@ -30,7 +30,7 @@ public class ScreenMixin {
         int height = Cornos.minecraft.getWindow().getScaledHeight();
         DrawableHelper.drawTexture(new MatrixStack(), 0, 0, 0, 0, 0, width, height, height, width);
         if (!(Cornos.minecraft.currentScreen instanceof MainScreen)) {
-            DrawableHelper.fill(new MatrixStack(), 0, 0, width, height, new Color(0,0,0,60).getRGB());
+            DrawableHelper.fill(new MatrixStack(), 0, 0, width, height, new Color(0, 0, 0, 60).getRGB());
         }
         ci.cancel();
     }

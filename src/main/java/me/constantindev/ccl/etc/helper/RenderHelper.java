@@ -161,7 +161,7 @@ public class RenderHelper {
         ClientPlayerEntity player = Cornos.minecraft.player;
 
         float f = 0.017453292F;
-        float pi = (float)Math.PI;
+        float pi = (float) Math.PI;
 
         assert player != null;
         float f1 = MathHelper.cos(-player.yaw * f - pi);
