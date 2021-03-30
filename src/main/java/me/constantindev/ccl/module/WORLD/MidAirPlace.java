@@ -15,7 +15,6 @@ import net.minecraft.util.math.Vec3d;
 import java.util.Objects;
 
 public class MidAirPlace extends Module {
-    RenderableBlock rlB = null;
     int timeout = 20;
 
     public MidAirPlace() {
