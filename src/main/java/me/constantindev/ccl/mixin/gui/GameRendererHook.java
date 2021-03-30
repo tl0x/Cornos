@@ -8,6 +8,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.mixin.gui;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.render.GameRenderer;
@@ -21,8 +22,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GameRenderer.class)
 public class GameRendererHook {
 
+    private boolean vb;
+
     @Inject(at = {@At(value = "FIELD", target = "Lnet/minecraft/client/render/GameRenderer;renderHand:Z", opcode = Opcodes.GETFIELD, ordinal = 0)}, method = "renderWorld")
     private void onRenderWorld(float tickDelta, long limitTime, MatrixStack matrix, CallbackInfo ci) {
+        if (vb) {
+            Cornos.minecraft.options.bobView = true;
+            vb = false;
+        }
         RenderHelper.BPQueue.forEach(renderableBlock -> RenderHelper.renderBlockOutline(renderableBlock.bp, renderableBlock.dimensions, renderableBlock.r, renderableBlock.g, renderableBlock.b, renderableBlock.a));
         RenderHelper.B1B2LQueue.forEach(renderableLine -> RenderHelper.renderLine(renderableLine.bp1, renderableLine.bp2, renderableLine.c, renderableLine.width));
         RenderHelper.BPQueue.clear();
@@ -34,4 +41,11 @@ public class GameRendererHook {
 
     }
 
+    @Inject(at = {@At(value = "FIELD", target = "Lnet/minecraft/client/options/GameOptions;bobView:Z", opcode = Opcodes.GETFIELD, ordinal = 0)}, method = "renderWorld")
+    private void fixTracerBobbing(float tickDelta, long limitTime, MatrixStack matrix, CallbackInfo ci) {
+        if (Cornos.minecraft.options.bobView) {
+            vb = true;
+            Cornos.minecraft.options.bobView = false;
+        }
+    }
 }

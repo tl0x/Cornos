@@ -154,6 +154,24 @@ public class RenderHelper {
         WorldRenderer.drawBox(matrices, builder, x, y, z, x + dim.x, y + dim.y, z + dim.z, r, g, b, a);
     }
 
+    public static Vec3d getCrosshairVector() {
+
+        Camera camera = BlockEntityRenderDispatcher.INSTANCE.camera;
+
+        ClientPlayerEntity player = Cornos.minecraft.player;
+
+        float f = 0.017453292F;
+        float pi = (float)Math.PI;
+
+        assert player != null;
+        float f1 = MathHelper.cos(-player.yaw * f - pi);
+        float f2 = MathHelper.sin(-player.yaw * f - pi);
+        float f3 = -MathHelper.cos(-player.pitch * f);
+        float f4 = MathHelper.sin(-player.pitch * f);
+
+        return new Vec3d(f2 * f3, f4, f1 * f3).add(camera.getPos());
+    }
+
     public static void drawImage(MatrixStack matrices, Identifier identifier, int x, int y, int imageWidth, int imageHeight) {
 
         RenderSystem.enableAlphaTest();

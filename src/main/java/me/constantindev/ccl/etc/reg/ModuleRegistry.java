@@ -35,6 +35,7 @@ public class ModuleRegistry {
         ml.add(new AutoRespawn());
         ml.add(new AutoTool());
         ml.add(new Jesus());
+        ml.add(new Sprint());
         ml.add(new BuildLimit());
         ml.add(new MidAirPlace());
         ml.add(new XRAY());
@@ -63,6 +64,7 @@ public class ModuleRegistry {
         ml.add(new Test());
         ml.add(new EntityCrash());
         ml.add(new SignCrash());
+        ml.add(new Step());
         ml.add(new TryUseCrash());
         ml.add(new LoginCrash());
         ml.add(new Debug());

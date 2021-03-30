@@ -12,6 +12,7 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
+import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
 import me.constantindev.ccl.etc.render.RenderableBlock;
 import net.minecraft.client.network.OtherClientPlayerEntity;
@@ -20,12 +21,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 
+import java.awt.*;
+
 public class Tracers extends Module {
     public Tracers() {
         super("PlayerInfo", "Shows nearby entities and/or players", MType.RENDER);
         this.mconf.add(new Toggleable("Entities", true));
         this.mconf.add(new Toggleable("Players", true));
         this.mconf.add(new Num("Distance", 100, 1000, 10));
+        this.mconf.add(new Toggleable("Tracers", true));
         this.mconf.add(new Toggleable("debug", false));
     }
 
@@ -55,6 +59,12 @@ public class Tracers extends Module {
                 RenderableBlock rb = new RenderableBlock(currE.getPos().add(off.multiply(-.5)).add(0, off.y / 2, 0), gInit, (int) rInit2, 50, 255, off);
                 //RenderHelper.addToQueue(rb);
                 this.rbq.add(rb);
+                if (((Toggleable) this.mconf.getByName("Tracers")).isEnabled()) {
+                    //RenderableLine rl = new RenderableLine(currE.getPos(), Cornos.minecraft.player.getPos(), 1, 0, 0, 1, 1);
+                    //RenderHelper.addToQueue(rl);
+
+                    RenderHelper.renderLine(currE.getPos(), RenderHelper.getCrosshairVector(), Color.CYAN, 1);
+                }
             }
         }
         super.onRender(ms, td);
