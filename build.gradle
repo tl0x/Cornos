@@ -1,7 +1,6 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.7-SNAPSHOT'
 	id 'maven-publish'
-	id "com.github.johnrengelman.shadow" version "6.1.0"
 }
 
 archivesBaseName = project.archives_base_name
@@ -10,17 +9,6 @@ group = project.maven_group
 
 minecraft {
 	remapMod = true
-
-}
-
-shadowJar {
-	dependencies {
-		exclude(dependency("net.fabricmc:fabric-loader:${project.loader_version}"))
-		exclude(dependency("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"))
-		exclude(dependency("net.fabricmc.yarn:${project.yarn_mappings}:v2"))
-		include(dependency('com.lukflug:panelstudio'))
-		include(dependency('com.lukflug:panelstudio-mc16'))
-	}
 
 }
 
