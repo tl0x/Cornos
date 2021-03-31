@@ -1,0 +1,94 @@
+/*
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# Project: Cornos
+# File: TutorialScreen
+# Created by constantin at 18:04, Mär 31 2021
+PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+*/
+package me.constantindev.ccl.gui;
+
+import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ClientProgression;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.Text;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TutorialScreen extends Screen {
+    ButtonWidget continueBTN;
+    int page = 0;
+    boolean finished = false;
+
+    public TutorialScreen() {
+        super(Text.of("Cornos tutorial"));
+    }
+
+    @Override
+    protected void init() {
+        continueBTN = new ButtonWidget(width - 81, height - 21, 80, 20, Text.of("Next"), button -> {
+            if (finished) {
+                ClientProgression.hasFinishedTut.setValue("on");
+                this.client.openScreen(null);
+            } else page++;
+        });
+        this.addButton(continueBTN);
+        super.init();
+    }
+
+    @Override
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        renderBackground(matrices);
+        matrices.push();
+        matrices.scale(2, 2, 1);
+        this.textRenderer.draw(matrices, "Welcome to Cornos!", 2, 2, 0xFFFFFFFF);
+        matrices.scale(.5f, .5f, 1);
+        this.textRenderer.draw(matrices, "Here's how to use the mod.", 5, 24, 0xFFFFFFFF);
+        matrices.pop();
+        List<String> messages = new ArrayList<>();
+        switch (page) {
+            case 0:
+                messages.add("Firstly, this is a client aimed at creative and survival servers.");
+                messages.add("Anarchy servers will be hard to dominate with this.");
+                messages.add("If you are a big nerdy creative exploit fan, this client is for you.");
+                messages.add("Of course, there are some good modules for survival, so you basically have a good choice for both");
+                messages.add("That being said, click the §aNext§r button to continue");
+                break;
+            case 1:
+                messages.add("Core features include funny items you can generate, a hologram generator and raiding utils.");
+                messages.add("");
+                messages.add("The hologram generator");
+                messages.add("To generate a hologram, you can use the §ahologram§r command or use the §aFunny Items§r menu in the top left in the creative inventory");
+                messages.add("");
+                messages.add("The hologram aura");
+                messages.add("The hologram aura module is basically like the hologram generator but on crack. Here's how to use it properly");
+                messages.add("1. Go to the module's settings, configure it properly and turn off autoplace");
+                messages.add("2. Go to the §afunny items§r menu");
+                messages.add("3. Enter in the hologram's content you'd like to display");
+                messages.add("4. Click the §aEnable§r button");
+                messages.add("5. Go to somewhere you can place stuff on, and enable autoplace or place them manually");
+                break;
+            case 2:
+                messages.add("Client GUI's and how you can disable them");
+                messages.add("The client adds a few custom GUIs, like the multiplayer menu or the home screen.");
+                messages.add("You can disable these and return to the default by going into §aClientConfig§r's module settings");
+                messages.add("The module is in the §aMisc§r category. You can press the §aClick GUI§r button on the main menu to get to the settings");
+                break;
+            default:
+                messages.add("Congrats! You are ready to use the client now");
+                messages.add("To revisit this tutorial, run §a" + ModuleRegistry.getByName("clientconfig").mconf.getByName("prefix").value + "config clientprogression finishedTutorial off§r in game.");
+                continueBTN.setMessage(Text.of("Finish"));
+                finished = true;
+                break;
+        }
+        int offset = 50;
+        for (String message : messages) {
+            textRenderer.draw(matrices, message, 5, offset, 0xFFFFFFFF);
+            offset += 10;
+        }
+        super.render(matrices, mouseX, mouseY, delta);
+    }
+}

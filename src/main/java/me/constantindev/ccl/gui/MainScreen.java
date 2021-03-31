@@ -3,6 +3,7 @@ package me.constantindev.ccl.gui;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ClientProgression;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
@@ -25,6 +26,10 @@ public class MainScreen extends Screen {
 
     @Override
     protected void init() {
+        if (!ClientProgression.hasFinishedTut.isEnabled()) {
+            this.client.openScreen(new TutorialScreen());
+            return;
+        }
         this.addButton(new ButtonWidget(width - 125, height - 175, 120, 20, Text.of("Alts"), button -> {
             this.client.openScreen(new AltManagerScreen());
         }));

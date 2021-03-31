@@ -14,6 +14,7 @@ import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 
@@ -35,7 +36,9 @@ public class Target extends Module {
         Box selector = new Box(init, fin);
         assert Cornos.minecraft.world != null;
         for (Entity e : Cornos.minecraft.world.getEntities()) {
-            if (e.getBoundingBox().intersects(selector) && e.getUuid() != Cornos.minecraft.player.getUuid() && e.isAttackable()) {
+            if (!(e instanceof LivingEntity)) continue;
+            LivingEntity le = (LivingEntity) e;
+            if (e.getBoundingBox().intersects(selector) && e.getUuid() != Cornos.minecraft.player.getUuid() && e.isAttackable() && !le.isDead()) {
                 Vec3d finP = e.getPos().add(0, e.getHeight() / 2, 0);
                 Cornos.minecraft.player.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, finP);
                 break;

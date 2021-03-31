@@ -6,6 +6,7 @@ import me.constantindev.ccl.module.*;
 import me.constantindev.ccl.module.COMBAT.Confuse;
 import me.constantindev.ccl.module.COMBAT.Target;
 import me.constantindev.ccl.module.COMBAT.ThunderAura;
+import me.constantindev.ccl.module.COMBAT.TriggerBot;
 import me.constantindev.ccl.module.EXPLOIT.*;
 import me.constantindev.ccl.module.EXPLOIT.CRASH.*;
 import me.constantindev.ccl.module.MOVEMENT.*;
@@ -75,6 +76,8 @@ public class ModuleRegistry {
         ml.add(new VelocityCap());
         ml.add(new NoJumpingCooldown());
         ml.add(new MemeSFX());
+        ml.add(new ClientProgression());
+        ml.add(new TriggerBot());
 
         tabManager = new TabManager();
     }

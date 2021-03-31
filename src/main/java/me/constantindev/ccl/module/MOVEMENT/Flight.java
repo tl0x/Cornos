@@ -94,6 +94,7 @@ public class Flight extends Module {
 
     @Override
     public void onDisable() {
+        if (abilitiesBefore == null) return;
         assert Cornos.minecraft.player != null;
         Cornos.minecraft.player.abilities.setFlySpeed(abilitiesBefore.getFlySpeed());
         Cornos.minecraft.player.abilities.allowFlying = abilitiesBefore.allowFlying;

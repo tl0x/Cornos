@@ -77,7 +77,7 @@ public class Confuse extends Module {
                 }
                 if (Cornos.minecraft.world.getBlockState(new BlockPos(goal.x, goal.y, goal.z)).getBlock().is(Blocks.AIR)) {
                     Raycast rc = new Raycast(Cornos.minecraft.player.getPos(), goal);
-                    if (rc.passesThroughBlock(1, true) && !moveThroughBlocks.isEnabled()) {
+                    if (!moveThroughBlocks.isEnabled() && rc.passesThroughBlock(1, true)) {
                         delayWaited = (int) (delay.getValue() - 1);
                         break;
                     }

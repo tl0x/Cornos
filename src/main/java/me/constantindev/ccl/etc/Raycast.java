@@ -9,7 +9,6 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.etc;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -33,9 +32,7 @@ public class Raycast {
     }
 
     public boolean passesThroughBlock(int laziness, boolean visualize) {
-        lastVisualization.clear();
         Vec3d current = s;
-        Vec3d last = null;
         double lastDist = Double.MAX_VALUE;
         boolean passes = false;
         double perX = diff.x / 100 * laziness;
@@ -48,20 +45,8 @@ public class Raycast {
             assert Cornos.minecraft.world != null;
             if (!Cornos.minecraft.world.getBlockState(bp).getBlock().is(Blocks.AIR)) {
                 passes = true;
-                if (!visualize) break;
-                if (last != null) {
-                    lastVisualization.add(new RenderableLine(last, current, 255, 50, 50, 255, 2));
-                }
-            } else {
-                if (last != null) {
-                    lastVisualization.add(new RenderableLine(last, current, 50, 255, 50, 255, 2));
-                }
+                break;
             }
-            for (RenderableLine line : lastVisualization) {
-                //RenderHelper.addToQueue(line);
-                ModuleRegistry.getByName("tracers").rlq.add(line);
-            }
-            last = current;
         }
         return passes;
     }

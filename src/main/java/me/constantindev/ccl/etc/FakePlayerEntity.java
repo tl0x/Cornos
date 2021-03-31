@@ -16,7 +16,7 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
 
     // dont use this, its here so idea will stop complaining
     private FakePlayerEntity(World world) {
-        super((ClientWorld) world,Cornos.minecraft.player.getGameProfile());
+        super((ClientWorld) world, Cornos.minecraft.player.getGameProfile());
     }
 
     public FakePlayerEntity(World world, GameProfile gameProfile, boolean shouldShowName) {

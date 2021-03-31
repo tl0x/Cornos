@@ -1,7 +1,6 @@
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
@@ -31,7 +30,7 @@ public class ChatHook {
             cbi.cancel();
             assert this.client != null;
             this.client.inGameHud.getChatHud().addToMessageHistory(msg);
-            String trimmed = msg.substring(ClientConfig.chatPrefix.length());
+            String trimmed = msg.substring(prefix.length());
             String[] args = trimmed.split(" +");
             String command = args[0].toLowerCase();
             String[] argsTrimmed = ArrayUtils.subarray(args, 1, args.length);
