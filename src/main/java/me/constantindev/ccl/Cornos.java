@@ -9,9 +9,7 @@ import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.registry.RegistryAttributeHolder;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.network.packet.s2c.play.CombatEventS2CPacket;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -23,11 +21,10 @@ import java.io.InputStream;
 
 public class Cornos implements ModInitializer {
 
-    public static SoundEvent BONG_SOUND = new SoundEvent(new Identifier("ccl","bong"));
-    public static SoundEvent HITMARKER_SOUND = new SoundEvent(new Identifier("ccl", "hitmarker"));
-
     public static final String MOD_ID = "ccl";
     public static final String MOD_NAME = "Cornos";
+    public static SoundEvent BONG_SOUND = new SoundEvent(new Identifier("ccl", "bong"));
+    public static SoundEvent HITMARKER_SOUND = new SoundEvent(new Identifier("ccl", "hitmarker"));
     public static Logger LOGGER = LogManager.getLogger();
     public static MinecraftClient minecraft = MinecraftClient.getInstance();
     public static Thread fastUpdater;
@@ -47,8 +44,8 @@ public class Cornos implements ModInitializer {
         Runtime.getRuntime().addShutdownHook(new Thread(ConfigHelper::saveConfig));
         log(Level.INFO, "Initializing main client");
         // *the void*
-        Registry.register(Registry.SOUND_EVENT,BONG_SOUND.getId(),BONG_SOUND);
-        Registry.register(Registry.SOUND_EVENT,HITMARKER_SOUND.getId(),HITMARKER_SOUND);
+        Registry.register(Registry.SOUND_EVENT, BONG_SOUND.getId(), BONG_SOUND);
+        Registry.register(Registry.SOUND_EVENT, HITMARKER_SOUND.getId(), HITMARKER_SOUND);
         log(Level.INFO, "Initializing configuration");
         ClientConfig.init();
         log(Level.INFO, "Registering event bus");

@@ -19,10 +19,10 @@ import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 public class MemeSFX extends Module {
     public MemeSFX() {
         super("MemeSFX", "Taco bell", MType.FUN);
-        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND,event -> {
+        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
             if (pe.packet instanceof PlayerInteractEntityC2SPacket) {
-                Cornos.minecraft.player.playSound(Cornos.HITMARKER_SOUND,1f,1f);
+                Cornos.minecraft.player.playSound(Cornos.HITMARKER_SOUND, 1f, 1f);
             }
         });
     }
