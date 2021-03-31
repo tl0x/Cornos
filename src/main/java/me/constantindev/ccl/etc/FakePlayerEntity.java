@@ -9,11 +9,15 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-// You might get an error right here, no idea why but it works just fine so just ignore the error
 public class FakePlayerEntity extends OtherClientPlayerEntity {
     private PlayerEntity player;
     private ClientWorld world;
     private boolean shouldShowName;
+
+    // dont use this, its here so idea will stop complaining
+    private FakePlayerEntity(World world) {
+        super((ClientWorld) world,Cornos.minecraft.player.getGameProfile());
+    }
 
     public FakePlayerEntity(World world, GameProfile gameProfile, boolean shouldShowName) {
         super((ClientWorld) world, gameProfile);
