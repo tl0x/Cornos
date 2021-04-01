@@ -9,6 +9,7 @@ import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.exc.InvalidStateException;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -74,10 +76,9 @@ public class IngameRendererHook {
         }
 
         if (ModuleRegistry.getByName("hud").isOn.isOn()) {
-
             if (((Toggleable) hud.mconf.getByName("modules")).isEnabled()) {
                 boolean doRgb = Hud.themeColor.isRainbow();
-                AtomicInteger offset = new AtomicInteger(1);
+                AtomicInteger offset = new AtomicInteger(0);
                 List<Module> ml = ModuleRegistry.getAll();
                 List<Module> mlR = new ArrayList<>();
                 ml.forEach(module -> {
@@ -97,7 +98,10 @@ public class IngameRendererHook {
                     } catch (Exception ignored) {
                         colorToUse = Hud.themeColor.getRGB();
                     }
-                    Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 1, 1 + offset.getAndAdd(10), doRgb ? colorToUse : Hud.themeColor.getRGB());
+                    int off = offset.getAndAdd(11);
+                    DrawableHelper.fill(matrices,scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name)-2-3,off,scaledWidth-2,off+11, new Color(47, 47, 47, 40).getRGB());
+                    DrawableHelper.fill(matrices,scaledWidth-2,off,scaledWidth,off+11, doRgb ? colorToUse : Hud.themeColor.getRGB());
+                    Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name)-3, 2 + off, doRgb ? colorToUse : Hud.themeColor.getRGB());
                 });
             }
             ClientConfig.hudElements.render(matrices, tickDelta);
