@@ -65,8 +65,13 @@ public class IngameRendererHook {
                 b = (int) rgbSeed;
                 break;
             default:
-                // shit hit the fan how is stage above 2
-                throw new InvalidStateException("RgbStage", stage + "");
+                stage = 0;
+                r = 0;
+                g = 0;
+                b = 0;
+                if (Cornos.minecraft.currentScreen == null) {
+                    Cornos.openCongratsScreen();
+                }
         }
         int rgb = (0xFF << 24) + (r << 16) + (g << 8) + b;
         ClientConfig.latestRGBVal = rgb;
@@ -99,9 +104,9 @@ public class IngameRendererHook {
                         colorToUse = Hud.themeColor.getRGB();
                     }
                     int off = offset.getAndAdd(11);
-                    DrawableHelper.fill(matrices,scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name)-2-3,off,scaledWidth-2,off+11, new Color(47, 47, 47, 40).getRGB());
-                    DrawableHelper.fill(matrices,scaledWidth-2,off,scaledWidth,off+11, doRgb ? colorToUse : Hud.themeColor.getRGB());
-                    Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name)-3, 2 + off, doRgb ? colorToUse : Hud.themeColor.getRGB());
+                    DrawableHelper.fill(matrices, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 2 - 3, off, scaledWidth - 2, off + 11, new Color(47, 47, 47, 40).getRGB());
+                    DrawableHelper.fill(matrices, scaledWidth - 2, off, scaledWidth, off + 11, doRgb ? colorToUse : Hud.themeColor.getRGB());
+                    Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 3, 2 + off, doRgb ? colorToUse : Hud.themeColor.getRGB());
                 });
             }
             ClientConfig.hudElements.render(matrices, tickDelta);

@@ -45,8 +45,7 @@ public class HudElements extends DrawableHelper {
         int offset = 0;
         if (((Toggleable) hud.mconf.getByName("miniplayer")).isEnabled() && !chatOpen) {
             double yaw = sin * 100;
-
-            InventoryScreen.drawEntity(Cornos.minecraft.getWindow().getScaledWidth() - 20, Cornos.minecraft.getWindow().getScaledHeight() - 1, 25, (float) (yaw), Cornos.minecraft.player.pitch, Cornos.minecraft.player);
+            InventoryScreen.drawEntity((int) (Cornos.minecraft.getWindow().getScaledWidth() / 1.5), Cornos.minecraft.getWindow().getScaledHeight() - 1, 25, (float) (yaw), Cornos.minecraft.player.pitch, Cornos.minecraft.player);
         }
         if (((Toggleable) hud.mconf.getByName("coords")).isEnabled() && !chatOpen) {
             offset += 10;

@@ -10,8 +10,11 @@ import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -36,6 +39,15 @@ public class Cornos implements ModInitializer {
     public static void onMinecraftCreate() {
         InputStream inputStream = Cornos.class.getClassLoader().getResourceAsStream("assets/ccl/icon1.png");
         Cornos.minecraft.getWindow().setIcon(inputStream, inputStream);
+    }
+
+    public static void openCongratsScreen() {
+        ConfirmScreen cs1 = new ConfirmScreen(t -> {
+            if (t) {
+                Util.getOperatingSystem().open("https://github.com/AriliusClient/Cornos/issues/new?title=Broke%20the%20client");
+            } else Cornos.minecraft.openScreen(null);
+        }, Text.of("Congrats!"), Text.of("You broke the client! Dare to tell me how you did it?"));
+        Cornos.minecraft.openScreen(cs1);
     }
 
     @Override
