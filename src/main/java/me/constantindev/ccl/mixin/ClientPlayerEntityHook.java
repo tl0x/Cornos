@@ -2,6 +2,11 @@ package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Packet;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,4 +29,6 @@ public class ClientPlayerEntityHook {
             cir.setReturnValue(false);
         }
     }
+
+
 }

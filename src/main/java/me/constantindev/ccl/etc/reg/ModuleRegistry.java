@@ -78,6 +78,7 @@ public class ModuleRegistry {
         ml.add(new MemeSFX());
         ml.add(new ClientProgression());
         ml.add(new TriggerBot());
+        ml.add(new Speed());
 
         tabManager = new TabManager();
     }
