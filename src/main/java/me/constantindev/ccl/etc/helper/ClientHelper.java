@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
 
 public class ClientHelper {
     public static void sendChat(String msg) {
-        assert Cornos.minecraft.player != null;
+        if (Cornos.minecraft.player == null) return;
         Cornos.minecraft.player.sendMessage(Text.of(Formatting.DARK_AQUA + "[ " + Formatting.AQUA + Cornos.MOD_ID.toUpperCase() + Formatting.DARK_AQUA + " ] " + Formatting.RESET + msg), false);
     }
 

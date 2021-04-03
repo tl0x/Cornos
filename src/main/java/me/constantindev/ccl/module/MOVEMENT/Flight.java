@@ -7,6 +7,7 @@ import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.helper.RandomHelper;
 import me.constantindev.ccl.etc.ms.MType;
+import net.minecraft.client.options.GameOptions;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.network.packet.c2s.play.UpdatePlayerAbilitiesC2SPacket;
 import net.minecraft.particle.ParticleTypes;
@@ -17,7 +18,8 @@ import java.util.Objects;
 public class Flight extends Module {
     int counter = 0;
     int counter1 = 0;
-    MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "static", "jetpack"});
+    float flyingSince = 0;
+    MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "3d", "static", "jetpack"});
     Toggleable toggleFast = new Toggleable("toggleFast", true);
     Num speed = new Num("speed", 1.0, 10, 0);
     Toggleable sendAbilitiesUpdate = new Toggleable("abilities", true);
@@ -58,8 +60,7 @@ public class Flight extends Module {
                 Cornos.minecraft.player.abilities.flying = !(counter > 9);
                 Cornos.minecraft.player.abilities.setFlySpeed((float) (speed / 10));
                 break;
-            case "static":
-
+            case "3d":
                 assert Cornos.minecraft.player != null;
                 Vec3d rot = Cornos.minecraft.player.getRotationVector();
                 rot = rot.multiply(speed);
@@ -69,6 +70,27 @@ public class Flight extends Module {
                 else if (Cornos.minecraft.options.keyBack.isPressed())
                     Cornos.minecraft.player.setVelocity(-rot.x, -rot.y, -rot.z);
                 else Cornos.minecraft.player.setVelocity(0, 0, 0);
+                break;
+            case "static":
+                float y = Cornos.minecraft.player.yaw;
+                int mx = 0, my = 0, mz = 0;
+                GameOptions go = Cornos.minecraft.options;
+                if (go.keyJump.isPressed()) my++;
+                if (go.keyBack.isPressed()) mz++;
+                if (go.keyLeft.isPressed()) mx--;
+                if (go.keyRight.isPressed()) mx++;
+                if (go.keySneak.isPressed()) my--;
+                if (go.keyForward.isPressed()) mz--;
+                double ts = speed / 2;
+                double s = Math.sin(Math.toRadians(y));
+                double c = Math.cos(Math.toRadians(y));
+                double nx = ts * mz * s;
+                double nz = ts * mz * -c;
+                double ny = ts * my;
+                nx += ts * mx * -c;
+                nz += ts * mx * -s;
+                Vec3d nv3 = new Vec3d(nx, ny, nz);
+                Cornos.minecraft.player.setVelocity(nv3);
                 break;
             case "jetpack":
                 if (Cornos.minecraft.world == null) return;
@@ -94,6 +116,7 @@ public class Flight extends Module {
 
     @Override
     public void onDisable() {
+        flyingSince = 0;
         if (abilitiesBefore == null) return;
         assert Cornos.minecraft.player != null;
         Cornos.minecraft.player.abilities.setFlySpeed(abilitiesBefore.getFlySpeed());

@@ -18,14 +18,16 @@ import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 
 public class Speed extends Module {
-    public static MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "bhop", "legit"});
+    public static MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "bhop", "legit", "minihop"});
     public static Num speedMulti = new Num("speed", 2, 5, 0);
+    public static Num bhopDown = new Num("bhopDown", 1, 10, -0.7);
     double prev = 0.1;
 
     public Speed() {
         super("Speed", "why is he going fast", MType.MOVEMENT);
         this.mconf.add(mode);
         this.mconf.add(speedMulti);
+        this.mconf.add(bhopDown);
     }
 
     @Override
@@ -37,18 +39,28 @@ public class Speed extends Module {
 
     @Override
     public void onExecute() {
-        Cornos.minecraft.player.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(speedMulti.getValue());
+        if (!mode.value.equalsIgnoreCase("legit"))
+            Cornos.minecraft.player.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(speedMulti.getValue());
         switch (mode.value) {
             case "bhop":
                 if (isMoving()) {
                     if (Cornos.minecraft.player.isOnGround()) Cornos.minecraft.player.jump();
-                    else Cornos.minecraft.player.addVelocity(0, -0.1, 0);
+                    else Cornos.minecraft.player.addVelocity(0, -(bhopDown.getValue() / 10), 0);
                 }
                 break;
             case "legit":
-                speedMulti.setValue("0.1");
                 if (isMoving() && Cornos.minecraft.player.isOnGround()) {
                     Cornos.minecraft.player.jump();
+                }
+                break;
+            case "minihop":
+                if (isMoving()) {
+                    if (Cornos.minecraft.player.isOnGround()) {
+                        Cornos.minecraft.player.jump();
+                        Cornos.minecraft.player.addVelocity(0, -.35, 0);
+                    } else {
+                        Cornos.minecraft.player.setVelocity(Cornos.minecraft.player.getVelocity().multiply(1.1));
+                    }
                 }
                 break;
         }

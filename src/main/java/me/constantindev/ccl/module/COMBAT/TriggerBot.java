@@ -15,7 +15,7 @@ import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.util.hit.EntityHitResult;
 
 public class TriggerBot extends Module {
-    Num delay = new Num("delay", 2, 0, 20);
+    Num delay = new Num("delay", 2, 20, 0);
     int delayWaited = 0;
 
     public TriggerBot() {
