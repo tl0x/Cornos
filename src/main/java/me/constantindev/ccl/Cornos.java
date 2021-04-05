@@ -1,6 +1,7 @@
 package me.constantindev.ccl;
 
 import com.thealtening.auth.TheAlteningAuthentication;
+import me.constantindev.ccl.etc.NotificationManager;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.event.EventHelper;
@@ -31,6 +32,7 @@ public class Cornos implements ModInitializer {
     public static Logger LOGGER = LogManager.getLogger();
     public static MinecraftClient minecraft = MinecraftClient.getInstance();
     public static Thread fastUpdater;
+    public static NotificationManager notifMan;
 
     public static void log(Level level, String message) {
         LOGGER.log(level, "[" + MOD_NAME + "] " + message);
@@ -55,9 +57,9 @@ public class Cornos implements ModInitializer {
 
         Runtime.getRuntime().addShutdownHook(new Thread(ConfigHelper::saveConfig));
         log(Level.INFO, "Initializing main client");
-        // *the void*
         Registry.register(Registry.SOUND_EVENT, BONG_SOUND.getId(), BONG_SOUND);
         Registry.register(Registry.SOUND_EVENT, HITMARKER_SOUND.getId(), HITMARKER_SOUND);
+        notifMan = new NotificationManager();
         log(Level.INFO, "Initializing configuration");
         ClientConfig.init();
         log(Level.INFO, "Registering event bus");

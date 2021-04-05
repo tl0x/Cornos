@@ -23,6 +23,6 @@ public class TickHook {
             }
         });
         KeyBindManager.tick();
-
+        Cornos.notifMan.tick();
     }
 }

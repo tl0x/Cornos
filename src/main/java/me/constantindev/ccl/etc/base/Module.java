@@ -1,5 +1,6 @@
 package me.constantindev.ccl.etc.base;
 
+import me.constantindev.ccl.etc.Notification;
 import me.constantindev.ccl.etc.config.Keybind;
 import me.constantindev.ccl.etc.config.ModuleConfig;
 import me.constantindev.ccl.etc.config.Toggleable;
@@ -43,11 +44,13 @@ public class Module {
             if (!this.calledVitalsOnenable) {
                 this.onEnable();
                 this.calledVitalsOnenable = true;
+                Notification.create("Module toggle", new String[]{"§aEnabled§r " + this.name}, 1000);
             }
         } else {
             this.calledVitalsOnenable = false;
             if (!this.calledVitalsOndisable) {
                 this.onDisable();
+                Notification.create("Module toggle", new String[]{"§cDisabled§r " + this.name}, 1000);
                 this.calledVitalsOndisable = true;
             }
         }

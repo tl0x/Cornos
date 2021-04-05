@@ -29,6 +29,7 @@ public class CommandRegistry {
         cl.add(new Enchant());
         cl.add(new Rename());
         cl.add(new Reload());
+        cl.add(new BlockEgg());
     }
 
     public static List<Command> getAll() {
