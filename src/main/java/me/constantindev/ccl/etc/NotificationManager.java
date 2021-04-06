@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationManager {
-    private List<Notification> notifs = new ArrayList<>();
     long lastCurr = System.currentTimeMillis();
+    private List<Notification> notifs = new ArrayList<>();
 
     public void add(Notification notif) {
         notifs.add(notif);
@@ -44,15 +44,15 @@ public class NotificationManager {
         int height = Cornos.minecraft.getWindow().getScaledHeight();
         for (Notification notification : Lists.reverse(notifs)) {
             if (notification.animationProgress2 < 6.0 && !notification.isAnimationComplete) {
-                notification.animationProgress2 += (((double)curr)-((double)lastCurr))/100.0;
-                notification.animationProgress2 = MathHelper.clamp(notification.animationProgress2,0,6.1);
+                notification.animationProgress2 += (((double) curr) - ((double) lastCurr)) / 100.0;
+                notification.animationProgress2 = MathHelper.clamp(notification.animationProgress2, 0, 6.1);
                 notification.animationProgress = ((Math.log(notification.animationProgress2) + 2) / 2.778);
             } else notification.isAnimationComplete = true;
             double xOff = 150.0 * notification.animationProgress;
             if (notification.duration + notification.creationTime < curr && notification.isAnimationComplete) {
                 if (notification.animationProgress2 > 0.01) {
-                    notification.animationProgress2 -= (((double)curr)-((double)lastCurr))/100.0;
-                    notification.animationProgress2 = MathHelper.clamp(notification.animationProgress2,0,6.1);
+                    notification.animationProgress2 -= (((double) curr) - ((double) lastCurr)) / 100.0;
+                    notification.animationProgress2 = MathHelper.clamp(notification.animationProgress2, 0, 6.1);
                     notification.animationProgress = ((Math.log(Math.max(notification.animationProgress2, 0.01)) + 2) / 2.778);
                 } else notification.markedForDeletion = true;
 

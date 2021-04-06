@@ -1,10 +1,10 @@
 {
-  "bong":{
+  "bong": {
     "sounds": [
       "ccl:bong"
     ]
   },
-  "hitmarker":{
+  "hitmarker": {
     "sounds": [
       "ccl:hitmarker"
     ]
