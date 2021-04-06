@@ -32,6 +32,7 @@ public class TriggerBot extends Module {
             } else return;
             EntityHitResult ehr = (EntityHitResult) Cornos.minecraft.crosshairTarget;
             if (!ehr.getEntity().isAttackable() || !ehr.getEntity().isAlive()) return;
+            assert Cornos.minecraft.interactionManager != null;
             Cornos.minecraft.interactionManager.attackEntity(Cornos.minecraft.player, ehr.getEntity());
 
         }

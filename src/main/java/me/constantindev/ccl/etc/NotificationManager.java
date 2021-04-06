@@ -38,6 +38,7 @@ public class NotificationManager {
     public void render(MatrixStack matrices) {
         // DO NOT CHANGE A SINGLE THING THIS TOOK SO LONG TO MAKE HOLY SHIT
         long curr = System.currentTimeMillis();
+        assert Cornos.minecraft.player != null;
         int offset = Cornos.minecraft.player.getStatusEffects().size() * 10 + 2;
         int width = Cornos.minecraft.getWindow().getScaledWidth();
         int height = Cornos.minecraft.getWindow().getScaledHeight();

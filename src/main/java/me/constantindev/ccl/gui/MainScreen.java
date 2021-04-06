@@ -27,15 +27,15 @@ public class MainScreen extends Screen {
     @Override
     protected void init() {
         if (!ClientProgression.hasFinishedTut.isEnabled()) {
+            assert this.client != null;
             this.client.openScreen(new TutorialScreen());
             return;
         }
         this.addButton(new ButtonWidget(width - 125, height - 175, 120, 20, Text.of("Alts"), button -> {
+            assert this.client != null;
             this.client.openScreen(new AltManagerScreen());
         }));
-        this.addButton(new ButtonWidget(width - 125, height - 150, 120, 20, Text.of("Click GUI"), button -> {
-            ModuleRegistry.getByName("clickgui").onEnable();
-        }));
+        this.addButton(new ButtonWidget(width - 125, height - 150, 120, 20, Text.of("Click GUI"), button -> ModuleRegistry.getByName("clickgui").onEnable()));
         this.addButton(new ButtonWidget(width - 125, height - 125, 120, 20, Text.of("Settings"), (b) -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));
         this.addButton(new ButtonWidget(width - 125, height - 100, 120, 20, Text.of("Singleplayer"), (b) -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
         this.addButton(new ButtonWidget(width - 125, height - 75, 120, 20, Text.of("Multiplayer"), (b) -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));

@@ -11,6 +11,7 @@ import net.minecraft.nbt.StringTag;
 import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
 import net.minecraft.screen.slot.SlotActionType;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class Crash extends Command {
@@ -39,13 +40,14 @@ public class Crash extends Command {
             StringTag st = StringTag.of(createGarbageData(600, 0, 1000));
             list.add(st);
         }
+        assert Cornos.minecraft.player != null;
         tag.put("author", StringTag.of(Cornos.minecraft.player.getEntityName()));
         tag.put("title", StringTag.of("\n the server \n needs \n a schmoke \n"));
         tag.put("pages", list);
         stack.setTag(tag);
         for (int i = 0; i < amount; i++) {
             //Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(new CreativeInventoryActionC2SPacket(0, stack));
-            Cornos.minecraft.getNetworkHandler().sendPacket(new ClickSlotC2SPacket(0, 0, 0, SlotActionType.PICKUP, stack, (short) 0));
+            Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(new ClickSlotC2SPacket(0, 0, 0, SlotActionType.PICKUP, stack, (short) 0));
         }
         super.onExecute(args);
     }

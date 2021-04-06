@@ -25,6 +25,7 @@ public class Nuker extends Module {
         current++;
         if (current > 2) current = 0;
         else return;
+        assert Cornos.minecraft.player != null;
         BlockPos original = Cornos.minecraft.player.getBlockPos();
         for (int x = -range; x < range + 1; x++) {
             for (int y = -range; y < range + 1; y++) {

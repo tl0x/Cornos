@@ -26,6 +26,7 @@ public class Freecam extends Module {
 
     @Override
     public void onExecute() {
+        assert Cornos.minecraft.player != null;
         Cornos.minecraft.player.setVelocity(0, 0, 0);
         Cornos.minecraft.player.updatePosition(startloc.x, startloc.y, startloc.z);
         if (Cornos.minecraft.currentScreen == null) {

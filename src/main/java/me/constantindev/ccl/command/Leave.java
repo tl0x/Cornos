@@ -12,6 +12,8 @@ import me.constantindev.ccl.etc.base.Command;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 
+import java.util.Objects;
+
 public class Leave extends Command {
     public Leave() {
         super("Leave", "Leaves the server", new String[]{"leave", "l", "quit"});
@@ -19,7 +21,7 @@ public class Leave extends Command {
 
     @Override
     public void onExecute(String[] args) {
-        MinecraftClient.getInstance().getNetworkHandler().onDisconnected(Text.of("Imagine quitting smh"));
+        Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).onDisconnected(Text.of("Imagine quitting smh"));
         super.onExecute(args);
     }
 }

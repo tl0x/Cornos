@@ -72,6 +72,7 @@ public class Flight extends Module {
                 else Cornos.minecraft.player.setVelocity(0, 0, 0);
                 break;
             case "static":
+                assert Cornos.minecraft.player != null;
                 float y = Cornos.minecraft.player.yaw;
                 int mx = 0, my = 0, mz = 0;
                 GameOptions go = Cornos.minecraft.options;

@@ -17,6 +17,8 @@ import net.minecraft.client.options.GameOptions;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 
+import java.util.Objects;
+
 public class Speed extends Module {
     public static MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "bhop", "legit", "minihop"});
     public static Num speedMulti = new Num("speed", 2, 5, 0);
@@ -32,6 +34,7 @@ public class Speed extends Module {
 
     @Override
     public void onEnable() {
+        assert Cornos.minecraft.player != null;
         EntityAttributeInstance eai = Cornos.minecraft.player.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
         if (eai != null) prev = eai.getValue();
         super.onEnable();
@@ -39,8 +42,10 @@ public class Speed extends Module {
 
     @Override
     public void onExecute() {
-        if (!mode.value.equalsIgnoreCase("legit"))
-            Cornos.minecraft.player.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(speedMulti.getValue());
+        if (!mode.value.equalsIgnoreCase("legit")) {
+            assert Cornos.minecraft.player != null;
+            Objects.requireNonNull(Cornos.minecraft.player.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)).setBaseValue(speedMulti.getValue());
+        }
         switch (mode.value) {
             case "bhop":
                 if (isMoving()) {
@@ -49,8 +54,11 @@ public class Speed extends Module {
                 }
                 break;
             case "legit":
-                if (isMoving() && Cornos.minecraft.player.isOnGround()) {
-                    Cornos.minecraft.player.jump();
+                if (isMoving()) {
+                    assert Cornos.minecraft.player != null;
+                    if (Cornos.minecraft.player.isOnGround()) {
+                        Cornos.minecraft.player.jump();
+                    }
                 }
                 break;
             case "minihop":
@@ -69,7 +77,8 @@ public class Speed extends Module {
 
     @Override
     public void onDisable() {
-        Cornos.minecraft.player.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(prev);
+        assert Cornos.minecraft.player != null;
+        Objects.requireNonNull(Cornos.minecraft.player.getAttributes().getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)).setBaseValue(prev);
         super.onDisable();
     }
 

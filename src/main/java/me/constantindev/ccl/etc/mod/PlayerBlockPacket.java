@@ -44,7 +44,7 @@ public class PlayerBlockPacket implements Packet<ServerPlayPacketListener> {
     }
 
     @Override
-    public void write(PacketByteBuf packetBuffer) throws IOException {
+    public void write(PacketByteBuf packetBuffer) {
         packetBuffer.writeBlockPos(this.position);
         packetBuffer.writeByte(this.placedBlockDirection);
         packetBuffer.writeItemStack(this.stack);

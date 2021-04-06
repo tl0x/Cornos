@@ -32,6 +32,7 @@ public class TutorialScreen extends Screen {
         continueBTN = new ButtonWidget(width - 81, height - 21, 80, 20, Text.of("Next"), button -> {
             if (finished) {
                 ClientProgression.hasFinishedTut.setValue("on");
+                assert this.client != null;
                 this.client.openScreen(null);
             } else page++;
         });

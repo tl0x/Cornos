@@ -44,13 +44,12 @@ public class FunnyItemsScreen extends Screen {
 
     @Override
     protected void init() {
+        assert Cornos.minecraft.player != null;
         Vec3d ppos = Cornos.minecraft.player.getPos();
         armorStandName = new TextFieldWidget(textRenderer, 5, 20, 200, 20, Text.of("Armor stand name"));
         armorStandName.setMaxLength(65535);
         pos = new TextFieldWidget(textRenderer, 5, 45, 120, 20, Text.of("Position"));
-        ButtonWidget currentPos = new ButtonWidget(130, 45, 75, 20, Text.of("Current pos"), button -> {
-            pos.setText(roundToDecimalPoint(ppos.x, 2) + " " + roundToDecimalPoint(ppos.y, 2) + " " + roundToDecimalPoint(ppos.z, 2));
-        });
+        ButtonWidget currentPos = new ButtonWidget(130, 45, 75, 20, Text.of("Current pos"), button -> pos.setText(roundToDecimalPoint(ppos.x, 2) + " " + roundToDecimalPoint(ppos.y, 2) + " " + roundToDecimalPoint(ppos.z, 2)));
         pos.setMaxLength(65535);
         pos.setText(roundToDecimalPoint(ppos.x, 2) + " " + roundToDecimalPoint(ppos.y, 2) + " " + roundToDecimalPoint(ppos.z, 2));
         armorStandSpawnegg = new CheckboxWidget(5, 70, 60, 20, Text.of("Create spawn egg"), false);

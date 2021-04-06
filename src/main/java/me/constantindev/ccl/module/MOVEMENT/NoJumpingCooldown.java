@@ -20,6 +20,7 @@ public class NoJumpingCooldown extends Module {
 
     @Override
     public void onExecute() {
+        assert Cornos.minecraft.player != null;
         ((JumpingCooldownAccessor) Cornos.minecraft.player).setJumpingCooldown(0);
         super.onExecute();
     }

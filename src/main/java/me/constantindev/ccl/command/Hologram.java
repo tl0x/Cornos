@@ -32,6 +32,7 @@ public class Hologram extends Command {
 
     public static void spawnHologram(Vec3d pos, String text, boolean egg, boolean baby, String type) {
         ItemStack is = getHoloStack(pos, text, egg, baby, type);
+        assert Cornos.minecraft.player != null;
         Cornos.minecraft.player.inventory.addPickBlock(is);
     }
 
@@ -93,6 +94,7 @@ public class Hologram extends Command {
         optionParser.accepts("baby");
         optionParser.accepts("sand");
         OptionSet oset = optionParser.parse(args);
+        assert Cornos.minecraft.player != null;
         if (!Cornos.minecraft.player.isCreative() && !oset.has("force")) {
             ClientHelper.sendChat("You need to be in creative (or provide --force)");
             return;

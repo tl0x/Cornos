@@ -20,6 +20,7 @@ public class Drop extends Command {
     @Override
     public void onExecute(String[] args) {
         for (int i = 0; i < 46; i++) {
+            assert Cornos.minecraft.interactionManager != null;
             Cornos.minecraft.interactionManager.clickSlot(0, i, 1, SlotActionType.THROW, Cornos.minecraft.player);
         }
 

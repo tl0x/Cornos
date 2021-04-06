@@ -9,6 +9,8 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
+import java.util.Objects;
+
 public class FakePlayerEntity extends OtherClientPlayerEntity {
     private PlayerEntity player;
     private ClientWorld world;
@@ -16,7 +18,7 @@ public class FakePlayerEntity extends OtherClientPlayerEntity {
 
     // dont use this, its here so idea will stop complaining
     private FakePlayerEntity(World world) {
-        super((ClientWorld) world, Cornos.minecraft.player.getGameProfile());
+        super((ClientWorld) world, Objects.requireNonNull(Cornos.minecraft.player).getGameProfile());
     }
 
     public FakePlayerEntity(World world, GameProfile gameProfile, boolean shouldShowName) {

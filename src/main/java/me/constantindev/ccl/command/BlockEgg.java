@@ -28,6 +28,7 @@ public class BlockEgg extends Command {
             return;
         }
         Block b = Registry.BLOCK.get(new Identifier(args[0]));
+        assert Cornos.minecraft.player != null;
         ItemStack is = Hologram.getFallingBlockStack(Cornos.minecraft.player.getPos(), b);
         Cornos.minecraft.player.inventory.addPickBlock(is);
         super.onExecute(args);

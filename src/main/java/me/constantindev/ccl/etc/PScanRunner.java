@@ -31,7 +31,7 @@ public class PScanRunner {
                 futures.add(isPortOpen(es, address.getHostAddress(), i, timeoutMS, threadDelay));
             }
             try {
-                es.awaitTermination(200L, TimeUnit.MILLISECONDS);
+                boolean _1 = es.awaitTermination(200L, TimeUnit.MILLISECONDS);
             } catch (InterruptedException ignored) {
             }
             List<PortScannerManager.ScanResult> results = new ArrayList<>();

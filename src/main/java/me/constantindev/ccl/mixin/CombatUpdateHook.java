@@ -23,6 +23,7 @@ public class CombatUpdateHook {
     @Inject(method = "<init>(Lnet/minecraft/entity/damage/DamageTracker;Lnet/minecraft/network/packet/s2c/play/CombatEventS2CPacket$Type;Lnet/minecraft/text/Text;)V", at = @At("TAIL"))
     public void init(DamageTracker damageTracker, CombatEventS2CPacket.Type type, Text deathMessage, CallbackInfo ci) {
         if (type == CombatEventS2CPacket.Type.ENTITY_DIED && ModuleRegistry.getByName("memesfx").isOn.isOn()) {
+            assert Cornos.minecraft.player != null;
             Cornos.minecraft.player.playSound(Cornos.BONG_SOUND, 1f, 1f);
         }
     }

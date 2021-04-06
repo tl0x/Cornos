@@ -73,6 +73,7 @@ public class AltManagerScreen extends Screen {
         ButtonWidget login = new ButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 60, 120, 20, Text.of("Login"), button -> {
             if (w.getMessage().asString().equalsIgnoreCase("cracked")) {
                 Session newS = new Session(this.email.getText(), UUID.randomUUID().toString(), "CornosOnTOP", "mojang");
+                assert this.client != null;
                 ((SessionAccessor) this.client).setSession(newS);
                 errormsg = "§aSet username to " + this.email.getText();
                 return;
@@ -84,6 +85,7 @@ public class AltManagerScreen extends Screen {
                 auth.logIn();
                 Session newS = new Session(auth.getSelectedProfile().getName(), auth.getSelectedProfile().getId().toString(), auth.getAuthenticatedToken(), "mojang");
                 errormsg = "§aSuccessfully logged in! Username: " + newS.getUsername();
+                assert this.client != null;
                 ((SessionAccessor) this.client).setSession(newS);
 
             } catch (Exception exc) {
@@ -105,6 +107,7 @@ public class AltManagerScreen extends Screen {
                 passwd = "ThisDoesNotMatterSinceTheAccountIsCracked";
             }
             Alts.k.setValue(Alts.k.value + ((char) 999) + encStr(email, 6001) + ((char) 998) + encStr(passwd, 6000));
+            assert this.client != null;
             this.client.openScreen(new AltManagerScreen());
         });
         this.addButton(login);
@@ -135,6 +138,7 @@ public class AltManagerScreen extends Screen {
             ButtonWidget delete = new ButtonWidget(width - 141 - 21, offset, 20, 20, Text.of("X"), button -> {
                 fal.remove(encStr(good.get(0), 6001) + ((char) 998) + encStr(good.get(1), 6000));
                 Alts.k.setValue("0" + String.join(((char) 999) + "", fal));
+                assert this.client != null;
                 this.client.openScreen(new AltManagerScreen());
             });
             offset += 25;

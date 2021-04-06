@@ -88,9 +88,7 @@ public class ModuleRegistry {
     }
 
     public static void reload() {
-        ml.forEach(module -> {
-            module.setEnabled(false);
-        });
+        ml.forEach(module -> module.setEnabled(false));
         ml.clear();
         init();
     }

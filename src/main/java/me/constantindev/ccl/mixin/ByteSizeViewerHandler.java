@@ -22,6 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.List;
+import java.util.Objects;
 
 @Mixin(ItemStack.class)
 public class ByteSizeViewerHandler {
@@ -43,7 +44,7 @@ public class ByteSizeViewerHandler {
             for (String key : ct.getKeys()) {
                 if (ct.get(key) == null) continue;
                 fs += key.length();
-                fs += ct.get(key).copy().toString().length();
+                fs += Objects.requireNonNull(ct.get(key)).copy().toString().length();
             }
             //tl.add(Text.of("Byte size: ~ "+humanReadableByteCountBin(fs)));
             ct.putString("bytesize", humanReadableByteCountBin(fs) + (fs > 2097152 ? " §l§c! §r§cTHIS CAN BOOKBAN§r" : ""));

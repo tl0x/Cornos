@@ -24,6 +24,7 @@ public class MemeSFX extends Module {
             if (!ModuleRegistry.getByName("memesfx").isOn.isOn()) return;
             PacketEvent pe = (PacketEvent) event;
             if (pe.packet instanceof PlayerInteractEntityC2SPacket) {
+                assert Cornos.minecraft.player != null;
                 Cornos.minecraft.player.playSound(Cornos.HITMARKER_SOUND, 1f, 1f);
             }
         });
