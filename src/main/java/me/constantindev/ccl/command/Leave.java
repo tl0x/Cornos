@@ -8,6 +8,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.command;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
@@ -21,7 +22,8 @@ public class Leave extends Command {
 
     @Override
     public void onExecute(String[] args) {
-        Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).onDisconnected(Text.of("Imagine quitting smh"));
+        if (Cornos.minecraft.world == null) return;
+        Cornos.minecraft.world.disconnect();
         super.onExecute(args);
     }
 }

@@ -73,6 +73,7 @@ public class Cornos implements ModInitializer {
         log(Level.INFO, "Registering all keybinds");
         KeyBindManager.init();
         log(Level.INFO, "All features registered. Ready to load game");
+
         fastUpdater = new Thread(() -> {
             while (true) {
                 try {
