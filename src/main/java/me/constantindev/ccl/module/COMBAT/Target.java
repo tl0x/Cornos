@@ -39,7 +39,7 @@ public class Target extends Module {
         for (Entity e : Cornos.minecraft.world.getEntities()) {
             if (!(e instanceof LivingEntity)) continue;
             if ((e instanceof PlayerEntity) && !players.isEnabled()) continue;
-            if (!entities.isEnabled()) continue;
+            if (!entities.isEnabled() && !(e instanceof PlayerEntity)) continue;
             LivingEntity le = (LivingEntity) e;
             if (e.getBoundingBox().intersects(selector) && e.getUuid() != Cornos.minecraft.player.getUuid() && e.isAttackable() && !le.isDead()) {
                 Vec3d finP = e.getPos().add(0, e.getHeight() / 2, 0);

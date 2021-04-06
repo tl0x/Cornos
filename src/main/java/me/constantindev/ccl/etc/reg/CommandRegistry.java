@@ -30,6 +30,8 @@ public class CommandRegistry {
         cl.add(new Rename());
         cl.add(new Reload());
         cl.add(new BlockEgg());
+        cl.add(new FakePlayer());
+        cl.add(new RemovePlayer());
     }
 
     public static List<Command> getAll() {

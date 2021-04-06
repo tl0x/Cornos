@@ -25,7 +25,7 @@ public class TabGUI extends DrawableHelper {
 
     private final Identifier rainbowLogo = new Identifier("ccl", "white_logo.png");
 
-    public static void drawBorderedRect(int x, int y, int x1, int y1, int size, int borderC, int insideC, Matrix4f matrix4f) {
+    public static void drawBorderedRect(int x, int y, int x1, int y1, float size, int borderC, int insideC, Matrix4f matrix4f) {
         drawGuiRect(x + size, y + size, x1 - size, y1 - size, insideC, matrix4f);
         drawGuiRect(x + size, y + size, x1, y, borderC, matrix4f);
         drawGuiRect(x, y + 1, x + size, y1, borderC, matrix4f);
