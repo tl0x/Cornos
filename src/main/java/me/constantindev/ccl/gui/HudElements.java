@@ -100,15 +100,15 @@ public class HudElements extends DrawableHelper {
         }
         if (((Toggleable) hud.mconf.getByName("taco")).isEnabled()) {
             long current = System.currentTimeMillis();
-            if (last+300<current) {
+            if (last + 300 < current) {
                 last = current;
                 tacoCounter++;
             }
             if (tacoCounter > 4) tacoCounter = 1;
             int w = Cornos.minecraft.getWindow().getScaledWidth();
             int h = Cornos.minecraft.getWindow().getScaledHeight();
-            Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl","taco/t"+tacoCounter+".png"));
-            DrawableHelper.drawTexture(matrices, (w/2)-(92/2),h-64-20,0,0,0,92,64,64,92);
+            Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl", "taco/t" + tacoCounter + ".png"));
+            DrawableHelper.drawTexture(matrices, (w / 2) - (92 / 2), h - 64 - 20, 0, 0, 0, 92, 64, 64, 92);
         }
 
 

@@ -70,7 +70,7 @@ public class ConfigHelper {
                 }
             } catch (Exception ignored) {
             }
-            System.out.println(sb.toString());
+            System.out.println(sb);
             for (String ck : sb.toString().split(";")) {
                 //System.out.println(ck);
                 String[] datapair = ck.split("=");

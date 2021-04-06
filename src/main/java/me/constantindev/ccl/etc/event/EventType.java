@@ -11,5 +11,6 @@ package me.constantindev.ccl.etc.event;
 public enum EventType {
     ONPACKETSEND,
     ONPACKETRECV,
-    ONPACKETHANDLE
+    ONPACKETHANDLE,
+    ONTICK
 }

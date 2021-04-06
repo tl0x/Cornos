@@ -1,6 +1,9 @@
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.event.EventHelper;
+import me.constantindev.ccl.etc.event.EventType;
+import me.constantindev.ccl.etc.event.arg.Event;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -24,5 +27,6 @@ public class TickHook {
         });
         KeyBindManager.tick();
         Cornos.notifMan.tick();
+        EventHelper.BUS.invokeEventCall(EventType.ONTICK, new Event());
     }
 }

@@ -10,10 +10,6 @@ package me.constantindev.ccl.command;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.Text;
-
-import java.util.Objects;
 
 public class Leave extends Command {
     public Leave() {

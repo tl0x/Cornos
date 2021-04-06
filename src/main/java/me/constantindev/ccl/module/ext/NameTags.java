@@ -87,7 +87,7 @@ public class NameTags extends Module {
             GlStateManager.enableBlend();
             GL11.glEnable(GL11.GL_DEPTH_TEST);
             GL11.glDepthFunc(GL11.GL_ALWAYS);
-            me.constantindev.ccl.gui.TabGUI.drawBorderedRect(-width - 4, (textRenderer.fontHeight + 2), width + 4, 1, .5f, Hud.themeColor.getRGB(), new Color(0, 0, 0, 120).getRGB(),  matrices.peek().getModel());
+            me.constantindev.ccl.gui.TabGUI.drawBorderedRect(-width - 4, (textRenderer.fontHeight + 2), width + 4, 1, .5f, Hud.themeColor.getRGB(), new Color(0, 0, 0, 120).getRGB(), matrices.peek().getModel());
             Cornos.minecraft.textRenderer.draw(matrices, tag, -Cornos.minecraft.textRenderer.getWidth(tag) / 2F, f, Color.WHITE.getRGB());
             matrices.pop();
             if (items.isEnabled()) {
