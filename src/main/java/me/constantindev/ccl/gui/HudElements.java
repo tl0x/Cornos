@@ -17,6 +17,7 @@ import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 
 import java.awt.*;
 import java.text.DateFormat;
@@ -31,7 +32,10 @@ public class HudElements extends DrawableHelper {
     public static long lastRecv = 0;
     public static List<Double> minAvg = new ArrayList<>();
     private final DateFormat dateFormat = new SimpleDateFormat("h:mm aa");
+    int tacoCounter = 0;
+    int counter1 = 1;
     double tick = 0;
+    long last = System.currentTimeMillis();
 
     public void render(MatrixStack matrices, float delta) {
         Cornos.notifMan.render(matrices);
@@ -46,7 +50,7 @@ public class HudElements extends DrawableHelper {
 
         TextRenderer textRenderer = Cornos.minecraft.textRenderer;
         int offset = 0;
-        if (((Toggleable) hud.mconf.getByName("miniplayer")).isEnabled() && !chatOpen) {
+        if (((Toggleable) hud.mconf.getByName("miniplayer")).isEnabled()) {
             double yaw = sin * 100;
             assert Cornos.minecraft.player != null;
             InventoryScreen.drawEntity((int) (Cornos.minecraft.getWindow().getScaledWidth() / 1.5), Cornos.minecraft.getWindow().getScaledHeight() - 1, 25, (float) (yaw), Cornos.minecraft.player.pitch, Cornos.minecraft.player);
@@ -93,6 +97,18 @@ public class HudElements extends DrawableHelper {
             int w = Cornos.minecraft.getWindow().getScaledWidth();
             int h = Cornos.minecraft.getWindow().getScaledHeight();
             DrawableHelper.drawCenteredString(new MatrixStack(), Cornos.minecraft.textRenderer, Hud.currentContext, w / 2, h / 2 + 10, 0xFFFFFFFF);
+        }
+        if (((Toggleable) hud.mconf.getByName("taco")).isEnabled()) {
+            long current = System.currentTimeMillis();
+            if (last+300<current) {
+                last = current;
+                tacoCounter++;
+            }
+            if (tacoCounter > 4) tacoCounter = 1;
+            int w = Cornos.minecraft.getWindow().getScaledWidth();
+            int h = Cornos.minecraft.getWindow().getScaledHeight();
+            Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl","taco/t"+tacoCounter+".png"));
+            DrawableHelper.drawTexture(matrices, (w/2)-(92/2),h-64-20,0,0,0,92,64,64,92);
         }
 
 
