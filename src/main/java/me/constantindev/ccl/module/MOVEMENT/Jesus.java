@@ -8,15 +8,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 public class Jesus extends Module {
+    public static MultiOption mode = new MultiOption("mode", "jump", new String[]{"jump", "velocity", "vanilla", "dontfall", "solid"});
     public Jesus() {
         super("Jesus", "Yisus.", MType.MOVEMENT);
-        this.mconf.add(new MultiOption("mode", "jump", new String[]{"jump", "velocity", "vanilla", "dontfall"}));
+        this.mconf.add(mode);
     }
 
     @Override
     public void onExecute() {
         assert Cornos.minecraft.player != null;
-        switch (this.mconf.getByName("mode").value) {
+        switch (mode.value) {
             case "jump":
                 if (Cornos.minecraft.player.isWet()) {
                     Cornos.minecraft.player.jump();

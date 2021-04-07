@@ -15,6 +15,7 @@
     "GameProfileMixin",
     "IdentifierMixin",
     "JumpingCooldownAccessor",
+    "LivingEntityMixin",
     "PacketSendHook",
     "PacketTryUseItemOnBlockHook",
     "PlayerMoveC2SPacketAccessor",

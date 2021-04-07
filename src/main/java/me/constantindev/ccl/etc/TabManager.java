@@ -24,12 +24,14 @@ public class TabManager {
         mods = new HashMap<>();
         currentMods = new HashMap<>();
         for (MType mType : MType.values()) {
+            if (mType == MType.HIDDEN) continue;
             mods.put(mType, new ArrayList<>());
             currentMods.put(mType, 0);
             tabs.put(mType, new Tab());
             tabType.add(mType);
         }
         for (Module m : ModuleRegistry.getAll()) {
+            if (m.type == MType.HIDDEN) continue;
             ArrayList<Module> modsList = mods.get(m.type);
             modsList.add(m);
         }

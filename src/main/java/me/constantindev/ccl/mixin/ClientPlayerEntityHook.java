@@ -1,5 +1,6 @@
 package me.constantindev.ccl.mixin;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,6 +25,7 @@ public class ClientPlayerEntityHook {
             cir.setReturnValue(false);
         }
     }
+
 
 
 }
