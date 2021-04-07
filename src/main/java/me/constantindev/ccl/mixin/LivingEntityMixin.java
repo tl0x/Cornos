@@ -13,13 +13,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
-    @Inject(method="canWalkOnFluid",at=@At("HEAD"),cancellable = true)
+    @Inject(method = "canWalkOnFluid", at = @At("HEAD"), cancellable = true)
     public void cWOF(Fluid fluid, CallbackInfoReturnable<Boolean> cir) {
         if (((Object) this) instanceof ClientPlayerEntity) {
             ClientPlayerEntity e = (ClientPlayerEntity) ((Object) this);
-            if(Cornos.minecraft.player.getUuid().equals(e.getUuid())) {
+            if (Cornos.minecraft.player.getUuid().equals(e.getUuid())) {
                 System.out.println("Called");
-                if (ModuleRegistry.getByName("jesus").isOn.isOn() && Jesus.mode.value.equalsIgnoreCase("solid")) cir.setReturnValue(true);
+                if (ModuleRegistry.getByName("jesus").isOn.isOn() && Jesus.mode.value.equalsIgnoreCase("solid"))
+                    cir.setReturnValue(true);
             }
         }
     }

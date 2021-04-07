@@ -4,16 +4,10 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.Notification;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.event.EventHelper;
-import me.constantindev.ccl.etc.event.EventType;
-import me.constantindev.ccl.etc.event.arg.PacketEvent;
-import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.ms.KeyBind;
 import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.vehicle.BoatEntity;
-import net.minecraft.network.Packet;
 import net.minecraft.network.packet.c2s.play.VehicleMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
@@ -21,7 +15,8 @@ import org.lwjgl.glfw.GLFW;
 public class BoatFly extends Module {
     Entity lastRide = null;
     KeyBind keyDown = new KeyBind(GLFW.GLFW_KEY_LEFT_ALT);
-    MultiOption mode = new MultiOption("mode","vanilla",new String[]{"vanilla","static","velocity"});
+    MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "static", "velocity"});
+
     public BoatFly() {
         super("EntityFly", "weee", MType.MOVEMENT);
         mconf.add(mode);
@@ -37,7 +32,7 @@ public class BoatFly extends Module {
     public void onExecute() {
         Entity vehicle = Cornos.minecraft.player.getVehicle();
         if (vehicle == null) {
-            Notification.create("EntityFly", new String[]{"Disabled due to lack","of riding entity"}, 5000);
+            Notification.create("EntityFly", new String[]{"Disabled due to lack", "of riding entity"}, 5000);
             this.setEnabled(false);
             return;
         }
@@ -46,13 +41,13 @@ public class BoatFly extends Module {
         Vec3d np = vehicle.getPos();
         GameOptions go = Cornos.minecraft.options;
 
-        switch(mode.value) {
+        switch (mode.value) {
             case "vanilla":
-                if (go.keyJump.isPressed()) np = np.add(0,.2,0);
-                if (keyDown.isHeld()) np = np.add(0,-.2,0);
-                vehicle.updatePosition(np.x,np.y,np.z);
+                if (go.keyJump.isPressed()) np = np.add(0, .2, 0);
+                if (keyDown.isHeld()) np = np.add(0, -.2, 0);
+                vehicle.updatePosition(np.x, np.y, np.z);
                 Vec3d v = vehicle.getVelocity();
-                Vec3d nv = new Vec3d(v.x,0,v.z);
+                Vec3d nv = new Vec3d(v.x, 0, v.z);
                 vehicle.setVelocity(nv);
                 break;
             case "velocity":
@@ -76,12 +71,11 @@ public class BoatFly extends Module {
                 Vec3d nv3 = new Vec3d(nx, ny, nz);
                 np = np.add(nv3);
                 if (mode.value.equals("static")) {
-                    vehicle.updatePosition(np.x,np.y,np.z);
-                    vehicle.setVelocity(0,0,0);
-                }
-                else {
+                    vehicle.updatePosition(np.x, np.y, np.z);
+                    vehicle.setVelocity(0, 0, 0);
+                } else {
                     nv3 = nv3.multiply(0.1);
-                    vehicle.addVelocity(nv3.x,nv3.y,nv3.z);
+                    vehicle.addVelocity(nv3.x, nv3.y, nv3.z);
                 }
                 break;
         }

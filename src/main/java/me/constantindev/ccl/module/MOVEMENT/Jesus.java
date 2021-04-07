@@ -9,6 +9,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class Jesus extends Module {
     public static MultiOption mode = new MultiOption("mode", "jump", new String[]{"jump", "velocity", "vanilla", "dontfall", "solid"});
+
     public Jesus() {
         super("Jesus", "Yisus.", MType.MOVEMENT);
         this.mconf.add(mode);

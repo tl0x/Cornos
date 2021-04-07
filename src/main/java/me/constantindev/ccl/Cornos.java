@@ -11,7 +11,6 @@ import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
