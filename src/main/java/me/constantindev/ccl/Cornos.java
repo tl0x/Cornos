@@ -11,6 +11,7 @@ import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
@@ -54,12 +55,12 @@ public class Cornos implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
         Runtime.getRuntime().addShutdownHook(new Thread(ConfigHelper::saveConfig));
         log(Level.INFO, "Initializing main client");
         Registry.register(Registry.SOUND_EVENT, BONG_SOUND.getId(), BONG_SOUND);
         Registry.register(Registry.SOUND_EVENT, HITMARKER_SOUND.getId(), HITMARKER_SOUND);
         notifMan = new NotificationManager();
+
         log(Level.INFO, "Initializing configuration");
         ClientConfig.init();
         log(Level.INFO, "Registering event bus");

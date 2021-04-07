@@ -79,6 +79,7 @@ public class ModuleRegistry {
         ml.add(new ClientProgression());
         ml.add(new TriggerBot());
         ml.add(new Speed());
+        ml.add(new BoatFly());
 
         tabManager = new TabManager();
     }
