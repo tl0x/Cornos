@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.render.RenderableBlock;
 import me.constantindev.ccl.etc.render.RenderableLine;
-import me.constantindev.ccl.etc.render.RenderableText;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.Camera;
@@ -24,7 +23,6 @@ import java.util.List;
 public class RenderHelper {
     public static List<RenderableBlock> BPQueue = new ArrayList<>();
     public static List<RenderableLine> B1B2LQueue = new ArrayList<>();
-    public static List<RenderableText> B1S1TQueue = new ArrayList<>();
 
     public static void addToQueue(RenderableBlock block) {
         if (!BPQueue.contains(block)) BPQueue.add(block);
@@ -32,10 +30,6 @@ public class RenderHelper {
 
     public static void addToQueue(RenderableLine line) {
         if (!B1B2LQueue.contains(line)) B1B2LQueue.add(line);
-    }
-
-    public static void addToQueue(RenderableText text) {
-        if (!B1S1TQueue.contains(text)) B1S1TQueue.add(text);
     }
 
     public static void renderBlockOutline(Vec3d bpos, Vec3d dimensions, int r, int g, int b, int a) {

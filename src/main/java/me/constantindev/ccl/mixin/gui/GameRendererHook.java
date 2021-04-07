@@ -34,7 +34,6 @@ public class GameRendererHook {
         RenderHelper.B1B2LQueue.forEach(renderableLine -> RenderHelper.renderLine(renderableLine.bp1, renderableLine.bp2, renderableLine.c, renderableLine.width));
         RenderHelper.BPQueue.clear();
         RenderHelper.B1B2LQueue.clear();
-        RenderHelper.B1S1TQueue.clear();
         ModuleRegistry.getAll().forEach(m -> {
             if (m.isOn.isOn()) m.onRender(matrix, tickDelta);
         });
