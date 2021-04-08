@@ -80,6 +80,7 @@ public class ModuleRegistry {
         ml.add(new TriggerBot());
         ml.add(new Speed());
         ml.add(new BoatFly());
+        ml.add(new AutoWither());
 
         tabManager = new TabManager();
     }

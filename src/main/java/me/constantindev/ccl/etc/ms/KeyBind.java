@@ -17,6 +17,7 @@ public class KeyBind {
     }
 
     public boolean isPressed() {
+        if (Cornos.minecraft.currentScreen != null) return false;
         if (keycode < 0) return false;
         boolean flag1 = InputUtil.isKeyPressed(Cornos.minecraft.getWindow().getHandle(), keycode);
         if (flag1 && !pressedbefore) {
