@@ -3,12 +3,10 @@ package me.constantindev.ccl.module.WORLD;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.Notification;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Keybind;
 import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.KeyBind;
 import me.constantindev.ccl.etc.ms.MType;
-import me.constantindev.ccl.etc.render.RenderableBlock;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -32,20 +30,20 @@ public class AutoWither extends Module {
 
     @Override
     public void onEnable() {
-        Notification.create("AutoWither notice", new String[]{"Press §cLAlt§r to place wither"},5000);
+        Notification.create("AutoWither notice", new String[]{"Press §cLAlt§r to place wither"}, 5000);
         super.onEnable();
     }
 
     @Override
     public void onRender(MatrixStack ms, float td) {
         if (sandPlacements.length < 4 || skullPlacements.length < 3) return;
-        for(Vec3d v : sandPlacements) {
-            Vec3d v1 = new Vec3d(Math.floor(v.x),Math.floor(v.y),Math.floor(v.z));
-            RenderHelper.renderBlockOutline(v1,new Vec3d(1,1,1),255,255,20,255);
+        for (Vec3d v : sandPlacements) {
+            Vec3d v1 = new Vec3d(Math.floor(v.x), Math.floor(v.y), Math.floor(v.z));
+            RenderHelper.renderBlockOutline(v1, new Vec3d(1, 1, 1), 255, 255, 20, 255);
         }
-        for(Vec3d v : skullPlacements) {
-            Vec3d v1 = new Vec3d(Math.floor(v.x),Math.floor(v.y),Math.floor(v.z));
-            RenderHelper.renderBlockOutline(v1.add(.25,0,.25),new Vec3d(.5,.5,.5),255,20,255,255);
+        for (Vec3d v : skullPlacements) {
+            Vec3d v1 = new Vec3d(Math.floor(v.x), Math.floor(v.y), Math.floor(v.z));
+            RenderHelper.renderBlockOutline(v1.add(.25, 0, .25), new Vec3d(.5, .5, .5), 255, 20, 255, 255);
         }
         super.onRender(ms, td);
     }
@@ -57,18 +55,18 @@ public class AutoWither extends Module {
             return;
         }
         Vec3d b = hr.getPos();
-        Vec3d u = b.add(0,1,0);
-        Vec3d r = u.add(1,0,0);
-        Vec3d l = u.add(-1,0,0);
-        Vec3d sb = u.add(0,1,0);
-        Vec3d sr = sb.add(1,0,0);
-        Vec3d sl = sb.add(-1,0,0);
+        Vec3d u = b.add(0, 1, 0);
+        Vec3d r = u.add(1, 0, 0);
+        Vec3d l = u.add(-1, 0, 0);
+        Vec3d sb = u.add(0, 1, 0);
+        Vec3d sr = sb.add(1, 0, 0);
+        Vec3d sl = sb.add(-1, 0, 0);
         this.sandPlacements = new Vec3d[]{b, u, r, l};
-        this.skullPlacements = new Vec3d[]{sb,sr,sl};
+        this.skullPlacements = new Vec3d[]{sb, sr, sl};
         if (sneak.isPressed()) {
             int soulSandIndex = -1;
             int witherSkullIndex = -1;
-            for(int i = 0;i<8;i++) {
+            for (int i = 0; i < 8; i++) {
                 ItemStack current = Cornos.minecraft.player.inventory.getStack(i);
                 if (current.isEmpty()) continue;
                 if (current.getItem().equals(Items.SOUL_SAND)) soulSandIndex = i;
@@ -77,22 +75,22 @@ public class AutoWither extends Module {
             if (soulSandIndex != -1 && witherSkullIndex != -1) {
                 ItemStack sand = Cornos.minecraft.player.inventory.getStack(soulSandIndex);
                 ItemStack skull = Cornos.minecraft.player.inventory.getStack(witherSkullIndex);
-                new Thread(()->{
+                new Thread(() -> {
                     Vec3d[] sandCopy = sandPlacements;
                     Vec3d[] skullCopy = skullPlacements;
                     Cornos.minecraft.player.inventory.addPickBlock(sand);
                     ClientHelper.sleep(70);
-                    for(Vec3d current : sandCopy) {
-                        BlockHitResult bhr = new BlockHitResult(new Vec3d(.5,.5,.5),Direction.DOWN,new BlockPos(current.x,current.y,current.z),false);
-                        PlayerInteractBlockC2SPacket p = new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND,bhr);
+                    for (Vec3d current : sandCopy) {
+                        BlockHitResult bhr = new BlockHitResult(new Vec3d(.5, .5, .5), Direction.DOWN, new BlockPos(current.x, current.y, current.z), false);
+                        PlayerInteractBlockC2SPacket p = new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND, bhr);
                         Cornos.minecraft.getNetworkHandler().sendPacket(p);
                     }
                     ClientHelper.sleep(70);
                     Cornos.minecraft.player.inventory.addPickBlock(skull);
                     ClientHelper.sleep(70);
-                    for(Vec3d current : skullCopy) {
-                        BlockHitResult bhr = new BlockHitResult(new Vec3d(.5,.5,.5),Direction.DOWN,new BlockPos(current.x,current.y,current.z),false);
-                        PlayerInteractBlockC2SPacket p = new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND,bhr);
+                    for (Vec3d current : skullCopy) {
+                        BlockHitResult bhr = new BlockHitResult(new Vec3d(.5, .5, .5), Direction.DOWN, new BlockPos(current.x, current.y, current.z), false);
+                        PlayerInteractBlockC2SPacket p = new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND, bhr);
                         Cornos.minecraft.getNetworkHandler().sendPacket(p);
                     }
                 }).start();

@@ -40,9 +40,11 @@ public class ClientHelper {
         } catch (Exception ignored) {
         }
     }
+
     public static void sleep(int duration) {
         try {
             Thread.sleep(duration);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 }

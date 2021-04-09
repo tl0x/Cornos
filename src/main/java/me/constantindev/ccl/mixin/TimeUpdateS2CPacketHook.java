@@ -34,7 +34,7 @@ public class TimeUpdateS2CPacketHook {
         calledAlready = true;
         double current = roundToDecPlace(calcTps(System.currentTimeMillis() - HudElements.lastRecv), 2);
         HudElements.minAvg.add(current);
-        while (HudElements.minAvg.size() > 60) {
+        while (HudElements.minAvg.size() > 10) {
             HudElements.minAvg.subList(0, 1).clear();
         }
         double avg = 0.0;
@@ -42,7 +42,9 @@ public class TimeUpdateS2CPacketHook {
             avg += d;
         }
         avg /= HudElements.minAvg.size();
-        HudElements.tps = current + ", Last 60 average: " + avg;
+        HudElements.tpsAvgHistory.add(avg);
+        HudElements.tpsHistory.add(current);
+        HudElements.tps = current + ", Last 10 average: " + avg;
         HudElements.lastRecv = System.currentTimeMillis();
     }
 }
