@@ -20,6 +20,7 @@ public class Boost extends Module {
     public Boost() {
         super("Boost", "Boosts you upwards", MType.MOVEMENT);
         this.mconf.add(strength);
+        this.showNotifications = false;
     }
 
     @Override

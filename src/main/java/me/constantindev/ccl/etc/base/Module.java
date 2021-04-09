@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Module {
+    public boolean showNotifications = true;
     public final String name;
     public final String description;
     public final ModuleConfig mconf;
@@ -44,13 +45,13 @@ public class Module {
             if (!this.calledVitalsOnenable) {
                 this.onEnable();
                 this.calledVitalsOnenable = true;
-                Notification.create("Module toggle", new String[]{"§aEnabled§r " + this.name}, 1000);
+                if (showNotifications) Notification.create("Module toggle", new String[]{"§aEnabled§r " + this.name}, 1000);
             }
         } else {
             this.calledVitalsOnenable = false;
             if (!this.calledVitalsOndisable) {
                 this.onDisable();
-                Notification.create("Module toggle", new String[]{"§cDisabled§r " + this.name}, 1000);
+                if (showNotifications) Notification.create("Module toggle", new String[]{"§cDisabled§r " + this.name}, 1000);
                 this.calledVitalsOndisable = true;
             }
         }
