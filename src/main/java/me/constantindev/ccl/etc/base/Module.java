@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Module {
-    public boolean showNotifications = true;
     public final String name;
     public final String description;
     public final ModuleConfig mconf;
     public final MType type;
     public final Toggleable$1 isOn = new Toggleable$1(false);
+    public boolean showNotifications = true;
     public List<RenderableBlock> rbq = new ArrayList<>();
     public List<RenderableLine> rlq = new ArrayList<>();
     boolean calledVitalsOnenable = true;
@@ -45,13 +45,15 @@ public class Module {
             if (!this.calledVitalsOnenable) {
                 this.onEnable();
                 this.calledVitalsOnenable = true;
-                if (showNotifications) Notification.create("Module toggle", new String[]{"§aEnabled§r " + this.name}, 1000);
+                if (showNotifications)
+                    Notification.create("Module toggle", new String[]{"§aEnabled§r " + this.name}, 1000);
             }
         } else {
             this.calledVitalsOnenable = false;
             if (!this.calledVitalsOndisable) {
                 this.onDisable();
-                if (showNotifications) Notification.create("Module toggle", new String[]{"§cDisabled§r " + this.name}, 1000);
+                if (showNotifications)
+                    Notification.create("Module toggle", new String[]{"§cDisabled§r " + this.name}, 1000);
                 this.calledVitalsOndisable = true;
             }
         }
@@ -72,11 +74,11 @@ public class Module {
     }
 
     public void onRender(MatrixStack ms, float td) {
-        for(RenderableLine rl : rlq.toArray(new RenderableLine[0])) {
-            RenderHelper.renderLine(rl.bp1,rl.bp2,rl.c,rl.width);
+        for (RenderableLine rl : rlq.toArray(new RenderableLine[0])) {
+            RenderHelper.renderLine(rl.bp1, rl.bp2, rl.c, rl.width);
         }
-        for(RenderableBlock rl : rbq.toArray(new RenderableBlock[0])) {
-            RenderHelper.renderBlockOutline(rl.bp,rl.dimensions,rl.r,rl.g,rl.b,rl.a);
+        for (RenderableBlock rl : rbq.toArray(new RenderableBlock[0])) {
+            RenderHelper.renderBlockOutline(rl.bp, rl.dimensions, rl.r, rl.g, rl.b, rl.a);
         }
         rlq.clear();
         rbq.clear();

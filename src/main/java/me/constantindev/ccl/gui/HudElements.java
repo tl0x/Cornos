@@ -121,7 +121,7 @@ public class HudElements extends DrawableHelper {
             for (double d : tpsHistory.toArray(new Double[0])) {
                 int current = (int) Math.floor(d);
                 if (last != -1) {
-                    RenderHelper.renderLineScreen(new Vec3d(xBase,yBase-((int) Math.floor(last)),0),new Vec3d(xBase+2,yBase-current,0),new Color(0, 255, 217),2);
+                    RenderHelper.renderLineScreen(new Vec3d(xBase, yBase - ((int) Math.floor(last)), 0), new Vec3d(xBase + 2, yBase - current, 0), new Color(0, 255, 217), 2);
                 }
                 xBase += 2;
                 last = d;
@@ -131,7 +131,7 @@ public class HudElements extends DrawableHelper {
             for (double d : tpsAvgHistory.toArray(new Double[0])) {
                 int current = (int) Math.floor(d);
                 if (last != -1) {
-                    RenderHelper.renderLineScreen(new Vec3d(xBase,yBase-((int) Math.floor(last)),0),new Vec3d(xBase+2,yBase-current,0),new Color(35, 255, 39),2);
+                    RenderHelper.renderLineScreen(new Vec3d(xBase, yBase - ((int) Math.floor(last)), 0), new Vec3d(xBase + 2, yBase - current, 0), new Color(35, 255, 39), 2);
                 }
                 xBase += 2;
                 last = d;
