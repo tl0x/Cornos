@@ -21,17 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RenderHelper {
-    public static List<RenderableBlock> BPQueue = new ArrayList<>();
-    public static List<RenderableLine> B1B2LQueue = new ArrayList<>();
-
-    public static void addToQueue(RenderableBlock block) {
-        if (!BPQueue.contains(block)) BPQueue.add(block);
-    }
-
-    public static void addToQueue(RenderableLine line) {
-        if (!B1B2LQueue.contains(line)) B1B2LQueue.add(line);
-    }
-
     public static void renderBlockOutline(Vec3d bpos, Vec3d dimensions, int r, int g, int b, int a) {
         Camera c = BlockEntityRenderDispatcher.INSTANCE.camera;
         Vec3d s = bpos.subtract(c.getPos());
@@ -53,8 +42,6 @@ public class RenderHelper {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glRotated(MathHelper.wrapDegrees(c.getPitch()), 1, 0, 0);
         GL11.glRotated(MathHelper.wrapDegrees(c.getYaw() + 180.0), 0, 1, 0);
-        //GL11.glTranslated(-c.getPos().x, -c.getPos().y, -c.getPos().z);
-        //GL11.glTranslated(0, -c.getPos().y, 0);
         GL11.glColor4f(r / 255F, g / 255F, b / 255F, a / 255F);
         GL11.glBegin(GL11.GL_LINES);
         GL11.glVertex3d(f, g1, h);
@@ -92,7 +79,6 @@ public class RenderHelper {
     public static void renderLine(Vec3d from, Vec3d to, Color col, int width) {
         Camera c = BlockEntityRenderDispatcher.INSTANCE.camera;
         GL11.glPushMatrix();
-
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
@@ -103,10 +89,7 @@ public class RenderHelper {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glRotated(MathHelper.wrapDegrees(c.getPitch()), 1, 0, 0);
         GL11.glRotated(MathHelper.wrapDegrees(c.getYaw() + 180.0), 0, 1, 0);
-        //GL11.glTranslated(-c.getPos().x, -c.getPos().y, -c.getPos().z);
-
         GL11.glColor4f(col.getRed() / 255F, col.getGreen() / 255F, col.getBlue() / 255F, col.getAlpha() / 255F);
-
         GL11.glBegin(GL11.GL_LINES);
         {
             Vec3d f1 = from.subtract(c.getPos());
@@ -115,37 +98,35 @@ public class RenderHelper {
             GL11.glVertex3d(t1.x, t1.y, t1.z);
         }
         GL11.glEnd();
-
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
-
         GL11.glPopMatrix();
     }
 
-    public static Vec3d getClientLookVec() {
-        ClientPlayerEntity player = Cornos.minecraft.player;
-        double f = 0.017453292;
-        double pi = Math.PI;
-
-        assert player != null;
-        double f1 = Math.cos(-player.yaw * f - pi);
-        double f2 = Math.sin(-player.yaw * f - pi);
-        double f3 = -Math.cos(-player.pitch * f);
-        double f4 = Math.sin(-player.pitch * f);
-
-        return new Vec3d(f2 * f3, f4, f1 * f3);
-    }
-
-    private static void renderBlockBounding(MatrixStack matrices, Vec3d dim, VertexConsumer builder, Vec3d bp, float r, float g, float b, float a) {
-        if (bp == null) {
-            return;
+    public static void renderLineScreen(Vec3d from, Vec3d to, Color col, int width) {
+        GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glLineWidth(width);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_CULL_FACE);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glColor4f(col.getRed() / 255F, col.getGreen() / 255F, col.getBlue() / 255F, col.getAlpha() / 255F);
+        GL11.glBegin(GL11.GL_LINES);
+        {
+            GL11.glVertex3d(from.x, from.y, from.z);
+            GL11.glVertex3d(to.x, to.y, to.z);
         }
-        final double x = bp.getX(), y = bp.getY(), z = bp.getZ();
-
-        //MinecraftClient.getInstance().gameRenderer.render();
-        WorldRenderer.drawBox(matrices, builder, x, y, z, x + dim.x, y + dim.y, z + dim.z, r, g, b, a);
+        GL11.glEnd();
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GL11.glPopMatrix();
     }
 
     public static Vec3d getCrosshairVector() {

@@ -30,10 +30,6 @@ public class GameRendererHook {
             Cornos.minecraft.options.bobView = true;
             vb = false;
         }
-        RenderHelper.BPQueue.forEach(renderableBlock -> RenderHelper.renderBlockOutline(renderableBlock.bp, renderableBlock.dimensions, renderableBlock.r, renderableBlock.g, renderableBlock.b, renderableBlock.a));
-        RenderHelper.B1B2LQueue.forEach(renderableLine -> RenderHelper.renderLine(renderableLine.bp1, renderableLine.bp2, renderableLine.c, renderableLine.width));
-        RenderHelper.BPQueue.clear();
-        RenderHelper.B1B2LQueue.clear();
         ModuleRegistry.getAll().forEach(m -> {
             if (m.isOn.isOn()) m.onRender(matrix, tickDelta);
         });

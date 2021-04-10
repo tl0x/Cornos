@@ -3,10 +3,7 @@ package me.constantindev.ccl.etc.reg;
 import me.constantindev.ccl.etc.TabManager;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.module.*;
-import me.constantindev.ccl.module.COMBAT.Confuse;
-import me.constantindev.ccl.module.COMBAT.Target;
-import me.constantindev.ccl.module.COMBAT.ThunderAura;
-import me.constantindev.ccl.module.COMBAT.TriggerBot;
+import me.constantindev.ccl.module.COMBAT.*;
 import me.constantindev.ccl.module.EXPLOIT.*;
 import me.constantindev.ccl.module.EXPLOIT.CRASH.*;
 import me.constantindev.ccl.module.MOVEMENT.*;
@@ -81,6 +78,7 @@ public class ModuleRegistry {
         ml.add(new Speed());
         ml.add(new BoatFly());
         ml.add(new AutoWither());
+        ml.add(new Killaura());
 
         tabManager = new TabManager();
     }

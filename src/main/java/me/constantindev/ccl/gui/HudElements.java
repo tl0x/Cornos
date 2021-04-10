@@ -3,6 +3,7 @@ package me.constantindev.ccl.gui;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
 import net.minecraft.client.font.TextRenderer;
@@ -18,6 +19,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
 import java.text.DateFormat;
@@ -108,33 +110,29 @@ public class HudElements extends DrawableHelper {
             Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl", "taco/t" + tacoCounter + ".png"));
             DrawableHelper.drawTexture(matrices, (int) (w / 1.5 + 30), h - 64, 0, 0, 0, 92, 64, 64, 92);
         }
-        if (tpsHistory.size() > 91) tpsHistory.subList(0, 1).clear();
-        if (tpsAvgHistory.size() > 91) tpsAvgHistory.subList(0, 1).clear();
+        if (tpsHistory.size() > 92) tpsHistory.subList(0, 1).clear();
+        if (tpsAvgHistory.size() > 92) tpsAvgHistory.subList(0, 1).clear();
         if (((Toggleable) hud.mconf.getByName("graph")).isEnabled()) {
-            int yBase = h - 22;
-            int xBase = (w / 2) - 91;
+            int yBase = h - 41;
+            int xBase = (w / 2) - 91 - 2;
             double last = -1;
             drawTextWithShadow(matrices, textRenderer, Text.of("TPS"), xBase, yBase - 20 - 11, new Color(0, 255, 217).getRGB());
             drawTextWithShadow(matrices, textRenderer, Text.of("Average TPS"), (w / 2) + 91 - textRenderer.getWidth("Average TPS"), yBase - 20 - 11, new Color(35, 255, 39).getRGB());
             for (double d : tpsHistory.toArray(new Double[0])) {
                 int current = (int) Math.floor(d);
                 if (last != -1) {
-                    int offset1 = last < current ? 0 : 1;
-                    DrawableHelper.fill(matrices, xBase - 1, yBase - ((int) Math.floor(last)), xBase, yBase - current + offset1, new Color(0, 255, 217).getRGB());
+                    RenderHelper.renderLineScreen(new Vec3d(xBase,yBase-((int) Math.floor(last)),0),new Vec3d(xBase+2,yBase-current,0),new Color(0, 255, 217),2);
                 }
-                DrawableHelper.fill(matrices, xBase, yBase - current, xBase + 2, yBase - current + 1, new Color(0, 255, 217).getRGB());
                 xBase += 2;
                 last = d;
             }
-            xBase = (w / 2) - 91;
+            xBase = (w / 2) - 91 - 2;
             last = -1;
             for (double d : tpsAvgHistory.toArray(new Double[0])) {
                 int current = (int) Math.floor(d);
                 if (last != -1) {
-                    int offset1 = last < current ? 0 : 1;
-                    DrawableHelper.fill(matrices, xBase - 1, yBase - ((int) Math.floor(last)), xBase, yBase - current + offset1, new Color(35, 255, 39).getRGB());
+                    RenderHelper.renderLineScreen(new Vec3d(xBase,yBase-((int) Math.floor(last)),0),new Vec3d(xBase+2,yBase-current,0),new Color(35, 255, 39),2);
                 }
-                DrawableHelper.fill(matrices, xBase, yBase - current, xBase + 2, yBase - current + 1, new Color(35, 255, 39).getRGB());
                 xBase += 2;
                 last = d;
             }
@@ -145,11 +143,8 @@ public class HudElements extends DrawableHelper {
             assert Cornos.minecraft.player != null;
             int i = 0;
             for (StatusEffectInstance statusEffectInstance : Cornos.minecraft.player.getStatusEffects()) {
-
                 StatusEffectType statusEffectType = statusEffectInstance.getEffectType().getType();
-
                 Formatting formatting;
-
                 switch (statusEffectType) {
                     case HARMFUL:
                         formatting = Formatting.RED;
@@ -164,7 +159,6 @@ public class HudElements extends DrawableHelper {
                         formatting = Formatting.GRAY;
                         break;
                 }
-
                 drawTextWithShadow(matrices, textRenderer, new LiteralText(StatusEffectUtil.durationToString(statusEffectInstance, 1)), Cornos.minecraft.getWindow().getScaledWidth() - (5 + textRenderer.getWidth(StatusEffectUtil.durationToString(statusEffectInstance, 1))), Cornos.minecraft.getWindow().getScaledHeight() - (10 + i), Color.LIGHT_GRAY.getRGB());
                 drawTextWithShadow(matrices, textRenderer, new LiteralText(statusEffectInstance.getEffectType().getName().getString() + " " + (statusEffectInstance.getAmplifier() + 1) + " "), Cornos.minecraft.getWindow().getScaledWidth() - (5 + textRenderer.getWidth(statusEffectInstance.getEffectType().getName().getString() + " " + (statusEffectInstance.getAmplifier() + 1) + " " + StatusEffectUtil.durationToString(statusEffectInstance, 1))), Cornos.minecraft.getWindow().getScaledHeight() - (10 + i), Objects.requireNonNull(formatting.getColorValue()));
                 i += 10;
