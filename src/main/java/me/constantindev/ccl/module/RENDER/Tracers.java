@@ -14,6 +14,7 @@ import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.etc.render.RenderableBlock;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
@@ -62,7 +63,7 @@ public class Tracers extends Module {
                 RenderableBlock rb = new RenderableBlock(currE.getPos().add(off.multiply(-.5)).add(0, off.y / 2, 0), gInit, (int) rInit2, 50, 255, off);
                 //RenderHelper.addToQueue(rb);
                 this.rbq.add(rb);
-                if (((Toggleable) this.mconf.getByName("Tracers")).isEnabled()) {
+                if (((Toggleable) this.mconf.getByName("Tracers")).isEnabled() && !ModuleRegistry.budgetGraphicsInstance.isOn.isOn()) {
                     Color c = Color.GREEN;
                     if (currE instanceof HostileEntity) c = Color.YELLOW;
                     if (currE instanceof PlayerEntity) c = Color.RED;

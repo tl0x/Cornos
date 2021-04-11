@@ -6,7 +6,6 @@ import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.ms.MType;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.HostileEntity;
@@ -35,11 +34,6 @@ public class Killaura extends Module {
         this.mconf.add(mobs);
         this.mconf.add(entities);
         this.mconf.add(range);
-    }
-
-    @Override
-    public void onRender(MatrixStack ms, float td) {
-        super.onRender(ms, td);
     }
 
     @Override

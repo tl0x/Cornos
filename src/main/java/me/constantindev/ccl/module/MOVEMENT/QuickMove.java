@@ -17,6 +17,7 @@ import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
 import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
@@ -55,7 +56,7 @@ public class QuickMove extends Module {
             latest = bp;
         }
         counter++;
-        if (counter > 10) {
+        if (counter > (ModuleRegistry.budgetGraphicsInstance.isOn.isOn() ? 80 : 10)) {
             assert Cornos.minecraft.player != null;
             bpl.add(new ColoredBlockEntry(Cornos.minecraft.player.getPos(), new Color(ClientConfig.latestRGBVal)));
             counter = 0;

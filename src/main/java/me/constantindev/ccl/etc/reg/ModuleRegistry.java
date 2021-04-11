@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ModuleRegistry {
     private static final List<Module> ml = new ArrayList<>();
+    public static BudgetGraphics budgetGraphicsInstance = new BudgetGraphics();
     private static TabManager tabManager; // Probably not the best place for this but whatever -FreakingChicken
 
     public static void init() {
@@ -81,6 +82,8 @@ public class ModuleRegistry {
         ml.add(new Killaura());
         ml.add(new ChestStealer());
 
+
+        ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();
     }
 

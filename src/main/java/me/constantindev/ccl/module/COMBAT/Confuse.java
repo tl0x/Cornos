@@ -14,28 +14,67 @@ import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MultiOption;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
+import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
+import java.awt.*;
 import java.util.Random;
 
 public class Confuse extends Module {
     MultiOption mode = new MultiOption("mode", "randomtp", new String[]{"randomtp", "switch", "circle"});
-    Num delay = new Num("delay", 3, 20, 1);
+    Num delay = new Num("delay", 3, 20, 0);
+    Num circleSpeed = new Num("circleSpeed", 10, 180, 1);
     Toggleable moveThroughBlocks = new Toggleable("moveThroughBlocks", false);
     int delayWaited = 0;
+    double circleProgress = 0;
+    double addition = 0.0;
     Entity target;
 
     public Confuse() {
-        super("Confuse", "Makes your entities shit themselves", MType.COMBAT);
+        super("Confuse", "Makes your enemies shit themselves", MType.COMBAT);
         this.mconf.add(mode);
         this.mconf.add(delay);
         this.mconf.add(moveThroughBlocks);
+        this.mconf.add(circleSpeed);
+    }
+
+    @Override
+    public void onRender(MatrixStack ms, float td) {
+        if (target != null) {
+            boolean flag = ModuleRegistry.budgetGraphicsInstance.isOn.isOn();
+            Vec3d last = null;
+            addition += flag ? 0 : 1.0;
+            if (addition > 360) addition = 0;
+            for (int i = 0; i < 360; i += flag ? 7 : 1) {
+                Color c1;
+                if (flag) c1 = Color.GREEN;
+                else {
+                    double rot = (255.0 * 3) * (((((double) i) + addition) % 360) / 360.0);
+                    int seed = (int) Math.floor(rot / 255.0);
+                    double current = rot % 255;
+                    double red = seed == 0 ? current : (seed == 1 ? Math.abs(current - 255) : 0);
+                    double green = seed == 1 ? current : (seed == 2 ? Math.abs(current - 255) : 0);
+                    double blue = seed == 2 ? current : (seed == 0 ? Math.abs(current - 255) : 0);
+                    c1 = new Color((int) red, (int) green, (int) blue);
+                }
+                Vec3d tp = target.getPos();
+                double rad = Math.toRadians(i);
+                double sin = Math.sin(rad) * 3;
+                double cos = Math.cos(rad) * 3;
+                Vec3d c = new Vec3d(tp.x + sin, tp.y + target.getHeight() / 2, tp.z + cos);
+                if (last != null) RenderHelper.renderLine(last, c, c1, 3);
+                last = c;
+            }
+        }
+        super.onRender(ms, td);
     }
 
     @Override
@@ -64,6 +103,10 @@ public class Confuse extends Module {
         }
         Vec3d entityPos = target.getPos();
         Vec3d playerPos = Cornos.minecraft.player.getPos();
+        if (playerPos.distanceTo(entityPos) > 6) {
+            target = null;
+            return;
+        }
         Random r = new Random();
         switch (mode.value) {
             case "randomtp":
@@ -91,13 +134,23 @@ public class Confuse extends Module {
                 Vec3d diff1 = new Vec3d(MathHelper.clamp(diff.x, -3, 3), MathHelper.clamp(diff.y, -3, 3), MathHelper.clamp(diff.z, -3, 3));
                 Vec3d goal2 = entityPos.add(diff1);
                 Raycast rc1 = new Raycast(playerPos, goal2);
-                if (rc1.passesThroughBlock(1, true) && !moveThroughBlocks.isEnabled()) {
+                if (!moveThroughBlocks.isEnabled() && rc1.passesThroughBlock(1, false)) {
                     delayWaited = (int) (delay.getValue() - 1);
                     break;
                 }
                 Cornos.minecraft.player.updatePosition(goal2.x, goal2.y, goal2.z);
                 break;
             case "circle":
+                delay.setValue("0");
+                circleProgress += circleSpeed.getValue();
+                if (circleProgress > 360) circleProgress -= 360;
+                double rad = Math.toRadians(circleProgress);
+                double sin = Math.sin(rad) * 3;
+                double cos = Math.cos(rad) * 3;
+                Vec3d current = new Vec3d(entityPos.x + sin, playerPos.y, entityPos.z + cos);
+                if (!moveThroughBlocks.isEnabled() && new Raycast(playerPos, current).passesThroughBlock(1, false))
+                    break;
+                Cornos.minecraft.player.updatePosition(current.x, current.y, current.z);
                 break;
         }
         super.onExecute();
