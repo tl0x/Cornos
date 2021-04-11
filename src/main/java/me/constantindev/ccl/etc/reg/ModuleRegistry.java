@@ -79,6 +79,7 @@ public class ModuleRegistry {
         ml.add(new BoatFly());
         ml.add(new AutoWither());
         ml.add(new Killaura());
+        ml.add(new ChestStealer());
 
         tabManager = new TabManager();
     }

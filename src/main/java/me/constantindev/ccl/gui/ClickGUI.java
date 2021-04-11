@@ -83,7 +83,7 @@ public class ClickGUI extends MinecraftGUI {
             public int getOpacity() {
                 return 255;
             }
-        }, 9, 4, 4);
+        }, 8, 4, 40);
         gui = new com.lukflug.panelstudio.ClickGUI(guiInterface, context -> {
             int height = Cornos.minecraft.textRenderer.fontHeight;
             int wH = Cornos.minecraft.getWindow().getScaledHeight();

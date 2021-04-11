@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 
 public class ClientConfig {
-    public static String chatPrefix;
     public static Block[] xrayBlocks;
     public static NumberSetting animSpeed;
     public static ClickGUI cg;
@@ -19,7 +18,6 @@ public class ClientConfig {
     public static TheAlteningAuthentication authentication;
 
     public static void init() {
-        chatPrefix = "}";
         xrayBlocks = new Block[]{
                 Blocks.DIAMOND_ORE,
                 Blocks.COAL_ORE,
