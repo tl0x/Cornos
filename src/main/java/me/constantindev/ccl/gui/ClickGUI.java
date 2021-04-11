@@ -83,7 +83,7 @@ public class ClickGUI extends MinecraftGUI {
             public int getOpacity() {
                 return 255;
             }
-        }, 8, 4, 40);
+        }, 8, 4, 4);
         gui = new com.lukflug.panelstudio.ClickGUI(guiInterface, context -> {
             int height = Cornos.minecraft.textRenderer.fontHeight;
             int wH = Cornos.minecraft.getWindow().getScaledHeight();
@@ -107,7 +107,13 @@ public class ClickGUI extends MinecraftGUI {
                     type.getN(), null,
                     theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed),
                     null, new Point(offset, offsetY), maxW + 8
-            );
+            ) {
+                @Override
+                protected int getScrollHeight(int childHeight) {
+                    int h = Cornos.minecraft.getWindow().getScaledHeight();
+                    return Math.min(h-10,200);
+                }
+            };
             gui.addComponent(container);
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
