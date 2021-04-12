@@ -52,6 +52,7 @@ public class ClickGUI extends MinecraftGUI {
             public int getFontHeight() {
                 return Cornos.minecraft.textRenderer.fontHeight;
             }
+
         };
         Theme theme = new GameSenseTheme(new ColorScheme() {
             @Override
@@ -111,7 +112,7 @@ public class ClickGUI extends MinecraftGUI {
                 @Override
                 protected int getScrollHeight(int childHeight) {
                     int h = Cornos.minecraft.getWindow().getScaledHeight();
-                    return Math.min(h-10,200);
+                    return Math.min(Math.min(h-10,200),childHeight);
                 }
             };
             gui.addComponent(container);
@@ -281,7 +282,7 @@ public class ClickGUI extends MinecraftGUI {
 
     @Override
     protected int getScrollSpeed() {
-        return 1;
+        return 10;
     }
 
     @Override
