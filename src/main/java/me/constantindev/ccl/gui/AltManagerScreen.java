@@ -13,6 +13,7 @@ import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import com.thealtening.auth.service.AlteningServiceType;
 import me.constantindev.ccl.etc.config.ClientConfig;
+import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.mixin.SessionAccessor;
 import me.constantindev.ccl.module.Alts;
 import net.minecraft.client.gui.DrawableHelper;
@@ -42,28 +43,6 @@ public class AltManagerScreen extends Screen {
     @Override
     protected void init() {
         ClientConfig.authentication.updateService(AlteningServiceType.MOJANG);
-        ButtonWidget w = new ButtonWidget(width - 161, 1, 160, 20, Text.of(ClientConfig.authentication.getService().equals(AlteningServiceType.THEALTENING) ? "TheAltening" : "Mojang"), button -> {
-            switch (button.getMessage().asString()) {
-                case "Mojang":
-                    ClientConfig.authentication.updateService(AlteningServiceType.MOJANG);
-                    button.setMessage(Text.of("Cracked"));
-                    passwd.setEditable(false);
-                    emailpasswd.setEditable(false);
-                    break;
-                case "Cracked":
-                    ClientConfig.authentication.updateService(AlteningServiceType.THEALTENING);
-                    button.setMessage(Text.of("TheAltening"));
-                    passwd.setEditable(false);
-                    emailpasswd.setEditable(false);
-                    break;
-                case "TheAltening":
-                    ClientConfig.authentication.updateService(AlteningServiceType.MOJANG);
-                    button.setMessage(Text.of("Mojang"));
-                    passwd.setEditable(true);
-                    emailpasswd.setEditable(true);
-                    break;
-            }
-        });
         email = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) - 35, 200, 20, Text.of("Email"));
         email.setMaxLength(1000);
         passwd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2), 200, 20, Text.of("Password"));
@@ -71,26 +50,8 @@ public class AltManagerScreen extends Screen {
         emailpasswd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) + 35, 200, 20, Text.of("Username:password"));
         emailpasswd.setMaxLength(2000);
         ButtonWidget login = new ButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 60, 120, 20, Text.of("Login"), button -> {
-            if (w.getMessage().asString().equalsIgnoreCase("cracked")) {
-                Session newS = new Session(this.email.getText(), UUID.randomUUID().toString(), "CornosOnTOP", "mojang");
-                assert this.client != null;
-                ((SessionAccessor) this.client).setSession(newS);
-                errormsg = "§aSet username to " + this.email.getText();
-                return;
-            }
-            YggdrasilUserAuthentication auth = (YggdrasilUserAuthentication) (new YggdrasilAuthenticationService(Proxy.NO_PROXY, "")).createUserAuthentication(Agent.MINECRAFT);
-            auth.setUsername(this.email.getText());
-            auth.setPassword(ClientConfig.authentication.getService().equals(AlteningServiceType.THEALTENING) ? "CornosOnTOP" : this.passwd.getText());
-            try {
-                auth.logIn();
-                Session newS = new Session(auth.getSelectedProfile().getName(), auth.getSelectedProfile().getId().toString(), auth.getAuthenticatedToken(), "mojang");
-                errormsg = "§aSuccessfully logged in! Username: " + newS.getUsername();
-                assert this.client != null;
-                ((SessionAccessor) this.client).setSession(newS);
-
-            } catch (Exception exc) {
-                errormsg = "§cSomething went wrong: " + exc.getMessage();
-            }
+            boolean success = ClientHelper.login(this.email.getText(),this.passwd.getText());
+            this.errormsg = success?"§aLogged in!":"§cFailed to log in. Check the password and email.";
         });
         ButtonWidget saveAlt = new ButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 85, 120, 20, Text.of("Save alt"), button -> {
             String email = this.email.getText();
@@ -99,19 +60,12 @@ public class AltManagerScreen extends Screen {
                 this.errormsg = "§cEmail cannot be empty";
                 return;
             }
-            if (passwd.isEmpty() && !w.getMessage().asString().equalsIgnoreCase("cracked")) {
-                this.errormsg = "§cPassword cannot be empty";
-                return;
-            }
-            if (w.getMessage().asString().equalsIgnoreCase("cracked")) {
-                passwd = "ThisDoesNotMatterSinceTheAccountIsCracked";
-            }
+            if (passwd.isEmpty()) passwd = "ThisDoesNotMatterSinceTheAccountIsCracked";
             Alts.k.setValue(Alts.k.value + ((char) 999) + encStr(email, 6001) + ((char) 998) + encStr(passwd, 6000));
             assert this.client != null;
             this.client.openScreen(new AltManagerScreen());
         });
         this.addButton(login);
-        this.addButton(w);
         this.addButton(saveAlt);
 
         List<List<String>> goodalts = new ArrayList<>();
@@ -126,7 +80,7 @@ public class AltManagerScreen extends Screen {
             }
         }
         List<String> fal = new ArrayList<>();
-        int offset = 55;
+        int offset = 11;
         for (List<String> good : goodalts) {
             hasSavedAlts = true;
             fal.add(encStr(good.get(0), 6001) + ((char) 998) + encStr(good.get(1), 6000));
@@ -180,7 +134,7 @@ public class AltManagerScreen extends Screen {
         DrawableHelper.drawCenteredString(matrices, textRenderer, "Or email:password", width / 2, height / 2 - (20 / 2) + 25, 0xFFFFFF);
         emailpasswd.render(matrices, mouseX, mouseY, delta);
         if (hasSavedAlts)
-            DrawableHelper.drawCenteredString(matrices, textRenderer, "Saved alts", width - 80, 40, 0xFFFFFF);
+            DrawableHelper.drawCenteredString(matrices, textRenderer, "Saved alts", width - 81, 2, 0xFFFFFF);
         if (!errormsg.isEmpty()) {
             textRenderer.draw(matrices, errormsg, 1, 1, 0xFFFFFF);
             //DrawableHelper.drawCenteredString(matrices,textRenderer,errormsg,width/2,height/2+30,0xFFFFFF);

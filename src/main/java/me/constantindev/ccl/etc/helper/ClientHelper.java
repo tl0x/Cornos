@@ -1,10 +1,20 @@
 package me.constantindev.ccl.etc.helper;
 
+import com.mojang.authlib.Agent;
+import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
+import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
+import com.thealtening.auth.service.AlteningServiceType;
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.config.ClientConfig;
+import me.constantindev.ccl.mixin.SessionAccessor;
+import net.minecraft.client.util.Session;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import org.apache.logging.log4j.Level;
 
 import java.lang.reflect.Field;
+import java.net.Proxy;
+import java.util.UUID;
 
 public class ClientHelper {
     public static void sendChat(String msg) {
@@ -38,6 +48,34 @@ public class ClientHelper {
         try {
             f.set(t, value);
         } catch (Exception ignored) {
+        }
+    }
+
+    public static boolean login(String username, String password) {
+        if (password.isEmpty()) {
+            Session crackedSession = new Session(username, UUID.randomUUID().toString(),"CornosOnTOP", "mojang");
+            ((SessionAccessor) Cornos.minecraft).setSession(crackedSession);
+            return true;
+        }
+        YggdrasilUserAuthentication auth =
+                (YggdrasilUserAuthentication)new YggdrasilAuthenticationService(
+                        Proxy.NO_PROXY, "").createUserAuthentication(Agent.MINECRAFT);
+        if (username.contains("@alt") && username.contains("-")) {
+            ClientConfig.authentication.updateService(AlteningServiceType.THEALTENING);
+        } else {
+            ClientConfig.authentication.updateService(AlteningServiceType.MOJANG);
+        }
+        auth.setPassword(password);
+        auth.setUsername(username);
+        try {
+            auth.logIn();
+            Session ns = new Session(auth.getSelectedProfile().getName(), auth.getSelectedProfile().getId().toString(),auth.getAuthenticatedToken(),"mojang");
+            ((SessionAccessor) Cornos.minecraft).setSession(ns);
+            return true;
+        } catch (Exception ec) {
+            Cornos.log(Level.ERROR,"Failed to log in: ");
+            ec.printStackTrace();
+            return false;
         }
     }
 

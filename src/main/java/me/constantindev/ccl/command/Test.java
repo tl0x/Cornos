@@ -1,6 +1,7 @@
 package me.constantindev.ccl.command;
 
 import me.constantindev.ccl.etc.base.Command;
+import net.minecraft.util.registry.Registry;
 
 public class Test extends Command {
 
