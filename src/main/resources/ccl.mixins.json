@@ -10,6 +10,7 @@
     "ChatHook",
     "ClientMixin",
     "ClientPlayerEntityHook",
+    "ClientPlayerInteractionManagerMixin",
     "CombatUpdateHook",
     "EntityRendererMixin",
     "GameProfileMixin",

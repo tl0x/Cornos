@@ -81,6 +81,7 @@ public class ModuleRegistry {
         ml.add(new AutoWither());
         ml.add(new Killaura());
         ml.add(new ChestStealer());
+        ml.add(new Range());
 
 
         ml.add(budgetGraphicsInstance);

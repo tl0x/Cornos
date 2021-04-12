@@ -20,12 +20,15 @@ import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.registry.Registry;
 
 import java.awt.*;
+import java.util.IdentityHashMap;
 import java.util.Random;
 
 public class Confuse extends Module {
@@ -91,16 +94,18 @@ public class Confuse extends Module {
             if (e.getUuid() == Cornos.minecraft.player.getUuid()) continue;
             if (!e.isAlive()
                     || !e.isAttackable()) continue;
+            Identifier id = Registry.ENTITY_TYPE.getId(e.getType());
+            if(id.getPath().equals("wither_skull")) continue;
+
             if (e.getBoundingBox().intersects(selector)) {
                 target = e;
                 break;
             }
         }
-        if (target == null) return;
         if (!target.isAlive()) {
             target = null;
-            return;
         }
+        if (target == null) return;
         Vec3d entityPos = target.getPos();
         Vec3d playerPos = Cornos.minecraft.player.getPos();
         if (playerPos.distanceTo(entityPos) > 6) {
