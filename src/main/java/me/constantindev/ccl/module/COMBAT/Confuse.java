@@ -28,7 +28,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 
 import java.awt.*;
-import java.util.IdentityHashMap;
 import java.util.Random;
 
 public class Confuse extends Module {
@@ -95,7 +94,7 @@ public class Confuse extends Module {
             if (!e.isAlive()
                     || !e.isAttackable()) continue;
             Identifier id = Registry.ENTITY_TYPE.getId(e.getType());
-            if(id.getPath().equals("wither_skull")) continue;
+            if (id.getPath().equals("wither_skull")) continue;
 
             if (e.getBoundingBox().intersects(selector)) {
                 target = e;

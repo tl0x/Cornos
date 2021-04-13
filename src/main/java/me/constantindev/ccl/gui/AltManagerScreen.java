@@ -8,26 +8,19 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.gui;
 
-import com.mojang.authlib.Agent;
-import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
-import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import com.thealtening.auth.service.AlteningServiceType;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.helper.ClientHelper;
-import me.constantindev.ccl.mixin.SessionAccessor;
 import me.constantindev.ccl.module.Alts;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.util.Session;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 
-import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class AltManagerScreen extends Screen {
     TextFieldWidget email;
@@ -50,8 +43,8 @@ public class AltManagerScreen extends Screen {
         emailpasswd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) + 35, 200, 20, Text.of("Username:password"));
         emailpasswd.setMaxLength(2000);
         ButtonWidget login = new ButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 60, 120, 20, Text.of("Login"), button -> {
-            boolean success = ClientHelper.login(this.email.getText(),this.passwd.getText());
-            this.errormsg = success?"§aLogged in!":"§cFailed to log in. Check the password and email.";
+            boolean success = ClientHelper.login(this.email.getText(), this.passwd.getText());
+            this.errormsg = success ? "§aLogged in!" : "§cFailed to log in. Check the password and email.";
         });
         ButtonWidget saveAlt = new ButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 85, 120, 20, Text.of("Save alt"), button -> {
             String email = this.email.getText();

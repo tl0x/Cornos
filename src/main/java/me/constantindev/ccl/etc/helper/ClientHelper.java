@@ -53,12 +53,12 @@ public class ClientHelper {
 
     public static boolean login(String username, String password) {
         if (password.isEmpty()) {
-            Session crackedSession = new Session(username, UUID.randomUUID().toString(),"CornosOnTOP", "mojang");
+            Session crackedSession = new Session(username, UUID.randomUUID().toString(), "CornosOnTOP", "mojang");
             ((SessionAccessor) Cornos.minecraft).setSession(crackedSession);
             return true;
         }
         YggdrasilUserAuthentication auth =
-                (YggdrasilUserAuthentication)new YggdrasilAuthenticationService(
+                (YggdrasilUserAuthentication) new YggdrasilAuthenticationService(
                         Proxy.NO_PROXY, "").createUserAuthentication(Agent.MINECRAFT);
         if (username.contains("@alt") && username.contains("-")) {
             ClientConfig.authentication.updateService(AlteningServiceType.THEALTENING);
@@ -69,11 +69,11 @@ public class ClientHelper {
         auth.setUsername(username);
         try {
             auth.logIn();
-            Session ns = new Session(auth.getSelectedProfile().getName(), auth.getSelectedProfile().getId().toString(),auth.getAuthenticatedToken(),"mojang");
+            Session ns = new Session(auth.getSelectedProfile().getName(), auth.getSelectedProfile().getId().toString(), auth.getAuthenticatedToken(), "mojang");
             ((SessionAccessor) Cornos.minecraft).setSession(ns);
             return true;
         } catch (Exception ec) {
-            Cornos.log(Level.ERROR,"Failed to log in: ");
+            Cornos.log(Level.ERROR, "Failed to log in: ");
             ec.printStackTrace();
             return false;
         }

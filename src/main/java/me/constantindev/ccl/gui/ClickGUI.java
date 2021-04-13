@@ -112,7 +112,7 @@ public class ClickGUI extends MinecraftGUI {
                 @Override
                 protected int getScrollHeight(int childHeight) {
                     int h = Cornos.minecraft.getWindow().getScaledHeight();
-                    return Math.min(Math.min(h-10,200),childHeight);
+                    return Math.min(Math.min(h - 10, 200), childHeight);
                 }
             };
             gui.addComponent(container);
