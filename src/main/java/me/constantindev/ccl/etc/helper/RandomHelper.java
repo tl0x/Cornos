@@ -19,6 +19,14 @@ public class RandomHelper {
         }
         return end.toString();
     }
+    public static String rndAscii(int size) {
+        StringBuilder end = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            // 97+25
+            end.append((char) (new Random().nextInt(25) + 97));
+        }
+        return end.toString();
+    }
 
     public static String rndBinStr(int size) {
         StringBuilder end = new StringBuilder();

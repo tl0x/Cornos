@@ -82,6 +82,8 @@ public class ModuleRegistry {
         ml.add(new Killaura());
         ml.add(new ChestStealer());
         ml.add(new Range());
+        ml.add(new ChunkClearer());
+        ml.add(new InvalidPositionCrash());
 
 
         ml.add(budgetGraphicsInstance);

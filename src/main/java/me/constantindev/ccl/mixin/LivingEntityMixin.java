@@ -18,7 +18,6 @@ public class LivingEntityMixin {
         if (((Object) this) instanceof ClientPlayerEntity) {
             ClientPlayerEntity e = (ClientPlayerEntity) ((Object) this);
             if (Cornos.minecraft.player.getUuid().equals(e.getUuid())) {
-                System.out.println("Called");
                 if (ModuleRegistry.getByName("jesus").isOn.isOn() && Jesus.mode.value.equalsIgnoreCase("solid"))
                     cir.setReturnValue(true);
             }
