@@ -32,7 +32,7 @@ public class ChunkClearer extends Module {
     Toggleable clientTeleport = new Toggleable("clientTP", false);
     Num delay = new Num("delay", 0, 20, 0);
     int delayWaited = 0;
-    MultiOption fast = new MultiOption("overdrive", "none", new String[]{"none", "light", "strong"});
+    MultiOption fast = new MultiOption("overdrive", "none", new String[]{"none", "light", "strong", "max"});
 
     public ChunkClearer() {
         super("ChunkClearer", "uh oh", MType.WORLD);
@@ -46,7 +46,7 @@ public class ChunkClearer extends Module {
     @Override
     public void onEnable() {
         assert Cornos.minecraft.player != null;
-        ClientHelper.sendChat("Your client might lag for a while, let it calm down. You are clearing an entire chunk");
+        if (fast.value.equals("max")) ClientHelper.sendChat("oh no");
         int cx = Cornos.minecraft.player.chunkX;
         int cz = Cornos.minecraft.player.chunkZ;
         int startX = 16 * cx;
@@ -149,15 +149,20 @@ public class ChunkClearer extends Module {
                     interacted = true;
                     if (fast.value.equals("none")) break;
                 }
-                if (interacted && !fast.value.equals("strong")) break;
+                if (interacted && !fast.value.equals("strong") && !fast.value.equals("max")) break;
             }
-            if (interacted) break;
+            if (interacted && !fast.value.equals("max")) break;
         }
         if (block != null) {
             assert Cornos.minecraft.player != null;
             Cornos.minecraft.player.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, block.add(.5, .5, .5));
-            int upDown = (block.y + 2) < Cornos.minecraft.player.getPos().y ? -4 : 4;
-            Cornos.minecraft.player.travel(new Vec3d(0, upDown, 0));
+            if((block.y + 2) < Cornos.minecraft.player.getPos().y) {
+                Cornos.minecraft.options.keySneak.setPressed(true);
+                Cornos.minecraft.options.keyJump.setPressed(false);
+            } else {
+                Cornos.minecraft.options.keySneak.setPressed(false);
+                Cornos.minecraft.options.keyJump.setPressed(true);
+            }
             Cornos.minecraft.options.keyForward.setPressed(true);
             Cornos.minecraft.player.abilities.flying = true;
             if (Cornos.minecraft.crosshairTarget instanceof BlockHitResult) {
