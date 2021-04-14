@@ -2,7 +2,6 @@ package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.NameTags;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -13,7 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.Matrix4f;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,9 +28,11 @@ public abstract class EntityRendererMixin<T extends Entity> {
     @Final
     protected EntityRenderDispatcher dispatcher;
 
-    @Shadow protected abstract void renderLabelIfPresent(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light);
+    @Shadow
+    protected abstract void renderLabelIfPresent(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light);
 
-    @Shadow public abstract TextRenderer getFontRenderer();
+    @Shadow
+    public abstract TextRenderer getFontRenderer();
 
     @Inject(at = {@At("HEAD")}, method = "renderLabelIfPresent", cancellable = true)
     private void onRenderLabel(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
@@ -45,7 +45,8 @@ public abstract class EntityRendererMixin<T extends Entity> {
             }
         }
     }
-    @Inject(method="renderLabelIfPresent",at=@At("TAIL"))
+
+    @Inject(method = "renderLabelIfPresent", at = @At("TAIL"))
     public void a(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         GL11.glEnable(GL11.GL_LIGHTING);
     }
