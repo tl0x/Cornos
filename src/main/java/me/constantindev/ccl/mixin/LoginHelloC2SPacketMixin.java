@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LoginHelloC2SPacket.class)
-public abstract class GameProfileMixin {
+public abstract class LoginHelloC2SPacketMixin {
 
     @Inject(method = "write", cancellable = true, at = @At("HEAD"))
     public void gid(PacketByteBuf buf, CallbackInfo ci) {

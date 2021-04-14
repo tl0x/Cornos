@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Mixin(ItemStack.class)
-public class ByteSizeViewerHandler {
+public class ItemStackMixin {
     @Inject(method = "getTooltip", at = @At("RETURN"), cancellable = true)
     public void getTooltip(PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir) {
         if (!ModuleRegistry.getByName("ByteSizeViewer").isOn.isOn()) return;

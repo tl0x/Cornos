@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractBlock.AbstractBlockState.class)
-public class AbstractBlockStateHook {
+public class AbstractBlockStateMixin {
     @Inject(at = {@At("HEAD")}, method = "getLuminance", cancellable = true)
     public void getLuminace(CallbackInfoReturnable<Integer> cir) {
         if (ModuleRegistry.getByName("xray").isOn.isOn()) {

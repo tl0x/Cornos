@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(CombatEventS2CPacket.class)
-public class CombatUpdateHook {
+public class CombatEventS2CPacketMixin {
     @Inject(method = "<init>(Lnet/minecraft/entity/damage/DamageTracker;Lnet/minecraft/network/packet/s2c/play/CombatEventS2CPacket$Type;Lnet/minecraft/text/Text;)V", at = @At("TAIL"))
     public void init(DamageTracker damageTracker, CombatEventS2CPacket.Type type, Text deathMessage, CallbackInfo ci) {
         if (type == CombatEventS2CPacket.Type.ENTITY_DIED && ModuleRegistry.getByName("memesfx").isOn.isOn()) {

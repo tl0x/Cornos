@@ -72,8 +72,7 @@ public class ChunkClearer extends Module {
                         if (showParticles) {
                             assert Cornos.minecraft.interactionManager != null;
                             Cornos.minecraft.interactionManager.attackBlock(bp1, Direction.DOWN);
-                        }
-                        else {
+                        } else {
                             PlayerActionC2SPacket p1 = new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, bp1, Direction.DOWN);
                             PlayerActionC2SPacket p2 = new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.ABORT_DESTROY_BLOCK, bp1, Direction.DOWN);
                             Cornos.minecraft.getNetworkHandler().sendPacket(p1);

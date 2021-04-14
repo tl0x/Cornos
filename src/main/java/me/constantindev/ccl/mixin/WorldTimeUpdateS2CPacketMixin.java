@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(net.minecraft.network.packet.s2c.play.WorldTimeUpdateS2CPacket.class)
-public class TimeUpdateS2CPacketHook {
+public class WorldTimeUpdateS2CPacketMixin {
     boolean calledAlready = false;
 
     double roundToDecPlace(double i, int n) {

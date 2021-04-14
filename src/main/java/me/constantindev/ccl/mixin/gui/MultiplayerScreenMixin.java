@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(MultiplayerScreen.class)
-public abstract class MPScreenMixin extends Screen {
+public abstract class MultiplayerScreenMixin extends Screen {
 
     @Shadow
     @Final
@@ -60,7 +60,7 @@ public abstract class MPScreenMixin extends Screen {
     @Shadow
     private List<Text> tooltipText;
 
-    protected MPScreenMixin(Text title) {
+    protected MultiplayerScreenMixin(Text title) {
         super(title);
     }
 

@@ -119,7 +119,7 @@ public class HudElements extends DrawableHelper {
             drawTextWithShadow(matrices, textRenderer, Text.of("TPS"), xBase, yBase - 20 - 11, new Color(0, 255, 217).getRGB());
             drawTextWithShadow(matrices, textRenderer, Text.of("Average TPS"), (w / 2) + 91 - textRenderer.getWidth("Average TPS"), yBase - 20 - 11, new Color(35, 255, 39).getRGB());
             for (Double d1 : tpsHistory.toArray(new Double[0])) {
-                double d = d1==null?20.0:d1;
+                double d = d1 == null ? 20.0 : d1;
                 int current = (int) Math.floor(d);
                 if (last != -1) {
                     RenderHelper.renderLineScreen(new Vec3d(xBase, yBase - ((int) Math.floor(last)), 0), new Vec3d(xBase + 2, yBase - current, 0), new Color(0, 255, 217), 2);
@@ -130,7 +130,7 @@ public class HudElements extends DrawableHelper {
             xBase = (w / 2) - 91 - 2;
             last = -1;
             for (Double d1 : tpsAvgHistory.toArray(new Double[0])) {
-                double d = d1==null?20.0:d1;
+                double d = d1 == null ? 20.0 : d1;
                 int current = (int) Math.floor(d);
                 if (last != -1) {
                     RenderHelper.renderLineScreen(new Vec3d(xBase, yBase - ((int) Math.floor(last)), 0), new Vec3d(xBase + 2, yBase - current, 0), new Color(35, 255, 39), 2);

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameOverlayRenderer.class)
-public class FireOverlayReplacement {
+public class InGameOverlayRendererMixin {
     @Inject(method = "renderFireOverlay", cancellable = true, at = @At("HEAD"))
     private static void renderFireOverlay(MinecraftClient minecraftClient, MatrixStack matrixStack, CallbackInfo ci) {
         if (NoRender.fire.isEnabled() && ModuleRegistry.getByName("norender").isOn.isOn()) {

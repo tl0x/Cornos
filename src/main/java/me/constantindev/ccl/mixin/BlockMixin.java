@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Block.class)
-public abstract class XrayHandler {
+public abstract class BlockMixin {
 
     @Inject(method = "shouldDrawSide", cancellable = true, at = @At("HEAD"))
     private static void checkBlock(BlockState state, BlockView world, BlockPos pos, Direction facing, CallbackInfoReturnable<Boolean> cir) {

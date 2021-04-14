@@ -19,8 +19,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(CreativeInventoryScreen.class)
-public class CreativeInventoryMixin extends Screen {
-    public CreativeInventoryMixin() {
+public class CreativeInventoryScreenMixin extends Screen {
+    public CreativeInventoryScreenMixin() {
         super(Text.of(""));
     }
 

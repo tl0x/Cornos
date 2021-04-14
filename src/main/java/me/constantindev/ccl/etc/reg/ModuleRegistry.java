@@ -84,6 +84,7 @@ public class ModuleRegistry {
         ml.add(new Range());
         ml.add(new ChunkClearer());
         ml.add(new InvalidPositionCrash());
+        ml.add(new AntiBlockban());
 
 
         ml.add(budgetGraphicsInstance);

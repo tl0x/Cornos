@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WorldRenderer.class)
-public class WorldRenderHook {
+public class WorldRendererMixin {
     @Inject(method = "render", at = @At("TAIL"))
     public void render(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo ci) {
         //RenderHelper.B1S1TQueue.forEach(renderableText -> RenderHelper.drawText(renderableText.pos, renderableText.color, matrices, camera, renderableText.text, renderableText.size));

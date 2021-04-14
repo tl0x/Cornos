@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TitleScreen.class)
-public class MainScreenHook extends Screen {
-    public MainScreenHook() {
+public class TitleScreenMixin extends Screen {
+    public TitleScreenMixin() {
         super(Text.of(""));
     }
 

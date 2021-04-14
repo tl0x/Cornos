@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(InGameHud.class)
-public class IngameRendererHook {
+public class InGameHudMixin {
     double rgbSeed = 0;
     double swap = 0;
     int stage = 0;

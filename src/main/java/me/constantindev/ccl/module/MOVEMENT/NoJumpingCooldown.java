@@ -11,7 +11,7 @@ package me.constantindev.ccl.module.MOVEMENT;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.ms.MType;
-import me.constantindev.ccl.mixin.JumpingCooldownAccessor;
+import me.constantindev.ccl.mixin.LivingEntityAccessor;
 
 public class NoJumpingCooldown extends Module {
     public NoJumpingCooldown() {
@@ -21,7 +21,7 @@ public class NoJumpingCooldown extends Module {
     @Override
     public void onExecute() {
         assert Cornos.minecraft.player != null;
-        ((JumpingCooldownAccessor) Cornos.minecraft.player).setJumpingCooldown(0);
+        ((LivingEntityAccessor) Cornos.minecraft.player).setJumpingCooldown(0);
         super.onExecute();
     }
 }

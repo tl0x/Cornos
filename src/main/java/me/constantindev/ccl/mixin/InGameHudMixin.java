@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameHud.class)
-public class PumpkinOverlayReplacement {
+public class InGameHudMixin {
     @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
     public void renderPumpkinOverlayReplacement(CallbackInfo ci) {
         if (NoRender.pumpkin.isEnabled() && ModuleRegistry.getByName("norender").isOn.isOn()) {

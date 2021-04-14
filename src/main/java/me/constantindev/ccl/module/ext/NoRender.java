@@ -15,8 +15,9 @@ import me.constantindev.ccl.etc.ms.MType;
 public class NoRender extends Module {
     public static Toggleable fire = new Toggleable("fire", true);
     public static Toggleable pumpkin = new Toggleable("pumpkin", true);
-    public static Toggleable sign = new Toggleable("signs", true);
-    public static Toggleable armorstand = new Toggleable("armorstands", true);
+    public static Toggleable sign = new Toggleable("signs", false);
+    public static Toggleable armorstand = new Toggleable("armorstands", false);
+    public static Toggleable particles = new Toggleable("particles", false);
 
     public NoRender() {
         super("NoRender", "Does not render some things", MType.RENDER);
@@ -24,5 +25,6 @@ public class NoRender extends Module {
         this.mconf.add(pumpkin);
         this.mconf.add(sign);
         this.mconf.add(armorstand);
+        this.mconf.add(particles);
     }
 }

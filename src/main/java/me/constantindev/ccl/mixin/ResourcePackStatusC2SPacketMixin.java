@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ResourcePackStatusC2SPacket.class)
-public class ResourcePackStatusMixin {
+public class ResourcePackStatusC2SPacketMixin {
     @Shadow
     private ResourcePackStatusC2SPacket.Status status;
 

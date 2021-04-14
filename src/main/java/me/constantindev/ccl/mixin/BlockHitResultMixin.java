@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BlockHitResult.class)
-public abstract class PacketTryUseItemOnBlockHook {
+public abstract class BlockHitResultMixin {
     @Shadow
     public abstract BlockPos getBlockPos();
 
