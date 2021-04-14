@@ -2,6 +2,8 @@ package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.NameTags;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -11,6 +13,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.Matrix4f;
+import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,14 +30,24 @@ public abstract class EntityRendererMixin<T extends Entity> {
     @Final
     protected EntityRenderDispatcher dispatcher;
 
+    @Shadow protected abstract void renderLabelIfPresent(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light);
+
+    @Shadow public abstract TextRenderer getFontRenderer();
+
     @Inject(at = {@At("HEAD")}, method = "renderLabelIfPresent", cancellable = true)
     private void onRenderLabel(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
+        GL11.glDisable(GL11.GL_LIGHTING);
         if (ModuleRegistry.getByName("Nametags").isOn.isOn()) {
             if (entity instanceof PlayerEntity) {
                 ((NameTags) ModuleRegistry.getByName("Nametags")).renderCustomLabel(entity, text, matrices, vertexConsumers, light, dispatcher);
+
                 ci.cancel();
             }
         }
+    }
+    @Inject(method="renderLabelIfPresent",at=@At("TAIL"))
+    public void a(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
+        GL11.glEnable(GL11.GL_LIGHTING);
     }
 
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
