@@ -110,15 +110,16 @@ public class HudElements extends DrawableHelper {
             Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl", "taco/t" + tacoCounter + ".png"));
             DrawableHelper.drawTexture(matrices, (int) (w / 1.5 + 30), h - 64, 0, 0, 0, 92, 64, 64, 92);
         }
-        if (tpsHistory.size() > 92) tpsHistory.subList(0, 1).clear();
-        if (tpsAvgHistory.size() > 92) tpsAvgHistory.subList(0, 1).clear();
+        if (tpsHistory.size() > 92) tpsHistory.remove(0);
+        if (tpsAvgHistory.size() > 92) tpsAvgHistory.remove(0);
         if (((Toggleable) hud.mconf.getByName("graph")).isEnabled()) {
             int yBase = h - 41;
             int xBase = (w / 2) - 91 - 2;
             double last = -1;
             drawTextWithShadow(matrices, textRenderer, Text.of("TPS"), xBase, yBase - 20 - 11, new Color(0, 255, 217).getRGB());
             drawTextWithShadow(matrices, textRenderer, Text.of("Average TPS"), (w / 2) + 91 - textRenderer.getWidth("Average TPS"), yBase - 20 - 11, new Color(35, 255, 39).getRGB());
-            for (double d : tpsHistory.toArray(new Double[0])) {
+            for (Double d1 : tpsHistory.toArray(new Double[0])) {
+                double d = d1==null?20.0:d1;
                 int current = (int) Math.floor(d);
                 if (last != -1) {
                     RenderHelper.renderLineScreen(new Vec3d(xBase, yBase - ((int) Math.floor(last)), 0), new Vec3d(xBase + 2, yBase - current, 0), new Color(0, 255, 217), 2);
@@ -128,7 +129,8 @@ public class HudElements extends DrawableHelper {
             }
             xBase = (w / 2) - 91 - 2;
             last = -1;
-            for (double d : tpsAvgHistory.toArray(new Double[0])) {
+            for (Double d1 : tpsAvgHistory.toArray(new Double[0])) {
+                double d = d1==null?20.0:d1;
                 int current = (int) Math.floor(d);
                 if (last != -1) {
                     RenderHelper.renderLineScreen(new Vec3d(xBase, yBase - ((int) Math.floor(last)), 0), new Vec3d(xBase + 2, yBase - current, 0), new Color(35, 255, 39), 2);
