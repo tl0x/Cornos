@@ -1,4 +1,4 @@
-package me.constantindev.ccl.etc;
+package me.constantindev.ccl.etc.fakes;
 
 import com.mojang.authlib.GameProfile;
 import me.constantindev.ccl.Cornos;

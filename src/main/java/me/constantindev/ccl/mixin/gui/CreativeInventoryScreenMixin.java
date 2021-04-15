@@ -9,6 +9,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.gui.FunnyItemsScreen;
+import me.constantindev.ccl.gui.HeadsScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -29,6 +30,10 @@ public class CreativeInventoryScreenMixin extends Screen {
         this.addButton(new ButtonWidget(1, 1, 120, 20, Text.of("Funny items"), button -> {
             if (this.client == null) return;
             this.client.openScreen(new FunnyItemsScreen());
+        }));
+        this.addButton(new ButtonWidget(1, 20, 120, 20, Text.of("Heads"), button -> {
+            if (this.client == null) return;
+            this.client.openScreen(new HeadsScreen());
         }));
     }
 }

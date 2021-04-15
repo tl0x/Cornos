@@ -20,6 +20,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.text.DateFormat;
@@ -37,8 +38,11 @@ public class HudElements extends DrawableHelper {
     public static List<Double> minAvg = new ArrayList<>();
     private final DateFormat dateFormat = new SimpleDateFormat("h:mm aa");
     int tacoCounter = 0;
+    int dababyPos = 0;
     double tick = 0;
     long last = System.currentTimeMillis();
+    long dababyLast = System.currentTimeMillis();
+    boolean dababyDirection = false;
 
     public void render(MatrixStack matrices, float delta) {
         Cornos.notifMan.render(matrices);
@@ -107,8 +111,34 @@ public class HudElements extends DrawableHelper {
                 tacoCounter++;
             }
             if (tacoCounter > 4) tacoCounter = 1;
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(770, 771);
             Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl", "taco/t" + tacoCounter + ".png"));
             DrawableHelper.drawTexture(matrices, (int) (w / 1.5 + 30), h - 64, 0, 0, 0, 92, 64, 64, 92);
+            GL11.glDisable(GL11.GL_BLEND);
+        }
+        if (((Toggleable) hud.mconf.getByName("dababycar")).isEnabled()) {
+            long current = System.currentTimeMillis();
+            if (dababyLast + 50 < current) {
+                dababyLast = current;
+                if (!dababyDirection) {
+                    dababyPos++;
+                } else {
+                    dababyPos--;
+                }
+            }
+            if (dababyPos >= 148) {
+                dababyDirection = true;
+            }
+            if (dababyPos <= 0) {
+                dababyDirection = false;
+            }
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(770, 771);
+            Cornos.minecraft.getTextureManager().bindTexture(new Identifier("ccl", "dababycar/dababycar.png"));
+            assert Cornos.minecraft.player != null;
+            DrawableHelper.drawTexture(matrices, (int) (w / 3.0 + dababyPos), h - (Cornos.minecraft.player.isCreative() ? 70 : 90), 0, 0, 0, 64, 64, 64, dababyDirection ? -64 : 64);
+            GL11.glDisable(GL11.GL_BLEND);
         }
         if (tpsHistory.size() > 92) tpsHistory.remove(0);
         if (tpsAvgHistory.size() > 92) tpsAvgHistory.remove(0);

@@ -28,6 +28,7 @@ public class Hud extends Module {
         this.mconf.add(new Toggleable("miniplayer", true));
         this.mconf.add(new Toggleable("context", true));
         this.mconf.add(new Toggleable("taco", false));
+        this.mconf.add(new Toggleable("dababycar", false));
         themeColor.setRainbow(true);
     }
     // Logic: IngameRenderHook.java
