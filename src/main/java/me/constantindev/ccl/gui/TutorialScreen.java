@@ -10,8 +10,10 @@ package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ClientProgression;
+import me.constantindev.ccl.module.ext.ClientConfig;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.CheckboxWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 
@@ -20,6 +22,9 @@ import java.util.List;
 
 public class TutorialScreen extends Screen {
     ButtonWidget continueBTN;
+    CheckboxWidget homescreen;
+    CheckboxWidget mpscreen;
+    CheckboxWidget customPIcon;
     int page = 0;
     boolean finished = false;
 
@@ -29,8 +34,15 @@ public class TutorialScreen extends Screen {
 
     @Override
     protected void init() {
+        homescreen = new CheckboxWidget(4,65,100,20,Text.of("Client home screen"),true);
+        mpscreen = new CheckboxWidget(4,90,100,20,Text.of("Client multiplayer screen"),false);
+        customPIcon = new CheckboxWidget(4,115,100,20,Text.of("Custom process icon"),true);
         continueBTN = new ButtonWidget(width - 81, height - 21, 80, 20, Text.of("Next"), button -> {
             if (finished) {
+                ClientConfig m = (ClientConfig) ModuleRegistry.getByName("clientconfig");
+                m.mconf.getByName("homescreen").setValue(homescreen.isChecked()?"client":"vanilla");
+                m.mconf.getByName("mpscreen").setValue(mpscreen.isChecked()?"client":"vanilla");
+                m.mconf.getByName("customProcessIcon").setValue(customPIcon.isChecked()?"on":"off");
                 ClientProgression.hasFinishedTut.setValue("on");
                 assert this.client != null;
                 this.client.openScreen(null);
@@ -78,9 +90,15 @@ public class TutorialScreen extends Screen {
                 messages.add("You can disable these and return to the default by going into §aClientConfig§r's module settings");
                 messages.add("The module is in the §aMisc§r category. You can press the §aClick GUI§r button on the main menu to get to the settings");
                 break;
+            case 3:
+                messages.add("Let's get to configuring, shall we?");
+                homescreen.render(matrices, mouseX, mouseY, delta);
+                mpscreen.render(matrices, mouseX, mouseY, delta);
+                customPIcon.render(matrices, mouseX, mouseY, delta);
+                break;
             default:
                 messages.add("Congrats! You are ready to use the client now");
-                messages.add("To revisit this tutorial, run §a" + ModuleRegistry.getByName("clientconfig").mconf.getByName("prefix").value + "config clientprogression finishedTutorial off§r in game.");
+                messages.add("To revisit this tutorial and change settings, run §a" + ModuleRegistry.getByName("clientconfig").mconf.getByName("prefix").value + "config clientprogression finishedTutorial off§r in game.");
                 continueBTN.setMessage(Text.of("Finish"));
                 finished = true;
                 break;
@@ -91,5 +109,29 @@ public class TutorialScreen extends Screen {
             offset += 10;
         }
         super.render(matrices, mouseX, mouseY, delta);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        homescreen.mouseClicked(mouseX, mouseY, button);
+        mpscreen.mouseClicked(mouseX, mouseY, button);
+        customPIcon.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        homescreen.mouseReleased(mouseX, mouseY, button);
+        mpscreen.mouseReleased(mouseX, mouseY, button);
+        customPIcon.mouseReleased(mouseX, mouseY, button);
+        return super.mouseReleased(mouseX, mouseY, button);
+    }
+
+    @Override
+    public void mouseMoved(double mouseX, double mouseY) {
+        homescreen.mouseMoved(mouseX, mouseY);
+        mpscreen.mouseMoved(mouseX, mouseY);
+        customPIcon.mouseMoved(mouseX, mouseY);
+        super.mouseMoved(mouseX, mouseY);
     }
 }

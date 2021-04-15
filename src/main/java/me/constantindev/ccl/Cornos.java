@@ -39,8 +39,10 @@ public class Cornos implements ModInitializer {
     }
 
     public static void onMinecraftCreate() {
-        InputStream inputStream = Cornos.class.getClassLoader().getResourceAsStream("assets/ccl/icon1.png");
-        Cornos.minecraft.getWindow().setIcon(inputStream, inputStream);
+        if (ModuleRegistry.getByName("ClientConfig").mconf.getByName("customProcessIcon").value.equals("on")) {
+            InputStream inputStream = Cornos.class.getClassLoader().getResourceAsStream("assets/ccl/icon1.png");
+            Cornos.minecraft.getWindow().setIcon(inputStream, inputStream);
+        }
     }
 
     public static void openCongratsScreen() {
