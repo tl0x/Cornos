@@ -13,6 +13,7 @@ import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
@@ -156,13 +157,18 @@ public class ChunkClearer extends Module {
         if (block != null) {
             assert Cornos.minecraft.player != null;
             Cornos.minecraft.player.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, block.add(.5, .5, .5));
+            Cornos.minecraft.player.pitch = 90;
             if((block.y + 2) < Cornos.minecraft.player.getPos().y) {
                 Cornos.minecraft.options.keySneak.setPressed(true);
                 Cornos.minecraft.options.keyJump.setPressed(false);
-            } else {
+            } else if ((block.y +1) > Cornos.minecraft.player.getPos().y) {
                 Cornos.minecraft.options.keySneak.setPressed(false);
                 Cornos.minecraft.options.keyJump.setPressed(true);
+            } else {
+                Cornos.minecraft.options.keySneak.setPressed(false);
+                Cornos.minecraft.options.keyJump.setPressed(false);
             }
+
             Cornos.minecraft.options.keyForward.setPressed(true);
             Cornos.minecraft.player.abilities.flying = true;
             if (Cornos.minecraft.crosshairTarget instanceof BlockHitResult) {
@@ -178,5 +184,12 @@ public class ChunkClearer extends Module {
             this.setEnabled(false);
         }
         super.onExecute();
+    }
+
+    @Override
+    public void onDisable() {
+        KeyBinding.unpressAll();
+        KeyBinding.updatePressedStates();
+        super.onDisable();
     }
 }
