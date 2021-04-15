@@ -39,6 +39,9 @@ public class IdentifierMixin {
         } else if (ns.equals("minecraft") && p.equals("textures/gui/options_background.png")) {
             this.namespace = "ccl";
             this.path = "transparent.png";
+        } else if (ns.equals("minecraft") && p.equals("default")) {
+            this.namespace = "ccl";
+            this.path = "font";
         }
     }
 }
