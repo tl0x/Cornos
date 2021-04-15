@@ -12,7 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
-import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -36,7 +35,7 @@ public abstract class EntityRendererMixin<T extends Entity> {
 
     @Inject(at = {@At("HEAD")}, method = "renderLabelIfPresent", cancellable = true)
     private void onRenderLabel(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
-        GL11.glDisable(GL11.GL_LIGHTING);
+        //GL11.glDisable(GL11.GL_LIGHTING);
         if (ModuleRegistry.getByName("Nametags").isOn.isOn()) {
             if (entity instanceof PlayerEntity) {
                 ((NameTags) ModuleRegistry.getByName("Nametags")).renderCustomLabel(entity, text, matrices, vertexConsumers, light, dispatcher);
@@ -44,11 +43,6 @@ public abstract class EntityRendererMixin<T extends Entity> {
                 ci.cancel();
             }
         }
-    }
-
-    @Inject(method = "renderLabelIfPresent", at = @At("TAIL"))
-    public void a(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
-        GL11.glEnable(GL11.GL_LIGHTING);
     }
 
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
