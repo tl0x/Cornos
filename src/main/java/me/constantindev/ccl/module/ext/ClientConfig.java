@@ -10,7 +10,7 @@ public class ClientConfig extends Module {
         this.mconf.add(new MultiOption("prefix", ".", new String[]{"}", ".", "-", "+", "#", "@", "&", "%", "$"}));
         this.mconf.add(new MultiOption("homescreen", "client", new String[]{"client", "vanilla"}));
         this.mconf.add(new MultiOption("mpscreen", "client", new String[]{"client", "vanilla"}));
-        this.mconf.add(new Toggleable("customProcessIcon",true));
+        this.mconf.add(new Toggleable("customProcessIcon", true));
     }
 
     @Override
