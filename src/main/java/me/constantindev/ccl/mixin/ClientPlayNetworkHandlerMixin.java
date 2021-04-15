@@ -3,8 +3,8 @@ package me.constantindev.ccl.mixin;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
-import me.constantindev.ccl.etc.mod.OreSimManager;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.OreSim;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.ChunkDataS2CPacket;
@@ -24,7 +24,7 @@ public class ClientPlayNetworkHandlerMixin {
     @Inject(method = "onChunkData", at = @At(value = "TAIL"))
     private void onChunkData(ChunkDataS2CPacket packet, CallbackInfo ci) {
         if (ModuleRegistry.getByName("oresim").isOn.isOn()) {
-            OreSimManager.getInstance().doMathOnChunk(packet.getX(), packet.getZ());
+            ((OreSim) ModuleRegistry.getByName("oresim")).doMathOnChunk(packet.getX(), packet.getZ());
         }
     }
 }

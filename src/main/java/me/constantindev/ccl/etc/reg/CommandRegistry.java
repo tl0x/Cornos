@@ -32,6 +32,7 @@ public class CommandRegistry {
         cl.add(new BlockEgg());
         cl.add(new FakePlayer());
         cl.add(new RemovePlayer());
+        cl.add(new SetSeed());
     }
 
     public static List<Command> getAll() {
