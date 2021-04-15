@@ -1,9 +1,12 @@
 package me.constantindev.ccl.module.ext;
 
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.Notification;
+import me.constantindev.ccl.etc.NotificationManager;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
+import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.block.Blocks;
@@ -35,7 +38,7 @@ public class OreSim extends Module {
     Num chunkRange = new Num("Chunk Range", 5, 10, 0);
 
     private long worldSeed = 0L;
-    private HashMap<Long, HashMap<OreType, List<Vec3d>>> chunkRenderers = new HashMap<>();
+    private final HashMap<Long, HashMap<OreType, List<Vec3d>>> chunkRenderers = new HashMap<>();
 
     public OreSim() {
         super("OreSim", "Worldseed + Math = Ores", MType.WORLD);
@@ -52,17 +55,19 @@ public class OreSim extends Module {
 
     @Override
     public void onRender(MatrixStack ms, float td) {
-        assert Cornos.minecraft.player != null;
-        int chunkX = Cornos.minecraft.player.chunkX;
-        int chunkZ = Cornos.minecraft.player.chunkZ;
+        if(worldSeed != 0) {
+            assert Cornos.minecraft.player != null;
+            int chunkX = Cornos.minecraft.player.chunkX;
+            int chunkZ = Cornos.minecraft.player.chunkZ;
 
-        int rangeVal = (int) chunkRange.getValue();
-        for(int range = 0; range <= rangeVal;range++) {
-            for(int x = -range+chunkX; x <= range+chunkX; x++) {
-                renderChunk(x, chunkZ+range-rangeVal);
-            }
-            for(int x = (-range)+1+chunkX; x < range+chunkX;x++) {
-                renderChunk(x, chunkZ-range+rangeVal+1);
+            int rangeVal = (int) chunkRange.getValue();
+            for(int range = 0; range <= rangeVal;range++) {
+                for(int x = -range+chunkX; x <= range+chunkX; x++) {
+                    renderChunk(x, chunkZ+range-rangeVal);
+                }
+                for(int x = (-range)+1+chunkX; x < range+chunkX;x++) {
+                    renderChunk(x, chunkZ-range+rangeVal+1);
+                }
             }
         }
         super.onRender(ms, td);
@@ -96,6 +101,9 @@ public class OreSim extends Module {
     @Override
     public void onEnable() {
         reload();
+        if(worldSeed == 0) {
+            Notification.create("OreSim", new String[]{"do .setseed [seed] to input your seed"}, 30000);
+        }
         super.onEnable();
     }
 
@@ -150,7 +158,7 @@ public class OreSim extends Module {
 
             random.setDecoratorSeed(populationSeed, index, ore.step);
 
-            if(ore.generatorType == 1) {
+            if(ore.generatorType == Generator.EMERALD) {
                 repeat = random.nextInt(3)+6;
             }
 
@@ -167,14 +175,18 @@ public class OreSim extends Module {
                     y = random.nextInt(ore.maxY- ore.minY) + ore.minY;
                 }
 
-                if(ore.generatorType == 0) {
-                    ores.addAll(generateNormal(worldAccess, random, new BlockPos(x, y, z), ore.size));
-                } else if (ore.generatorType == 1) {
-                    ores.add(new Vec3d(x,y,z));
-                } else if (ore.generatorType == 2) {
-                    ores.addAll(generateHidden(random, new BlockPos(x, y, z), ore.size));
-                } else {
-                    System.out.println(ore.name + " has some unknown generator. Fix it!");
+                switch (ore.generatorType) {
+                    case DEFAULT:
+                        ores.addAll(generateNormal(worldAccess, random, new BlockPos(x, y, z), ore.size));
+                        break;
+                    case EMERALD:
+                        ores.add(new Vec3d(x,y,z));
+                        break;
+                    case NO_SURFACE:
+                        ores.addAll(generateHidden(random, new BlockPos(x, y, z), ore.size));
+                        break;
+                    default:
+                        System.out.println(ore.name + " has some unknown generator. Fix it!");
                 }
             }
             h.put(ore.name, ores);
@@ -200,9 +212,9 @@ public class OreSim extends Module {
         final RuleTest replacable;
         final int repeat;
         final boolean isDepthAverage;
-        final int generatorType;
+        final Generator generatorType;
 
-        private Ore(OreType name, int index, int step, int minY, int maxY, int size, RuleTest replacable, int repeat, boolean isDepthAverage, int generatorType) {
+        private Ore(OreType name, int index, int step, int minY, int maxY, int size, RuleTest replacable, int repeat, boolean isDepthAverage, Generator generatorType) {
             this.name = name;
             this.index = index;
             this.step = step;
@@ -217,15 +229,15 @@ public class OreSim extends Module {
 
         public static final ArrayList<Ore> ORES = new ArrayList<>(
                 Arrays.asList(
-                        new Ore(OreType.DIAMOND, 9, 6, 0, 16, 8, OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, 1, false, 0),
-                        new Ore(OreType.REDSTONE, 8, 6, 0, 16, 8, OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, 8, false, 0),
-                        new Ore(OreType.GOLD, 7, 6, 0, 32, 9, OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, 2, false, 0),
-                        new Ore(OreType.IRON, 6, 6, 0, 64, 9, OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, 20, false, 0),
-                        new Ore(OreType.COAL, 5, 6, 0, 128, 17, OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, 20, false, 0),
-                        new Ore(OreType.EMERALD,14,6,4,32,1, new BlockMatchRuleTest(Blocks.STONE),11, false,1),
-                        new Ore(OreType.SDEBRIS,15,7,8,120,2, OreFeatureConfig.Rules.BASE_STONE_NETHER, 1, false, 2),
-                        new Ore(OreType.LDEBRIS,15,7,16,8,3, OreFeatureConfig.Rules.BASE_STONE_NETHER, 1, true, 2),
-                        new Ore(OreType.LAPIS,10,6,16, 16,7, OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,1, true,0)
+                        new Ore(OreType.DIAMOND, 9, 6, 0, 16, 8, OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, 1, false, Generator.DEFAULT),
+                        new Ore(OreType.REDSTONE, 8, 6, 0, 16, 8, OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, 8, false, Generator.DEFAULT),
+                        new Ore(OreType.GOLD, 7, 6, 0, 32, 9, OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, 2, false, Generator.DEFAULT),
+                        new Ore(OreType.IRON, 6, 6, 0, 64, 9, OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, 20, false, Generator.DEFAULT),
+                        new Ore(OreType.COAL, 5, 6, 0, 128, 17, OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, 20, false, Generator.DEFAULT),
+                        new Ore(OreType.EMERALD,14,6,4,32,1, new BlockMatchRuleTest(Blocks.STONE),6-8, false,Generator.EMERALD),
+                        new Ore(OreType.SDEBRIS,15,7,8,120,2, OreFeatureConfig.Rules.BASE_STONE_NETHER, 1, false, Generator.NO_SURFACE),
+                        new Ore(OreType.LDEBRIS,15,7,16,8,3, OreFeatureConfig.Rules.BASE_STONE_NETHER, 1, true, Generator.NO_SURFACE),
+                        new Ore(OreType.LAPIS,10,6,16, 16,7, OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,1, true,Generator.DEFAULT)
                 )
         );
     }
@@ -240,6 +252,12 @@ public class OreSim extends Module {
         SDEBRIS,
         LDEBRIS,
         LAPIS
+    }
+
+    private enum Generator {
+        DEFAULT,
+        EMERALD,
+        NO_SURFACE
     }
 
     //====================================
