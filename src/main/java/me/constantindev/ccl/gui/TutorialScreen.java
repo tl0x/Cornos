@@ -34,15 +34,15 @@ public class TutorialScreen extends Screen {
 
     @Override
     protected void init() {
-        homescreen = new CheckboxWidget(4,65,100,20,Text.of("Client home screen"),true);
-        mpscreen = new CheckboxWidget(4,90,100,20,Text.of("Client multiplayer screen"),false);
-        customPIcon = new CheckboxWidget(4,115,100,20,Text.of("Custom process icon"),true);
+        homescreen = new CheckboxWidget(4, 65, 100, 20, Text.of("Client home screen"), true);
+        mpscreen = new CheckboxWidget(4, 90, 100, 20, Text.of("Client multiplayer screen"), false);
+        customPIcon = new CheckboxWidget(4, 115, 100, 20, Text.of("Custom process icon"), true);
         continueBTN = new ButtonWidget(width - 81, height - 21, 80, 20, Text.of("Next"), button -> {
             if (finished) {
                 ClientConfig m = (ClientConfig) ModuleRegistry.getByName("clientconfig");
-                m.mconf.getByName("homescreen").setValue(homescreen.isChecked()?"client":"vanilla");
-                m.mconf.getByName("mpscreen").setValue(mpscreen.isChecked()?"client":"vanilla");
-                m.mconf.getByName("customProcessIcon").setValue(customPIcon.isChecked()?"on":"off");
+                m.mconf.getByName("homescreen").setValue(homescreen.isChecked() ? "client" : "vanilla");
+                m.mconf.getByName("mpscreen").setValue(mpscreen.isChecked() ? "client" : "vanilla");
+                m.mconf.getByName("customProcessIcon").setValue(customPIcon.isChecked() ? "on" : "off");
                 ClientProgression.hasFinishedTut.setValue("on");
                 assert this.client != null;
                 this.client.openScreen(null);

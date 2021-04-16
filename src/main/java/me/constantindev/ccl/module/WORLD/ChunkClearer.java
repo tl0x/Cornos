@@ -158,10 +158,10 @@ public class ChunkClearer extends Module {
             assert Cornos.minecraft.player != null;
             Cornos.minecraft.player.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, block.add(.5, .5, .5));
             Cornos.minecraft.player.pitch = 90;
-            if((block.y + 2) < Cornos.minecraft.player.getPos().y) {
+            if ((block.y + 2) < Cornos.minecraft.player.getPos().y) {
                 Cornos.minecraft.options.keySneak.setPressed(true);
                 Cornos.minecraft.options.keyJump.setPressed(false);
-            } else if ((block.y +1) > Cornos.minecraft.player.getPos().y) {
+            } else if ((block.y + 1) > Cornos.minecraft.player.getPos().y) {
                 Cornos.minecraft.options.keySneak.setPressed(false);
                 Cornos.minecraft.options.keyJump.setPressed(true);
             } else {
