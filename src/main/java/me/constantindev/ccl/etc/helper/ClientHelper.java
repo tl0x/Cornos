@@ -33,6 +33,17 @@ public class ClientHelper {
         return isValid;
     }
 
+    public static boolean isLongValid(String longToParse) {
+        boolean isValid;
+        try {
+            Long.parseLong(longToParse);
+            isValid = true;
+        } catch (Exception exc) {
+            isValid = false;
+        }
+        return isValid;
+    }
+
     public static void setField(Object t, String n1, String n2, Object value) {
         Field f;
         try {
