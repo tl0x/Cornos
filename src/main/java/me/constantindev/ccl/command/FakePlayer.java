@@ -58,6 +58,7 @@ public class FakePlayer extends Command {
             ClientHelper.sendChat("not sure if thats a valid uuid bruh");
             return;
         }
+        assert Cornos.minecraft.world != null;
         OtherClientPlayerEntity o = new OtherClientPlayerEntity(Cornos.minecraft.world, new GameProfile(uuid, u));
         o.copyPositionAndRotation(Cornos.minecraft.player);
         Cornos.minecraft.world.addPlayer((int) RandomHelper.rndD(65535), o);
