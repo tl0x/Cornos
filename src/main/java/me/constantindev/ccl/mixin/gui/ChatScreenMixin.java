@@ -15,7 +15,8 @@ import java.awt.*;
 
 @Mixin(ChatScreen.class)
 public class ChatScreenMixin {
-    @Shadow protected TextFieldWidget chatField;
+    @Shadow
+    protected TextFieldWidget chatField;
 
     @Inject(at = {@At("HEAD")}, method = "render")
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {

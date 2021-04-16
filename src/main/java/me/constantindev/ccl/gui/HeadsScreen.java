@@ -2,7 +2,6 @@ package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.module.ext.Hud;
-import net.minecraft.block.Material;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -10,14 +9,12 @@ import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.SkullItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.text.Text;
 
 import java.awt.*;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Random;
 import java.util.UUID;

@@ -127,10 +127,10 @@ public class HudElements extends DrawableHelper {
                     dababyPos--;
                 }
             }
-            if (dababyPos >= 92-32) {
+            if (dababyPos >= 92 - 32) {
                 dababyDirection = true;
             }
-            if (dababyPos <= -92+32) {
+            if (dababyPos <= -92 + 32) {
                 dababyDirection = false;
             }
             GL11.glEnable(GL11.GL_BLEND);
