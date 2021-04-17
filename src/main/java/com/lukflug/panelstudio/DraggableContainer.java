@@ -116,8 +116,4 @@ public class DraggableContainer extends CollapsibleContainer implements FixedCom
         if (pos != null) position = pos;
         if (open.isOn() != config.loadState()) open.toggle();
     }
-
-    public void setWidth(int nw) {
-        this.width = nw;
-    }
 }

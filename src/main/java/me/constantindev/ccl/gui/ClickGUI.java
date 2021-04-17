@@ -6,7 +6,6 @@ import com.lukflug.panelstudio.SettingsAnimation;
 import com.lukflug.panelstudio.mc16.MinecraftGUI;
 import com.lukflug.panelstudio.settings.*;
 import com.lukflug.panelstudio.theme.ColorScheme;
-import com.lukflug.panelstudio.theme.GameSenseTheme;
 import com.lukflug.panelstudio.theme.Theme;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
@@ -39,7 +38,7 @@ public class ClickGUI extends MinecraftGUI {
             @Override
             public void drawString(Point pos, String s, Color c) {
                 end();
-                Cornos.minecraft.textRenderer.draw(new MatrixStack(), s, pos.x, pos.y, c.getRGB());
+                Cornos.minecraft.textRenderer.draw(new MatrixStack(), " " + s, pos.x, pos.y, c.getRGB());
                 begin();
             }
 
@@ -54,7 +53,7 @@ public class ClickGUI extends MinecraftGUI {
             }
 
         };
-        Theme theme = new GameSenseTheme(new ColorScheme() {
+        Theme theme = new com.lukflug.panelstudio.theme.GameSenseTheme(new ColorScheme() {
             @Override
             public Color getActiveColor() {
                 return new Color(47, 47, 47, 153);
