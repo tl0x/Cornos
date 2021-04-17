@@ -17,6 +17,22 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ModuleRegistry {
+    /* NOTE
+    * Features to implement:
+    * autoarmor -> working on it
+    * blink -> working on it
+    * bowaimbot -> working on it
+    * autopotion -> working on it
+    * criticals -> working on it
+    * fancychat -> working on it
+    * autobedbomb -> working on it
+    * autlog -> working on it
+    * autoez -> working on it
+    * autofish -> working on it
+    * autosign that you can change -> working on it
+    * */
+
+
     private static final List<Module> ml = new ArrayList<>();
     public static BudgetGraphics budgetGraphicsInstance = new BudgetGraphics();
     private static TabManager tabManager; // Probably not the best place for this but whatever -FreakingChicken
@@ -86,6 +102,7 @@ public class ModuleRegistry {
         ml.add(new ChunkClearer());
         ml.add(new InvalidPositionCrash());
         ml.add(new AntiBlockban());
+        ml.add(new Scaffold());
 
 
         ml.add(budgetGraphicsInstance);

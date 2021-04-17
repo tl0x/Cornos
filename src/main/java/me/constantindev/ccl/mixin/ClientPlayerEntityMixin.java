@@ -46,5 +46,4 @@ public class ClientPlayerEntityMixin {
         EventHelper.BUS.invokeEventCall(EventType.ONTICK, new Event());
     }
 
-
 }

@@ -19,6 +19,7 @@
     "LivingEntityRendererMixin",
     "LoginHelloC2SPacketMixin",
     "MinecraftClientMixin",
+    "PlayerEntityMixin",
     "PlayerMoveC2SPacketAccessor",
     "PlaySoundS2CPacketMixin",
     "ResourcePackStatusC2SPacketMixin",
@@ -39,6 +40,7 @@
     "gui.ScanningEntryMixin",
     "gui.ScreenMixin",
     "gui.SelectWorldScreenMixin",
+    "gui.SplashScreenMixin",
     "gui.TitleScreenMixin",
     "gui.WorldRendererMixin"
   ],
