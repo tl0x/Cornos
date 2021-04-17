@@ -3,6 +3,7 @@ package me.constantindev.ccl.gui;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
 import me.constantindev.ccl.module.ClientProgression;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -10,7 +11,6 @@ import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.client.gui.screen.options.OptionsScreen;
 import net.minecraft.client.gui.screen.world.SelectWorldScreen;
-import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.realms.gui.screen.RealmsMainScreen;
 import net.minecraft.client.util.math.MatrixStack;
@@ -31,16 +31,16 @@ public class MainScreen extends Screen {
             this.client.openScreen(new TutorialScreen());
             return;
         }
-        this.addButton(new ButtonWidget(width - 125, height - 175, 120, 20, Text.of("Alts"), button -> {
+        this.addButton(new RoundedButtonWidget(width - 125, height - 175, 120, 20, Text.of("Alts"), () -> {
             assert this.client != null;
             this.client.openScreen(new AltManagerScreen());
         }));
-        this.addButton(new ButtonWidget(width - 125, height - 150, 120, 20, Text.of("Click GUI"), button -> ModuleRegistry.getByName("clickgui").onEnable()));
-        this.addButton(new ButtonWidget(width - 125, height - 125, 120, 20, Text.of("Settings"), (b) -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));
-        this.addButton(new ButtonWidget(width - 125, height - 100, 120, 20, Text.of("Singleplayer"), (b) -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
-        this.addButton(new ButtonWidget(width - 125, height - 75, 120, 20, Text.of("Multiplayer"), (b) -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));
-        ButtonWidget btnw = new ButtonWidget(width - 125, height - 50, 120, 20, Text.of("Realms"), (b) -> Cornos.minecraft.openScreen(new RealmsMainScreen(this)));
-        this.addButton(new ButtonWidget(width - 125, height - 25, 120, 20, Text.of("Vanilla homescreen"), (b) -> {
+        this.addButton(new RoundedButtonWidget(width - 125, height - 150, 120, 20, Text.of("Click GUI"), () -> ModuleRegistry.getByName("clickgui").onEnable()));
+        this.addButton(new RoundedButtonWidget(width - 125, height - 125, 120, 20, Text.of("Settings"), () -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));
+        this.addButton(new RoundedButtonWidget(width - 125, height - 100, 120, 20, Text.of("Singleplayer"), () -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
+        this.addButton(new RoundedButtonWidget(width - 125, height - 75, 120, 20, Text.of("Multiplayer"), () -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));
+        RoundedButtonWidget btnw = new RoundedButtonWidget(width - 125, height - 50, 120, 20, Text.of("Realms"), () -> Cornos.minecraft.openScreen(new RealmsMainScreen(this)));
+        this.addButton(new RoundedButtonWidget(width - 125, height - 25, 120, 20, Text.of("Vanilla homescreen"), () -> {
             ModuleRegistry.getByName("ClientConfig").mconf.getByName("homescreen").setValue("vanilla");
             Cornos.minecraft.openScreen(new TitleScreen());
         }));

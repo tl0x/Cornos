@@ -38,14 +38,14 @@ public abstract class GLInterface implements Interface {
      */
     private static final float[] COORDS = new float[4];
     /**
+     * Clipping rectangle stack.
+     */
+    private final Stack<Rectangle> clipRect = new Stack<>();
+    /**
      * Boolean indicating whether to clip in the horizontal direction
      */
     protected boolean clipX;
     protected List<Identifier> textures = new ArrayList<>();
-    /**
-     * Clipping rectangle stack.
-     */
-    private final Stack<Rectangle> clipRect = new Stack<>();
 
     /**
      * Constructor.

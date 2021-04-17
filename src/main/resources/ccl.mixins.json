@@ -13,7 +13,6 @@
     "EntityRendererMixin",
     "EntitySpawnS2CPacketMixin",
     "IdentifierMixin",
-    "InGameHudMixin",
     "ItemStackMixin",
     "LivingEntityAccessor",
     "LivingEntityMixin",

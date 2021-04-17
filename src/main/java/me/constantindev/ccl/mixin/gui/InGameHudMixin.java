@@ -9,6 +9,7 @@ import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.exc.InvalidStateException;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
+import me.constantindev.ccl.module.ext.NoRender;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
@@ -111,6 +112,9 @@ public class InGameHudMixin {
             }
             ClientConfig.hudElements.render(matrices, tickDelta);
         }
+        for (Module m : ModuleRegistry.getAll()) {
+            if (m.isOn.isOn()) m.onHudRender(matrices, tickDelta);
+        }
         if (ModuleRegistry.getByName("TabGUI").isOn.isOn() && ClientConfig.tabGUI != null) {
             ClientConfig.tabGUI.render(matrices, tickDelta);
         }
@@ -120,6 +124,16 @@ public class InGameHudMixin {
     private void renderStatusEffectOverlay(MatrixStack matrices, CallbackInfo ci) {
         if (ModuleRegistry.getByName("hud").isOn.isOn()) {
             ci.cancel();
+        }
+    }
+
+    @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
+    public void renderPumpkinOverlayReplacement(CallbackInfo ci) {
+        if (NoRender.pumpkin.isEnabled() && ModuleRegistry.getByName("norender").isOn.isOn()) {
+            ci.cancel();
+            MatrixStack defaultM = new MatrixStack();
+            int w2d = Cornos.minecraft.getWindow().getScaledWidth() / 2;
+            Cornos.minecraft.textRenderer.draw(defaultM, "You are wearing a pumpkin", w2d - ((float) Cornos.minecraft.textRenderer.getWidth("You are wearing a pumpkin") / 2), 50, 0xFFFFFFFF);
         }
     }
 }

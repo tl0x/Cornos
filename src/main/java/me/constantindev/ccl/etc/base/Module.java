@@ -73,6 +73,10 @@ public class Module {
 
     }
 
+    public void onHudRender(MatrixStack ms, float td) {
+
+    }
+
     public void onRender(MatrixStack ms, float td) {
         for (RenderableLine rl : rlq.toArray(new RenderableLine[0])) {
             RenderHelper.renderLine(rl.bp1, rl.bp2, rl.c, rl.width);

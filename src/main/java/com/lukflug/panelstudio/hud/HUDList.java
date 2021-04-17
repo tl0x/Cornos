@@ -13,7 +13,7 @@ public interface HUDList {
      *
      * @return list size
      */
-	int getSize();
+    int getSize();
 
     /**
      * Get the item at the given index.
@@ -21,7 +21,7 @@ public interface HUDList {
      * @param index index of item
      * @return the item corresponding to the index
      */
-	String getItem(int index);
+    String getItem(int index);
 
     /**
      * Get the color the string should have.
@@ -29,19 +29,19 @@ public interface HUDList {
      * @param index index of item
      * @return the color of the item
      */
-	Color getItemColor(int index);
+    Color getItemColor(int index);
 
     /**
      * Whether to align the list downwards.
      *
      * @return align down
      */
-	boolean sortUp();
+    boolean sortUp();
 
     /**
      * Whether to align the list to the right.
      *
      * @return align right
      */
-	boolean sortRight();
+    boolean sortRight();
 }

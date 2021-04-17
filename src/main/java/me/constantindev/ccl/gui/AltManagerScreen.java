@@ -11,10 +11,10 @@ package me.constantindev.ccl.gui;
 import com.thealtening.auth.service.AlteningServiceType;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
 import me.constantindev.ccl.module.Alts;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
@@ -42,11 +42,11 @@ public class AltManagerScreen extends Screen {
         passwd.setMaxLength(1000);
         emailpasswd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) + 35, 200, 20, Text.of("Username:password"));
         emailpasswd.setMaxLength(2000);
-        ButtonWidget login = new ButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 60, 120, 20, Text.of("Login"), button -> {
+        RoundedButtonWidget login = new RoundedButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 60, 120, 20, Text.of("Login"), () -> {
             boolean success = ClientHelper.login(this.email.getText(), this.passwd.getText());
             this.errormsg = success ? "§aLogged in!" : "§cFailed to log in. Check the password and email.";
         });
-        ButtonWidget saveAlt = new ButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 85, 120, 20, Text.of("Save alt"), button -> {
+        RoundedButtonWidget saveAlt = new RoundedButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 85, 120, 20, Text.of("Save alt"), () -> {
             String email = this.email.getText();
             String passwd = this.passwd.getText();
             if (email.isEmpty()) {
@@ -77,12 +77,12 @@ public class AltManagerScreen extends Screen {
         for (List<String> good : goodalts) {
             hasSavedAlts = true;
             fal.add(encStr(good.get(0), 6001) + ((char) 998) + encStr(good.get(1), 6000));
-            ButtonWidget alt = new ButtonWidget(width - 141, offset, 140, 20, Text.of(good.get(0)), button -> {
+            RoundedButtonWidget alt = new RoundedButtonWidget(width - 141, offset, 140, 20, Text.of(good.get(0)), () -> {
                 this.email.setText(good.get(0));
                 if (!good.get(1).equalsIgnoreCase("ThisDoesNotMatterSinceTheAccountIsCracked"))
                     this.passwd.setText(good.get(1));
             });
-            ButtonWidget delete = new ButtonWidget(width - 141 - 21, offset, 20, 20, Text.of("X"), button -> {
+            RoundedButtonWidget delete = new RoundedButtonWidget(width - 141 - 21, offset, 20, 20, Text.of("X"), () -> {
                 fal.remove(encStr(good.get(0), 6001) + ((char) 998) + encStr(good.get(1), 6000));
                 Alts.k.setValue("0" + String.join(((char) 999) + "", fal));
                 assert this.client != null;

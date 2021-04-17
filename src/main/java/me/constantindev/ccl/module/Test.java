@@ -9,8 +9,12 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.etc.base.Module;
+import me.constantindev.ccl.etc.helper.RenderHelper;
 import me.constantindev.ccl.etc.ms.MType;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.Vec3d;
+
+import java.awt.*;
 
 public class Test extends Module {
     public Test() {
@@ -18,8 +22,10 @@ public class Test extends Module {
     }
 
     @Override
-    public void onRender(MatrixStack ms, float td) {
+    public void onHudRender(MatrixStack ms, float td) {
+        Vec3d inst = new Vec3d(50, 100, 0);
 
-        super.onRender(ms, td);
+        RenderHelper.renderRoundedQuad(inst, inst.add(5, 5, 5), 5, Color.RED);
+        super.onHudRender(ms, td);
     }
 }

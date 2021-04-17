@@ -9,10 +9,10 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
 import me.constantindev.ccl.module.ClientProgression;
 import me.constantindev.ccl.module.ext.ClientConfig;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.CheckboxWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TutorialScreen extends Screen {
-    ButtonWidget continueBTN;
+    RoundedButtonWidget continueBTN;
     CheckboxWidget homescreen;
     CheckboxWidget mpscreen;
     CheckboxWidget customPIcon;
@@ -37,7 +37,7 @@ public class TutorialScreen extends Screen {
         homescreen = new CheckboxWidget(4, 65, 100, 20, Text.of("Client home screen"), true);
         mpscreen = new CheckboxWidget(4, 90, 100, 20, Text.of("Client multiplayer screen"), false);
         customPIcon = new CheckboxWidget(4, 115, 100, 20, Text.of("Custom process icon"), true);
-        continueBTN = new ButtonWidget(width - 81, height - 21, 80, 20, Text.of("Next"), button -> {
+        continueBTN = new RoundedButtonWidget(width - 81, height - 21, 80, 20, Text.of("Next"), () -> {
             if (finished) {
                 ClientConfig m = (ClientConfig) ModuleRegistry.getByName("clientconfig");
                 m.mconf.getByName("homescreen").setValue(homescreen.isChecked() ? "client" : "vanilla");
