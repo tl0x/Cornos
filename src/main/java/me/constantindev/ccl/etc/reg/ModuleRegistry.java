@@ -20,12 +20,11 @@ public class ModuleRegistry {
     /* NOTE
     * Features to implement:
     * autoarmor -> working on it
-    * blink -> working on it
+    * blink -> done
     * bowaimbot -> working on it
     * autopotion -> working on it
     * criticals -> working on it
-    * fancychat -> working on it
-    * autobedbomb -> working on it
+    * fancychat -> done
     * autlog -> working on it
     * autoez -> working on it
     * autofish -> working on it
@@ -38,7 +37,7 @@ public class ModuleRegistry {
     private static TabManager tabManager; // Probably not the best place for this but whatever -FreakingChicken
 
     public static void init() {
-        ml.add(new AntiHunger()); // lemme disable this while i test the event bus
+        ml.add(new AntiHunger());
         ml.add(new Flight());
         ml.add(new FullBright());
         ml.add(new Suicide());
@@ -56,7 +55,7 @@ public class ModuleRegistry {
         ml.add(new XRAY());
         ml.add(new OreSim());
         ml.add(new AntiOffhandCrash());
-        ml.add(new Freecam()); // freecam broke
+        ml.add(new Freecam());
         ml.add(new ClickGUI());
         ml.add(new TabGUI());
         ml.add(new ClientConfig());
@@ -103,7 +102,9 @@ public class ModuleRegistry {
         ml.add(new InvalidPositionCrash());
         ml.add(new AntiBlockban());
         ml.add(new Scaffold());
-
+        ml.add(new Blink());
+        ml.add(new FancyChat());
+        ml.add(new AutoLog());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

@@ -16,6 +16,7 @@ public class ClientConfig {
     public static TabGUI tabGUI;
     public static int latestRGBVal = 0;
     public static TheAlteningAuthentication authentication;
+    public static String[][] dict;
 
     public static void init() {
         xrayBlocks = new Block[]{
@@ -27,6 +28,35 @@ public class ClientConfig {
                 Blocks.LAPIS_ORE,
                 Blocks.ANCIENT_DEBRIS,
                 Blocks.REDSTONE_ORE
+        };
+        dict = new String[][]{
+                /* ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ */
+                new String[]{"A","Ａ"},
+                new String[]{"B","Ｂ"},
+                new String[]{"C","Ｃ"},
+                new String[]{"D","Ｄ"},
+                new String[]{"E","Ｅ"},
+                new String[]{"F","Ｆ"},
+                new String[]{"G","Ｇ"},
+                new String[]{"H","Ｈ"},
+                new String[]{"I","Ｉ"},
+                new String[]{"J","Ｊ"},
+                new String[]{"K","Ｋ"},
+                new String[]{"L","Ｌ"},
+                new String[]{"M","Ｍ"},
+                new String[]{"N","Ｎ"},
+                new String[]{"O","Ｏ"},
+                new String[]{"P","Ｐ"},
+                new String[]{"Q","Ｑ"},
+                new String[]{"R","Ｒ"},
+                new String[]{"S","Ｓ"},
+                new String[]{"T","Ｔ"},
+                new String[]{"U","Ｕ"},
+                new String[]{"V","Ｖ"},
+                new String[]{"W","Ｗ"},
+                new String[]{"X","Ｘ"},
+                new String[]{"Y","Ｙ"},
+                new String[]{"Z","Ｚ"}
         };
         animSpeed = new NumberSetting() {
             double num = 0.1;

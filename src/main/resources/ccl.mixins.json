@@ -6,6 +6,7 @@
     "AbstractBlockStateMixin",
     "BlockHitResultMixin",
     "BlockMixin",
+    "ChatMessageC2SPacketMixin",
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
     "ClientPlayNetworkHandlerMixin",
