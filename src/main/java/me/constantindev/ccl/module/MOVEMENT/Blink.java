@@ -15,10 +15,11 @@ import java.util.List;
 public class Blink extends Module {
     List<Packet<?>> pl = new ArrayList<>();
     boolean blockPackets = false;
+
     public Blink() {
         super("Blink", "makes you lag intentionally", MType.MOVEMENT);
         Module parent = this;
-        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND,event -> {
+        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
             if (blockPackets && !(pe.packet instanceof KeepAliveC2SPacket)) {
                 pe.cancel();

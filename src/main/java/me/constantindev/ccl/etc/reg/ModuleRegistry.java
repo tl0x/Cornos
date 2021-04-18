@@ -18,18 +18,18 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ModuleRegistry {
     /* NOTE
-    * Features to implement:
-    * autoarmor -> working on it
-    * blink -> done
-    * bowaimbot -> working on it
-    * autopotion -> working on it
-    * criticals -> working on it
-    * fancychat -> done
-    * autlog -> working on it
-    * autoez -> working on it
-    * autofish -> working on it
-    * autosign that you can change -> working on it
-    * */
+     * Features to implement:
+     * autoarmor -> fuck that shit
+     * bowaimbot -> working on it
+     * autopotion -> working on it
+     * criticals -> working on it
+     * autoez -> working on it
+     * autofish -> working on it
+     * autosign that you can change -> done
+     * fancychat -> done
+     * autlog -> done
+     * blink -> done
+     * */
 
 
     private static final List<Module> ml = new ArrayList<>();
@@ -105,6 +105,7 @@ public class ModuleRegistry {
         ml.add(new Blink());
         ml.add(new FancyChat());
         ml.add(new AutoLog());
+        ml.add(new AutoFish());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

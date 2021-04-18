@@ -14,14 +14,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(SplashScreen.class)
 public class SplashScreenMixin {
     @Mutable
-    @Shadow @Final private static int BRAND_RGB;
+    @Shadow
+    @Final
+    private static int BRAND_RGB;
 
     @Mutable
-    @Shadow @Final private static int BRAND_ARGB;
+    @Shadow
+    @Final
+    private static int BRAND_ARGB;
 
-    @Inject(method="init",at=@At("TAIL"))
+    @Inject(method = "init", at = @At("TAIL"))
     private static void i(MinecraftClient client, CallbackInfo ci) {
-        BRAND_RGB = BackgroundHelper.ColorMixer.getArgb(255,0,0,0) & 16777215;
-        BRAND_ARGB = BackgroundHelper.ColorMixer.getArgb(255,0,0,0);
+        BRAND_RGB = BackgroundHelper.ColorMixer.getArgb(255, 0, 0, 0) & 16777215;
+        BRAND_ARGB = BackgroundHelper.ColorMixer.getArgb(255, 0, 0, 0);
     }
 }

@@ -5,7 +5,10 @@
       "file": "ccl:font.ttf",
       "oversample": 4.0,
       "size": 11,
-      "shift": [0,0.5]
+      "shift": [
+        0,
+        0.5
+      ]
     }
   ]
 }

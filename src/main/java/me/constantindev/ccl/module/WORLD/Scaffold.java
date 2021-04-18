@@ -17,6 +17,7 @@ public class Scaffold extends Module {
     public static Toggleable preventFalling = new Toggleable("preventfall", true);
     Toggleable lookForBlocks = new Toggleable("lookforblocks", true);
     Toggleable placeMidAir = new Toggleable("placemidair", true);
+
     public Scaffold() {
         super("Scaffold", "POGGERS", MType.WORLD);
         this.mconf.add(lookForBlocks);
@@ -33,16 +34,16 @@ public class Scaffold extends Module {
             if (placeMidAir.isEnabled()) shouldPlace = true;
             else {
                 int[][] bruh = new int[][]{
-                        new int[]{1,0,0},
-                        new int[]{0,1,0},
-                        new int[]{0,0,1},
-                        new int[]{-1,0,0},
-                        new int[]{0,-1,0},
-                        new int[]{0,0,-1},
-                        new int[]{1,0,1},
-                        new int[]{-1,0,1},
-                        new int[]{1,0,-1},
-                        new int[]{-1,0,-1}
+                        new int[]{1, 0, 0},
+                        new int[]{0, 1, 0},
+                        new int[]{0, 0, 1},
+                        new int[]{-1, 0, 0},
+                        new int[]{0, -1, 0},
+                        new int[]{0, 0, -1},
+                        new int[]{1, 0, 1},
+                        new int[]{-1, 0, 1},
+                        new int[]{1, 0, -1},
+                        new int[]{-1, 0, -1}
                 };
                 for (int[] c : bruh) {
                     if (!Cornos.minecraft.world.getBlockState(current.add(c[0], c[1], c[2])).isAir()) {
@@ -56,7 +57,7 @@ public class Scaffold extends Module {
                 int isIndex = -1;
                 if (!lookForBlocks.isEnabled()) isIndex = prevIndex;
                 else {
-                    for(int i = 0;i<9;i++) {
+                    for (int i = 0; i < 9; i++) {
                         ItemStack currStack = Cornos.minecraft.player.inventory.getStack(i);
                         if (currStack.getItem() instanceof BlockItem) {
                             isIndex = i;
@@ -66,8 +67,8 @@ public class Scaffold extends Module {
                 }
                 if (isIndex == -1) return;
                 Cornos.minecraft.player.inventory.selectedSlot = isIndex;
-                BlockHitResult bhr = new BlockHitResult(new Vec3d(.5,.5,.5), Direction.DOWN,current,false);
-                Cornos.minecraft.interactionManager.interactBlock(Cornos.minecraft.player,Cornos.minecraft.world, Hand.MAIN_HAND,bhr);
+                BlockHitResult bhr = new BlockHitResult(new Vec3d(.5, .5, .5), Direction.DOWN, current, false);
+                Cornos.minecraft.interactionManager.interactBlock(Cornos.minecraft.player, Cornos.minecraft.world, Hand.MAIN_HAND, bhr);
             }
         }
         super.onExecute();

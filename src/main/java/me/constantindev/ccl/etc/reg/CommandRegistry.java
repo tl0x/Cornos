@@ -33,6 +33,7 @@ public class CommandRegistry {
         cl.add(new FakePlayer());
         cl.add(new RemovePlayer());
         cl.add(new SetSeed());
+        cl.add(new AutoSign());
     }
 
     public static List<Command> getAll() {
