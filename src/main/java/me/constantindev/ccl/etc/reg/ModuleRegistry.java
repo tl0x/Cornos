@@ -17,19 +17,12 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ModuleRegistry {
-    /* NOTE
-     * Features to implement:
-     * autoarmor -> fuck that shit
-     * bowaimbot -> working on it
-     * autopotion -> working on it
-     * criticals -> working on it
-     * autoez -> working on it
-     * autofish -> working on it
-     * autosign that you can change -> done
-     * fancychat -> done
-     * autlog -> done
-     * blink -> done
-     * */
+    // TODO
+    // * Features to implement:
+    // * bowaimbot -> working on it
+    // * autopotion -> working on it
+    // * criticals -> working on it
+    // * autoez -> working on it
 
 
     private static final List<Module> ml = new ArrayList<>();
