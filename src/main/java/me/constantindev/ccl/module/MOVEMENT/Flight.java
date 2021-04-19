@@ -19,11 +19,12 @@ public class Flight extends Module {
     int counter = 0;
     int counter1 = 0;
     float flyingSince = 0;
-    MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "3d", "static", "jetpack"});
+    MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "3d", "static", "jetpack", "airhop", "zika"});
     Toggleable toggleFast = new Toggleable("toggleFast", true);
     Num speed = new Num("speed", 1.0, 10, 0);
     Toggleable sendAbilitiesUpdate = new Toggleable("abilities", true);
     PlayerAbilities abilitiesBefore = null;
+    double startheight = 0;
 
     public Flight() {
         super("Flight", "Allows you to fly", MType.MOVEMENT);
@@ -54,6 +55,7 @@ public class Flight extends Module {
             if (counter > 10) counter = 0;
             counter++;
         } else counter = 0;
+        GameOptions go = Cornos.minecraft.options;
         switch (this.mconf.getByName("mode").value) {
             case "vanilla":
                 assert Cornos.minecraft.player != null;
@@ -75,7 +77,7 @@ public class Flight extends Module {
                 assert Cornos.minecraft.player != null;
                 float y = Cornos.minecraft.player.yaw;
                 int mx = 0, my = 0, mz = 0;
-                GameOptions go = Cornos.minecraft.options;
+
                 if (go.keyJump.isPressed()) my++;
                 if (go.keyBack.isPressed()) mz++;
                 if (go.keyLeft.isPressed()) mx--;
@@ -104,6 +106,33 @@ public class Flight extends Module {
                     }
                 }
                 break;
+            case "airhop":
+                Cornos.minecraft.player.addVelocity(0, -0.1, 0);
+                if (Cornos.minecraft.player.getPos().y < startheight) {
+                    Vec3d vel = Cornos.minecraft.player.getVelocity();
+                    boolean isMoving = go.keyForward.isPressed() || go.keyBack.isPressed() || go.keyRight.isPressed() || go.keyLeft.isPressed();
+                    double mpt = isMoving ? 1.2 : 1;
+                    Cornos.minecraft.player.setVelocity(vel.x * mpt, 0.1, vel.z * mpt);
+                }
+                break;
+            case "zika":
+                boolean swap = false;
+                flyingSince++;
+                if (flyingSince > 5) {
+                    flyingSince = 0;
+                    swap = true;
+                }
+                Cornos.minecraft.player.setSwimming(true);
+                Vec3d ppos = Cornos.minecraft.player.getPos();
+                Cornos.minecraft.player.setVelocity(0, 0, 0);
+                if (ppos.y > startheight + 5) {
+                    Vec3d rotVec = Cornos.minecraft.player.getRotationVector();
+                    Vec3d np = ppos.add(new Vec3d(rotVec.x, 0, rotVec.z).multiply(2));
+                    Cornos.minecraft.player.updatePosition(np.x, np.y + (swap ? -1 : 0.01), np.z);
+                } else {
+                    Cornos.minecraft.player.updatePosition(ppos.x, ppos.y + 0.8, ppos.z);
+                }
+                break;
         }
         super.onExecute();
     }
@@ -111,6 +140,7 @@ public class Flight extends Module {
     @Override
     public void onEnable() {
         assert Cornos.minecraft.player != null;
+        startheight = Cornos.minecraft.player.getPos().y;
         abilitiesBefore = Cornos.minecraft.player.abilities;
         super.onEnable();
     }
