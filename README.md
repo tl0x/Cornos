@@ -1,8 +1,7 @@
-# CornClient
+# Cornos
 A small utility mod for Minecraft useful for a variety of tasks ranging from raiding to duping.
 
 <img src="https://img.shields.io/github/stars/AriliusClient/Cornos?color=000000&style=for-the-badge" /><br>
-<img src="https://img.shields.io/github/downloads/AriliusClient/Cornos/total?color=000000&style=for-the-badge&label=Downloads%20via%20releases">
 
 # Support
 
@@ -74,14 +73,16 @@ After you obtained the jarfile, read the section above, "Installing the jarfile"
 
 # Screenshots
 
-## Click GUI
-
-![image](https://user-images.githubusercontent.com/80022388/110660734-250b4200-81c4-11eb-9a47-f1ba6be19d60.png)
-
 ## Home screen
 
-![image](https://user-images.githubusercontent.com/80022388/110660767-2dfc1380-81c4-11eb-8d29-88f73da43bd2.png)
+![grafik](https://user-images.githubusercontent.com/80022388/115186302-c057d700-a0e1-11eb-818c-acf8a7de2346.png)
 
-## HUD (more to come)
+## ClickGUI
 
-![image](https://user-images.githubusercontent.com/80022388/110660817-3bb19900-81c4-11eb-9027-b2337b096101.png)
+![grafik](https://user-images.githubusercontent.com/80022388/115186386-e54c4a00-a0e1-11eb-93ef-88a3a68c2510.png)
+
+
+## HUD
+
+![grafik](https://user-images.githubusercontent.com/80022388/115186272-b504ab80-a0e1-11eb-8cc0-fba7afdb2d69.png)
+
