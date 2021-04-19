@@ -17,6 +17,7 @@ public class ClientConfig {
     public static int latestRGBVal = 0;
     public static TheAlteningAuthentication authentication;
     public static String[][] dict;
+    public static boolean checkedForUpdates = false;
 
     public static void init() {
         xrayBlocks = new Block[]{

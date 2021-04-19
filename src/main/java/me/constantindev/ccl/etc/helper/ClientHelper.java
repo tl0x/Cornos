@@ -1,5 +1,8 @@
 package me.constantindev.ccl.etc.helper;
 
+import com.google.common.hash.HashCode;
+import com.google.common.hash.Hashing;
+import com.google.common.io.Files;
 import com.mojang.authlib.Agent;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
@@ -12,8 +15,14 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.apache.logging.log4j.Level;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.Proxy;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.util.UUID;
 
 public class ClientHelper {
@@ -95,5 +104,41 @@ public class ClientHelper {
             Thread.sleep(duration);
         } catch (Exception ignored) {
         }
+    }
+
+    public static void checkForUpdates() {
+        new Thread(()->{
+            try {
+                File f = new File(ClientHelper.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+                if(f.isDirectory()) {
+                    ClientHelper.sendChat("Can't check for updates.");
+                    return;
+                }
+                File parent = new File(f.getParentFile().getParent()+"/tmp");
+                if (!parent.exists()) parent.mkdir();
+                parent = new File(parent.getPath()+"/latest.jar");
+                if (parent.exists()) {
+                    parent.delete();
+                }
+                downloadUsingNIO("https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar",parent.getAbsolutePath());
+                HashCode hc = Files.asByteSource(f).hash(Hashing.crc32());
+                HashCode hc1 = Files.asByteSource(parent).hash(Hashing.crc32());
+                if (!hc.equals(hc1)) {
+                    sendChat("Your cornos installation is out of sync with the latest build!");
+                    sendChat("Please head over to https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar to get the latest version");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                sendChat("Failed to check for updates!");
+            }
+        }).start();
+    }
+    private static void downloadUsingNIO(String urlStr, String file) throws IOException {
+        URL url = new URL(urlStr);
+        ReadableByteChannel rbc = Channels.newChannel(url.openStream());
+        FileOutputStream fos = new FileOutputStream(file);
+        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        fos.close();
+        rbc.close();
     }
 }

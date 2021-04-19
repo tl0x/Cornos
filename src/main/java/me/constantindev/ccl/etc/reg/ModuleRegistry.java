@@ -99,6 +99,7 @@ public class ModuleRegistry {
         ml.add(new FancyChat());
         ml.add(new AutoLog());
         ml.add(new AutoFish());
+        ml.add(new Criticals());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

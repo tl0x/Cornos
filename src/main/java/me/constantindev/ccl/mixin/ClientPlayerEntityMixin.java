@@ -1,9 +1,11 @@
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.Event;
+import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.helper.KeyBindManager;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -32,6 +34,10 @@ public class ClientPlayerEntityMixin {
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void tick(CallbackInfo ci) {
+        if (!ClientConfig.checkedForUpdates) {
+            ClientHelper.checkForUpdates();
+        }
+        ClientConfig.checkedForUpdates = true;
         if (System.currentTimeMillis() % 120000 == 0) System.gc();
         ModuleRegistry.getAll().forEach(m -> {
             m.updateVitals();
