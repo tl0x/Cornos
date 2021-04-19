@@ -73,13 +73,14 @@ After you obtained the jarfile, read the section above, "Installing the jarfile"
 
 # Screenshots
 
-## Click GUI
+## Home screen
 
 ![grafik](https://user-images.githubusercontent.com/80022388/115186302-c057d700-a0e1-11eb-818c-acf8a7de2346.png)
 
-## Home screen
+## ClickGUI
 
-![image](https://user-images.githubusercontent.com/80022388/110660767-2dfc1380-81c4-11eb-8d29-88f73da43bd2.png)
+![grafik](https://user-images.githubusercontent.com/80022388/115186386-e54c4a00-a0e1-11eb-93ef-88a3a68c2510.png)
+
 
 ## HUD
 
