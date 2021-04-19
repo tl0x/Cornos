@@ -1,5 +1,5 @@
 # Cornos
-A small utility mod for Minecraft useful for a variety of tasks ranging from raiding to duping.
+based block game hax
 
 <img src="https://img.shields.io/github/stars/AriliusClient/Cornos?color=000000&style=for-the-badge" /><br>
 
