@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class NoFall extends Module {
     Num fallDistance = new Num("fallDistance", 2, 10, 0.1);
-    MultiOption mode = new MultiOption("mode", "packet", new String[]{"packet","breakFall"});
+    MultiOption mode = new MultiOption("mode", "packet", new String[]{"packet", "breakFall"});
 
     public NoFall() {
         super("NoFall", "Prevents you from taking fall damage", MType.MOVEMENT);
@@ -32,12 +32,12 @@ public class NoFall extends Module {
         // bruh moment #2
         if (Cornos.minecraft.player == null) return;
         if (Cornos.minecraft.player.fallDistance >= fallDistance.getValue()) {
-            switch(mode.value) {
+            switch (mode.value) {
                 case "packet":
                     Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(new PlayerMoveC2SPacket(true));
                     break;
                 case "breakFall":
-                    Cornos.minecraft.player.setVelocity(0,0.1,0);
+                    Cornos.minecraft.player.setVelocity(0, 0.1, 0);
                     Cornos.minecraft.player.fallDistance = 0;
             }
         }

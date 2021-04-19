@@ -107,20 +107,20 @@ public class ClientHelper {
     }
 
     public static void checkForUpdates() {
-        new Thread(()->{
+        new Thread(() -> {
             try {
                 File f = new File(ClientHelper.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-                if(f.isDirectory()) {
+                if (f.isDirectory()) {
                     ClientHelper.sendChat("Can't check for updates.");
                     return;
                 }
-                File parent = new File(f.getParentFile().getParent()+"/tmp");
+                File parent = new File(f.getParentFile().getParent() + "/tmp");
                 if (!parent.exists()) parent.mkdir();
-                parent = new File(parent.getPath()+"/latest.jar");
+                parent = new File(parent.getPath() + "/latest.jar");
                 if (parent.exists()) {
                     parent.delete();
                 }
-                downloadUsingNIO("https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar",parent.getAbsolutePath());
+                downloadUsingNIO("https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar", parent.getAbsolutePath());
                 HashCode hc = Files.asByteSource(f).hash(Hashing.crc32());
                 HashCode hc1 = Files.asByteSource(parent).hash(Hashing.crc32());
                 if (!hc.equals(hc1)) {
@@ -133,6 +133,7 @@ public class ClientHelper {
             }
         }).start();
     }
+
     private static void downloadUsingNIO(String urlStr, String file) throws IOException {
         URL url = new URL(urlStr);
         ReadableByteChannel rbc = Channels.newChannel(url.openStream());
