@@ -100,6 +100,7 @@ public class ModuleRegistry {
         ml.add(new AutoLog());
         ml.add(new AutoFish());
         ml.add(new Criticals());
+        ml.add(new AutoBuild());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();
