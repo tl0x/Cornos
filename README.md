@@ -9,6 +9,9 @@ You can open an issue for help or feature requests. If that is not the right thi
 
 # Installation
 
+## Easy installation
+You can use the [cornos installer](https://github.com/AriliusClient/cornos-installer) to easily install this mod. If you wish to control everything yourself tho, keep reading.
+
 Since so many people ask me how to build this and cant read apparently, I will say the following
 
 **YOU DO NOT NEED TO BUILD IT YOURSELF.
