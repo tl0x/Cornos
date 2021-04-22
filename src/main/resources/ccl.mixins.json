@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "AbstractBlockStateMixin",
+    "AbstractClientPlayerEntityMixin",
     "BlockHitResultMixin",
     "BlockMixin",
     "ChatMessageC2SPacketMixin",

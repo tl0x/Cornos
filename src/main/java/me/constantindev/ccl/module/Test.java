@@ -8,8 +8,11 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.module;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.ms.MType;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 
 public class Test extends Module {
@@ -18,9 +21,8 @@ public class Test extends Module {
     }
 
     @Override
-    public void onHudRender(MatrixStack ms, float td) {
+    public void onRender(MatrixStack ms, float td) {
 
-
-        super.onHudRender(ms, td);
+        super.onRender(ms, td);
     }
 }
