@@ -11,6 +11,7 @@
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
     "ClientPlayNetworkHandlerMixin",
+    "ClientWorldMixin",
     "CombatEventS2CPacketMixin",
     "EntityRendererMixin",
     "EntitySpawnS2CPacketMixin",

@@ -11,35 +11,35 @@ package me.constantindev.ccl.module;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.ms.MType;
+import net.minecraft.client.render.SkyProperties;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.listener.PacketListener;
+import net.minecraft.util.math.Vec3d;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 public class Test extends Module {
+    public static SkyProperties prop = new SkyProperties(128,true, SkyProperties.SkyType.NORMAL,false,true) {
+        @Override
+        public Vec3d adjustFogColor(Vec3d color, float sunHeight) {
+            return color.normalize();
+        }
+
+        @Override
+        public boolean useThickFog(int camX, int camY) {
+            return true;
+        }
+    };
     public Test() {
         super("TestModule", "Poggê", MType.HIDDEN);
     }
 
     @Override
     public void onEnable() {
-        Cornos.minecraft.getNetworkHandler().sendPacket(new Packet<PacketListener>() {
-            @Override
-            public void read(PacketByteBuf buf) throws IOException {
 
-            }
 
-            @Override
-            public void write(PacketByteBuf buf) throws IOException {
-                buf.writeInt(0);
-            }
-
-            @Override
-            public void apply(PacketListener listener) {
-
-            }
-        });
         super.onEnable();
     }
 }

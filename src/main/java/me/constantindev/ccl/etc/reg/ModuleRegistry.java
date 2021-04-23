@@ -102,6 +102,7 @@ public class ModuleRegistry {
         ml.add(new Criticals());
         ml.add(new AutoBuild());
         ml.add(new AutoFemboy());
+        ml.add(new Vibe());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();
