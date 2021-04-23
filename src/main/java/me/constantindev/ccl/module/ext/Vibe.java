@@ -10,19 +10,18 @@ import net.minecraft.client.render.SkyProperties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldProperties;
 
 import java.awt.*;
-import java.util.Random;
 
 public class Vibe extends Module {
     public static Toggleable rgbBlocks = new Toggleable("rgbbocks", false);
     public static Toggleable fog = new Toggleable("fog", true);
     public static MultiOption skyType = new MultiOption("skyType", "overworld", new String[]{"overworld", "nether", "end"});
     public static Num dim = new Num("brightness", 80, 100, 0);
-    public static Num ch = new Num("cloudsHeight",128,255,0);
+    public static Num ch = new Num("cloudsHeight", 128, 255, 0);
     public static Num rgbnoise = new Num("rgbNoise", 5, 100, 0);
+    static double prevOff = 0;
+
     public Vibe() {
         super("Vibe", "Changes world render settings", MType.RENDER);
         this.mconf.add(dim);
@@ -32,21 +31,23 @@ public class Vibe extends Module {
         this.mconf.add(rgbBlocks);
         this.mconf.add(rgbnoise);
     }
+
     public static SkyProperties getProps() {
         SkyProperties.SkyType bruh;
-        switch(skyType.value) {
+        switch (skyType.value) {
             case "nether":
                 bruh = SkyProperties.SkyType.NONE;
                 break;
             case "end":
                 bruh = SkyProperties.SkyType.END;
                 break;
-            default: bruh = SkyProperties.SkyType.NORMAL;
+            default:
+                bruh = SkyProperties.SkyType.NORMAL;
         }
-        return new SkyProperties((float)ch.getValue(),true,bruh,true,dim.getValue() != 100) {
+        return new SkyProperties((float) ch.getValue(), true, bruh, true, dim.getValue() != 100) {
             @Override
             public Vec3d adjustFogColor(Vec3d color, float sunHeight) {
-                double mtp = dim.getValue()/100;
+                double mtp = dim.getValue() / 100;
                 return color.multiply(mtp);
             }
 
@@ -56,19 +57,19 @@ public class Vibe extends Module {
             }
         };
     }
-    static  double prevOff = 0;
+
     public static int calculateBP(BlockPos pos) {
-        float bruh = (pos.getX()+pos.getY()+pos.getZ())*10f;
-        prevOff += RandomHelper.rndD(4)-2;
-        prevOff = MathHelper.clamp(prevOff,-rgbnoise.getValue(), rgbnoise.getValue());
+        float bruh = (pos.getX() + pos.getY() + pos.getZ()) * 10f;
+        prevOff += RandomHelper.rndD(4) - 2;
+        prevOff = MathHelper.clamp(prevOff, -rgbnoise.getValue(), rgbnoise.getValue());
         bruh += prevOff;
         bruh = Math.abs(bruh);
-        bruh %= 255*3;
+        bruh %= 255 * 3;
         int stage = (int) Math.floor(bruh / 255);
         int seed = (int) Math.floor(bruh % 255);
-        int r = stage==0?seed:(stage==1?Math.abs(seed-255):0);
-        int g = stage==1?seed:(stage==2?Math.abs(seed-255):0);
-        int b = stage==2?seed:(stage==0?Math.abs(seed-255):0);
-        return new Color(r,g,b).getRGB();
+        int r = stage == 0 ? seed : (stage == 1 ? Math.abs(seed - 255) : 0);
+        int g = stage == 1 ? seed : (stage == 2 ? Math.abs(seed - 255) : 0);
+        int b = stage == 2 ? seed : (stage == 0 ? Math.abs(seed - 255) : 0);
+        return new Color(r, g, b).getRGB();
     }
 }

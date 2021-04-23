@@ -26,6 +26,7 @@
     "PlayerMoveC2SPacketAccessor",
     "PlaySoundS2CPacketMixin",
     "ResourcePackStatusC2SPacketMixin",
+    "ScoreboardMixin",
     "ScreenMixin",
     "SessionAccessor",
     "SignBlockEntityRendererMixin",
