@@ -10,8 +10,10 @@ import net.minecraft.util.math.Vec3d;
 import java.awt.*;
 
 public class RoundedButtonWidget extends AbstractPressableButtonWidget {
+    public Color unselectedColor = new Color(30, 30, 30, 100);
+    public Color selectedColor = new Color(12, 12, 12, 100);
+    protected int r;
     Runnable onPressed;
-    int r;
 
     public RoundedButtonWidget(int x, int y, int width, int height, Text message, Runnable onPress) {
         super(x, y, width, height, message);
@@ -34,9 +36,9 @@ public class RoundedButtonWidget extends AbstractPressableButtonWidget {
     public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         Color c;
         if (this.isHovered()) {
-            c = new Color(12, 12, 12, 100);
+            c = selectedColor;
         } else {
-            c = new Color(30, 30, 30, 100);
+            c = unselectedColor;
         }
         RenderHelper.renderRoundedQuad(new Vec3d(x, y, 0), new Vec3d(x + width, y + height, 0), r, c);
         drawCenteredText(matrices, Cornos.minecraft.textRenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, Color.white.getRGB());

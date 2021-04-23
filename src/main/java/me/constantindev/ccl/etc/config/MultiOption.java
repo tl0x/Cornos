@@ -4,6 +4,7 @@ import me.constantindev.ccl.etc.helper.ClientHelper;
 
 public class MultiOption extends ModuleConfig.ConfigKey {
     public String[] possibleValues;
+    public int current = 0;
 
     public MultiOption(String k, String initialValue, String[] possible) {
         super(k, initialValue);

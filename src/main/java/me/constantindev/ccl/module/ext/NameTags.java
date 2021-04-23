@@ -57,9 +57,9 @@ public class NameTags extends Module {
             TextRenderer textRenderer = dispatcher.getTextRenderer();
             int health = (int) ((PlayerEntity) entity).getHealth();
             double healthPercentage = (((PlayerEntity) entity).getHealth() / ((PlayerEntity) entity).getMaxHealth());
-            healthPercentage = MathHelper.clamp(healthPercentage,0,1);
+            healthPercentage = MathHelper.clamp(healthPercentage, 0, 1);
             double red = Math.abs(healthPercentage - 1.0);
-            Color c = new Color((int) MathHelper.clamp(255.0 * red,0,255), (int) MathHelper.clamp(255.0 * healthPercentage,0,255), 0);
+            Color c = new Color((int) MathHelper.clamp(255.0 * red, 0, 255), (int) MathHelper.clamp(255.0 * healthPercentage, 0, 255), 0);
             if (health <= ((PlayerEntity) entity).getMaxHealth() * 0.25) { // If health is below 25%
                 tag += "§4";
             } else if (health <= ((PlayerEntity) entity).getMaxHealth() * 0.5) { // If health is below 50%

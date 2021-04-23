@@ -10,10 +10,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractClientPlayerEntity.class)
 public class AbstractClientPlayerEntityMixin {
-    @Inject(method="getSkinTexture",at=@At("HEAD"),cancellable = true)
+    @Inject(method = "getSkinTexture", at = @At("HEAD"), cancellable = true)
     public void bruh(CallbackInfoReturnable<Identifier> cir) {
         if (ModuleRegistry.getByName("autofemboy").isOn.isOn()) {
-            cir.setReturnValue(new Identifier("ccl","femboy.png"));
+            cir.setReturnValue(new Identifier("ccl", "femboy.png"));
         }
     }
 }
