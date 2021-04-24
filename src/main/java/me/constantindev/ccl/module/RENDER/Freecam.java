@@ -14,6 +14,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.Objects;
+
 public class Freecam extends Module {
     // this shit is excessively documented because even i dont understand how it works
 
@@ -40,10 +42,12 @@ public class Freecam extends Module {
     @Override
     public void onEnable() {
         // save cache
+        assert Cornos.minecraft.player != null;
         startloc = Cornos.minecraft.player.getPos();
         pitch = Cornos.minecraft.player.pitch;
         yaw = Cornos.minecraft.player.yaw;
         // make player entity that shows where we left off when we started the module
+        assert Cornos.minecraft.world != null;
         OtherClientPlayerEntity clone = new OtherClientPlayerEntity(Cornos.minecraft.world, Cornos.minecraft.player.getGameProfile());
         clone.copyPositionAndRotation(Cornos.minecraft.player);
         clone.headYaw = Cornos.minecraft.player.headYaw;
@@ -58,13 +62,14 @@ public class Freecam extends Module {
 
     @Override
     public void onDisable() {
-        // failsafe if the module is on without onEnable() being called
-        if (startloc == null) return;
+        assert Cornos.minecraft.player != null;
         // remove the fake player
-        Cornos.minecraft.world.removeEntity(-69);
+        if (clone != null) clone.remove();
         clone = null;
         // place us back where we started
-        Cornos.minecraft.player.updatePositionAndAngles(startloc.x, startloc.y, startloc.z, yaw, pitch);
+        if (startloc != null) {
+            Cornos.minecraft.player.updatePositionAndAngles(startloc.x, startloc.y, startloc.z, yaw, pitch);
+        }
         startloc = null;
         yaw = pitch = 0;
         // disable flight & re-enable vanilla flight
@@ -72,7 +77,7 @@ public class Freecam extends Module {
         Cornos.minecraft.player.abilities.setFlySpeed(0.05f);
         // disable noclip
         Cornos.minecraft.player.noClip = false;
-        Cornos.minecraft.getCameraEntity().noClip = false;
+        Objects.requireNonNull(Cornos.minecraft.getCameraEntity()).noClip = false;
         // vel 0
         Cornos.minecraft.player.setVelocity(0, 0, 0);
         super.onDisable();
@@ -81,6 +86,7 @@ public class Freecam extends Module {
     @Override
     public void onExecute() {
         // set us flying & keep vanilla flight at a 0
+        assert Cornos.minecraft.player != null;
         Cornos.minecraft.player.abilities.flying = true;
         Cornos.minecraft.player.abilities.setFlySpeed(0);
         // set ground to false and fall distance to 0
@@ -118,7 +124,9 @@ public class Freecam extends Module {
     @Override
     public void onRender(MatrixStack ms, float td) {
         // enable noclip on onRender() because minecraft is retarded
+        assert Cornos.minecraft.player != null;
         Cornos.minecraft.player.noClip = true;
+        assert Cornos.minecraft.cameraEntity != null;
         Cornos.minecraft.cameraEntity.noClip = true;
         super.onRender(ms, td);
     }
