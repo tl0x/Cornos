@@ -45,8 +45,7 @@
     "gui.ScreenMixin",
     "gui.SelectWorldScreenMixin",
     "gui.SplashScreenMixin",
-    "gui.TitleScreenMixin",
-    "gui.WorldRendererMixin"
+    "gui.TitleScreenMixin"
   ],
   "client": [],
   "server": [],
