@@ -28,21 +28,27 @@ import net.minecraft.util.math.Vec3d;
 import java.awt.*;
 
 public class Tracers extends Module {
+    Toggleable entities = new Toggleable("Entities", true);
+    Toggleable players = new Toggleable("Players", true);
+    Toggleable tracers = new Toggleable("Tracers", true);
+    Toggleable debug = new Toggleable("debug", false);
+    Num dist = new Num("Distance", 100, 1000, 10);
+
     public Tracers() {
         super("PlayerInfo", "Shows nearby entities and/or players", MType.RENDER);
-        this.mconf.add(new Toggleable("Entities", true));
-        this.mconf.add(new Toggleable("Players", true));
-        this.mconf.add(new Num("Distance", 100, 1000, 10));
-        this.mconf.add(new Toggleable("Tracers", true));
-        this.mconf.add(new Toggleable("debug", false));
+        this.mconf.add(entities);
+        this.mconf.add(players);
+        this.mconf.add(dist);
+        this.mconf.add(tracers);
+        this.mconf.add(debug);
     }
 
     @Override
     public void onRender(MatrixStack ms, float td) {
-        boolean e = ((Toggleable) this.mconf.getByName("Entities")).isEnabled();
-        boolean p = ((Toggleable) this.mconf.getByName("Players")).isEnabled();
-        boolean debug = ((Toggleable) this.mconf.getByName("debug")).isEnabled();
-        double dist = ((Num) this.mconf.getByName("Distance")).getValue();
+        boolean e = entities.isEnabled();
+        boolean p = players.isEnabled();
+        boolean debug = this.debug.isEnabled();
+        double dist = this.dist.getValue();
         assert Cornos.minecraft.world != null;
         for (Entity currE : Cornos.minecraft.world.getEntities()) {
             assert Cornos.minecraft.player != null;

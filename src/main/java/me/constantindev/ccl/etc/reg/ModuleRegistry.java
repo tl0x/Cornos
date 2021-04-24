@@ -17,14 +17,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ModuleRegistry {
-    // TODO
-    // * Features to implement:
-    // * bowaimbot -> working on it
-    // * autopotion -> working on it
-    // * criticals -> working on it
-    // * autoez -> working on it
-
-
     private static final List<Module> ml = new ArrayList<>();
     public static BudgetGraphics budgetGraphicsInstance = new BudgetGraphics();
     private static TabManager tabManager; // Probably not the best place for this but whatever -FreakingChicken
@@ -124,11 +116,12 @@ public class ModuleRegistry {
 
     public static Module getByName(String name) {
         AtomicReference<Module> mr = new AtomicReference<>(null);
-        ModuleRegistry.getAll().forEach(module -> {
+        for (Module module : ModuleRegistry.getAll()) {
             if (module.name.equalsIgnoreCase(name)) {
                 mr.set(module);
+                break;
             }
-        });
+        }
         return mr.get();
     }
 }

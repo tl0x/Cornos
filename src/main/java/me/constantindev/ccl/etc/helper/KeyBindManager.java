@@ -1,6 +1,7 @@
 package me.constantindev.ccl.etc.helper;
 
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.ms.KeyBind;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import org.lwjgl.glfw.GLFW;
@@ -13,7 +14,7 @@ public class KeyBindManager {
     public static boolean freezeTabGui;
 
     public static void init() {
-        ModuleRegistry.getAll().forEach(module -> {
+        for (Module module : ModuleRegistry.getAll()) {
             if (!module.mconf.getByName("keybind").value.equals("-1.0")) {
                 binds.put(module.name, new KeyBind((int) Double.parseDouble(module.mconf.getByName("keybind").value)));
             }
@@ -22,12 +23,11 @@ public class KeyBindManager {
             binds.put("TAB_LEFT", new KeyBind(263));
             binds.put("TAB_RIGHT", new KeyBind(262));
             binds.put("TAB_ENTER", new KeyBind(GLFW.GLFW_KEY_ENTER));
-        });
+        }
     }
 
     public static void tick() {
         binds.forEach((s, keyBinding) -> {
-
             if (keyBinding.isPressed() && Cornos.minecraft.currentScreen == null)
                 if (s.contains("TAB_")) {
                     if (ModuleRegistry.getByName("TabGUI").isOn.isOn()) {

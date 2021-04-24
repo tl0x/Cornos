@@ -1,6 +1,7 @@
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
@@ -36,17 +37,16 @@ public class ClientPlayerEntityMixin {
     public void tick(CallbackInfo ci) {
         if (!ClientConfig.checkedForUpdates) {
             ClientHelper.checkForUpdates();
+            ClientConfig.checkedForUpdates = true;
         }
-        ClientConfig.checkedForUpdates = true;
-        if (System.currentTimeMillis() % 120000 == 0) System.gc();
-        ModuleRegistry.getAll().forEach(m -> {
+        for (Module m : ModuleRegistry.getAll()) {
             m.updateVitals();
             if (Cornos.minecraft.player == null) return; // so this mf will stop complaining
             try {
                 if (m.isOn.isOn()) m.onExecute();
             } catch (Exception ignored) {
             }
-        });
+        }
         KeyBindManager.tick();
         Cornos.notifMan.tick();
         EventHelper.BUS.invokeEventCall(EventType.ONTICK, new Event());

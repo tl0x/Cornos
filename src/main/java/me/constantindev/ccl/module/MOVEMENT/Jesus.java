@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 public class Jesus extends Module {
-    public static MultiOption mode = new MultiOption("mode", "jump", new String[]{"jump", "velocity", "vanilla", "dontfall", "solid"});
+    public static MultiOption mode = new MultiOption("mode", "jump", new String[]{"jump", "velocity", "vanilla", "dontfall", "solid", "herobrine", "herobrine2", "herobrine3"});
 
     public Jesus() {
         super("Jesus", "Yisus.", MType.MOVEMENT);
@@ -19,11 +19,13 @@ public class Jesus extends Module {
     public void onExecute() {
         assert Cornos.minecraft.player != null;
         switch (mode.value) {
+            case "herobrine2":
             case "jump":
                 if (Cornos.minecraft.player.isWet()) {
                     Cornos.minecraft.player.jump();
                 }
                 break;
+            case "herobrine":
             case "velocity":
                 if (Cornos.minecraft.player.isWet()) {
                     Vec3d vel = Cornos.minecraft.player.getVelocity();
