@@ -23,4 +23,15 @@ public class LivingEntityMixin {
             }
         }
     }
+
+    @Inject(method = "isInsideWall", at = @At("HEAD"), cancellable = true)
+    public void bruh(CallbackInfoReturnable<Boolean> cir) {
+        if (((Object) this) instanceof ClientPlayerEntity) {
+            ClientPlayerEntity e = (ClientPlayerEntity) ((Object) this);
+            if (Cornos.minecraft.player.getUuid().equals(e.getUuid())) {
+                if (ModuleRegistry.getByName("freecam").isOn.isOn())
+                    cir.setReturnValue(false);
+            }
+        }
+    }
 }

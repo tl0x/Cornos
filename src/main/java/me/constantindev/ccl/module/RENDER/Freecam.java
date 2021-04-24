@@ -3,48 +3,123 @@ package me.constantindev.ccl.module.RENDER;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.Num;
+import me.constantindev.ccl.etc.event.EventHelper;
+import me.constantindev.ccl.etc.event.EventType;
+import me.constantindev.ccl.etc.event.arg.PacketEvent;
 import me.constantindev.ccl.etc.ms.MType;
+import net.minecraft.client.network.OtherClientPlayerEntity;
+import net.minecraft.client.options.GameOptions;
+import net.minecraft.client.options.Perspective;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
 
 public class Freecam extends Module {
-    public static Vec3d currentOffset = new Vec3d(0, 4, 0);
-    Num speed = new Num("speed", 1, 2, 0);
+    // this shit is excessively documented because even i dont understand how it works
+
+    // options
+    Num speed = new Num("speed", 1, 10, 0);
+    // start cache
     Vec3d startloc;
+    float pitch = 0, yaw = 0;
+    OtherClientPlayerEntity clone;
 
     public Freecam() {
         super("Freecam", "Become a ghost and leave your body", MType.MISC);
         this.mconf.add(speed);
+        Module parent = this;
+        // prevent movement packets from sending when module is enabled
+        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
+            PacketEvent pe = (PacketEvent) event;
+            if (pe.packet instanceof PlayerMoveC2SPacket) {
+                if (parent.isOn.isOn()) event.cancel();
+            }
+        });
     }
 
     @Override
     public void onEnable() {
-        currentOffset = new Vec3d(0, 0, 0);
-        if (Cornos.minecraft.player == null) return;
+        // save cache
         startloc = Cornos.minecraft.player.getPos();
+        pitch = Cornos.minecraft.player.pitch;
+        yaw = Cornos.minecraft.player.yaw;
+        // make player entity that shows where we left off when we started the module
+        OtherClientPlayerEntity clone = new OtherClientPlayerEntity(Cornos.minecraft.world, Cornos.minecraft.player.getGameProfile());
+        clone.copyPositionAndRotation(Cornos.minecraft.player);
+        clone.headYaw = Cornos.minecraft.player.headYaw;
+        this.clone = clone;
+        // spawn the entity
+        Cornos.minecraft.world.addEntity(-69, clone);
+        // make us fly & disable vanilla flight
+        Cornos.minecraft.player.abilities.flying = true;
+        Cornos.minecraft.player.abilities.setFlySpeed(0);
         super.onEnable();
     }
 
     @Override
-    public void onExecute() {
-        assert Cornos.minecraft.player != null;
+    public void onDisable() {
+        // failsafe if the module is on without onEnable() being called
+        if (startloc == null) return;
+        // remove the fake player
+        Cornos.minecraft.world.removeEntity(-69);
+        clone = null;
+        // place us back where we started
+        Cornos.minecraft.player.updatePositionAndAngles(startloc.x, startloc.y, startloc.z, yaw, pitch);
+        startloc = null;
+        yaw = pitch = 0;
+        // disable flight & re-enable vanilla flight
+        Cornos.minecraft.player.abilities.flying = false;
+        Cornos.minecraft.player.abilities.setFlySpeed(0.05f);
+        // disable noclip
+        Cornos.minecraft.player.noClip = false;
+        Cornos.minecraft.getCameraEntity().noClip = false;
+        // vel 0
         Cornos.minecraft.player.setVelocity(0, 0, 0);
-        Cornos.minecraft.player.updatePosition(startloc.x, startloc.y, startloc.z);
-        if (Cornos.minecraft.currentScreen == null) {
-            Vec3d vec3d = Cornos.minecraft.player.getRotationVector();
-            Vec3d considerSpeed = vec3d.multiply(speed.getValue());
-            if (Cornos.minecraft.options.keyJump.isPressed()) {
-                currentOffset = currentOffset.add(0, -speed.getValue(), 0);
-            }
-            if (Cornos.minecraft.options.keySneak.isPressed()) {
-                currentOffset = currentOffset.add(0, speed.getValue(), 0);
-            }
-            if (Cornos.minecraft.options.keyForward.isPressed()) {
-                currentOffset = currentOffset.add(considerSpeed.multiply(-1));
-            }
-            if (Cornos.minecraft.options.keyBack.isPressed()) {
-                currentOffset = currentOffset.add(considerSpeed);
-            }
-        }
+        super.onDisable();
+    }
+
+    @Override
+    public void onExecute() {
+        // set us flying & keep vanilla flight at a 0
+        Cornos.minecraft.player.abilities.flying = true;
+        Cornos.minecraft.player.abilities.setFlySpeed(0);
+        // set ground to false and fall distance to 0
+        Cornos.minecraft.player.setOnGround(false);
+        Cornos.minecraft.player.fallDistance = 0;
+        // first perspective
+        Cornos.minecraft.options.setPerspective(Perspective.FIRST_PERSON);
+
+        // static flight, not much to see here, just moving the player
+        GameOptions go = Cornos.minecraft.options;
+        float speed = (float) this.speed.getValue() / 5;
+        float y = Cornos.minecraft.player.yaw;
+        int mx = 0, my = 0, mz = 0;
+        if (go.keyJump.isPressed()) my++;
+        if (go.keyBack.isPressed()) mz++;
+        if (go.keyLeft.isPressed()) mx--;
+        if (go.keyRight.isPressed()) mx++;
+        if (go.keySneak.isPressed()) my--;
+        if (go.keyForward.isPressed()) mz--;
+        double ts = speed / 2;
+        double s = Math.sin(Math.toRadians(y));
+        double c = Math.cos(Math.toRadians(y));
+        double nx = ts * mz * s;
+        double nz = ts * mz * -c;
+        double ny = ts * my;
+        nx += ts * mx * -c;
+        nz += ts * mx * -s;
+        Vec3d nv3 = new Vec3d(nx, ny, nz);
+        Vec3d ov3 = Cornos.minecraft.player.getPos();
+        Vec3d bruh = ov3.add(nv3);
+        Cornos.minecraft.player.updatePosition(bruh.x, bruh.y, bruh.z);
         super.onExecute();
+    }
+
+    @Override
+    public void onRender(MatrixStack ms, float td) {
+        // enable noclip on onRender() because minecraft is retarded
+        Cornos.minecraft.player.noClip = true;
+        Cornos.minecraft.cameraEntity.noClip = true;
+        super.onRender(ms, td);
     }
 }
