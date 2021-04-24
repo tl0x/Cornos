@@ -5,11 +5,23 @@
   "name": "Cornos",
   "description": "swag client",
   "authors": [
-    "ConstantinDev"
+    "0x150"
   ],
-  "contributors": [],
-  "contact": {},
-  "license": "MIT",
+  "contributors": [
+    "FreakingChicken",
+    "CrazyMoose",
+    "Terpi",
+    "JohnShiozo",
+    "Feliscatusmeows",
+    "19MisterX98",
+    "CastleDev"
+  ],
+  "contact": {
+    "homepage": "https://cornos.cf/",
+    "issues": "https://github.com/AriliusClient/Cornos/issues",
+    "sources": "https://github.com/AriliusClient/Cornos"
+  },
+  "license": "GPL-3.0",
   "icon": "assets/ccl/icon1.png",
   "environment": "client",
   "entrypoints": {

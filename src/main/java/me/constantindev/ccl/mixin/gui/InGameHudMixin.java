@@ -6,7 +6,6 @@ import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.config.Num;
 import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.exc.InvalidStateException;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
 import me.constantindev.ccl.module.ext.NoRender;
@@ -36,7 +35,7 @@ public class InGameHudMixin {
     private int scaledWidth;
 
     @Inject(method = "render", at = @At("RETURN"))
-    public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) throws InvalidStateException {
+    public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
         Hud hud = (Hud) ModuleRegistry.getByName("hud");
         double rgbMulti = ((Num) ModuleRegistry.getByName("hud").mconf.getByName("rgbSpeed")).getValue();
         long elapsed = System.currentTimeMillis() - latestTime;

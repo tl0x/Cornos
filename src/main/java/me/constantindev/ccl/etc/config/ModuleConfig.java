@@ -4,7 +4,6 @@ import me.constantindev.ccl.etc.base.Module;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class ModuleConfig {
     public final Module owner;
@@ -20,11 +19,14 @@ public class ModuleConfig {
     }
 
     public ConfigKey getByName(String name) {
-        AtomicReference<ConfigKey> ref = new AtomicReference<>(null);
-        this.config.forEach(configKey -> {
-            if (configKey.key.equalsIgnoreCase(name)) ref.set(configKey);
-        });
-        return ref.get();
+        ConfigKey ref = null;
+        for (ConfigKey configKey : this.config) {
+            if (configKey.key.equalsIgnoreCase(name)) {
+                ref = configKey;
+                break;
+            }
+        }
+        return ref;
     }
 
     public ConfigKey getOrDefault(String name, ConfigKey defaultVal) {
