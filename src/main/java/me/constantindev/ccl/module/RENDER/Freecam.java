@@ -11,6 +11,7 @@ import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.options.Perspective;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
 
@@ -51,6 +52,7 @@ public class Freecam extends Module {
         OtherClientPlayerEntity clone = new OtherClientPlayerEntity(Cornos.minecraft.world, Cornos.minecraft.player.getGameProfile());
         clone.copyPositionAndRotation(Cornos.minecraft.player);
         clone.headYaw = Cornos.minecraft.player.headYaw;
+        clone.copyFrom(Cornos.minecraft.player);
         this.clone = clone;
         // spawn the entity
         Cornos.minecraft.world.addEntity(-69, clone);
@@ -94,8 +96,11 @@ public class Freecam extends Module {
         Cornos.minecraft.player.fallDistance = 0;
         // first perspective
         Cornos.minecraft.options.setPerspective(Perspective.FIRST_PERSON);
+        Cornos.minecraft.player.setSwimming(false);
+        Cornos.minecraft.player.setPose(EntityPose.STANDING);
 
         // static flight, not much to see here, just moving the player
+
         GameOptions go = Cornos.minecraft.options;
         float speed = (float) this.speed.getValue() / 5;
         float y = Cornos.minecraft.player.yaw;

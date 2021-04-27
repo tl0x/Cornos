@@ -22,6 +22,7 @@ public class Flight extends Module {
     MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "3d", "static", "jetpack", "airhop", "zika"});
     Toggleable toggleFast = new Toggleable("toggleFast", true);
     Num speed = new Num("speed", 1.0, 10, 0);
+    Num airhopUp = new Num("airhopUp", 1.0, 3, 0.1);
     Toggleable sendAbilitiesUpdate = new Toggleable("abilities", true);
     PlayerAbilities abilitiesBefore = null;
     double startheight = 0;
@@ -32,7 +33,7 @@ public class Flight extends Module {
         this.mconf.add(toggleFast);
         this.mconf.add(sendAbilitiesUpdate);
         this.mconf.add(speed);
-
+        this.mconf.add(airhopUp);
     }
 
     @Override
@@ -112,7 +113,7 @@ public class Flight extends Module {
                     Vec3d vel = Cornos.minecraft.player.getVelocity();
                     boolean isMoving = go.keyForward.isPressed() || go.keyBack.isPressed() || go.keyRight.isPressed() || go.keyLeft.isPressed();
                     double mpt = isMoving ? 1.2 : 1;
-                    Cornos.minecraft.player.setVelocity(vel.x * mpt, 0.1, vel.z * mpt);
+                    Cornos.minecraft.player.setVelocity(vel.x * mpt, airhopUp.getValue(), vel.z * mpt);
                 }
                 break;
             case "zika":

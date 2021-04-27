@@ -18,7 +18,6 @@ public class Blink extends Module {
 
     public Blink() {
         super("Blink", "makes you lag intentionally", MType.MOVEMENT);
-        Module parent = this;
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
             if (blockPackets && !(pe.packet instanceof KeepAliveC2SPacket)) {
@@ -40,6 +39,7 @@ public class Blink extends Module {
         for (Packet<?> packet : pl) {
             Cornos.minecraft.getNetworkHandler().sendPacket(packet);
         }
+        pl.clear();
         super.onDisable();
     }
 }
