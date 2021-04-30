@@ -28,6 +28,7 @@ public class MainScreen extends Screen {
     Identifier bg = new Identifier("ccl", "bg.jpg");
     DateFormat line1 = new SimpleDateFormat("h:mm aa");
     DateFormat line2 = new SimpleDateFormat("E, d. M");
+    boolean showSecrets = false;
 
     public MainScreen() {
         super(Text.of("bruh"));
@@ -54,7 +55,10 @@ public class MainScreen extends Screen {
             Cornos.minecraft.openScreen(new TitleScreen());
         }));
         this.addButton(btnw);
-        this.addButton(new TexturedButtonWidget(width - 20, 0, 20, 20, 0, 0, 0, new Identifier("ccl", "transparent.png"), (b) -> btnw.setMessage(Text.of("Roleplay"))));
+        this.addButton(new TexturedButtonWidget(width - 20, 0, 20, 20, 0, 0, 0, new Identifier("ccl", "transparent.png"), (b) -> {
+            btnw.setMessage(Text.of("Roleplay"));
+            showSecrets = true;
+        }));
         super.init();
     }
 
@@ -75,6 +79,9 @@ public class MainScreen extends Screen {
         DrawableHelper.drawCenteredString(matrices,textRenderer,line1F,centerX/2,(centerY-18)/2, 0xFFFFFF);
         GL11.glScaled(.5,.5,1);
         DrawableHelper.drawCenteredString(matrices,textRenderer,line2F,centerX,centerY+1, 0xFFFFFF);
+        if (showSecrets) {
+            RenderHelper.drawImage(matrices,new Identifier("ccl", "pornad.png"),width/2-(743/3/2),height-(107/3),743/3,107/3,1,1,1);
+        }
         super.render(matrices, mouseX, mouseY, delta);
     }
 }
