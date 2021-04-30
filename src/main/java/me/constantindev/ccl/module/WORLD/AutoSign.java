@@ -32,7 +32,7 @@ public class AutoSign extends Module {
         Module parent = this;
         EventHelper.BUS.registerEvent(EventType.ONPACKETHANDLE, event -> {
             PacketApplyEvent PE = (PacketApplyEvent) event;
-            if (PE.packet instanceof SignEditorOpenS2CPacket && parent.isOn.isOn()) {
+            if (PE.packet instanceof SignEditorOpenS2CPacket && parent.isEnabled()) {
                 event.cancel();
                 if (Cornos.minecraft.getNetworkHandler() == null) return;
                 SignEditorOpenS2CPacket p = (SignEditorOpenS2CPacket) PE.packet;

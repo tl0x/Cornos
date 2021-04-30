@@ -12,8 +12,8 @@ public class Panic extends Command {
     @Override
     public void onExecute(String[] args) {
         for (Module m : ModuleRegistry.getAll()) {
-            if (m.isOn.isOn()) {
-                m.isOn.setState(false);
+            if (m.isEnabled()) {
+                m.setEnabled(false);
             }
         }
     }

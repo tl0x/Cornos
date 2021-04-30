@@ -23,7 +23,7 @@ public class ResourcePackStatusC2SPacketMixin {
 
     @Inject(method = "<init>(Lnet/minecraft/network/packet/c2s/play/ResourcePackStatusC2SPacket$Status;)V", at = @At("TAIL"))
     public void init(ResourcePackStatusC2SPacket.Status status, CallbackInfo ci) {
-        if (ModuleRegistry.getByName("resourcepackspoof").isOn.isOn()) {
+        if (ModuleRegistry.getByName("resourcepackspoof").isEnabled()) {
             this.status = ResourcePackStatusC2SPacket.Status.SUCCESSFULLY_LOADED;
         }
     }

@@ -19,7 +19,7 @@ public class Module {
     public final String description;
     public final ModuleConfig mconf;
     public final MType type;
-    public final Toggleable$1 isOn = new Toggleable$1(false);
+    private final Toggleable$1 isOn = new Toggleable$1(false);
     public boolean showNotifications = true;
     public List<RenderableBlock> rbq = new ArrayList<>();
     public List<RenderableLine> rlq = new ArrayList<>();
@@ -95,5 +95,8 @@ public class Module {
             this.onDisable();
         }
         this.isOn.setState(isEnabled);
+    }
+    public final boolean isEnabled() {
+        return isOn.isOn();
     }
 }

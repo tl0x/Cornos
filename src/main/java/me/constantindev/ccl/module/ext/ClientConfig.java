@@ -15,7 +15,7 @@ public class ClientConfig extends Module {
 
     @Override
     public void onEnable() {
-        this.isOn.setState(false);
+        this.setEnabled(false);
         super.onEnable();
     }
 }

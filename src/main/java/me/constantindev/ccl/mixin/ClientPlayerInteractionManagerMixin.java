@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ClientPlayerInteractionManagerMixin {
     @Inject(method = "getReachDistance", at = @At("HEAD"), cancellable = true)
     public void gRD(CallbackInfoReturnable<Float> cir) {
-        if (ModuleRegistry.getByName("Range").isOn.isOn()) {
+        if (ModuleRegistry.getByName("Range").isEnabled()) {
             double range = Range.range.getValue();
             cir.setReturnValue((float) range);
         }

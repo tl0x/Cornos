@@ -81,14 +81,14 @@ public class InGameHudMixin {
             swap = 0;
         }
 
-        if (ModuleRegistry.getByName("hud").isOn.isOn()) {
+        if (ModuleRegistry.getByName("hud").isEnabled()) {
             if (((Toggleable) hud.mconf.getByName("modules")).isEnabled()) {
                 boolean doRgb = Hud.themeColor.isRainbow();
                 AtomicInteger offset = new AtomicInteger(0);
                 List<Module> ml = ModuleRegistry.getAll();
                 List<Module> mlR = new ArrayList<>();
                 ml.forEach(module -> {
-                    if (module.isOn.isOn() && (((Toggleable) module.mconf.getByName("visible")).isEnabled()))
+                    if (module.isEnabled() && (((Toggleable) module.mconf.getByName("visible")).isEnabled()))
                         mlR.add(module);
                 });
                 mlR.sort(Comparator.comparingInt(o -> Cornos.minecraft.textRenderer.getWidth(o.name)));
@@ -113,23 +113,23 @@ public class InGameHudMixin {
             ClientConfig.hudElements.render(matrices, tickDelta);
         }
         for (Module m : ModuleRegistry.getAll()) {
-            if (m.isOn.isOn()) m.onHudRender(matrices, tickDelta);
+            if (m.isEnabled()) m.onHudRender(matrices, tickDelta);
         }
-        if (ModuleRegistry.getByName("TabGUI").isOn.isOn() && ClientConfig.tabGUI != null) {
+        if (ModuleRegistry.getByName("TabGUI").isEnabled() && ClientConfig.tabGUI != null) {
             ClientConfig.tabGUI.render(matrices, tickDelta);
         }
     }
 
     @Inject(at = {@At("HEAD")}, method = "renderStatusEffectOverlay", cancellable = true)
     private void renderStatusEffectOverlay(MatrixStack matrices, CallbackInfo ci) {
-        if (ModuleRegistry.getByName("hud").isOn.isOn()) {
+        if (ModuleRegistry.getByName("hud").isEnabled()) {
             ci.cancel();
         }
     }
 
     @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
     public void renderPumpkinOverlayReplacement(CallbackInfo ci) {
-        if (NoRender.pumpkin.isEnabled() && ModuleRegistry.getByName("norender").isOn.isOn()) {
+        if (NoRender.pumpkin.isEnabled() && ModuleRegistry.getByName("norender").isEnabled()) {
             ci.cancel();
             MatrixStack defaultM = new MatrixStack();
             int w2d = Cornos.minecraft.getWindow().getScaledWidth() / 2;

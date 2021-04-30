@@ -11,6 +11,8 @@ import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.Objects;
+
 public class Criticals extends Module {
     MultiOption mode = new MultiOption("mode", "packet", new String[]{"packet", "tphop", "visual"});
 
@@ -20,8 +22,9 @@ public class Criticals extends Module {
         Module parent = this;
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
-            if (parent.isOn.isOn() && (pe.packet instanceof PlayerInteractEntityC2SPacket)) {
+            if (parent.isEnabled() && (pe.packet instanceof PlayerInteractEntityC2SPacket)) {
                 PlayerInteractEntityC2SPacket p = (PlayerInteractEntityC2SPacket) pe.packet;
+                assert Cornos.minecraft.player != null;
                 Vec3d pos = Cornos.minecraft.player.getPos();
                 switch (mode.value) {
                     case "packet":
@@ -29,7 +32,7 @@ public class Criticals extends Module {
                         PlayerMoveC2SPacket.PositionOnly mp1 = new PlayerMoveC2SPacket.PositionOnly(pos.x, pos.y, pos.z, false);
                         PlayerMoveC2SPacket.PositionOnly mp2 = new PlayerMoveC2SPacket.PositionOnly(pos.x, pos.y + 0.000011, pos.z, false);
                         PlayerMoveC2SPacket.PositionOnly mp3 = new PlayerMoveC2SPacket.PositionOnly(pos.x, pos.y, pos.z, false);
-                        Cornos.minecraft.getNetworkHandler().sendPacket(mp);
+                        Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(mp);
                         Cornos.minecraft.getNetworkHandler().sendPacket(mp1);
                         Cornos.minecraft.getNetworkHandler().sendPacket(mp2);
                         Cornos.minecraft.getNetworkHandler().sendPacket(mp3);
@@ -37,7 +40,7 @@ public class Criticals extends Module {
                     case "tphop":
                         PlayerMoveC2SPacket.PositionOnly mp4 = new PlayerMoveC2SPacket.PositionOnly(pos.x, pos.y + 0.02, pos.z, false);
                         PlayerMoveC2SPacket.PositionOnly mp5 = new PlayerMoveC2SPacket.PositionOnly(pos.x, pos.y + 0.01, pos.z, false);
-                        Cornos.minecraft.getNetworkHandler().sendPacket(mp4);
+                        Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(mp4);
                         Cornos.minecraft.getNetworkHandler().sendPacket(mp5);
                         break;
                 }

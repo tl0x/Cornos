@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ParticleManagerMixin {
     @Inject(method = "addParticle(Lnet/minecraft/client/particle/Particle;)V", at = @At("HEAD"), cancellable = true)
     public void aPR(Particle particle, CallbackInfo ci) {
-        if (ModuleRegistry.getByName("norender").isOn.isOn() && NoRender.particles.isEnabled()) ci.cancel();
+        if (ModuleRegistry.getByName("norender").isEnabled() && NoRender.particles.isEnabled()) ci.cancel();
     }
 }

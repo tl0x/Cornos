@@ -119,7 +119,17 @@ public class ClickGUI extends MinecraftGUI {
                 if (m.type != type) continue;
                 maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));
                 CollapsibleContainer mc = new CollapsibleContainer(m.name, m.description, theme.getContainerRenderer(),
-                        new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), m.isOn);
+                        new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), new SimpleToggleable(m.isEnabled()) {
+                    @Override
+                    public boolean isOn() {
+                        return m.isEnabled();
+                    }
+
+                    @Override
+                    public void toggle() {
+                        m.setEnabled(!m.isEnabled());
+                    }
+                });
                 container.addComponent(mc);
                 for (ModuleConfig.ConfigKey kc : m.mconf.config) {
                     maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(kc.key + ": " + kc.value));

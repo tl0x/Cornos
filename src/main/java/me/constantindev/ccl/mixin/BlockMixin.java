@@ -17,7 +17,7 @@ public abstract class BlockMixin {
 
     @Inject(method = "shouldDrawSide", cancellable = true, at = @At("HEAD"))
     private static void checkBlock(BlockState state, BlockView world, BlockPos pos, Direction facing, CallbackInfoReturnable<Boolean> cir) {
-        if (ModuleRegistry.getByName("xray").isOn.isOn()) {
+        if (ModuleRegistry.getByName("xray").isEnabled()) {
             boolean isIncluded = false;
             for (Block b : ClientConfig.xrayBlocks) {
                 if (state.getBlock().is(b)) isIncluded = true;
@@ -28,7 +28,7 @@ public abstract class BlockMixin {
 
     @Inject(method = "isTranslucent", cancellable = true, at = @At("HEAD"))
     public void checkTranslucent(BlockState state, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (ModuleRegistry.getByName("xray").isOn.isOn()) {
+        if (ModuleRegistry.getByName("xray").isEnabled()) {
             boolean isIncluded = false;
             for (Block b : ClientConfig.xrayBlocks) {
                 if (state.getBlock().is(b)) isIncluded = true;

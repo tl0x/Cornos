@@ -30,7 +30,7 @@ public class KeyBindManager {
         binds.forEach((s, keyBinding) -> {
             if (keyBinding.isPressed() && Cornos.minecraft.currentScreen == null)
                 if (s.contains("TAB_")) {
-                    if (ModuleRegistry.getByName("TabGUI").isOn.isOn()) {
+                    if (ModuleRegistry.getByName("TabGUI").isEnabled()) {
                         if (!freezeTabGui) {
                             ModuleRegistry.getTabManager().keyPressed(keyBinding.keycode);
                         } else {
@@ -38,7 +38,8 @@ public class KeyBindManager {
                         }
                     }
                 } else {
-                    ModuleRegistry.getByName(s).isOn.toggle();
+                    Module m = ModuleRegistry.getByName(s);
+                    m.setEnabled(!m.isEnabled());
                 }
         });
     }

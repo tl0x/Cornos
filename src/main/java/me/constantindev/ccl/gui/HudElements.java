@@ -51,7 +51,7 @@ public class HudElements extends DrawableHelper {
         tick += .2;
         if (tick > 360) tick = 0;
         double sin = Math.sin(Math.toRadians(tick));
-        if (ModuleRegistry.getByName("debug").isOn.isOn())
+        if (ModuleRegistry.getByName("debug").isEnabled())
             ClientHelper.sendChat(sin + ", " + tick + ", " + Math.toRadians(tick) + ", " + Math.toDegrees(tick));
         boolean chatOpen = Cornos.minecraft.currentScreen instanceof ChatScreen;
         Hud hud = (Hud) ModuleRegistry.getByName("hud");

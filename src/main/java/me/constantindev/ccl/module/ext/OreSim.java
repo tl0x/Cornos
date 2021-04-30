@@ -194,7 +194,7 @@ public class OreSim extends Module {
     public void setWorldSeed(long seed) {
         this.worldSeed = seed;
         chunkRenderers.clear();
-        if (this.isOn.isOn()) {
+        if (this.isEnabled()) {
             reload();
         }
     }

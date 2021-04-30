@@ -30,7 +30,7 @@ public class GameRendererHook {
             vb = false;
         }
         ModuleRegistry.getAll().forEach(m -> {
-            if (m.isOn.isOn()) m.onRender(matrix, tickDelta);
+            if (m.isEnabled()) m.onRender(matrix, tickDelta);
         });
 
     }

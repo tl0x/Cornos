@@ -16,7 +16,7 @@ public class PlayerEntityMixin {
         PlayerEntity context = (PlayerEntity) ((Object) this);
         if (Cornos.minecraft.player == null) return;
         if (context.getUuid() == Cornos.minecraft.player.getUuid()) {
-            if (Scaffold.preventFalling.isEnabled() && ModuleRegistry.getByName("scaffold").isOn.isOn()) {
+            if (Scaffold.preventFalling.isEnabled() && ModuleRegistry.getByName("scaffold").isEnabled()) {
                 cir.setReturnValue(true);
             }
         }

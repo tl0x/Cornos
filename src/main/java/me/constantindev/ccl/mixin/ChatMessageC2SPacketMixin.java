@@ -17,7 +17,7 @@ public class ChatMessageC2SPacketMixin {
 
     @Inject(method = "getChatMessage", at = @At("HEAD"))
     public void gCM(CallbackInfoReturnable<String> cir) {
-        if (ModuleRegistry.getByName("fancychat").isOn.isOn()) {
+        if (ModuleRegistry.getByName("fancychat").isEnabled()) {
             chatMessage = chatMessage.toUpperCase();
 
             for (String[] s : ClientConfig.dict) {

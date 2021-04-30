@@ -92,7 +92,7 @@ public class TabManager {
                             .get(currentMods.get(
                                     tabType.get(currentTab)
                             ));
-                    m.isOn.toggle();
+                    m.setEnabled(!m.isEnabled());
                 } else {
                     tabs.get(tabType.get(currentTab)).setExpanded(true);
                 }

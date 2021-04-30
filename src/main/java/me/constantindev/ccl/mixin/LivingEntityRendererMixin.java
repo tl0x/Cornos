@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class LivingEntityRendererMixin<T extends LivingEntity> {
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void render(T livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
-        if (livingEntity instanceof ArmorStandEntity && NoRender.armorstand.isEnabled() && ModuleRegistry.getByName("norender").isOn.isOn())
+        if (livingEntity instanceof ArmorStandEntity && NoRender.armorstand.isEnabled() && ModuleRegistry.getByName("norender").isEnabled())
             ci.cancel();
     }
 }

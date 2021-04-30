@@ -28,7 +28,7 @@ import java.util.Objects;
 public class ItemStackMixin {
     @Inject(method = "getTooltip", at = @At("RETURN"), cancellable = true)
     public void getTooltip(PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir) {
-        if (!ModuleRegistry.getByName("ByteSizeViewer").isOn.isOn()) return;
+        if (!ModuleRegistry.getByName("ByteSizeViewer").isEnabled()) return;
         List<Text> tl = cir.getReturnValue();
         ItemStack is = (ItemStack) ((Object) this);
         tl.add(Text.of(" "));

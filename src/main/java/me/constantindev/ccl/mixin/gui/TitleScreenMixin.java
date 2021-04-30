@@ -1,6 +1,7 @@
 package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.helper.ClientHelper;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.gui.MainScreen;
 import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
@@ -12,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.awt.*;
+
 @Mixin(TitleScreen.class)
 public class TitleScreenMixin extends Screen {
     public TitleScreenMixin() {
@@ -20,6 +23,7 @@ public class TitleScreenMixin extends Screen {
 
     @Inject(method = "init", cancellable = true, at = @At("HEAD"))
     public void init(CallbackInfo cbi) {
+        ClientHelper.sendClientNotif("Client is ready!");
         if (ModuleRegistry.getByName("ClientConfig").mconf.getByName("homescreen").value.equals("client")) {
             Cornos.minecraft.openScreen(new MainScreen());
             cbi.cancel();

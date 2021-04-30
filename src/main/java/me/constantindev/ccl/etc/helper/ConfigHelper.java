@@ -28,7 +28,7 @@ public class ConfigHelper {
         String finalC = String.join(";", confFinal);
         List<String> enabledM = new ArrayList<>();
         for (Module m : ModuleRegistry.getAll()) {
-            if (m.isOn.isOn()) enabledM.add(m.name);
+            if (m.isEnabled()) enabledM.add(m.name);
         }
         String enabledMFinal = String.join(":", enabledM);
         try {
@@ -66,7 +66,7 @@ public class ConfigHelper {
             sb.append(xor((char) 42069, fileDataS.split("\n")[0]));
             try {
                 for (String str : xor((char) 694, fileDataS.split("\n")[1]).split(":")) {
-                    ModuleRegistry.getByName(str).isOn.setState(true);
+                    ModuleRegistry.getByName(str).setEnabled(true);
                 }
             } catch (Exception ignored) {
             }

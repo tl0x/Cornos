@@ -14,7 +14,7 @@ public class Hud extends Module {
 
     public Hud() {
         super("HUD", "Will make shit fancy", MType.RENDER);
-        this.isOn.setState(true);
+        this.setEnabled(true);
         this.mconf.add(new Num("rgbSpeed", 5, 20, 1));
         this.mconf.add(themeColor);
         this.mconf.add(new Toggleable("fps", true));

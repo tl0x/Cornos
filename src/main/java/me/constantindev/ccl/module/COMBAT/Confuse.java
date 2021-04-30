@@ -51,7 +51,7 @@ public class Confuse extends Module {
     @Override
     public void onRender(MatrixStack ms, float td) {
         if (target != null) {
-            boolean flag = ModuleRegistry.budgetGraphicsInstance.isOn.isOn();
+            boolean flag = ModuleRegistry.budgetGraphicsInstance.isEnabled();
             Vec3d last = null;
             addition += flag ? 0 : 1.0;
             if (addition > 360) addition = 0;

@@ -13,14 +13,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class AbstractBlockStateMixin {
     @Inject(at = {@At("HEAD")}, method = "getLuminance", cancellable = true)
     public void getLuminace(CallbackInfoReturnable<Integer> cir) {
-        if (ModuleRegistry.getByName("xray").isOn.isOn()) {
+        if (ModuleRegistry.getByName("xray").isEnabled()) {
             cir.setReturnValue(15);
         }
     }
 
     @Inject(at = {@At("TAIL")}, method = "isFullCube", cancellable = true)
     private void isFullCube(BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (ModuleRegistry.getByName("Freecam").isOn.isOn()) {
+        if (ModuleRegistry.getByName("Freecam").isEnabled()) {
             cir.setReturnValue(false);
         }
     }

@@ -17,6 +17,6 @@ public class ClickGUI extends Module {
         if (ClientConfig.cg == null) ClientConfig.cg = new me.constantindev.ccl.gui.ClickGUI();
         Cornos.minecraft.openScreen(ClientConfig.cg);
         super.onEnable();
-        this.isOn.setState(false);
+        this.setEnabled(false);
     }
 }

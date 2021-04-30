@@ -95,9 +95,9 @@ public class TabGUI extends DrawableHelper {
                     int j = 0;
                     int l = 0;
                     for (Module m : tabManager.getMods().get(mType)) {
-                        int off = m.isOn.isOn() ? 2 : 0;
+                        int off = m.isEnabled() ? 2 : 0;
                         drawGuiRect(172 + off, 20 + j, 81 + off, 30 + j, new Color(35, 35, 35).getRGB(), matrices.peek().getModel());
-                        if (m.isOn.isOn()) {
+                        if (m.isEnabled()) {
                             drawGuiRect(174, 20 + j, 83, 30 + j, new Color(47, 47, 47, 134).getRGB(), matrices.peek().getModel());
                         }
                         if (l == tabManager.getCurrentMods().get(mType)) {

@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class SignBlockEntityRendererMixin {
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void gtor(SignBlockEntity signBlockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j, CallbackInfo ci) {
-        if (NoRender.sign.isEnabled() && ModuleRegistry.getByName("norender").isOn.isOn()) {
+        if (NoRender.sign.isEnabled() && ModuleRegistry.getByName("norender").isEnabled()) {
             ci.cancel();
         }
     }

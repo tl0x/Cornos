@@ -22,13 +22,12 @@ import java.awt.*;
 public class NameTags extends Module {
 
     Toggleable health = new Toggleable("Health", true);
-    Toggleable items = new Toggleable("Items", true);
     Toggleable renderSelf = new Toggleable("RenderSelf", false);
 
     public NameTags() {
         super("NameTags", "Shows bigger better nametags that give you more info about the player", MType.RENDER);
         this.mconf.add(health);
-        this.mconf.add(items);
+
         this.mconf.add(renderSelf);
     }
 

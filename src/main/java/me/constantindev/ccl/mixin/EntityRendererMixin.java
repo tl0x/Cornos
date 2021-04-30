@@ -36,7 +36,7 @@ public abstract class EntityRendererMixin<T extends Entity> {
     @Inject(at = {@At("HEAD")}, method = "renderLabelIfPresent", cancellable = true)
     private void onRenderLabel(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         //GL11.glDisable(GL11.GL_LIGHTING);
-        if (ModuleRegistry.getByName("Nametags").isOn.isOn()) {
+        if (ModuleRegistry.getByName("Nametags").isEnabled()) {
             if (entity instanceof PlayerEntity) {
                 ((NameTags) ModuleRegistry.getByName("Nametags")).renderCustomLabel(entity, text, matrices, vertexConsumers, light, dispatcher);
 
@@ -47,13 +47,13 @@ public abstract class EntityRendererMixin<T extends Entity> {
 
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
     public void sR(T entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> cir) {
-        if (entity.getType().equals(EntityType.AREA_EFFECT_CLOUD) && ModuleRegistry.getByName("antiblockban").isOn.isOn())
+        if (entity.getType().equals(EntityType.AREA_EFFECT_CLOUD) && ModuleRegistry.getByName("antiblockban").isEnabled())
             cir.setReturnValue(false);
     }
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void render(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
-        if (entity.getType().equals(EntityType.AREA_EFFECT_CLOUD) && ModuleRegistry.getByName("antiblockban").isOn.isOn())
+        if (entity.getType().equals(EntityType.AREA_EFFECT_CLOUD) && ModuleRegistry.getByName("antiblockban").isEnabled())
             ci.cancel();
     }
 }

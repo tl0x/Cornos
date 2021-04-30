@@ -15,6 +15,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.apache.logging.log4j.Level;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -105,20 +106,21 @@ public class ClientHelper {
         } catch (Exception ignored) {
         }
     }
-
+    @SuppressWarnings("unused")
     public static void checkForUpdates() {
         new Thread(() -> {
             try {
+                boolean trash;
                 File f = new File(ClientHelper.class.getProtectionDomain().getCodeSource().getLocation().toURI());
                 if (f.isDirectory()) {
                     ClientHelper.sendChat("Can't check for updates.");
                     return;
                 }
                 File parent = new File(f.getParentFile().getParent() + "/tmp");
-                if (!parent.exists()) parent.mkdir();
+                if (!parent.exists()) trash = parent.mkdir();
                 parent = new File(parent.getPath() + "/latest.jar");
                 if (parent.exists()) {
-                    parent.delete();
+                    trash = parent.delete();
                 }
                 downloadUsingNIO("https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar", parent.getAbsolutePath());
                 HashCode hc = Files.asByteSource(f).hash(Hashing.crc32());
@@ -141,5 +143,9 @@ public class ClientHelper {
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         fos.close();
         rbc.close();
+    }
+
+    public static void sendClientNotif(String text) {
+
     }
 }

@@ -17,7 +17,7 @@ public class EntitySpawnS2CPacketMixin {
 
     @Inject(method = "apply", at = @At("TAIL"), cancellable = true)
     public void a(ClientPlayPacketListener clientPlayPacketListener, CallbackInfo ci) {
-        if (this.entityTypeId == EntityType.AREA_EFFECT_CLOUD && ModuleRegistry.getByName("antiblockban").isOn.isOn()) {
+        if (this.entityTypeId == EntityType.AREA_EFFECT_CLOUD && ModuleRegistry.getByName("antiblockban").isEnabled()) {
             ci.cancel();
         }
     }

@@ -35,7 +35,7 @@ public class Freecam extends Module {
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
             if (pe.packet instanceof PlayerMoveC2SPacket) {
-                if (parent.isOn.isOn()) event.cancel();
+                if (parent.isEnabled()) event.cancel();
             }
         });
     }

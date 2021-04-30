@@ -35,7 +35,7 @@ public class QuickMove extends Module {
         Module parent = this;
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
-            if (pe.packet instanceof PlayerMoveC2SPacket && parent.isOn.isOn()) event.cancel();
+            if (pe.packet instanceof PlayerMoveC2SPacket && parent.isEnabled()) event.cancel();
         });
         this.mconf.add(new Num("delay", 20, 100, 0));
     }
@@ -56,7 +56,7 @@ public class QuickMove extends Module {
             latest = bp;
         }
         counter++;
-        if (counter > (ModuleRegistry.budgetGraphicsInstance.isOn.isOn() ? 80 : 10)) {
+        if (counter > (ModuleRegistry.budgetGraphicsInstance.isEnabled() ? 80 : 10)) {
             assert Cornos.minecraft.player != null;
             bpl.add(new ColoredBlockEntry(Cornos.minecraft.player.getPos(), new Color(ClientConfig.latestRGBVal)));
             counter = 0;

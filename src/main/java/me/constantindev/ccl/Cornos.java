@@ -81,7 +81,7 @@ public class Cornos implements ModInitializer {
                 try {
                     if (Cornos.minecraft.player != null) {
                         for (Module m : ModuleRegistry.getAll()) {
-                            if (m.isOn.isOn()) m.onFastUpdate();
+                            if (m.isEnabled()) m.onFastUpdate();
                         }
                     }
                     Thread.sleep(10);
