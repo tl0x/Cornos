@@ -182,16 +182,18 @@ public class RenderHelper {
         return new Vec3d(f2 * f3, f4, f1 * f3).add(camera.getPos());
     }
 
-    public static void drawImage(MatrixStack matrices, Identifier identifier, int x, int y, int imageWidth, int imageHeight) {
+    public static void drawImage(MatrixStack matrices, Identifier identifier, int x, int y, int imageWidth, int imageHeight, float r, float g, float b) {
 
         RenderSystem.enableAlphaTest();
         RenderSystem.pushMatrix();
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(770, 771);
+        GL11.glColor3f(r,g,b);
 
         Cornos.minecraft.getTextureManager().bindTexture(identifier);
         Screen.drawTexture(matrices, x, y, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
 
+        GL11.glColor3f(1,1,1);
         RenderSystem.disableAlphaTest();
         RenderSystem.disableBlend();
         RenderSystem.popMatrix();
