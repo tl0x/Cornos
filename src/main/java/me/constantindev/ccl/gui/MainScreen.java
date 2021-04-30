@@ -64,21 +64,21 @@ public class MainScreen extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        Color c = Color.getHSBColor((float) (((double) (System.currentTimeMillis()%10000))/10000), 1, 1);
+        Color c = Color.getHSBColor((float) (((double) (System.currentTimeMillis() % 10000)) / 10000), 1, 1);
         Cornos.minecraft.getTextureManager().bindTexture(bg);
         DrawableHelper.drawTexture(matrices, 0, 0, 0, 0, 0, width, height, height, width);
-        RenderHelper.drawImage(matrices, new Identifier("ccl", "hscreenlogo.png"), -11, 1, 960 / 4, 233 / 4, (float)c.getRed()/255, (float)c.getGreen()/255, (float)c.getBlue()/255);
+        RenderHelper.drawImage(matrices, new Identifier("ccl", "hscreenlogo.png"), -11, 1, 960 / 4, 233 / 4, (float) c.getRed() / 255, (float) c.getGreen() / 255, (float) c.getBlue() / 255);
         int diff = 32;
-        RenderHelper.renderRoundedQuad(new Vec3d(5, height-5-diff,0), new Vec3d(211, height-5,0),4,new Color(0,0,0, 20));
+        RenderHelper.renderRoundedQuad(new Vec3d(5, height - 5 - diff, 0), new Vec3d(211, height - 5, 0), 4, new Color(0, 0, 0, 20));
         int centerX = 107;
-        int centerY = (height-5)/2+(height-5-diff)/2+5;
+        int centerY = (height - 5) / 2 + (height - 5 - diff) / 2 + 5;
         Date d = new Date();
         String line1F = line1.format(d);
         String line2F = line2.format(d);
-        GL11.glScaled(2,2,1);
-        DrawableHelper.drawCenteredString(matrices,textRenderer,line1F,centerX/2,(centerY-18)/2, 0xFFFFFF);
-        GL11.glScaled(.5,.5,1);
-        DrawableHelper.drawCenteredString(matrices,textRenderer,line2F,centerX,centerY+1, 0xFFFFFF);
+        GL11.glScaled(2, 2, 1);
+        DrawableHelper.drawCenteredString(matrices, textRenderer, line1F, centerX / 2, (centerY - 18) / 2, 0xFFFFFF);
+        GL11.glScaled(.5, .5, 1);
+        DrawableHelper.drawCenteredString(matrices, textRenderer, line2F, centerX, centerY + 1, 0xFFFFFF);
         super.render(matrices, mouseX, mouseY, delta);
     }
 }

@@ -15,7 +15,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.apache.logging.log4j.Level;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -106,6 +105,7 @@ public class ClientHelper {
         } catch (Exception ignored) {
         }
     }
+
     @SuppressWarnings("unused")
     public static void checkForUpdates() {
         new Thread(() -> {

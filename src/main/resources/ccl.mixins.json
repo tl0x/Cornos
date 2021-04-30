@@ -15,6 +15,7 @@
     "CombatEventS2CPacketMixin",
     "EntityRendererMixin",
     "EntitySpawnS2CPacketMixin",
+
     "IdentifierMixin",
     "ItemStackMixin",
     "LivingEntityAccessor",

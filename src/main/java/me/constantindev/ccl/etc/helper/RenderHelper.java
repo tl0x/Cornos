@@ -188,12 +188,12 @@ public class RenderHelper {
         RenderSystem.pushMatrix();
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(770, 771);
-        GL11.glColor3f(r,g,b);
+        GL11.glColor3f(r, g, b);
 
         Cornos.minecraft.getTextureManager().bindTexture(identifier);
         Screen.drawTexture(matrices, x, y, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
 
-        GL11.glColor3f(1,1,1);
+        GL11.glColor3f(1, 1, 1);
         RenderSystem.disableAlphaTest();
         RenderSystem.disableBlend();
         RenderSystem.popMatrix();

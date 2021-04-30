@@ -88,6 +88,10 @@ public class Module {
         rbq.clear();
     }
 
+    public final boolean isEnabled() {
+        return isOn.isOn();
+    }
+
     public final void setEnabled(boolean isEnabled) {
         if (isEnabled) {
             this.onEnable();
@@ -95,8 +99,5 @@ public class Module {
             this.onDisable();
         }
         this.isOn.setState(isEnabled);
-    }
-    public final boolean isEnabled() {
-        return isOn.isOn();
     }
 }

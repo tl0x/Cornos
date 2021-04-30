@@ -51,7 +51,7 @@ public class ModuleRegistry {
         ml.add(new QuickMove());
         ml.add(new Tracers());
         ml.add(new ByteSizeViewer());
-        ml.add(new ThunderAura());
+
         ml.add(new NoFall());
         ml.add(new AutoSign());
         ml.add(new OffhandCrash());
@@ -99,6 +99,7 @@ public class ModuleRegistry {
         ml.add(new Vibe());
         ml.add(new LSD());
         ml.add(new Animations());
+
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();
