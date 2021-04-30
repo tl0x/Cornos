@@ -79,9 +79,6 @@ public class MainScreen extends Screen {
         DrawableHelper.drawCenteredString(matrices,textRenderer,line1F,centerX/2,(centerY-18)/2, 0xFFFFFF);
         GL11.glScaled(.5,.5,1);
         DrawableHelper.drawCenteredString(matrices,textRenderer,line2F,centerX,centerY+1, 0xFFFFFF);
-        if (showSecrets) {
-            RenderHelper.drawImage(matrices,new Identifier("ccl", "pornad.png"),width/2-(743/3/2),height-(107/3),743/3,107/3,1,1,1);
-        }
         super.render(matrices, mouseX, mouseY, delta);
     }
 }

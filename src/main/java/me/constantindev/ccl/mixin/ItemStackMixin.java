@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.nio.charset.StandardCharsets;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.List;
@@ -37,14 +38,14 @@ public class ItemStackMixin {
         } else {
             CompoundTag ct = is.getOrCreateTag();
             if (ct.contains("bytesize")) {
-                tl.add(Text.of("Byte size: ~ " + ct.getString("bytesize")));
+                tl.add(Text.of("Bytes: about " + ct.getString("bytesize")));
                 return;
             }
             float fs = 0;
             for (String key : ct.getKeys()) {
                 if (ct.get(key) == null) continue;
-                fs += key.length();
-                fs += Objects.requireNonNull(ct.get(key)).copy().toString().length();
+                fs += key.getBytes(StandardCharsets.UTF_8).length;
+                fs += Objects.requireNonNull(ct.get(key)).copy().toString().getBytes(StandardCharsets.UTF_8).length;
             }
             //tl.add(Text.of("Byte size: ~ "+humanReadableByteCountBin(fs)));
             ct.putString("bytesize", humanReadableByteCountBin(fs) + (fs > 2097152 ? " §l§c! §r§cTHIS CAN BOOKBAN§r" : ""));
