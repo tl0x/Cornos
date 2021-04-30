@@ -37,6 +37,7 @@
     "gui.EditGameRulesScreenMixin",
     "gui.EntryListWidgetMixin",
     "gui.GameRendererHook",
+    "gui.HeldItemRendererMixin",
     "gui.InGameHudMixin",
     "gui.InGameOverlayRendererMixin",
     "gui.MultiplayerScreenMixin",

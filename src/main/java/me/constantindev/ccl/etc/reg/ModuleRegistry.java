@@ -8,6 +8,7 @@ import me.constantindev.ccl.module.EXPLOIT.*;
 import me.constantindev.ccl.module.EXPLOIT.CRASH.*;
 import me.constantindev.ccl.module.FUN.LSD;
 import me.constantindev.ccl.module.MOVEMENT.*;
+import me.constantindev.ccl.module.RENDER.Animations;
 import me.constantindev.ccl.module.RENDER.Freecam;
 import me.constantindev.ccl.module.RENDER.Tracers;
 import me.constantindev.ccl.module.WORLD.*;
@@ -97,6 +98,7 @@ public class ModuleRegistry {
         ml.add(new AutoFemboy());
         ml.add(new Vibe());
         ml.add(new LSD());
+        ml.add(new Animations());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

@@ -10,6 +10,7 @@ package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.ms.MType;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 
 public class Test extends Module {
