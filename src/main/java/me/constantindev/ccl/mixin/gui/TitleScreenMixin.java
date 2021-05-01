@@ -21,7 +21,6 @@ public class TitleScreenMixin extends Screen {
 
     @Inject(method = "init", cancellable = true, at = @At("HEAD"))
     public void init(CallbackInfo cbi) {
-        ClientHelper.sendClientNotif("Client is ready!");
         if (ModuleRegistry.getByName("ClientConfig").mconf.getByName("homescreen").value.equals("client")) {
             Cornos.minecraft.openScreen(new MainScreen());
             cbi.cancel();

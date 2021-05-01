@@ -53,24 +53,6 @@ public class ClientHelper {
         return isValid;
     }
 
-    public static void setField(Object t, String n1, String n2, Object value) {
-        Field f;
-        try {
-            f = t.getClass().getField(n1);
-        } catch (Exception exc) {
-            try {
-                f = t.getClass().getField(n2);
-            } catch (Exception ignored) {
-                return;
-            }
-        }
-        if (!f.isAccessible()) f.setAccessible(true);
-        try {
-            f.set(t, value);
-        } catch (Exception ignored) {
-        }
-    }
-
     public static boolean login(String username, String password) {
         if (password.isEmpty()) {
             Session crackedSession = new Session(username, UUID.randomUUID().toString(), "CornosOnTOP", "mojang");
@@ -126,8 +108,12 @@ public class ClientHelper {
                 HashCode hc = Files.asByteSource(f).hash(Hashing.crc32());
                 HashCode hc1 = Files.asByteSource(parent).hash(Hashing.crc32());
                 if (!hc.equals(hc1)) {
-                    sendChat("Your cornos installation is out of sync with the latest build!");
-                    sendChat("Please head over to https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar to get the latest version");
+                    try {
+                        Files.move(parent,f);
+                    } catch (Exception exc) {
+                        sendChat("Your cornos installation is out of sync with the latest build!");
+                        sendChat("Failed to automatically update. Head over to https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar to get the latest version");
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -143,9 +129,5 @@ public class ClientHelper {
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         fos.close();
         rbc.close();
-    }
-
-    public static void sendClientNotif(String text) {
-
     }
 }
