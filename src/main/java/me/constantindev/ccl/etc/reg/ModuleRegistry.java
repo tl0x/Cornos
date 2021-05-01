@@ -6,6 +6,7 @@ import me.constantindev.ccl.module.*;
 import me.constantindev.ccl.module.COMBAT.*;
 import me.constantindev.ccl.module.EXPLOIT.*;
 import me.constantindev.ccl.module.EXPLOIT.CRASH.*;
+import me.constantindev.ccl.module.FUN.Clumsy;
 import me.constantindev.ccl.module.FUN.LSD;
 import me.constantindev.ccl.module.MOVEMENT.*;
 import me.constantindev.ccl.module.RENDER.Animations;
@@ -99,6 +100,7 @@ public class ModuleRegistry {
         ml.add(new Vibe());
         ml.add(new LSD());
         ml.add(new Animations());
+        ml.add(new Clumsy());
 
 
         ml.add(budgetGraphicsInstance);

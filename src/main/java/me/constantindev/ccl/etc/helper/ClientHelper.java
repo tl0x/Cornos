@@ -11,6 +11,9 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.mixin.SessionAccessor;
 import net.minecraft.client.util.Session;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
+import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.apache.logging.log4j.Level;
@@ -129,5 +132,12 @@ public class ClientHelper {
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         fos.close();
         rbc.close();
+    }
+
+    public static void dropItem(int index) {
+        short actionID = Cornos.minecraft.player.currentScreenHandler.getNextActionId(Cornos.minecraft.player.inventory);
+        ItemStack is = Cornos.minecraft.player.inventory.getStack(index);
+        ClickSlotC2SPacket p = new ClickSlotC2SPacket(0, index, 1, SlotActionType.THROW, is, actionID);
+        Cornos.minecraft.getNetworkHandler().sendPacket(p);
     }
 }
