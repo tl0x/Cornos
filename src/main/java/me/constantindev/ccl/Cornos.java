@@ -29,6 +29,7 @@ public class Cornos implements ModInitializer {
     public static final String MOD_NAME = "Cornos";
     public static SoundEvent BONG_SOUND = new SoundEvent(new Identifier("ccl", "bong"));
     public static SoundEvent HITMARKER_SOUND = new SoundEvent(new Identifier("ccl", "hitmarker"));
+    public static SoundEvent VINEBOOM_SOUND = new SoundEvent(new Identifier("ccl", "vineboom"));
     public static Logger LOGGER = LogManager.getLogger();
     public static MinecraftClient minecraft = MinecraftClient.getInstance();
     public static Thread fastUpdater;

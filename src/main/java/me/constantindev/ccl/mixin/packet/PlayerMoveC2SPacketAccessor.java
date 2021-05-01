@@ -1,4 +1,4 @@
-package me.constantindev.ccl.mixin;
+package me.constantindev.ccl.mixin.packet;
 
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import org.spongepowered.asm.mixin.Mixin;

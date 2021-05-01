@@ -8,6 +8,7 @@ import me.constantindev.ccl.module.EXPLOIT.*;
 import me.constantindev.ccl.module.EXPLOIT.CRASH.*;
 import me.constantindev.ccl.module.FUN.Clumsy;
 import me.constantindev.ccl.module.FUN.LSD;
+import me.constantindev.ccl.module.FUN.Twerk;
 import me.constantindev.ccl.module.MOVEMENT.*;
 import me.constantindev.ccl.module.RENDER.Animations;
 import me.constantindev.ccl.module.RENDER.Freecam;
@@ -102,6 +103,7 @@ public class ModuleRegistry {
         ml.add(new Animations());
         ml.add(new Clumsy());
         ml.add(new Safewalk());
+        ml.add(new Twerk());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

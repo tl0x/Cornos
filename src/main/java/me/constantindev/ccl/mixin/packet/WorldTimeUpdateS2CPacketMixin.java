@@ -6,7 +6,7 @@
 PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 */
-package me.constantindev.ccl.mixin;
+package me.constantindev.ccl.mixin.packet;
 
 import me.constantindev.ccl.gui.HudElements;
 import net.minecraft.network.listener.ClientPlayPacketListener;

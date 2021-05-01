@@ -1,4 +1,4 @@
-package me.constantindev.ccl.mixin;
+package me.constantindev.ccl.mixin.packet;
 
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
