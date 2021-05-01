@@ -101,7 +101,7 @@ public class ModuleRegistry {
         ml.add(new LSD());
         ml.add(new Animations());
         ml.add(new Clumsy());
-
+        ml.add(new Safewalk());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();
