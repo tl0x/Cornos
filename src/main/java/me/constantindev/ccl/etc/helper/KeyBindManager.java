@@ -12,6 +12,7 @@ import java.util.Map;
 public class KeyBindManager {
     public static Map<String, KeyBind> binds = new HashMap<>();
     public static boolean freezeTabGui;
+    static Module tab = ModuleRegistry.getByName("TabGUI");
 
     public static void init() {
         for (Module module : ModuleRegistry.getAll()) {
@@ -30,7 +31,7 @@ public class KeyBindManager {
         binds.forEach((s, keyBinding) -> {
             if (keyBinding.isPressed() && Cornos.minecraft.currentScreen == null)
                 if (s.contains("TAB_")) {
-                    if (ModuleRegistry.getByName("TabGUI").isEnabled()) {
+                    if (tab.isEnabled()) {
                         if (!freezeTabGui) {
                             ModuleRegistry.getTabManager().keyPressed(keyBinding.keycode);
                         } else {

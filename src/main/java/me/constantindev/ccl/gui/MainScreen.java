@@ -51,7 +51,7 @@ public class MainScreen extends Screen {
         this.addButton(new RoundedButtonWidget(width - 125, height - 75, 120, 20, Text.of("Multiplayer"), () -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));
         RoundedButtonWidget btnw = new RoundedButtonWidget(width - 125, height - 50, 120, 20, Text.of("Realms"), () -> Cornos.minecraft.openScreen(new RealmsMainScreen(this)));
         this.addButton(new RoundedButtonWidget(width - 125, height - 25, 120, 20, Text.of("Vanilla homescreen"), () -> {
-            ModuleRegistry.getByName("ClientConfig").mconf.getByName("homescreen").setValue("vanilla");
+            Cornos.config.mconf.getByName("homescreen").setValue("vanilla");
             Cornos.minecraft.openScreen(new TitleScreen());
         }));
         this.addButton(btnw);

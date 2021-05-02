@@ -35,12 +35,14 @@ public class Cornos implements ModInitializer {
     public static Thread fastUpdater;
     public static NotificationManager notifMan;
 
+    public static me.constantindev.ccl.module.ext.ClientConfig config;
+
     public static void log(Level level, String message) {
         LOGGER.log(level, "[" + MOD_NAME + "] " + message);
     }
 
     public static void onMinecraftCreate() {
-        if (ModuleRegistry.getByName("ClientConfig").mconf.getByName("customProcessIcon").value.equals("on")) {
+        if (config.mconf.getByName("customProcessIcon").value.equals("on")) {
             InputStream inputStream = Cornos.class.getClassLoader().getResourceAsStream("assets/ccl/icon1.png");
             Cornos.minecraft.getWindow().setIcon(inputStream, inputStream);
         }
@@ -71,6 +73,7 @@ public class Cornos implements ModInitializer {
         CommandRegistry.init();
         log(Level.INFO, "Initializing module registry");
         ModuleRegistry.init();
+        config = (me.constantindev.ccl.module.ext.ClientConfig) ModuleRegistry.getByName("ClientConfig");
         log(Level.INFO, "Loading the configuration file");
         ConfigHelper.loadConfig();
         log(Level.INFO, "Registering all keybinds");

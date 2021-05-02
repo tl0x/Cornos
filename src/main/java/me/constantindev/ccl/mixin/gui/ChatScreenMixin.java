@@ -1,5 +1,6 @@
 package me.constantindev.ccl.mixin.gui;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.ClientConfig;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.gui.screen.ChatScreen;
@@ -21,7 +22,7 @@ public class ChatScreenMixin {
     @Inject(at = {@At("HEAD")}, method = "render")
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (chatField.getText().toCharArray().length > 0) {
-            if (chatField.getText().toCharArray()[0] == ModuleRegistry.getByName("ClientConfig").mconf.getByName("prefix").value.toCharArray()[0]) {
+            if (chatField.getText().toCharArray()[0] == Cornos.config.mconf.getByName("prefix").value.toCharArray()[0]) {
                 chatField.setEditableColor(new Color(ClientConfig.latestRGBVal, true).brighter().getRGB());
             } else {
                 chatField.setEditableColor(14737632);

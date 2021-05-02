@@ -16,16 +16,18 @@ import me.constantindev.ccl.module.RENDER.Tracers;
 import me.constantindev.ccl.module.WORLD.*;
 import me.constantindev.ccl.module.ext.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ModuleRegistry {
     private static final List<Module> ml = new ArrayList<>();
+    private static final Map<String, Module> cache = new HashMap<>();
     public static BudgetGraphics budgetGraphicsInstance = new BudgetGraphics();
     private static TabManager tabManager; // Probably not the best place for this but whatever -FreakingChicken
 
     public static void init() {
+        cache.clear();
+        ml.clear();
         ml.add(new AntiHunger());
         ml.add(new Flight());
         ml.add(new FullBright());
@@ -53,7 +55,6 @@ public class ModuleRegistry {
         ml.add(new QuickMove());
         ml.add(new Tracers());
         ml.add(new ByteSizeViewer());
-
         ml.add(new NoFall());
         ml.add(new AutoSign());
         ml.add(new OffhandCrash());
@@ -107,6 +108,10 @@ public class ModuleRegistry {
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();
+
+        for (Module module : ml) {
+            cache.put(module.name.toLowerCase(),module);
+        }
     }
 
     public static List<Module> getAll() {
@@ -124,13 +129,6 @@ public class ModuleRegistry {
     }
 
     public static Module getByName(String name) {
-        AtomicReference<Module> mr = new AtomicReference<>(null);
-        for (Module module : ModuleRegistry.getAll()) {
-            if (module.name.equalsIgnoreCase(name)) {
-                mr.set(module);
-                break;
-            }
-        }
-        return mr.get();
+        return cache.get(name.toLowerCase());
     }
 }

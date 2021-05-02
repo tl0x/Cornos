@@ -21,13 +21,13 @@ public class TitleScreenMixin extends Screen {
 
     @Inject(method = "init", cancellable = true, at = @At("HEAD"))
     public void init(CallbackInfo cbi) {
-        if (ModuleRegistry.getByName("ClientConfig").mconf.getByName("homescreen").value.equals("client")) {
+        if (Cornos.config.mconf.getByName("homescreen").value.equals("client")) {
             Cornos.minecraft.openScreen(new MainScreen());
             cbi.cancel();
             return;
         }
         this.addButton(new RoundedButtonWidget(width - 121, 1, 120, 20, Text.of("Return to pog menu"), () -> {
-            ModuleRegistry.getByName("ClientConfig").mconf.getByName("homescreen").setValue("client");
+            Cornos.config.mconf.getByName("homescreen").setValue("client");
             Cornos.minecraft.openScreen(this);
         }));
     }

@@ -8,6 +8,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.gui;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
 import me.constantindev.ccl.module.ClientProgression;
@@ -39,7 +40,7 @@ public class TutorialScreen extends Screen {
         customPIcon = new CheckboxWidget(4, 115, 100, 20, Text.of("Custom process icon"), true);
         continueBTN = new RoundedButtonWidget(width - 81, height - 21, 80, 20, Text.of("Next"), () -> {
             if (finished) {
-                ClientConfig m = (ClientConfig) ModuleRegistry.getByName("clientconfig");
+                ClientConfig m = Cornos.config;
                 m.mconf.getByName("homescreen").setValue(homescreen.isChecked() ? "client" : "vanilla");
                 m.mconf.getByName("mpscreen").setValue(mpscreen.isChecked() ? "client" : "vanilla");
                 m.mconf.getByName("customProcessIcon").setValue(customPIcon.isChecked() ? "on" : "off");
@@ -98,7 +99,7 @@ public class TutorialScreen extends Screen {
                 break;
             default:
                 messages.add("Congrats! You are ready to use the client now");
-                messages.add("To revisit this tutorial and change settings, run §a" + ModuleRegistry.getByName("clientconfig").mconf.getByName("prefix").value + "config clientprogression finishedTutorial off§r in game.");
+                messages.add("To revisit this tutorial and change settings, run §a" + Cornos.config.mconf.getByName("prefix").value + "config clientprogression finishedTutorial off§r in game.");
                 continueBTN.setMessage(Text.of("Finish"));
                 finished = true;
                 break;
