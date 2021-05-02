@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class AbstractBlockStateMixin {
     Module xray;
     Module freecam;
+
     @Inject(at = {@At("HEAD")}, method = "getLuminance", cancellable = true)
     public void getLuminace(CallbackInfoReturnable<Integer> cir) {
         if (xray == null) xray = ModuleRegistry.getByName("xray");

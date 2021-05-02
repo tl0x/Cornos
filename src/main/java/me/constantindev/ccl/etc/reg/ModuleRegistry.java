@@ -16,8 +16,10 @@ import me.constantindev.ccl.module.RENDER.Tracers;
 import me.constantindev.ccl.module.WORLD.*;
 import me.constantindev.ccl.module.ext.*;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ModuleRegistry {
     private static final List<Module> ml = new ArrayList<>();
@@ -110,7 +112,7 @@ public class ModuleRegistry {
         tabManager = new TabManager();
 
         for (Module module : ml) {
-            cache.put(module.name.toLowerCase(),module);
+            cache.put(module.name.toLowerCase(), module);
         }
     }
 

@@ -21,7 +21,6 @@ import org.apache.logging.log4j.Level;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.Proxy;
 import java.net.URL;
 import java.nio.channels.Channels;
@@ -112,7 +111,7 @@ public class ClientHelper {
                 HashCode hc1 = Files.asByteSource(parent).hash(Hashing.crc32());
                 if (!hc.equals(hc1)) {
                     try {
-                        Files.move(parent,f);
+                        Files.move(parent, f);
                     } catch (Exception exc) {
                         sendChat("Your cornos installation is out of sync with the latest build!");
                         sendChat("Failed to automatically update. Head over to https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar to get the latest version");

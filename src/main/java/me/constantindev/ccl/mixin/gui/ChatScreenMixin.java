@@ -2,7 +2,6 @@ package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.ClientConfig;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.math.MatrixStack;

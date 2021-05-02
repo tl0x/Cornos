@@ -1,8 +1,6 @@
 package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.helper.ClientHelper;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.gui.MainScreen;
 import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
 import net.minecraft.client.gui.screen.Screen;

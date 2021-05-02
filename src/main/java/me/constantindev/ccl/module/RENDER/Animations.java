@@ -19,9 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public class Animations extends Module {
     private static final MultiOption type = new MultiOption("type", "laidBack", new String[]{"laidBack", "small", "smaller", "custom"});
-    private static final Num customOffX = new Num("customX",0, 5, -5);
-    private static final Num customOffY = new Num("customY",0,5,-5);
-    private static final Num customOffZ = new Num("customZ",0,5,-5);
+    private static final Num customOffX = new Num("customX", 0, 5, -5);
+    private static final Num customOffY = new Num("customY", 0, 5, -5);
+    private static final Num customOffZ = new Num("customZ", 0, 5, -5);
     private static final Num customScale = new Num("customScale", 1, 5, 0);
     private static final Num customRotX = new Num("customMX", 0, 5, -5);
     private static final Num customRotY = new Num("customMY", 0, 5, -5);
@@ -55,9 +55,9 @@ public class Animations extends Module {
                     matrices.translate(0, 3, 0);
                     break;
                 case "custom":
-                    matrices.scale((float) customScale.getValue(),(float)customScale.getValue(),(float)customScale.getValue());
+                    matrices.scale((float) customScale.getValue(), (float) customScale.getValue(), (float) customScale.getValue());
                     matrices.translate(customOffX.getValue(), customOffY.getValue(), customOffZ.getValue());
-                    matrices.multiply(new Quaternion((float)customRotX.getValue(),(float)customRotY.getValue(),(float)customRotZ.getValue(),1f));
+                    matrices.multiply(new Quaternion((float) customRotX.getValue(), (float) customRotY.getValue(), (float) customRotZ.getValue(), 1f));
                     break;
                 default:
                     return;

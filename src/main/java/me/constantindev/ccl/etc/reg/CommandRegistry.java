@@ -35,6 +35,7 @@ public class CommandRegistry {
         cl.add(new SetSeed());
         cl.add(new AutoSign());
         cl.add(new KickBook());
+        cl.add(new XrayConfig());
     }
 
     public static List<Command> getAll() {
