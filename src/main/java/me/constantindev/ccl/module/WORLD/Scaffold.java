@@ -2,8 +2,8 @@ package me.constantindev.ccl.module.WORLD;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
@@ -14,12 +14,12 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 public class Scaffold extends Module {
-    public static Toggleable preventFalling = new Toggleable("preventfall", true);
-    Toggleable lookForBlocks = new Toggleable("lookforblocks", true);
-    Toggleable placeMidAir = new Toggleable("placemidair", true);
+    public static MConfToggleable preventFalling = new MConfToggleable("preventfall", true);
+    MConfToggleable lookForBlocks = new MConfToggleable("lookforblocks", true);
+    MConfToggleable placeMidAir = new MConfToggleable("placemidair", true);
 
     public Scaffold() {
-        super("Scaffold", "POGGERS", MType.WORLD);
+        super("Scaffold", "POGGERS", ModuleType.WORLD);
         this.mconf.add(lookForBlocks);
         this.mconf.add(placeMidAir);
         this.mconf.add(preventFalling);
@@ -27,7 +27,9 @@ public class Scaffold extends Module {
 
     @Override
     public void onExecute() {
+        assert Cornos.minecraft.player != null;
         BlockPos current = Cornos.minecraft.player.getBlockPos().down();
+        assert Cornos.minecraft.world != null;
         BlockState bs = Cornos.minecraft.world.getBlockState(current);
         if (bs.getMaterial().isReplaceable()) {
             boolean shouldPlace = false;
@@ -68,6 +70,7 @@ public class Scaffold extends Module {
                 if (isIndex == -1) return;
                 Cornos.minecraft.player.inventory.selectedSlot = isIndex;
                 BlockHitResult bhr = new BlockHitResult(new Vec3d(.5, .5, .5), Direction.DOWN, current, false);
+                assert Cornos.minecraft.interactionManager != null;
                 Cornos.minecraft.interactionManager.interactBlock(Cornos.minecraft.player, Cornos.minecraft.world, Hand.MAIN_HAND, bhr);
             }
         }

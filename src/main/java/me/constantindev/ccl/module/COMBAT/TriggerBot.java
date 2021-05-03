@@ -10,16 +10,16 @@ package me.constantindev.ccl.module.COMBAT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.util.hit.EntityHitResult;
 
 public class TriggerBot extends Module {
-    Num delay = new Num("delay", 2, 20, 0);
+    MConfNum delay = new MConfNum("delay", 2, 20, 0);
     int delayWaited = 0;
 
     public TriggerBot() {
-        super("TriggerBot", "Automatically attacks shit you are aiming at", MType.COMBAT);
+        super("TriggerBot", "Automatically attacks shit you are aiming at", ModuleType.COMBAT);
         this.mconf.add(delay);
     }
 

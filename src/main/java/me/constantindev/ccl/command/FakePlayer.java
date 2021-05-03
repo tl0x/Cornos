@@ -5,8 +5,8 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
-import me.constantindev.ccl.etc.helper.ClientHelper;
-import me.constantindev.ccl.etc.helper.RandomHelper;
+import me.constantindev.ccl.etc.helper.Rnd;
+import me.constantindev.ccl.etc.helper.STL;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.util.math.MathHelper;
@@ -23,6 +23,7 @@ public class FakePlayer extends Command {
     public FakePlayer() {
         super("FakePlayer", "Creates a totally real functional player", new String[]{"cplayer"});
         EventHelper.BUS.registerEvent(EventType.ONTICK, event -> {
+            assert Cornos.minecraft.player != null;
             if (!trackedPositions.contains(Cornos.minecraft.player.getPos()))
                 trackedPositions.add(Cornos.minecraft.player.getPos());
             if (trackedPositions.size() > 30) {
@@ -47,7 +48,7 @@ public class FakePlayer extends Command {
     @Override
     public void onExecute(String[] args) {
         if (args.length < 2) {
-            ClientHelper.sendChat("ima need an username and uuid");
+            STL.notifyUser("ima need an username and uuid");
             return;
         }
         String u = args[0];
@@ -55,13 +56,13 @@ public class FakePlayer extends Command {
         try {
             uuid = UUID.fromString(args[1]);
         } catch (Exception ignored) {
-            ClientHelper.sendChat("not sure if thats a valid uuid bruh");
+            STL.notifyUser("not sure if thats a valid uuid bruh");
             return;
         }
         assert Cornos.minecraft.world != null;
         OtherClientPlayerEntity o = new OtherClientPlayerEntity(Cornos.minecraft.world, new GameProfile(uuid, u));
         o.copyPositionAndRotation(Cornos.minecraft.player);
-        Cornos.minecraft.world.addPlayer((int) RandomHelper.rndD(65535), o);
+        Cornos.minecraft.world.addPlayer((int) Rnd.rndD(65535), o);
         fakePlayers.add(o);
         super.onExecute(args);
     }

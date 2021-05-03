@@ -9,12 +9,12 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.client.util.math.MatrixStack;
 
 public class Test extends Module {
     public Test() {
-        super("TestModule", "Poggê", MType.HIDDEN);
+        super("TestModule", "Poggê", ModuleType.HIDDEN);
     }
 
     @Override

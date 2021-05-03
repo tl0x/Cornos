@@ -2,7 +2,7 @@ package me.constantindev.ccl.command;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.text.HoverEvent;
@@ -19,15 +19,15 @@ public class Help extends Command {
     @Override
     public void onExecute(String[] args) {
         if (args.length == 0) {
-            ClientHelper.sendChat("Please either run this with modules or commands as 1st argument.");
+            STL.notifyUser("Please either run this with modules or commands as 1st argument.");
         } else {
             switch (args[0]) {
                 case "modules":
-                    ClientHelper.sendChat("All modules:");
-                    ModuleRegistry.getAll().forEach(module -> ClientHelper.sendChat(Formatting.AQUA + "  " + module.name + ": " + Formatting.BLUE + module.description));
+                    STL.notifyUser("All modules:");
+                    ModuleRegistry.getAll().forEach(module -> STL.notifyUser(Formatting.AQUA + "  " + module.name + ": " + Formatting.BLUE + module.description));
                     break;
                 case "commands":
-                    ClientHelper.sendChat("All commands:");
+                    STL.notifyUser("All commands:");
                     CommandRegistry.getAll().forEach(command -> {
                         Style bonk = Text.of("").getStyle().withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.of("Triggers: " + String.join(", ", command.triggers))));
                         LiteralText bruh1 = new net.minecraft.text.LiteralText(Formatting.DARK_AQUA + "[ " + Formatting.AQUA + Cornos.MOD_ID.toUpperCase() + Formatting.DARK_AQUA + " ]   " + Formatting.RESET + Formatting.AQUA + "  " + command.displayName + " (" + command.triggers[0] + ")" + ": " + Formatting.BLUE + command.description);
@@ -37,7 +37,7 @@ public class Help extends Command {
                     });
                     break;
                 default:
-                    ClientHelper.sendChat("Please either run this with modules or commands as 1st argument.");
+                    STL.notifyUser("Please either run this with modules or commands as 1st argument.");
                     break;
             }
         }

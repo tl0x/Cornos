@@ -2,7 +2,7 @@ package me.constantindev.ccl.etc.helper;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.ModuleConfig;
+import me.constantindev.ccl.etc.config.MConf;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import org.apache.logging.log4j.Level;
 
@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ConfigHelper {
+public class ConfMan {
     private static String xor(char key, String content) {
         return content;
     }
 
 
-    public static void saveConfig() {
+    public static void sconf() {
         List<String> confFinal = new ArrayList<>();
         ModuleRegistry.getAll().forEach(module -> {
             List<String> configKeys = new ArrayList<>();
@@ -50,7 +50,7 @@ public class ConfigHelper {
         }
     }
 
-    public static void loadConfig() {
+    public static void lconf() {
         try {
             File f = new File(Cornos.minecraft.runDirectory + "/ccl_moduleconfig.bin");
             if (!f.exists()) return;
@@ -66,7 +66,7 @@ public class ConfigHelper {
             sb.append(xor((char) 42069, fileDataS.split("\n")[0]));
             try {
                 for (String str : xor((char) 694, fileDataS.split("\n")[1]).split(":")) {
-                    ModuleRegistry.getByName(str).setEnabled(true);
+                    ModuleRegistry.search(str).setEnabled(true);
                 }
             } catch (Exception ignored) {
             }
@@ -77,7 +77,7 @@ public class ConfigHelper {
                 if (datapair.length != 2) continue;
                 String mname = datapair[0];
                 String config = datapair[1];
-                Module m = ModuleRegistry.getByName(mname);
+                Module m = ModuleRegistry.search(mname);
                 //System.out.println(m);
                 if (m == null) continue;
                 Cornos.log(Level.INFO, "Loading config for module " + m.name);
@@ -85,7 +85,7 @@ public class ConfigHelper {
                 for (String v : config.split(",")) {
                     String k = v.split(":")[0];
                     String v1 = v.split(":")[1];
-                    m.mconf.getOrDefault(k, new ModuleConfig.ConfigKey(k, v1)).setValue(v1);
+                    m.mconf.getOrDefault(k, new MConf.ConfigKey(k, v1)).setValue(v1);
                     Cornos.log(Level.INFO, "  " + k + " = " + v1);
                 }
             }

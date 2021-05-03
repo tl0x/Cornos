@@ -1,10 +1,10 @@
 package me.constantindev.ccl.etc.config;
 
-public class Num extends ModuleConfig.ConfigKey {
+public class MConfNum extends MConf.ConfigKey {
     public double max;
     public double min;
 
-    public Num(String k, double v, double max, double min) {
+    public MConfNum(String k, double v, double max, double min) {
         super(k, v + "");
         this.max = max;
         this.min = min;

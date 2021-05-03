@@ -1,7 +1,7 @@
 package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.helper.RenderHelper;
+import me.constantindev.ccl.etc.helper.Renderer;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
 import me.constantindev.ccl.module.ClientProgression;
@@ -45,7 +45,7 @@ public class MainScreen extends Screen {
             assert this.client != null;
             this.client.openScreen(new AltManagerScreen());
         }));
-        this.addButton(new RoundedButtonWidget(width - 125, height - 150, 120, 20, Text.of("Click GUI"), () -> ModuleRegistry.getByName("clickgui").onEnable()));
+        this.addButton(new RoundedButtonWidget(width - 125, height - 150, 120, 20, Text.of("Click GUI"), () -> ModuleRegistry.search("clickgui").onEnable()));
         this.addButton(new RoundedButtonWidget(width - 125, height - 125, 120, 20, Text.of("Settings"), () -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));
         this.addButton(new RoundedButtonWidget(width - 125, height - 100, 120, 20, Text.of("Singleplayer"), () -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
         this.addButton(new RoundedButtonWidget(width - 125, height - 75, 120, 20, Text.of("Multiplayer"), () -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));
@@ -67,9 +67,9 @@ public class MainScreen extends Screen {
         Color c = Color.getHSBColor((float) (((double) (System.currentTimeMillis() % 10000)) / 10000), 1, 1);
         Cornos.minecraft.getTextureManager().bindTexture(bg);
         DrawableHelper.drawTexture(matrices, 0, 0, 0, 0, 0, width, height, height, width);
-        RenderHelper.drawImage(matrices, new Identifier("ccl", "hscreenlogo.png"), -11, 1, 960 / 4, 233 / 4, (float) c.getRed() / 255, (float) c.getGreen() / 255, (float) c.getBlue() / 255);
+        Renderer.drawImage(matrices, new Identifier("ccl", "hscreenlogo.png"), -11, 1, 960 / 4, 233 / 4, (float) c.getRed() / 255, (float) c.getGreen() / 255, (float) c.getBlue() / 255);
         int diff = 32;
-        RenderHelper.renderRoundedQuad(new Vec3d(5, height - 5 - diff, 0), new Vec3d(211, height - 5, 0), 4, new Color(0, 0, 0, 20));
+        Renderer.renderRoundedQuad(new Vec3d(5, height - 5 - diff, 0), new Vec3d(211, height - 5, 0), 4, new Color(0, 0, 0, 20));
         int centerX = 107;
         int centerY = (height - 5) / 2 + (height - 5 - diff) / 2 + 5;
         Date d = new Date();

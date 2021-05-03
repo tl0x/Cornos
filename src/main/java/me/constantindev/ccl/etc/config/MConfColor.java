@@ -8,21 +8,21 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.etc.config;
 
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 
 import java.awt.*;
 
-public class RGBAColor extends ModuleConfig.ConfigKey {
+public class MConfColor extends MConf.ConfigKey {
     Color c;
     boolean rainbow;
 
-    public RGBAColor(String k, Color rgb) {
+    public MConfColor(String k, Color rgb) {
         super(k, rgb.getRGB() + "");
         this.c = rgb;
     }
 
     public Color getColor() {
-        Color finalcol = new Color(ClientConfig.latestRGBVal);
+        Color finalcol = new Color(CConf.latestRGBVal);
         if (!rainbow) finalcol = c;
         return finalcol;
     }
@@ -32,14 +32,14 @@ public class RGBAColor extends ModuleConfig.ConfigKey {
     }
 
     public int getRGB() {
-        Color finalcol = new Color(ClientConfig.latestRGBVal);
+        Color finalcol = new Color(CConf.latestRGBVal);
         if (!rainbow) finalcol = c;
         return finalcol.getRGB();
     }
 
     @Override
     public void setValue(String newV) {
-        if (!ClientHelper.isIntValid(newV)) return;
+        if (!STL.tryParseI(newV)) return;
         int bruh = Integer.parseInt(newV);
         if (bruh > 0xFFFFFF || bruh < 0) return;
         super.setValue(new Color(Integer.parseInt(newV)).getRGB() + "");

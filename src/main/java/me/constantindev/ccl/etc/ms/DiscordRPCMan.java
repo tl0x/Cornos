@@ -13,7 +13,7 @@ import club.minnced.discord.rpc.DiscordEventHandlers;
 import club.minnced.discord.rpc.DiscordRPC;
 import club.minnced.discord.rpc.DiscordRichPresence;
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.gui.MainScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.TitleScreen;
@@ -21,18 +21,18 @@ import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 
 import java.util.Objects;
 
-public class DiscordRPCThread {
+public class DiscordRPCMan {
     boolean stopped = false;
     int currentCat = 1;
     int currentCatCounter = 0;
     Thread runner;
 
-    public DiscordRPCThread() {
+    public DiscordRPCMan() {
         DiscordRPC discordRPC = DiscordRPC.INSTANCE;
         DiscordEventHandlers handlers = new DiscordEventHandlers();
         handlers.ready = (user) -> {
             if (MinecraftClient.getInstance().player != null)
-                ClientHelper.sendChat("Connected to user " + user.username + "#" + user.discriminator + " (" + user.userId + ")");
+                STL.notifyUser("Connected to user " + user.username + "#" + user.discriminator + " (" + user.userId + ")");
         };
         discordRPC.Discord_Initialize("819250268117925929", handlers, true, null);
         DiscordRichPresence presence = new DiscordRichPresence();

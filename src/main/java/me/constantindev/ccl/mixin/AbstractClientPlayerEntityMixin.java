@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class AbstractClientPlayerEntityMixin {
     @Inject(method = "getSkinTexture", at = @At("HEAD"), cancellable = true)
     public void bruh(CallbackInfoReturnable<Identifier> cir) {
-        if (ModuleRegistry.getByName("autofemboy").isEnabled()) {
+        if (ModuleRegistry.search("autofemboy").isEnabled()) {
             AbstractClientPlayerEntity pp = (AbstractClientPlayerEntity) ((Object) this);
             int index;
             if (AutoFemboy.repository.containsKey(pp.getUuid())) {

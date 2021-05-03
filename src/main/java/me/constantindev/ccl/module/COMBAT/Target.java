@@ -10,8 +10,8 @@ package me.constantindev.ccl.module.COMBAT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -20,11 +20,11 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 
 public class Target extends Module {
-    Toggleable players = new Toggleable("players", true);
-    Toggleable entities = new Toggleable("entities", false);
+    MConfToggleable players = new MConfToggleable("players", true);
+    MConfToggleable entities = new MConfToggleable("entities", false);
 
     public Target() {
-        super("Target", "Helps you aim at shit", MType.COMBAT);
+        super("Target", "Helps you aim at shit", ModuleType.COMBAT);
         this.mconf.add(players);
         this.mconf.add(entities);
     }

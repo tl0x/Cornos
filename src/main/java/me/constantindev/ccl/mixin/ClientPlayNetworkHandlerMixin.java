@@ -23,8 +23,8 @@ public class ClientPlayNetworkHandlerMixin {
 
     @Inject(method = "onChunkData", at = @At(value = "TAIL"))
     private void onChunkData(ChunkDataS2CPacket packet, CallbackInfo ci) {
-        if (ModuleRegistry.getByName("oresim").isEnabled()) {
-            ((OreSim) ModuleRegistry.getByName("oresim")).doMathOnChunk(packet.getX(), packet.getZ());
+        if (ModuleRegistry.search("oresim").isEnabled()) {
+            ((OreSim) ModuleRegistry.search("oresim")).doMathOnChunk(packet.getX(), packet.getZ());
         }
     }
 }

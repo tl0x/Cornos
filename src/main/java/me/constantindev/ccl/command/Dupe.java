@@ -2,7 +2,7 @@ package me.constantindev.ccl.command;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 import net.minecraft.text.Text;
 
 import java.util.Objects;
@@ -15,7 +15,7 @@ public class Dupe extends Command {
     @Override
     public void onExecute(String[] args) {
         if (args.length == 0) {
-            ClientHelper.sendChat("Available modes: popbob, 11/11");
+            STL.notifyUser("Available modes: popbob, 11/11");
             return;
         }
         if (Cornos.minecraft.player == null) return;

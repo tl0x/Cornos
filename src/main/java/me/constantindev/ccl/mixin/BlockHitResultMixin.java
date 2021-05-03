@@ -17,7 +17,7 @@ public abstract class BlockHitResultMixin {
 
     @Inject(method = "getSide", at = @At("HEAD"), cancellable = true)
     public void constructor(CallbackInfoReturnable<Direction> cir) {
-        if (ModuleRegistry.getByName("buildlimit").isEnabled()) {
+        if (ModuleRegistry.search("buildlimit").isEnabled()) {
             cir.setReturnValue(Direction.DOWN);
         }
     }

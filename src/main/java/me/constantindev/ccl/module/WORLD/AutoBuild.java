@@ -2,10 +2,10 @@ package me.constantindev.ccl.module.WORLD;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.helper.RenderHelper;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.helper.Renderer;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Hand;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoBuild extends Module {
-    MultiOption mode = new MultiOption("mode", "bunker", new String[]{"bunker", "cock"});
+    MConfMultiOption mode = new MConfMultiOption("mode", "bunker", new String[]{"bunker", "cock"});
     Vec3d[] cock = new Vec3d[]{
             new Vec3d(0, 2, 0),
             new Vec3d(0, 1, 0),
@@ -27,12 +27,12 @@ public class AutoBuild extends Module {
             new Vec3d(0, 0, 0),
             new Vec3d(-1, 0, 0)
     };
-    Num delay = new Num("delay", 100, 1000, 1);
+    MConfNum delay = new MConfNum("delay", 100, 1000, 1);
     Vec3d[] bunker;
     double timer = 100.0;
 
     public AutoBuild() {
-        super("AutoBuild", "makes structures fuckin idk", MType.WORLD);
+        super("AutoBuild", "makes structures fuckin idk", ModuleType.WORLD);
         this.mconf.add(mode);
         this.mconf.add(delay);
         ArrayUtils.reverse(cock);
@@ -76,7 +76,7 @@ public class AutoBuild extends Module {
         double colVal = perDone * 255;
         double red = Math.abs(colVal - 255);
         for (Vec3d bruh : points) {
-            RenderHelper.renderBlockOutline(bp.add(bruh), new Vec3d(1, 1, 1), (int) Math.floor(red), 50, (int) Math.floor(colVal), 255);
+            Renderer.renderBlockOutline(bp.add(bruh), new Vec3d(1, 1, 1), (int) Math.floor(red), 50, (int) Math.floor(colVal), 255);
         }
         super.onRender(ms, td);
     }
@@ -102,9 +102,11 @@ public class AutoBuild extends Module {
         }
         for (Vec3d point : points) {
             BlockPos current = new BlockPos(bp.x + point.x, bp.y + point.y, bp.z + point.z);
+            assert Cornos.minecraft.world != null;
             BlockState bs = Cornos.minecraft.world.getBlockState(current);
             if (!bs.getMaterial().isReplaceable()) continue;
             BlockHitResult bhr = new BlockHitResult(Vec3d.ZERO, Direction.DOWN, current, false);
+            assert Cornos.minecraft.interactionManager != null;
             Cornos.minecraft.interactionManager.interactBlock(Cornos.minecraft.player, Cornos.minecraft.world, Hand.MAIN_HAND, bhr);
         }
         super.onExecute();

@@ -2,17 +2,17 @@ package me.constantindev.ccl.module.FUN;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.ms.ModuleType;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Twerk extends Module {
 
-    Toggleable randomize = new Toggleable("randomize", false);
+    MConfToggleable randomize = new MConfToggleable("randomize", false);
 
     public Twerk() {
-        super("Twerk", "shake your ass for the whole server", MType.FUN);
+        super("Twerk", "shake your ass for the whole server", ModuleType.FUN);
         this.mconf.add(randomize);
     }
 

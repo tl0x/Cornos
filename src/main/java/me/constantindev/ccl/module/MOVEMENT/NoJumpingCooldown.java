@@ -10,12 +10,12 @@ package me.constantindev.ccl.module.MOVEMENT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.mixin.LivingEntityAccessor;
 
 public class NoJumpingCooldown extends Module {
     public NoJumpingCooldown() {
-        super("NoJumpingCooldown", "Removes gay shit", MType.MOVEMENT);
+        super("NoJumpingCooldown", "Removes gay shit", ModuleType.MOVEMENT);
     }
 
     @Override

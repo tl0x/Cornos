@@ -3,10 +3,10 @@ package me.constantindev.ccl.module.WORLD;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.Notification;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.helper.ClientHelper;
-import me.constantindev.ccl.etc.helper.RenderHelper;
+import me.constantindev.ccl.etc.helper.Renderer;
+import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.etc.ms.KeyBind;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -19,13 +19,15 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.Objects;
+
 public class AutoWither extends Module {
     KeyBind sneak = new KeyBind(GLFW.GLFW_KEY_LEFT_ALT);
     Vec3d[] sandPlacements = new Vec3d[0];
     Vec3d[] skullPlacements = new Vec3d[0];
 
     public AutoWither() {
-        super("AutoWither", "Automatically makes a wither", MType.WORLD);
+        super("AutoWither", "Automatically makes a wither", ModuleType.WORLD);
     }
 
     @Override
@@ -39,11 +41,11 @@ public class AutoWither extends Module {
         if (sandPlacements.length < 4 || skullPlacements.length < 3) return;
         for (Vec3d v : sandPlacements) {
             Vec3d v1 = new Vec3d(Math.floor(v.x), Math.floor(v.y), Math.floor(v.z));
-            RenderHelper.renderBlockOutline(v1, new Vec3d(1, 1, 1), 255, 255, 20, 255);
+            Renderer.renderBlockOutline(v1, new Vec3d(1, 1, 1), 255, 255, 20, 255);
         }
         for (Vec3d v : skullPlacements) {
             Vec3d v1 = new Vec3d(Math.floor(v.x), Math.floor(v.y), Math.floor(v.z));
-            RenderHelper.renderBlockOutline(v1.add(.25, 0, .25), new Vec3d(.5, .5, .5), 255, 20, 255, 255);
+            Renderer.renderBlockOutline(v1.add(.25, 0, .25), new Vec3d(.5, .5, .5), 255, 20, 255, 255);
         }
         super.onRender(ms, td);
     }
@@ -67,6 +69,7 @@ public class AutoWither extends Module {
             int soulSandIndex = -1;
             int witherSkullIndex = -1;
             for (int i = 0; i < 8; i++) {
+                assert Cornos.minecraft.player != null;
                 ItemStack current = Cornos.minecraft.player.inventory.getStack(i);
                 if (current.isEmpty()) continue;
                 if (current.getItem().equals(Items.SOUL_SAND)) soulSandIndex = i;
@@ -79,19 +82,19 @@ public class AutoWither extends Module {
                     Vec3d[] sandCopy = sandPlacements;
                     Vec3d[] skullCopy = skullPlacements;
                     Cornos.minecraft.player.inventory.addPickBlock(sand);
-                    ClientHelper.sleep(70);
+                    STL.sleep(70);
                     for (Vec3d current : sandCopy) {
                         BlockHitResult bhr = new BlockHitResult(new Vec3d(.5, .5, .5), Direction.DOWN, new BlockPos(current.x, current.y, current.z), false);
                         PlayerInteractBlockC2SPacket p = new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND, bhr);
-                        Cornos.minecraft.getNetworkHandler().sendPacket(p);
+                        Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(p);
                     }
-                    ClientHelper.sleep(70);
+                    STL.sleep(70);
                     Cornos.minecraft.player.inventory.addPickBlock(skull);
-                    ClientHelper.sleep(70);
+                    STL.sleep(70);
                     for (Vec3d current : skullCopy) {
                         BlockHitResult bhr = new BlockHitResult(new Vec3d(.5, .5, .5), Direction.DOWN, new BlockPos(current.x, current.y, current.z), false);
                         PlayerInteractBlockC2SPacket p = new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND, bhr);
-                        Cornos.minecraft.getNetworkHandler().sendPacket(p);
+                        Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(p);
                     }
                 }).start();
             }

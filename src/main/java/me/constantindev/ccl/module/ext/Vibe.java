@@ -1,11 +1,11 @@
 package me.constantindev.ccl.module.ext;
 
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.helper.RandomHelper;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.helper.Rnd;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.client.render.SkyProperties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -14,16 +14,16 @@ import net.minecraft.util.math.Vec3d;
 import java.awt.*;
 
 public class Vibe extends Module {
-    public static Toggleable rgbBlocks = new Toggleable("rgbbocks", false);
-    public static Toggleable fog = new Toggleable("fog", true);
-    public static MultiOption skyType = new MultiOption("skyType", "overworld", new String[]{"overworld", "nether", "end"});
-    public static Num dim = new Num("brightness", 80, 100, 0);
-    public static Num ch = new Num("cloudsHeight", 128, 255, 0);
-    public static Num rgbnoise = new Num("rgbNoise", 5, 100, 0);
+    public static MConfToggleable rgbBlocks = new MConfToggleable("rgbbocks", false);
+    public static MConfToggleable fog = new MConfToggleable("fog", true);
+    public static MConfMultiOption skyType = new MConfMultiOption("skyType", "overworld", new String[]{"overworld", "nether", "end"});
+    public static MConfNum dim = new MConfNum("brightness", 80, 100, 0);
+    public static MConfNum ch = new MConfNum("cloudsHeight", 128, 255, 0);
+    public static MConfNum rgbnoise = new MConfNum("rgbNoise", 5, 100, 0);
     static double prevOff = 0;
 
     public Vibe() {
-        super("Vibe", "Changes world render settings", MType.RENDER);
+        super("Vibe", "Changes world render settings", ModuleType.RENDER);
         this.mconf.add(dim);
         this.mconf.add(ch);
         this.mconf.add(fog);
@@ -60,7 +60,7 @@ public class Vibe extends Module {
 
     public static int calculateBP(BlockPos pos) {
         float bruh = (pos.getX() + pos.getY() + pos.getZ()) * 10f;
-        prevOff += RandomHelper.rndD(4) - 2;
+        prevOff += Rnd.rndD(4) - 2;
         prevOff = MathHelper.clamp(prevOff, -rgbnoise.getValue(), rgbnoise.getValue());
         bruh += prevOff;
         bruh = Math.abs(bruh);

@@ -3,10 +3,10 @@ package me.constantindev.ccl.module.ext;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.Notification;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.helper.RenderHelper;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.helper.Renderer;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
@@ -26,19 +26,19 @@ import java.util.*;
 public class OreSim extends Module {
 
     private final HashMap<Long, HashMap<OreType, List<Vec3d>>> chunkRenderers = new HashMap<>();
-    Toggleable diamond = new Toggleable("Diamond", true);
-    Toggleable redstone = new Toggleable("Redstone", false);
-    Toggleable gold = new Toggleable("Gold", false);
-    Toggleable ancientDebris = new Toggleable("Ancient Debris", false);
-    Toggleable iron = new Toggleable("Iron", false);
-    Toggleable emerald = new Toggleable("Emerald", false);
-    Toggleable lapis = new Toggleable("Lapis", false);
-    Toggleable coal = new Toggleable("Coal", false);
-    Num chunkRange = new Num("Chunk Range", 5, 10, 0);
+    MConfToggleable diamond = new MConfToggleable("Diamond", true);
+    MConfToggleable redstone = new MConfToggleable("Redstone", false);
+    MConfToggleable gold = new MConfToggleable("Gold", false);
+    MConfToggleable ancientDebris = new MConfToggleable("Ancient Debris", false);
+    MConfToggleable iron = new MConfToggleable("Iron", false);
+    MConfToggleable emerald = new MConfToggleable("Emerald", false);
+    MConfToggleable lapis = new MConfToggleable("Lapis", false);
+    MConfToggleable coal = new MConfToggleable("Coal", false);
+    MConfNum chunkRange = new MConfNum("Chunk Range", 5, 10, 0);
     private long worldSeed = 0L;
 
     public OreSim() {
-        super("OreSim", "Worldseed + Math = Ores", MType.WORLD);
+        super("OreSim", "Worldseed + Math = Ores", ModuleType.WORLD);
         mconf.add(chunkRange);
         mconf.add(diamond);
         mconf.add(redstone);
@@ -91,7 +91,7 @@ public class OreSim extends Module {
 
     private void renderOre(long chunkKey, OreType type, int r, int g, int b) {
         for (Vec3d pos : chunkRenderers.get(chunkKey).get(type)) {
-            RenderHelper.renderBlockOutline(pos, new Vec3d(1, 1, 1), r, g, b, 255);
+            Renderer.renderBlockOutline(pos, new Vec3d(1, 1, 1), r, g, b, 255);
         }
     }
 

@@ -9,10 +9,10 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.ms.DiscordRPCThread;
+import me.constantindev.ccl.etc.ms.DiscordRPCMan;
 
 public class DiscordRPC extends Module {
-    DiscordRPCThread instance = null;
+    DiscordRPCMan instance = null;
 
     public DiscordRPC() {
         super("DiscordRPC", "Displays a nice rich presence if you have the discord client on");
@@ -20,7 +20,7 @@ public class DiscordRPC extends Module {
 
     @Override
     public void onEnable() {
-        instance = new DiscordRPCThread();
+        instance = new DiscordRPCMan();
         super.onEnable();
     }
 

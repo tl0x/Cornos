@@ -47,7 +47,7 @@ public class CommandRegistry {
         init();
     }
 
-    public static Command getByName(String name) {
+    public static Command search(String name) {
         AtomicReference<Command> mr = new AtomicReference<>(null);
         CommandRegistry.getAll().forEach(module -> {
             boolean isGood = false;

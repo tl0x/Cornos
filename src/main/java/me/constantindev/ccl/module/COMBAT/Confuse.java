@@ -11,11 +11,11 @@ package me.constantindev.ccl.module.COMBAT;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.Raycast;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.helper.RenderHelper;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.helper.Renderer;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.util.math.MatrixStack;
@@ -31,17 +31,17 @@ import java.awt.*;
 import java.util.Random;
 
 public class Confuse extends Module {
-    MultiOption mode = new MultiOption("mode", "randomtp", new String[]{"randomtp", "switch", "circle"});
-    Num delay = new Num("delay", 3, 20, 0);
-    Num circleSpeed = new Num("circleSpeed", 10, 180, 1);
-    Toggleable moveThroughBlocks = new Toggleable("moveThroughBlocks", false);
+    MConfMultiOption mode = new MConfMultiOption("mode", "randomtp", new String[]{"randomtp", "switch", "circle"});
+    MConfNum delay = new MConfNum("delay", 3, 20, 0);
+    MConfNum circleSpeed = new MConfNum("circleSpeed", 10, 180, 1);
+    MConfToggleable moveThroughBlocks = new MConfToggleable("moveThroughBlocks", false);
     int delayWaited = 0;
     double circleProgress = 0;
     double addition = 0.0;
     Entity target;
 
     public Confuse() {
-        super("Confuse", "Makes your enemies shit themselves", MType.COMBAT);
+        super("Confuse", "Makes your enemies shit themselves", ModuleType.COMBAT);
         this.mconf.add(mode);
         this.mconf.add(delay);
         this.mconf.add(moveThroughBlocks);
@@ -72,7 +72,7 @@ public class Confuse extends Module {
                 double sin = Math.sin(rad) * 3;
                 double cos = Math.cos(rad) * 3;
                 Vec3d c = new Vec3d(tp.x + sin, tp.y + target.getHeight() / 2, tp.z + cos);
-                if (last != null) RenderHelper.renderLine(last, c, c1, 3);
+                if (last != null) Renderer.renderLine(last, c, c1, 3);
                 last = c;
             }
         }

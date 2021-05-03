@@ -1,7 +1,7 @@
 package me.constantindev.ccl.etc;
 
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.etc.ms.Tab;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import org.lwjgl.glfw.GLFW;
@@ -11,10 +11,10 @@ import java.util.HashMap;
 
 public class TabManager {
 
-    private final HashMap<MType, Tab> tabs;
-    private final ArrayList<MType> tabType;
-    private final HashMap<MType, ArrayList<Module>> mods;
-    private final HashMap<MType, Integer> currentMods;
+    private final HashMap<ModuleType, Tab> tabs;
+    private final ArrayList<ModuleType> tabType;
+    private final HashMap<ModuleType, ArrayList<Module>> mods;
+    private final HashMap<ModuleType, Integer> currentMods;
     private int currentTab;
 
     public TabManager() {
@@ -23,29 +23,29 @@ public class TabManager {
         currentTab = 0;
         mods = new HashMap<>();
         currentMods = new HashMap<>();
-        for (MType mType : MType.values()) {
-            if (mType == MType.HIDDEN) continue;
+        for (ModuleType mType : ModuleType.values()) {
+            if (mType == ModuleType.HIDDEN) continue;
             mods.put(mType, new ArrayList<>());
             currentMods.put(mType, 0);
             tabs.put(mType, new Tab());
             tabType.add(mType);
         }
         for (Module m : ModuleRegistry.getAll()) {
-            if (m.type == MType.HIDDEN) continue;
+            if (m.type == ModuleType.HIDDEN) continue;
             ArrayList<Module> modsList = mods.get(m.type);
             modsList.add(m);
         }
     }
 
-    public HashMap<MType, Tab> getTabs() {
+    public HashMap<ModuleType, Tab> getTabs() {
         return tabs;
     }
 
-    public HashMap<MType, ArrayList<Module>> getMods() {
+    public HashMap<ModuleType, ArrayList<Module>> getMods() {
         return mods;
     }
 
-    public HashMap<MType, Integer> getCurrentMods() {
+    public HashMap<ModuleType, Integer> getCurrentMods() {
         return currentMods;
     }
 
@@ -53,7 +53,7 @@ public class TabManager {
         return currentTab;
     }
 
-    public ArrayList<MType> getTabType() {
+    public ArrayList<ModuleType> getTabType() {
         return tabType;
     }
 

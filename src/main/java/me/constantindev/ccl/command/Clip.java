@@ -10,7 +10,7 @@ package me.constantindev.ccl.command;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 import net.minecraft.util.math.Vec3d;
 
 public class Clip extends Command {
@@ -23,7 +23,7 @@ public class Clip extends Command {
     @Override
     public void onExecute(String[] args) {
         if (args.length == 0) {
-            ClientHelper.sendChat("i need some arguments like \"v\" or \"h\" ygm");
+            STL.notifyUser("i need some arguments like \"v\" or \"h\" ygm");
             return;
         }
         assert Cornos.minecraft.player != null;
@@ -32,12 +32,12 @@ public class Clip extends Command {
         switch (args[0].toLowerCase()) {
             case "v":
                 if (args.length == 1) {
-                    ClientHelper.sendChat("Please gimme a number as 2nd arg");
+                    STL.notifyUser("Please gimme a number as 2nd arg");
                     failedAttempts = 1;
                     break;
                 }
-                if (!ClientHelper.isIntValid(args[1])) {
-                    ClientHelper.sendChat(failedAttempts == 1 ? "homie i said a number" : (failedAttempts == 2 ? "DUDE" : "can i get a valid number as 2nd arg"));
+                if (!STL.tryParseI(args[1])) {
+                    STL.notifyUser(failedAttempts == 1 ? "homie i said a number" : (failedAttempts == 2 ? "DUDE" : "can i get a valid number as 2nd arg"));
                     failedAttempts = 2;
                     break;
                 }
@@ -46,12 +46,12 @@ public class Clip extends Command {
                 break;
             case "h":
                 if (args.length == 1) {
-                    ClientHelper.sendChat("Please gimme a number as 2nd arg");
+                    STL.notifyUser("Please gimme a number as 2nd arg");
                     failedAttempts = 1;
                     break;
                 }
-                if (!ClientHelper.isIntValid(args[1])) {
-                    ClientHelper.sendChat(failedAttempts == 1 ? "homie i said a number" : (failedAttempts == 2 ? "DUDE" : "can i get a valid number as 2nd arg"));
+                if (!STL.tryParseI(args[1])) {
+                    STL.notifyUser(failedAttempts == 1 ? "homie i said a number" : (failedAttempts == 2 ? "DUDE" : "can i get a valid number as 2nd arg"));
                     failedAttempts = 2;
                     break;
                 }
@@ -61,7 +61,7 @@ public class Clip extends Command {
                 np = new Vec3d(p.x + newv.x, p.y, p.z + newv.z);
                 break;
             default:
-                ClientHelper.sendChat("run the command w/o arguments and follow the instructions please");
+                STL.notifyUser("run the command w/o arguments and follow the instructions please");
                 return;
         }
         Cornos.minecraft.player.updatePosition(np.x, np.y, np.z);

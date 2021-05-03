@@ -2,12 +2,12 @@ package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.network.packet.c2s.play.ClientStatusC2SPacket;
 
 public class AutoRespawn extends Module {
     public AutoRespawn() {
-        super("AutoRespawn", "Automatically respawns you upon death", MType.MISC);
+        super("AutoRespawn", "Automatically respawns you upon death", ModuleType.MISC);
     }
 
     @Override

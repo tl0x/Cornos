@@ -2,12 +2,12 @@ package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.ClientConfig;
+import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.Event;
-import me.constantindev.ccl.etc.helper.ClientHelper;
-import me.constantindev.ccl.etc.helper.KeyBindManager;
+import me.constantindev.ccl.etc.helper.KeybindMan;
+import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,23 +21,23 @@ public class ClientPlayerEntityMixin {
 
     @Inject(at = @At("INVOKE"), method = "pushOutOfBlocks", cancellable = true)
     private void pushOutOfBlocks(double x, double d, CallbackInfo ci) {
-        if (ModuleRegistry.getByName("Freecam").isEnabled()) {
+        if (ModuleRegistry.search("Freecam").isEnabled()) {
             ci.cancel();
         }
     }
 
     @Inject(at = {@At("HEAD")}, method = "isSubmergedInWater", cancellable = true)
     private void isSubmergedInWater(CallbackInfoReturnable<Boolean> cir) {
-        if (ModuleRegistry.getByName("Freecam").isEnabled()) {
+        if (ModuleRegistry.search("Freecam").isEnabled()) {
             cir.setReturnValue(false);
         }
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void tick(CallbackInfo ci) {
-        if (!ClientConfig.checkedForUpdates) {
-            ClientHelper.checkForUpdates();
-            ClientConfig.checkedForUpdates = true;
+        if (!CConf.checkedForUpdates) {
+            STL.update();
+            CConf.checkedForUpdates = true;
         }
         for (Module m : ModuleRegistry.getAll()) {
             m.updateVitals();
@@ -47,7 +47,7 @@ public class ClientPlayerEntityMixin {
             } catch (Exception ignored) {
             }
         }
-        KeyBindManager.tick();
+        KeybindMan.tick();
         Cornos.notifMan.tick();
         EventHelper.BUS.invokeEventCall(EventType.ONTICK, new Event());
     }

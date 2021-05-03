@@ -2,11 +2,11 @@ package me.constantindev.ccl.module.MOVEMENT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.helper.RandomHelper;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.helper.Rnd;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.network.packet.c2s.play.UpdatePlayerAbilitiesC2SPacket;
@@ -19,16 +19,16 @@ public class Flight extends Module {
     int counter = 0;
     int counter1 = 0;
     float flyingSince = 0;
-    MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "3d", "static", "jetpack", "airhop", "zika"});
-    Toggleable toggleFast = new Toggleable("toggleFast", true);
-    Num speed = new Num("speed", 1.0, 10, 0);
-    Num airhopUp = new Num("airhopUp", 1.0, 3, 0.1);
-    Toggleable sendAbilitiesUpdate = new Toggleable("abilities", true);
+    MConfMultiOption mode = new MConfMultiOption("mode", "vanilla", new String[]{"vanilla", "3d", "static", "jetpack", "airhop", "zika"});
+    MConfToggleable toggleFast = new MConfToggleable("toggleFast", true);
+    MConfNum speed = new MConfNum("speed", 1.0, 10, 0);
+    MConfNum airhopUp = new MConfNum("airhopUp", 1.0, 3, 0.1);
+    MConfToggleable sendAbilitiesUpdate = new MConfToggleable("abilities", true);
     PlayerAbilities abilitiesBefore = null;
     double startheight = 0;
 
     public Flight() {
-        super("Flight", "Allows you to fly", MType.MOVEMENT);
+        super("Flight", "Allows you to fly", ModuleType.MOVEMENT);
         this.mconf.add(mode);
         this.mconf.add(toggleFast);
         this.mconf.add(sendAbilitiesUpdate);
@@ -42,7 +42,7 @@ public class Flight extends Module {
             assert Cornos.minecraft.player != null;
             abilitiesBefore = Cornos.minecraft.player.abilities;
         }
-        double speed = ((Num) this.mconf.getByName("speed")).getValue();
+        double speed = ((MConfNum) this.mconf.getByName("speed")).getValue();
         counter1++;
         if (counter1 > 10) {
             counter1 = 0;
@@ -52,7 +52,7 @@ public class Flight extends Module {
             UpdatePlayerAbilitiesC2SPacket p = new UpdatePlayerAbilitiesC2SPacket(pa);
             Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(p);
         }
-        if (((Toggleable) this.mconf.getByName("toggleFast")).isEnabled()) {
+        if (((MConfToggleable) this.mconf.getByName("toggleFast")).isEnabled()) {
             if (counter > 10) counter = 0;
             counter++;
         } else counter = 0;
@@ -103,11 +103,12 @@ public class Flight extends Module {
                     Cornos.minecraft.player.addVelocity(0, speed / 30, 0);
                     Vec3d vp = Cornos.minecraft.player.getPos();
                     for (int i = 0; i < 10; i++) {
-                        Cornos.minecraft.world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, vp.x, vp.y, vp.z, RandomHelper.rndD(.25) - .125, RandomHelper.rndD(.25) - .125, RandomHelper.rndD(.25) - .125);
+                        Cornos.minecraft.world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, vp.x, vp.y, vp.z, Rnd.rndD(.25) - .125, Rnd.rndD(.25) - .125, Rnd.rndD(.25) - .125);
                     }
                 }
                 break;
             case "airhop":
+                assert Cornos.minecraft.player != null;
                 Cornos.minecraft.player.addVelocity(0, -0.1, 0);
                 if (Cornos.minecraft.player.getPos().y < startheight) {
                     Vec3d vel = Cornos.minecraft.player.getVelocity();
@@ -123,6 +124,7 @@ public class Flight extends Module {
                     flyingSince = 0;
                     swap = true;
                 }
+                assert Cornos.minecraft.player != null;
                 Cornos.minecraft.player.setSwimming(true);
                 Vec3d ppos = Cornos.minecraft.player.getPos();
                 Cornos.minecraft.player.setVelocity(0, 0, 0);

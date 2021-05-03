@@ -3,22 +3,24 @@ package me.constantindev.ccl.module.MOVEMENT;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.Notification;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
 import me.constantindev.ccl.etc.ms.KeyBind;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.packet.c2s.play.VehicleMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.Objects;
+
 public class BoatFly extends Module {
     Entity lastRide = null;
     KeyBind keyDown = new KeyBind(GLFW.GLFW_KEY_LEFT_ALT);
-    MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "static", "velocity"});
+    MConfMultiOption mode = new MConfMultiOption("mode", "vanilla", new String[]{"vanilla", "static", "velocity"});
 
     public BoatFly() {
-        super("EntityFly", "weee", MType.MOVEMENT);
+        super("EntityFly", "weee", ModuleType.MOVEMENT);
         mconf.add(mode);
     }
 
@@ -30,6 +32,7 @@ public class BoatFly extends Module {
 
     @Override
     public void onExecute() {
+        assert Cornos.minecraft.player != null;
         Entity vehicle = Cornos.minecraft.player.getVehicle();
         if (vehicle == null) {
             Notification.create("EntityFly", new String[]{"Disabled due to lack", "of riding entity"}, 5000);
@@ -81,7 +84,7 @@ public class BoatFly extends Module {
         }
 
         VehicleMoveC2SPacket p = new VehicleMoveC2SPacket(vehicle);
-        Cornos.minecraft.getNetworkHandler().sendPacket(p);
+        Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(p);
         super.onExecute();
     }
 }

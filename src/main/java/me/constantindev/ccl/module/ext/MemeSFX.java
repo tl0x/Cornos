@@ -13,15 +13,15 @@ import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 
 public class MemeSFX extends Module {
     public MemeSFX() {
-        super("MemeSFX", "Taco bell", MType.FUN);
+        super("MemeSFX", "Taco bell", ModuleType.FUN);
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
-            if (!ModuleRegistry.getByName("memesfx").isEnabled()) return;
+            if (!ModuleRegistry.search("memesfx").isEnabled()) return;
             PacketEvent pe = (PacketEvent) event;
             if (pe.packet instanceof PlayerInteractEntityC2SPacket) {
                 assert Cornos.minecraft.player != null;

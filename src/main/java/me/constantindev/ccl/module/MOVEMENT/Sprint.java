@@ -2,11 +2,11 @@ package me.constantindev.ccl.module.MOVEMENT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 
 public class Sprint extends Module {
     public Sprint() {
-        super("Sprint", "Like toggle sprint but as a hack :)", MType.MOVEMENT);
+        super("Sprint", "Like toggle sprint but as a hack :)", ModuleType.MOVEMENT);
     }
 
     @Override

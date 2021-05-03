@@ -8,7 +8,7 @@ import me.constantindev.ccl.gui.TabGUI;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 
-public class ClientConfig {
+public class CConf {
     public static Block[] xrayBlocks;
     public static NumberSetting animSpeed;
     public static ClickGUI cg;

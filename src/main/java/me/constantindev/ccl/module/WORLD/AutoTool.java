@@ -2,7 +2,7 @@ package me.constantindev.ccl.module.WORLD;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class AutoTool extends Module {
     public AutoTool() {
-        super("AutoTool", "Automatically picks the fastest tool out of your hotbar", MType.WORLD);
+        super("AutoTool", "Automatically picks the fastest tool out of your hotbar", ModuleType.WORLD);
     }
 
     @Override

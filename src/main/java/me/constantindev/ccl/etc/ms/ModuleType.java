@@ -1,6 +1,6 @@
 package me.constantindev.ccl.etc.ms;
 
-public enum MType {
+public enum ModuleType {
     MISC("Miscellaneous"),
     EXPLOIT("Exploit"),
     WORLD("World"),
@@ -13,7 +13,7 @@ public enum MType {
 
     String n;
 
-    MType(String name) {
+    ModuleType(String name) {
         this.n = name;
     }
 

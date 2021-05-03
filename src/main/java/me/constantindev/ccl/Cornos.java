@@ -3,10 +3,10 @@ package me.constantindev.ccl;
 import com.thealtening.auth.TheAlteningAuthentication;
 import me.constantindev.ccl.etc.NotificationManager;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.ClientConfig;
+import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.event.EventHelper;
-import me.constantindev.ccl.etc.helper.ConfigHelper;
-import me.constantindev.ccl.etc.helper.KeyBindManager;
+import me.constantindev.ccl.etc.helper.ConfMan;
+import me.constantindev.ccl.etc.helper.KeybindMan;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.fabricmc.api.ModInitializer;
@@ -59,25 +59,25 @@ public class Cornos implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        Runtime.getRuntime().addShutdownHook(new Thread(ConfigHelper::saveConfig));
+        Runtime.getRuntime().addShutdownHook(new Thread(ConfMan::sconf));
         log(Level.INFO, "Initializing main client");
         Registry.register(Registry.SOUND_EVENT, BONG_SOUND.getId(), BONG_SOUND);
         Registry.register(Registry.SOUND_EVENT, HITMARKER_SOUND.getId(), HITMARKER_SOUND);
         notifMan = new NotificationManager();
 
         log(Level.INFO, "Initializing configuration");
-        ClientConfig.init();
+        CConf.init();
         log(Level.INFO, "Registering event bus");
         EventHelper.BUS.init();
         log(Level.INFO, "Initializing command registry");
         CommandRegistry.init();
         log(Level.INFO, "Initializing module registry");
         ModuleRegistry.init();
-        config = (me.constantindev.ccl.module.ext.ClientConfig) ModuleRegistry.getByName("ClientConfig");
+        config = (me.constantindev.ccl.module.ext.ClientConfig) ModuleRegistry.search("ClientConfig");
         log(Level.INFO, "Loading the configuration file");
-        ConfigHelper.loadConfig();
+        ConfMan.lconf();
         log(Level.INFO, "Registering all keybinds");
-        KeyBindManager.init();
+        KeybindMan.init();
         log(Level.INFO, "All features registered. Ready to load game");
 
         fastUpdater = new Thread(() -> {
@@ -93,7 +93,7 @@ public class Cornos implements ModInitializer {
                 }
             }
         });
-        ClientConfig.authentication = TheAlteningAuthentication.mojang(yggdrasilEnvironment -> {
+        CConf.authentication = TheAlteningAuthentication.mojang(yggdrasilEnvironment -> {
         });
         fastUpdater.start();
     }

@@ -2,8 +2,8 @@ package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.helper.ClientHelper;
-import me.constantindev.ccl.etc.helper.KeyBindManager;
+import me.constantindev.ccl.etc.helper.KeybindMan;
+import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -24,7 +24,7 @@ public class ScreenMixin {
 
     @Inject(method = "sendMessage(Ljava/lang/String;)V", at = @At("HEAD"), cancellable = true)
     public void onChatMessageSent(String msg, CallbackInfo cbi) {
-        KeyBindManager.freezeTabGui = true;
+        KeybindMan.freezeTabGui = true;
         String prefix = Cornos.config.mconf.getByName("prefix").value;
         if (msg.toLowerCase().startsWith(prefix.toLowerCase())) {
             cbi.cancel();
@@ -34,10 +34,10 @@ public class ScreenMixin {
             String[] args = trimmed.split(" +");
             String command = args[0].toLowerCase();
             String[] argsTrimmed = ArrayUtils.subarray(args, 1, args.length);
-            ClientHelper.sendChat(Formatting.DARK_BLUE + "> " + Formatting.BLUE + command);
-            Command c = CommandRegistry.getByName(command);
+            STL.notifyUser(Formatting.DARK_BLUE + "> " + Formatting.BLUE + command);
+            Command c = CommandRegistry.search(command);
             if (c == null) {
-                ClientHelper.sendChat(Formatting.RED + "That command was not found");
+                STL.notifyUser(Formatting.RED + "That command was not found");
                 return;
             }
             c.onExecute(argsTrimmed);

@@ -2,15 +2,15 @@ package me.constantindev.ccl.module.MOVEMENT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.ms.ModuleType;
 
 public class Step extends Module {
 
-    Num height = new Num("height", 1.0, 10, 0);
+    MConfNum height = new MConfNum("height", 1.0, 10, 0);
 
     public Step() {
-        super("Step", "Step up full blocks", MType.MOVEMENT);
+        super("Step", "Step up full blocks", ModuleType.MOVEMENT);
         this.mconf.add(height);
     }
 
@@ -31,7 +31,7 @@ public class Step extends Module {
     @Override
     public void onExecute() {
         assert Cornos.minecraft.player != null;
-        Cornos.minecraft.player.stepHeight = (float) ((Num) this.mconf.getByName("height")).getValue();
+        Cornos.minecraft.player.stepHeight = (float) ((MConfNum) this.mconf.getByName("height")).getValue();
         super.onExecute();
     }
 }

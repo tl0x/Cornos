@@ -12,7 +12,7 @@ import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -96,11 +96,11 @@ public class Hologram extends Command {
         OptionSet oset = optionParser.parse(args);
         assert Cornos.minecraft.player != null;
         if (!Cornos.minecraft.player.isCreative() && !oset.has("force")) {
-            ClientHelper.sendChat("You need to be in creative (or provide --force)");
+            STL.notifyUser("You need to be in creative (or provide --force)");
             return;
         }
         if (args.length < 1) {
-            ClientHelper.sendChat("Syntax ([required], <optional>): .hlg [text] <--spawnEgg> <--force> <--baby> <--sand>");
+            STL.notifyUser("Syntax ([required], <optional>): .hlg [text] <--spawnEgg> <--force> <--baby> <--sand>");
             return;
         }
         List<String> bruh = new ArrayList<>();

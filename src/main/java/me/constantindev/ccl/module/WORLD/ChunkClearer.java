@@ -3,13 +3,13 @@ package me.constantindev.ccl.module.WORLD;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.Notification;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.ClientConfig;
-import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.helper.ClientHelper;
-import me.constantindev.ccl.etc.helper.RenderHelper;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.CConf;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.helper.Renderer;
+import me.constantindev.ccl.etc.helper.STL;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -28,15 +28,15 @@ import java.util.Objects;
 public class ChunkClearer extends Module {
     BlockPos start = null;
     BlockPos end = null;
-    MultiOption mode = new MultiOption("mode", "client", new String[]{"client", "packet", "legit"});
-    Toggleable ignoreXray = new Toggleable("ignoreXray", true);
-    Toggleable clientTeleport = new Toggleable("clientTP", false);
-    Num delay = new Num("delay", 0, 20, 0);
+    MConfMultiOption mode = new MConfMultiOption("mode", "client", new String[]{"client", "packet", "legit"});
+    MConfToggleable ignoreXray = new MConfToggleable("ignoreXray", true);
+    MConfToggleable clientTeleport = new MConfToggleable("clientTP", false);
+    MConfNum delay = new MConfNum("delay", 0, 20, 0);
     int delayWaited = 0;
-    MultiOption fast = new MultiOption("overdrive", "none", new String[]{"none", "light", "strong", "max"});
+    MConfMultiOption fast = new MConfMultiOption("overdrive", "none", new String[]{"none", "light", "strong", "max"});
 
     public ChunkClearer() {
-        super("ChunkClearer", "uh oh", MType.WORLD);
+        super("ChunkClearer", "uh oh", ModuleType.WORLD);
         this.mconf.add(mode);
         this.mconf.add(ignoreXray);
         this.mconf.add(clientTeleport);
@@ -47,7 +47,7 @@ public class ChunkClearer extends Module {
     @Override
     public void onEnable() {
         assert Cornos.minecraft.player != null;
-        if (fast.value.equals("max")) ClientHelper.sendChat("oh no");
+        if (fast.value.equals("max")) STL.notifyUser("oh no");
         int cx = Cornos.minecraft.player.chunkX;
         int cz = Cornos.minecraft.player.chunkZ;
         int startX = 16 * cx;
@@ -62,7 +62,7 @@ public class ChunkClearer extends Module {
     @Override
     public void onRender(MatrixStack ms, float td) {
         if (start == null || end == null) return;
-        RenderHelper.renderBlockOutline(new Vec3d(start.getX() - 15, 0, start.getZ() - 15), new Vec3d(16, 255, 16), 255, 0, 255, 255);
+        Renderer.renderBlockOutline(new Vec3d(start.getX() - 15, 0, start.getZ() - 15), new Vec3d(16, 255, 16), 255, 0, 255, 255);
         super.onRender(ms, td);
     }
 
@@ -86,7 +86,7 @@ public class ChunkClearer extends Module {
                     boolean shouldSkip = bs.isOf(Blocks.AIR) || bs.isOf(Blocks.CAVE_AIR) || bs.isOf(Blocks.WATER) || bs.isOf(Blocks.LAVA);
                     boolean shift = false;
                     if (ignoreXray.isEnabled() && !shouldSkip) {
-                        for (Block xrayBlock : ClientConfig.xrayBlocks) {
+                        for (Block xrayBlock : CConf.xrayBlocks) {
                             if (bs.getBlock().is(xrayBlock)) {
                                 shouldSkip = true;
                                 break;
@@ -131,8 +131,10 @@ public class ChunkClearer extends Module {
                     if (!mode.value.equals("legit")) {
                         PlayerMoveC2SPacket.PositionOnly p = new PlayerMoveC2SPacket.PositionOnly(tpGoal.getX() + .5, tpGoal.getY(), tpGoal.getZ() + .5, true);
                         Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(p);
-                        if (clientTeleport.isEnabled())
+                        if (clientTeleport.isEnabled()) {
+                            assert Cornos.minecraft.player != null;
                             Cornos.minecraft.player.updatePosition(tpGoal.getX() + .5, tpGoal.getY(), tpGoal.getZ() + .5);
+                        }
                         if (showParticles) {
                             assert Cornos.minecraft.interactionManager != null;
                             Cornos.minecraft.interactionManager.attackBlock(bp1, Direction.DOWN);

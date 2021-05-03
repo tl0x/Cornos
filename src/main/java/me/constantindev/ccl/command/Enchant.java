@@ -10,7 +10,7 @@ package me.constantindev.ccl.command;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
@@ -30,26 +30,26 @@ public class Enchant extends Command {
     @Override
     public void onExecute(String[] args) {
         if (args.length < 2) {
-            ClientHelper.sendChat("Syntax: enchant <level> <full enchantment name>");
-            ClientHelper.sendChat("All enchantments you can apply:");
+            STL.notifyUser("Syntax: enchant <level> <full enchantment name>");
+            STL.notifyUser("All enchantments you can apply:");
             for (Field field : Enchantments.class.getFields()) {
                 try {
                     field.setAccessible(true);
                     Enchantment bruh = (Enchantment) field.get(Enchantments.class);
-                    ClientHelper.sendChat("  - " + new TranslatableText(bruh.getTranslationKey()).getString() + "");
+                    STL.notifyUser("  - " + new TranslatableText(bruh.getTranslationKey()).getString() + "");
                 } catch (Exception ignored) {
 
                 }
             }
             return;
         }
-        if (!ClientHelper.isIntValid(args[0])) {
-            ClientHelper.sendChat("Homie idk if the enchantment level is valid");
+        if (!STL.tryParseI(args[0])) {
+            STL.notifyUser("Homie idk if the enchantment level is valid");
             return;
         }
         assert Cornos.minecraft.player != null;
         if (Cornos.minecraft.player.inventory.getStack(Cornos.minecraft.player.inventory.selectedSlot).isEmpty()) {
-            ClientHelper.sendChat("idk if you are holding an item ngl");
+            STL.notifyUser("idk if you are holding an item ngl");
             return;
         }
         int level = Integer.parseInt(args[0]);
@@ -74,11 +74,11 @@ public class Enchant extends Command {
                     break;
                 }
             } catch (Exception ignored) {
-                ClientHelper.sendChat("Failed to look up enchantments for some reason");
+                STL.notifyUser("Failed to look up enchantments for some reason");
                 break;
             }
         }
-        if (!found) ClientHelper.sendChat("homie idk if thats an enchantment i know of");
+        if (!found) STL.notifyUser("homie idk if thats an enchantment i know of");
         super.onExecute(args);
     }
 }

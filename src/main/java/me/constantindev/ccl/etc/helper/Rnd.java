@@ -10,7 +10,7 @@ package me.constantindev.ccl.etc.helper;
 
 import java.util.Random;
 
-public class RandomHelper {
+public class Rnd {
     public static String rndStr(int size) {
         StringBuilder end = new StringBuilder();
         for (int i = 0; i < size; i++) {

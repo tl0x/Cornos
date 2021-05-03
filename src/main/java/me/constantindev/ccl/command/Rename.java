@@ -10,7 +10,7 @@ package me.constantindev.ccl.command;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.text.Text;
@@ -25,11 +25,11 @@ public class Rename extends Command {
         assert Cornos.minecraft.player != null;
         ItemStack is = Cornos.minecraft.player.inventory.getStack(Cornos.minecraft.player.inventory.selectedSlot);
         if (is.isEmpty()) {
-            ClientHelper.sendChat("man u gotta hold sum");
+            STL.notifyUser("man u gotta hold sum");
             return;
         }
         if (args.length == 0) {
-            ClientHelper.sendChat("Homie ima need the new name");
+            STL.notifyUser("Homie ima need the new name");
             return;
         }
         CompoundTag compoundTag = is.getOrCreateSubTag("display");

@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class RenderHelper {
+public class Renderer {
     public static void renderBlockOutline(Vec3d bpos, Vec3d dimensions, int r, int g, int b, int a) {
         Camera c = BlockEntityRenderDispatcher.INSTANCE.camera;
         Vec3d s = bpos.subtract(c.getPos());

@@ -2,11 +2,11 @@ package me.constantindev.ccl.etc.base;
 
 import me.constantindev.ccl.etc.Notification;
 import me.constantindev.ccl.etc.config.Keybind;
-import me.constantindev.ccl.etc.config.ModuleConfig;
-import me.constantindev.ccl.etc.config.Toggleable;
+import me.constantindev.ccl.etc.config.MConf;
+import me.constantindev.ccl.etc.config.MConfToggleable;
 import me.constantindev.ccl.etc.config.Toggleable$1;
-import me.constantindev.ccl.etc.helper.RenderHelper;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.helper.Renderer;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.etc.render.RenderableBlock;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.client.util.math.MatrixStack;
@@ -17,8 +17,8 @@ import java.util.List;
 public class Module {
     public final String name;
     public final String description;
-    public final ModuleConfig mconf;
-    public final MType type;
+    public final MConf mconf;
+    public final ModuleType type;
     private final Toggleable$1 isOn = new Toggleable$1(false);
     public boolean showNotifications = true;
     public List<RenderableBlock> rbq = new ArrayList<>();
@@ -27,16 +27,16 @@ public class Module {
     boolean calledVitalsOndisable = true;
 
     public Module(String n, String d) {
-        this(n, d, MType.MISC);
+        this(n, d, ModuleType.MISC);
     }
 
-    public Module(String n, String d, MType type) {
+    public Module(String n, String d, ModuleType type) {
         this.name = n;
         this.description = d;
         this.type = type;
-        this.mconf = new ModuleConfig(this);
+        this.mconf = new MConf(this);
         this.mconf.add(new Keybind("keybind", -1));
-        this.mconf.add(new Toggleable("visible", true));
+        this.mconf.add(new MConfToggleable("visible", true));
     }
 
     public final void updateVitals() {
@@ -79,10 +79,10 @@ public class Module {
 
     public void onRender(MatrixStack ms, float td) {
         for (RenderableLine rl : rlq.toArray(new RenderableLine[0])) {
-            RenderHelper.renderLine(rl.bp1, rl.bp2, rl.c, rl.width);
+            Renderer.renderLine(rl.bp1, rl.bp2, rl.c, rl.width);
         }
         for (RenderableBlock rl : rbq.toArray(new RenderableBlock[0])) {
-            RenderHelper.renderBlockOutline(rl.bp, rl.dimensions, rl.r, rl.g, rl.b, rl.a);
+            Renderer.renderBlockOutline(rl.bp, rl.dimensions, rl.r, rl.g, rl.b, rl.a);
         }
         rlq.clear();
         rbq.clear();

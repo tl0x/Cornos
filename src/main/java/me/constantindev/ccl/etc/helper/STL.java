@@ -8,7 +8,7 @@ import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import com.thealtening.auth.service.AlteningServiceType;
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.config.ClientConfig;
+import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.mixin.SessionAccessor;
 import net.minecraft.client.util.Session;
 import net.minecraft.item.ItemStack;
@@ -27,16 +27,16 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.UUID;
 
-public class ClientHelper {
-    public static void sendChat(String msg) {
+public class STL {
+    public static void notifyUser(String msg) {
         if (Cornos.minecraft.player == null) return;
         Cornos.minecraft.player.sendMessage(Text.of(Formatting.DARK_AQUA + "[ " + Formatting.AQUA + Cornos.MOD_ID.toUpperCase() + Formatting.DARK_AQUA + " ] " + Formatting.RESET + msg), false);
     }
 
-    public static boolean isIntValid(String intToParse) {
+    public static boolean tryParseI(String arg) {
         boolean isValid;
         try {
-            Integer.parseInt(intToParse);
+            Integer.parseInt(arg);
             isValid = true;
         } catch (Exception exc) {
             isValid = false;
@@ -44,10 +44,10 @@ public class ClientHelper {
         return isValid;
     }
 
-    public static boolean isLongValid(String longToParse) {
+    public static boolean tryParseL(String arg) {
         boolean isValid;
         try {
-            Long.parseLong(longToParse);
+            Long.parseLong(arg);
             isValid = true;
         } catch (Exception exc) {
             isValid = false;
@@ -55,7 +55,7 @@ public class ClientHelper {
         return isValid;
     }
 
-    public static boolean login(String username, String password) {
+    public static boolean auth(String username, String password) {
         if (password.isEmpty()) {
             Session crackedSession = new Session(username, UUID.randomUUID().toString(), "CornosOnTOP", "mojang");
             ((SessionAccessor) Cornos.minecraft).setSession(crackedSession);
@@ -65,9 +65,9 @@ public class ClientHelper {
                 (YggdrasilUserAuthentication) new YggdrasilAuthenticationService(
                         Proxy.NO_PROXY, "").createUserAuthentication(Agent.MINECRAFT);
         if (username.contains("@alt") && username.contains("-")) {
-            ClientConfig.authentication.updateService(AlteningServiceType.THEALTENING);
+            CConf.authentication.updateService(AlteningServiceType.THEALTENING);
         } else {
-            ClientConfig.authentication.updateService(AlteningServiceType.MOJANG);
+            CConf.authentication.updateService(AlteningServiceType.MOJANG);
         }
         auth.setPassword(password);
         auth.setUsername(username);
@@ -91,13 +91,13 @@ public class ClientHelper {
     }
 
     @SuppressWarnings("unused")
-    public static void checkForUpdates() {
+    public static void update() {
         new Thread(() -> {
             try {
                 boolean trash;
-                File f = new File(ClientHelper.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+                File f = new File(STL.class.getProtectionDomain().getCodeSource().getLocation().toURI());
                 if (f.isDirectory()) {
-                    ClientHelper.sendChat("Can't check for updates.");
+                    STL.notifyUser("Can't check for updates.");
                     return;
                 }
                 File parent = new File(f.getParentFile().getParent() + "/tmp");
@@ -106,25 +106,25 @@ public class ClientHelper {
                 if (parent.exists()) {
                     trash = parent.delete();
                 }
-                downloadUsingNIO("https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar", parent.getAbsolutePath());
+                dlU("https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar", parent.getAbsolutePath());
                 HashCode hc = Files.asByteSource(f).hash(Hashing.crc32());
                 HashCode hc1 = Files.asByteSource(parent).hash(Hashing.crc32());
                 if (!hc.equals(hc1)) {
                     try {
                         Files.move(parent, f);
                     } catch (Exception exc) {
-                        sendChat("Your cornos installation is out of sync with the latest build!");
-                        sendChat("Failed to automatically update. Head over to https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar to get the latest version");
+                        notifyUser("Your cornos installation is out of sync with the latest build!");
+                        notifyUser("Failed to automatically update. Head over to https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar to get the latest version");
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                sendChat("Failed to check for updates!");
+                notifyUser("Failed to check for updates!");
             }
         }).start();
     }
 
-    private static void downloadUsingNIO(String urlStr, String file) throws IOException {
+    private static void dlU(String urlStr, String file) throws IOException {
         URL url = new URL(urlStr);
         ReadableByteChannel rbc = Channels.newChannel(url.openStream());
         FileOutputStream fos = new FileOutputStream(file);
@@ -133,7 +133,7 @@ public class ClientHelper {
         rbc.close();
     }
 
-    public static void dropItem(int index) {
+    public static void drop(int index) {
         short actionID = Cornos.minecraft.player.currentScreenHandler.getNextActionId(Cornos.minecraft.player.inventory);
         ItemStack is = Cornos.minecraft.player.inventory.getStack(index);
         ClickSlotC2SPacket p = new ClickSlotC2SPacket(0, index, 1, SlotActionType.THROW, is, actionID);

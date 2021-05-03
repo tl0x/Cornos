@@ -2,11 +2,11 @@ package me.constantindev.ccl.module.RENDER;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Num;
+import me.constantindev.ccl.etc.config.MConfNum;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.options.Perspective;
@@ -21,14 +21,14 @@ public class Freecam extends Module {
     // this shit is excessively documented because even i dont understand how it works
 
     // options
-    Num speed = new Num("speed", 1, 10, 0);
+    MConfNum speed = new MConfNum("speed", 1, 10, 0);
     // start cache
     Vec3d startloc;
     float pitch = 0, yaw = 0;
     OtherClientPlayerEntity clone;
 
     public Freecam() {
-        super("Freecam", "Become a ghost and leave your body", MType.MISC);
+        super("Freecam", "Become a ghost and leave your body", ModuleType.RENDER);
         this.mconf.add(speed);
         Module parent = this;
         // prevent movement packets from sending when module is enabled
@@ -123,6 +123,7 @@ public class Freecam extends Module {
         Vec3d ov3 = Cornos.minecraft.player.getPos();
         Vec3d bruh = ov3.add(nv3);
         Cornos.minecraft.player.updatePosition(bruh.x, bruh.y, bruh.z);
+        Cornos.minecraft.player.setVelocity(Vec3d.ZERO);
         super.onExecute();
     }
 

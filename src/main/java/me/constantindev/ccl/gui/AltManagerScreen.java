@@ -9,8 +9,8 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.gui;
 
 import com.thealtening.auth.service.AlteningServiceType;
-import me.constantindev.ccl.etc.config.ClientConfig;
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.config.CConf;
+import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
 import me.constantindev.ccl.module.Alts;
 import net.minecraft.client.gui.DrawableHelper;
@@ -35,7 +35,7 @@ public class AltManagerScreen extends Screen {
 
     @Override
     protected void init() {
-        ClientConfig.authentication.updateService(AlteningServiceType.MOJANG);
+        CConf.authentication.updateService(AlteningServiceType.MOJANG);
         email = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) - 35, 200, 20, Text.of("Email"));
         email.setMaxLength(1000);
         passwd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2), 200, 20, Text.of("Password"));
@@ -43,7 +43,7 @@ public class AltManagerScreen extends Screen {
         emailpasswd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) + 35, 200, 20, Text.of("Username:password"));
         emailpasswd.setMaxLength(2000);
         RoundedButtonWidget login = new RoundedButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 60, 120, 20, Text.of("Login"), () -> {
-            boolean success = ClientHelper.login(this.email.getText(), this.passwd.getText());
+            boolean success = STL.auth(this.email.getText(), this.passwd.getText());
             this.errormsg = success ? "§aLogged in!" : "§cFailed to log in. Check the password and email.";
         });
         RoundedButtonWidget saveAlt = new RoundedButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 85, 120, 20, Text.of("Save alt"), () -> {

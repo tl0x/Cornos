@@ -10,9 +10,9 @@ package me.constantindev.ccl.module.MOVEMENT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -20,13 +20,13 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import java.util.Objects;
 
 public class Speed extends Module {
-    public static MultiOption mode = new MultiOption("mode", "vanilla", new String[]{"vanilla", "bhop", "legit", "minihop"});
-    public static Num speedMulti = new Num("speed", 2, 5, 0);
-    public static Num bhopDown = new Num("bhopDown", 1, 10, -0.7);
+    public static MConfMultiOption mode = new MConfMultiOption("mode", "vanilla", new String[]{"vanilla", "bhop", "legit", "minihop"});
+    public static MConfNum speedMulti = new MConfNum("speed", 2, 5, 0);
+    public static MConfNum bhopDown = new MConfNum("bhopDown", 1, 10, -0.7);
     double prev = 0.1;
 
     public Speed() {
-        super("Speed", "why is he going fast", MType.MOVEMENT);
+        super("Speed", "why is he going fast", ModuleType.MOVEMENT);
         this.mconf.add(mode);
         this.mconf.add(speedMulti);
         this.mconf.add(bhopDown);

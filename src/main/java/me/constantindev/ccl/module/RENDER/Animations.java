@@ -2,9 +2,9 @@ package me.constantindev.ccl.module.RENDER;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.options.Perspective;
 import net.minecraft.client.render.OverlayTexture;
@@ -18,17 +18,17 @@ import net.minecraft.util.math.Quaternion;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public class Animations extends Module {
-    private static final MultiOption type = new MultiOption("type", "laidBack", new String[]{"laidBack", "small", "smaller", "custom"});
-    private static final Num customOffX = new Num("customX", 0, 5, -5);
-    private static final Num customOffY = new Num("customY", 0, 5, -5);
-    private static final Num customOffZ = new Num("customZ", 0, 5, -5);
-    private static final Num customScale = new Num("customScale", 1, 5, 0);
-    private static final Num customRotX = new Num("customMX", 0, 5, -5);
-    private static final Num customRotY = new Num("customMY", 0, 5, -5);
-    private static final Num customRotZ = new Num("customMZ", 0, 5, -5);
+    private static final MConfMultiOption type = new MConfMultiOption("type", "laidBack", new String[]{"laidBack", "small", "smaller", "custom"});
+    private static final MConfNum customOffX = new MConfNum("customX", 0, 5, -5);
+    private static final MConfNum customOffY = new MConfNum("customY", 0, 5, -5);
+    private static final MConfNum customOffZ = new MConfNum("customZ", 0, 5, -5);
+    private static final MConfNum customScale = new MConfNum("customScale", 1, 5, 0);
+    private static final MConfNum customRotX = new MConfNum("customMX", 0, 5, -5);
+    private static final MConfNum customRotY = new MConfNum("customMY", 0, 5, -5);
+    private static final MConfNum customRotZ = new MConfNum("customMZ", 0, 5, -5);
 
     public Animations() {
-        super("Animations", "makes items go brrr", MType.RENDER);
+        super("Animations", "makes items go brrr", ModuleType.RENDER);
         this.mconf.add(type);
         this.mconf.add(customOffX);
         this.mconf.add(customOffY);
@@ -41,7 +41,7 @@ public class Animations extends Module {
 
     public static void render(LivingEntity entity, ItemStack stack, ModelTransformation.Mode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci, ItemRenderer itemRenderer) {
         assert Cornos.minecraft.player != null;
-        if (entity.getUuid() == Cornos.minecraft.player.getUuid() && Cornos.minecraft.options.getPerspective() == Perspective.FIRST_PERSON && ModuleRegistry.getByName("Animations").isEnabled()) {
+        if (entity.getUuid() == Cornos.minecraft.player.getUuid() && Cornos.minecraft.options.getPerspective() == Perspective.FIRST_PERSON && ModuleRegistry.search("Animations").isEnabled()) {
             switch (type.value) {
                 case "laidBack":
                     matrices.multiply(new Quaternion(0.3f, 0f, 0f, 1f));

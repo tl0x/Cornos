@@ -5,11 +5,11 @@ import me.constantindev.ccl.etc.base.Module;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModuleConfig {
+public class MConf {
     public final Module owner;
     public List<ConfigKey> config = new ArrayList<>();
 
-    public ModuleConfig(Module owner) {
+    public MConf(Module owner) {
         this.owner = owner;
     }
 

@@ -18,7 +18,7 @@ public class LivingEntityMixin {
         if (((Object) this) instanceof ClientPlayerEntity) {
             ClientPlayerEntity e = (ClientPlayerEntity) ((Object) this);
             if (Cornos.minecraft.player.getUuid().equals(e.getUuid())) {
-                if (ModuleRegistry.getByName("jesus").isEnabled() && (Jesus.mode.value.equalsIgnoreCase("solid") || Jesus.mode.value.equalsIgnoreCase("herobrine3")))
+                if (ModuleRegistry.search("jesus").isEnabled() && (Jesus.mode.value.equalsIgnoreCase("solid") || Jesus.mode.value.equalsIgnoreCase("herobrine3")))
                     cir.setReturnValue(true);
             }
         }
@@ -29,7 +29,7 @@ public class LivingEntityMixin {
         if (((Object) this) instanceof ClientPlayerEntity) {
             ClientPlayerEntity e = (ClientPlayerEntity) ((Object) this);
             if (Cornos.minecraft.player.getUuid().equals(e.getUuid())) {
-                if (ModuleRegistry.getByName("freecam").isEnabled())
+                if (ModuleRegistry.search("freecam").isEnabled())
                     cir.setReturnValue(false);
             }
         }

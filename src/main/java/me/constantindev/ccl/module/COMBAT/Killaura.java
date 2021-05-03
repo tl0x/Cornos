@@ -3,10 +3,10 @@ package me.constantindev.ccl.module.COMBAT;
 import com.google.common.base.CharMatcher;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.HostileEntity;
@@ -18,23 +18,24 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Killaura extends Module {
-    MultiOption mode = new MultiOption("mode", "single", new String[]{"single", "multi"});
-    Toggleable entities = new Toggleable("entities", false);
-    Toggleable players = new Toggleable("players", true);
-    Toggleable mobs = new Toggleable("mobs", true);
-    Toggleable swing = new Toggleable("swing", true);
-    Num range = new Num("range", 3.0, 10.0, 1.0);
-    Num delay = new Num("delay", 2.0, 20.0, 0);
-    Toggleable abNoname = new Toggleable("ab:noname", true);
-    Toggleable abColorName = new Toggleable("ab:colorname", true);
-    Toggleable abInvalidName = new Toggleable("ab:invalidName", true);
+    MConfMultiOption mode = new MConfMultiOption("mode", "single", new String[]{"single", "multi"});
+    MConfToggleable entities = new MConfToggleable("entities", false);
+    MConfToggleable players = new MConfToggleable("players", true);
+    MConfToggleable mobs = new MConfToggleable("mobs", true);
+    MConfToggleable swing = new MConfToggleable("swing", true);
+    MConfNum range = new MConfNum("range", 3.0, 10.0, 1.0);
+    MConfNum delay = new MConfNum("delay", 2.0, 20.0, 0);
+    MConfToggleable abNoname = new MConfToggleable("ab:noname", true);
+    MConfToggleable abColorName = new MConfToggleable("ab:colorname", true);
+    MConfToggleable abInvalidName = new MConfToggleable("ab:invalidName", true);
     int delayWaited = 0;
     List<LivingEntity> attacks = new ArrayList<>();
 
     public Killaura() {
-        super("Killaura", "bruh (ab = antibot)", MType.COMBAT);
+        super("Killaura", "bruh (ab = antibot)", ModuleType.COMBAT);
         this.mconf.add(mode);
         this.mconf.add(delay);
         this.mconf.add(players);
@@ -54,9 +55,11 @@ public class Killaura extends Module {
             delayWaited = 0;
         } else return;
         attacks.clear();
+        assert Cornos.minecraft.player != null;
         Vec3d loc = Cornos.minecraft.player.getPos();
         Box selector = new Box(loc.add(-1, -1, -1), loc.add(1, 1, 1));
         selector = selector.expand(range.getValue());
+        assert Cornos.minecraft.world != null;
         List<Entity> entities1 = Cornos.minecraft.world.getOtherEntities(Cornos.minecraft.player, selector);
         if (entities1.size() < 1) return;
         List<Entity> entities = new ArrayList<>();
@@ -97,10 +100,11 @@ public class Killaura extends Module {
                 break;
         }
         for (Entity e : attacks) {
+            assert Cornos.minecraft.interactionManager != null;
             Cornos.minecraft.interactionManager.attackEntity(Cornos.minecraft.player, e);
             if (swing.isEnabled()) {
                 HandSwingC2SPacket p = new HandSwingC2SPacket(Hand.MAIN_HAND);
-                Cornos.minecraft.getNetworkHandler().sendPacket(p);
+                Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(p);
             }
         }
         super.onExecute();

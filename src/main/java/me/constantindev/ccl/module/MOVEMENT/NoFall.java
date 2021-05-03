@@ -10,19 +10,19 @@ package me.constantindev.ccl.module.MOVEMENT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 
 import java.util.Objects;
 
 public class NoFall extends Module {
-    Num fallDistance = new Num("fallDistance", 2, 10, 0.1);
-    MultiOption mode = new MultiOption("mode", "packet", new String[]{"packet", "breakFall"});
+    MConfNum fallDistance = new MConfNum("fallDistance", 2, 10, 0.1);
+    MConfMultiOption mode = new MConfMultiOption("mode", "packet", new String[]{"packet", "breakFall"});
 
     public NoFall() {
-        super("NoFall", "Prevents you from taking fall damage", MType.MOVEMENT);
+        super("NoFall", "Prevents you from taking fall damage", ModuleType.MOVEMENT);
         this.mconf.add(fallDistance);
         this.mconf.add(mode);
     }

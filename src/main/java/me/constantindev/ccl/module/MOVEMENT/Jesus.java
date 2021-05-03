@@ -2,16 +2,16 @@ package me.constantindev.ccl.module.MOVEMENT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 public class Jesus extends Module {
-    public static MultiOption mode = new MultiOption("mode", "jump", new String[]{"jump", "velocity", "vanilla", "dontfall", "solid", "herobrine", "herobrine2", "herobrine3"});
+    public static MConfMultiOption mode = new MConfMultiOption("mode", "jump", new String[]{"jump", "velocity", "vanilla", "dontfall", "solid", "herobrine", "herobrine2", "herobrine3"});
 
     public Jesus() {
-        super("Jesus", "Yisus.", MType.MOVEMENT);
+        super("Jesus", "Yisus.", ModuleType.MOVEMENT);
         this.mconf.add(mode);
     }
 

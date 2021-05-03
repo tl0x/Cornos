@@ -24,7 +24,7 @@ public class ExplosionS2CPacketMixin {
 
     @Inject(at = @At("HEAD"), method = "apply")
     private void playSound(ClientPlayPacketListener clientPlayPacketListener, CallbackInfo ci) {
-        if (ModuleRegistry.getByName("memesfx").isEnabled()) {
+        if (ModuleRegistry.search("memesfx").isEnabled()) {
             assert Cornos.minecraft.world != null;
             Cornos.minecraft.world.playSound(x, y, z, Cornos.VINEBOOM_SOUND, SoundCategory.BLOCKS, 4f, 1f, false);
         }

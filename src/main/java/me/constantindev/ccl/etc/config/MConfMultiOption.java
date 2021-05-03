@@ -1,12 +1,12 @@
 package me.constantindev.ccl.etc.config;
 
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 
-public class MultiOption extends ModuleConfig.ConfigKey {
+public class MConfMultiOption extends MConf.ConfigKey {
     public String[] possibleValues;
     public int current = 0;
 
-    public MultiOption(String k, String initialValue, String[] possible) {
+    public MConfMultiOption(String k, String initialValue, String[] possible) {
         super(k, initialValue);
         this.possibleValues = possible;
     }
@@ -21,7 +21,7 @@ public class MultiOption extends ModuleConfig.ConfigKey {
             }
         }
         if (!pass) {
-            ClientHelper.sendChat("[Config] You tried to set a value that is not possible. The values you can set are " + String.join(", ", possibleValues));
+            STL.notifyUser("[Config] You tried to set a value that is not possible. The values you can set are " + String.join(", ", possibleValues));
             return;
         }
         super.setValue(newV);

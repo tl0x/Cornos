@@ -5,9 +5,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.TabManager;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.ClientConfig;
-import me.constantindev.ccl.etc.helper.RenderHelper;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.CConf;
+import me.constantindev.ccl.etc.helper.Renderer;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.render.BufferBuilder;
@@ -72,10 +72,10 @@ public class TabGUI extends DrawableHelper {
     public void render(MatrixStack matrices, float delta) {
         drawTabs(matrices, delta);
         GL11.glPushMatrix();
-        Color color = new Color(ClientConfig.latestRGBVal);
+        Color color = new Color(CConf.latestRGBVal);
         GL11.glColor4f(1, 1, 1, 1);
         GL11.glColor4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
-        RenderHelper.drawImage(matrices, rainbowLogo, 1, 1, 80, 18, 1, 1, 1);
+        Renderer.drawImage(matrices, rainbowLogo, 1, 1, 80, 18, 1, 1, 1);
         GL11.glColor4f(1, 1, 1, 1);
         GL11.glPopMatrix();
     }
@@ -85,10 +85,10 @@ public class TabGUI extends DrawableHelper {
             TabManager tabManager = ModuleRegistry.getTabManager();
             int i = 0;
             int k = 0;
-            for (MType mType : tabManager.getTabType()) {
+            for (ModuleType mType : tabManager.getTabType()) {
                 drawGuiRect(5, 20 + i, 79, 30 + i, 0x90000000, matrices.peek().getModel());
                 if (k == tabManager.getCurrentTab()) {
-                    drawGuiRect(5, 20 + i, 79, 30 + i, ClientConfig.latestRGBVal, matrices.peek().getModel());
+                    drawGuiRect(5, 20 + i, 79, 30 + i, CConf.latestRGBVal, matrices.peek().getModel());
                 }
                 Cornos.minecraft.textRenderer.drawWithShadow(matrices, mType.getN(), 7, 21 + i, 0xffffff, true);
                 if (tabManager.getTabs().get(mType).isExpanded()) {
@@ -101,7 +101,7 @@ public class TabGUI extends DrawableHelper {
                             drawGuiRect(174, 20 + j, 83, 30 + j, new Color(47, 47, 47, 134).getRGB(), matrices.peek().getModel());
                         }
                         if (l == tabManager.getCurrentMods().get(mType)) {
-                            drawGuiRect(172 + off, 20 + j, 81 + off, 30 + j, ClientConfig.latestRGBVal, matrices.peek().getModel());
+                            drawGuiRect(172 + off, 20 + j, 81 + off, 30 + j, CConf.latestRGBVal, matrices.peek().getModel());
                         }
                         Cornos.minecraft.textRenderer.drawWithShadow(matrices, m.name, 84 + off, 21 + j, 0xffffff, true);
                         j += 10;

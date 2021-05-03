@@ -12,9 +12,9 @@ package me.constantindev.ccl.module.MOVEMENT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
@@ -30,9 +30,9 @@ public class ArrowAvoid extends Module {
     RenderableLine rlL = null;
 
     public ArrowAvoid() {
-        super("ArrowAvoid", "Avoids arrows, if possible", MType.MOVEMENT);
-        this.mconf.add(new MultiOption("Type", "Packet", new String[]{"Client", "Packet"}));
-        this.mconf.add(new Num("Speed", 1, 2, 0.1));
+        super("ArrowAvoid", "Avoids arrows, if possible", ModuleType.MOVEMENT);
+        this.mconf.add(new MConfMultiOption("Type", "Packet", new String[]{"Client", "Packet"}));
+        this.mconf.add(new MConfNum("Speed", 1, 2, 0.1));
     }
 
     @Override
@@ -64,7 +64,7 @@ public class ArrowAvoid extends Module {
 
             }
             String mode = this.mconf.getByName("Type").value;
-            double speed = ((Num) this.mconf.getByName("Speed")).getValue();
+            double speed = ((MConfNum) this.mconf.getByName("Speed")).getValue();
             for (int i = 0; i < 75; i++) {
                 Vec3d nextPos = e.getPos().add(e.getVelocity().multiply(i / 5d));
                 Box nextBox = new Box(

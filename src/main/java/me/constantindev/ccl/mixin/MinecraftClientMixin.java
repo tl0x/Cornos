@@ -9,7 +9,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.helper.ConfigHelper;
+import me.constantindev.ccl.etc.helper.ConfMan;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.FastUse;
 import net.minecraft.client.MinecraftClient;
@@ -27,7 +27,7 @@ public class MinecraftClientMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     public void tick(CallbackInfo ci) {
-        FastUse fuse = (FastUse) ModuleRegistry.getByName("fast");
+        FastUse fuse = (FastUse) ModuleRegistry.search("fast");
         if (!fuse.isEnabled()) return;
         if (fuse.fastuse.isEnabled()) this.itemUseCooldown = 0;
     }
@@ -39,6 +39,6 @@ public class MinecraftClientMixin {
 
     @Inject(method = "stop", at = @At("HEAD"))
     public void sdHook(CallbackInfo ci) {
-        ConfigHelper.saveConfig();
+        ConfMan.sconf();
     }
 }

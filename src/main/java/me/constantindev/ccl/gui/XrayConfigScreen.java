@@ -1,7 +1,7 @@
 package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.config.ClientConfig;
+import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -30,7 +30,7 @@ public class XrayConfigScreen extends Screen {
     protected void init() {
         super.init();
         newBlocks.clear();
-        newBlocks.addAll(Arrays.asList(ClientConfig.xrayBlocks));
+        newBlocks.addAll(Arrays.asList(CConf.xrayBlocks));
         newBlock = new TextFieldWidget(textRenderer, 5, 5, 100, 20, Text.of(""));
         RoundedButtonWidget add = new RoundedButtonWidget(110, 5, 45, 20, Text.of("Add"), () -> {
             Block b = Registry.BLOCK.get(new Identifier(newBlock.getText()));
@@ -39,7 +39,8 @@ public class XrayConfigScreen extends Screen {
             } else {
                 newBlock.setEditableColor(14737632);
                 newBlocks.add(b);
-                ClientConfig.xrayBlocks = newBlocks.toArray(new Block[0]);
+                CConf.xrayBlocks = newBlocks.toArray(new Block[0]);
+                assert this.client != null;
                 this.client.openScreen(new XrayConfigScreen());
             }
         });
@@ -49,7 +50,8 @@ public class XrayConfigScreen extends Screen {
         for (Block block : newBlocks.toArray(new Block[0])) {
             RoundedButtonWidget delete = new RoundedButtonWidget(offsetX, offset, 150, 20, block.getName(), () -> {
                 newBlocks.remove(block);
-                ClientConfig.xrayBlocks = newBlocks.toArray(new Block[0]);
+                CConf.xrayBlocks = newBlocks.toArray(new Block[0]);
+                assert this.client != null;
                 this.client.openScreen(new XrayConfigScreen());
             });
             addButton(delete);

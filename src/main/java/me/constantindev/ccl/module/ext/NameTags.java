@@ -3,8 +3,8 @@ package me.constantindev.ccl.module.ext;
 import com.mojang.blaze3d.platform.GlStateManager;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.gui.TabGUI;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -21,11 +21,11 @@ import java.awt.*;
 
 public class NameTags extends Module {
 
-    Toggleable health = new Toggleable("Health", true);
-    Toggleable renderSelf = new Toggleable("RenderSelf", false);
+    MConfToggleable health = new MConfToggleable("Health", true);
+    MConfToggleable renderSelf = new MConfToggleable("RenderSelf", false);
 
     public NameTags() {
-        super("NameTags", "Shows bigger better nametags that give you more info about the player", MType.RENDER);
+        super("NameTags", "Shows bigger better nametags that give you more info about the player", ModuleType.RENDER);
         this.mconf.add(health);
 
         this.mconf.add(renderSelf);

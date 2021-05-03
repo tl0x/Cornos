@@ -9,18 +9,18 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.module.ext;
 
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.ms.ModuleType;
 
 public class NoRender extends Module {
-    public static Toggleable fire = new Toggleable("fire", true);
-    public static Toggleable pumpkin = new Toggleable("pumpkin", true);
-    public static Toggleable sign = new Toggleable("signs", false);
-    public static Toggleable armorstand = new Toggleable("armorstands", false);
-    public static Toggleable particles = new Toggleable("particles", false);
+    public static MConfToggleable fire = new MConfToggleable("fire", true);
+    public static MConfToggleable pumpkin = new MConfToggleable("pumpkin", true);
+    public static MConfToggleable sign = new MConfToggleable("signs", false);
+    public static MConfToggleable armorstand = new MConfToggleable("armorstands", false);
+    public static MConfToggleable particles = new MConfToggleable("particles", false);
 
     public NoRender() {
-        super("NoRender", "Does not render some things", MType.RENDER);
+        super("NoRender", "Does not render some things", ModuleType.RENDER);
         this.mconf.add(fire);
         this.mconf.add(pumpkin);
         this.mconf.add(sign);

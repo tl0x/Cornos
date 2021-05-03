@@ -2,14 +2,14 @@ package me.constantindev.ccl.module.ext;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 
 public class FullBright extends Module {
 
     private double oldgamma;
 
     public FullBright() {
-        super("FullBright", "Light up your world.", MType.RENDER);
+        super("FullBright", "Light up your world.", ModuleType.RENDER);
     }
 
     @Override

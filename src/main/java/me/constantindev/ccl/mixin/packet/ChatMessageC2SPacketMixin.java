@@ -1,6 +1,6 @@
 package me.constantindev.ccl.mixin.packet;
 
-import me.constantindev.ccl.etc.config.ClientConfig;
+import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,10 +17,10 @@ public class ChatMessageC2SPacketMixin {
 
     @Inject(method = "getChatMessage", at = @At("HEAD"))
     public void gCM(CallbackInfoReturnable<String> cir) {
-        if (ModuleRegistry.getByName("fancychat").isEnabled()) {
+        if (ModuleRegistry.search("fancychat").isEnabled()) {
             chatMessage = chatMessage.toUpperCase();
 
-            for (String[] s : ClientConfig.dict) {
+            for (String[] s : CConf.dict) {
                 chatMessage = chatMessage.replaceAll(s[0], s[1]);
             }
         }

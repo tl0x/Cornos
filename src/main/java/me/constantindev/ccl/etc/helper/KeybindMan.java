@@ -9,10 +9,10 @@ import org.lwjgl.glfw.GLFW;
 import java.util.HashMap;
 import java.util.Map;
 
-public class KeyBindManager {
+public class KeybindMan {
     public static Map<String, KeyBind> binds = new HashMap<>();
     public static boolean freezeTabGui;
-    static Module tab = ModuleRegistry.getByName("TabGUI");
+    static Module tab = ModuleRegistry.search("TabGUI");
 
     public static void init() {
         for (Module module : ModuleRegistry.getAll()) {
@@ -39,7 +39,7 @@ public class KeyBindManager {
                         }
                     }
                 } else {
-                    Module m = ModuleRegistry.getByName(s);
+                    Module m = ModuleRegistry.search(s);
                     m.setEnabled(!m.isEnabled());
                 }
         });

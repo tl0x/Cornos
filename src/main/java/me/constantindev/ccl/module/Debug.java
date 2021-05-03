@@ -10,22 +10,22 @@ package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.helper.ClientHelper;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.helper.STL;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 
 public class Debug extends Module {
     public Debug() {
-        super("Debug", "uhh", MType.HIDDEN);
+        super("Debug", "uhh", ModuleType.HIDDEN);
     }
 
     @Override
     public void onExecute() {
-        ClientHelper.sendChat("[D] MinecraftClient.currentScreen = " + Cornos.minecraft.currentScreen);
+        STL.notifyUser("[D] MinecraftClient.currentScreen = " + Cornos.minecraft.currentScreen);
         Camera c = BlockEntityRenderDispatcher.INSTANCE.camera;
-        ClientHelper.sendChat("[D] Camera: " + c);
-        ClientHelper.sendChat("[D] CameraRot: " + c.getRotation());
+        STL.notifyUser("[D] Camera: " + c);
+        STL.notifyUser("[D] CameraRot: " + c.getRotation());
 
         super.onExecute();
     }

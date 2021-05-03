@@ -2,20 +2,20 @@ package me.constantindev.ccl.module.MOVEMENT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
 
 public class ShiftTp extends Module {
     public ShiftTp() {
-        super("ShiftTp", "Teleports you when shifting. Useful for phasing through walls", MType.MOVEMENT);
-        this.mconf.add(new Num("multiplier", 4.0, 15, 1));
+        super("ShiftTp", "Teleports you when shifting. Useful for phasing through walls", ModuleType.MOVEMENT);
+        this.mconf.add(new MConfNum("multiplier", 4.0, 15, 1));
     }
 
     @Override
     public void onExecute() {
-        int mtp = (int) ((Num) this.mconf.getByName("multiplier")).getValue();
+        int mtp = (int) ((MConfNum) this.mconf.getByName("multiplier")).getValue();
         if (Cornos.minecraft.options.keySneak.wasPressed()) {
             assert Cornos.minecraft.player != null;
             Vec3d pos = Cornos.minecraft.player.getPos();

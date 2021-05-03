@@ -10,12 +10,12 @@ package me.constantindev.ccl.module.WORLD;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketApplyEvent;
-import me.constantindev.ccl.etc.helper.RandomHelper;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.helper.Rnd;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.network.packet.c2s.play.UpdateSignC2SPacket;
 import net.minecraft.network.packet.s2c.play.SignEditorOpenS2CPacket;
 
@@ -24,11 +24,11 @@ public class AutoSign extends Module {
     public static String line2 = "and configure";
     public static String line3 = "your custom";
     public static String line4 = "text";
-    MultiOption type;
+    MConfMultiOption type;
 
     public AutoSign() {
-        super("AutoSign", "Lulw", MType.WORLD);
-        type = (MultiOption) this.mconf.add(new MultiOption("mode", "noise", new String[]{"noise", "copypasta", "longlines", "custom"}));
+        super("AutoSign", "Lulw", ModuleType.WORLD);
+        type = (MConfMultiOption) this.mconf.add(new MConfMultiOption("mode", "noise", new String[]{"noise", "copypasta", "longlines", "custom"}));
         Module parent = this;
         EventHelper.BUS.registerEvent(EventType.ONPACKETHANDLE, event -> {
             PacketApplyEvent PE = (PacketApplyEvent) event;
@@ -40,10 +40,10 @@ public class AutoSign extends Module {
                 switch (type.value) {
                     case "noise":
                         lines = new String[]{
-                                RandomHelper.rndBinStr(15),
-                                RandomHelper.rndBinStr(15),
-                                RandomHelper.rndBinStr(15),
-                                RandomHelper.rndBinStr(15)
+                                Rnd.rndBinStr(15),
+                                Rnd.rndBinStr(15),
+                                Rnd.rndBinStr(15),
+                                Rnd.rndBinStr(15)
                         };
                         break;
                     case "copypasta":
@@ -56,10 +56,10 @@ public class AutoSign extends Module {
                         break;
                     case "longlines":
                         lines = new String[]{
-                                RandomHelper.rndBinStr(50),
-                                RandomHelper.rndBinStr(50),
-                                RandomHelper.rndBinStr(50),
-                                RandomHelper.rndBinStr(50)
+                                Rnd.rndBinStr(50),
+                                Rnd.rndBinStr(50),
+                                Rnd.rndBinStr(50),
+                                Rnd.rndBinStr(50)
                         };
                         break;
                     case "custom":

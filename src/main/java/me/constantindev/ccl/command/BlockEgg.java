@@ -10,7 +10,7 @@ package me.constantindev.ccl.command;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -24,7 +24,7 @@ public class BlockEgg extends Command {
     @Override
     public void onExecute(String[] args) {
         if (args.length == 0) {
-            ClientHelper.sendChat("bruh.");
+            STL.notifyUser("bruh.");
             return;
         }
         Block b = Registry.BLOCK.get(new Identifier(args[0]));

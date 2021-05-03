@@ -9,10 +9,9 @@ import com.lukflug.panelstudio.theme.ColorScheme;
 import com.lukflug.panelstudio.theme.Theme;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Toggleable;
 import me.constantindev.ccl.etc.config.*;
-import me.constantindev.ccl.etc.helper.KeyBindManager;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.helper.KeybindMan;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
 import net.minecraft.client.gui.DrawableHelper;
@@ -91,8 +90,8 @@ public class ClickGUI extends MinecraftGUI {
         });
         int offset = 10 - 114;
         int offsetY = 10;
-        for (MType type : MType.values()) {
-            if (type == MType.HIDDEN) continue;
+        for (ModuleType type : ModuleType.values()) {
+            if (type == ModuleType.HIDDEN) continue;
             int maxW = 96;
             for (Module m : ModuleRegistry.getAll()) {
                 if (m.type != type) continue;
@@ -105,7 +104,7 @@ public class ClickGUI extends MinecraftGUI {
             }
             com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(
                     type.getN(), null,
-                    theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed),
+                    theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(CConf.animSpeed),
                     null, new Point(offset, offsetY), maxW + 8
             ) {
                 @Override
@@ -119,7 +118,7 @@ public class ClickGUI extends MinecraftGUI {
                 if (m.type != type) continue;
                 maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));
                 CollapsibleContainer mc = new CollapsibleContainer(m.name, m.description, theme.getContainerRenderer(),
-                        new SimpleToggleable(false), new SettingsAnimation(ClientConfig.animSpeed), new SimpleToggleable(m.isEnabled()) {
+                        new SimpleToggleable(false), new SettingsAnimation(CConf.animSpeed), new SimpleToggleable(m.isEnabled()) {
                     @Override
                     public boolean isOn() {
                         return m.isEnabled();
@@ -131,26 +130,26 @@ public class ClickGUI extends MinecraftGUI {
                     }
                 });
                 container.addComponent(mc);
-                for (ModuleConfig.ConfigKey kc : m.mconf.config) {
+                for (MConf.ConfigKey kc : m.mconf.config) {
                     maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(kc.key + ": " + kc.value));
                     // it works.
                     // dont question it.
-                    if (kc instanceof Toggleable) {
+                    if (kc instanceof MConfToggleable) {
                         BooleanComponent bc = new BooleanComponent(kc.key, null, theme.getComponentRenderer(),
                                 new com.lukflug.panelstudio.settings.Toggleable() {
                                     @Override
                                     public void toggle() {
-                                        ((Toggleable) kc).toggle();
+                                        ((MConfToggleable) kc).toggle();
                                     }
 
                                     @Override
                                     public boolean isOn() {
-                                        return ((Toggleable) kc).isEnabled();
+                                        return ((MConfToggleable) kc).isEnabled();
                                     }
                                 });
                         mc.addComponent(bc);
-                    } else if (kc instanceof MultiOption) {
-                        List<String> l = new ArrayList<>(Arrays.asList(((MultiOption) kc).possibleValues));
+                    } else if (kc instanceof MConfMultiOption) {
+                        List<String> l = new ArrayList<>(Arrays.asList(((MConfMultiOption) kc).possibleValues));
 
                         EnumSetting es = new EnumSetting() {
                             int current = l.indexOf(kc.value);
@@ -158,13 +157,13 @@ public class ClickGUI extends MinecraftGUI {
                             @Override
                             public void increment() {
                                 current++;
-                                if (current > (((MultiOption) kc).possibleValues.length - 1)) current = 0;
-                                kc.setValue(((MultiOption) kc).possibleValues[current]);
+                                if (current > (((MConfMultiOption) kc).possibleValues.length - 1)) current = 0;
+                                kc.setValue(((MConfMultiOption) kc).possibleValues[current]);
                             }
 
                             @Override
                             public String getValueName() {
-                                return ((MultiOption) kc).possibleValues[current];
+                                return ((MConfMultiOption) kc).possibleValues[current];
                             }
                         };
                         EnumComponent ec = new EnumComponent(kc.key, null, theme.getComponentRenderer(), es);
@@ -180,7 +179,7 @@ public class ClickGUI extends MinecraftGUI {
                             public void setKey(int key) {
                                 if (key == 47) kc.setValue(-1 + "");
                                 else kc.setValue(key + "");
-                                KeyBindManager.reload();
+                                KeybindMan.reload();
                             }
 
                             @Override
@@ -197,12 +196,12 @@ public class ClickGUI extends MinecraftGUI {
                         };
                         KeybindComponent kc1 = new KeybindComponent(theme.getComponentRenderer(), ks);
                         mc.addComponent(kc1);
-                    } else if (kc instanceof Num) {
+                    } else if (kc instanceof MConfNum) {
                         NumberSetting ns = new NumberSetting() {
                             @Override
                             public double getNumber() {
 
-                                return ((Num) kc).getValue();
+                                return ((MConfNum) kc).getValue();
                             }
 
                             @Override
@@ -212,12 +211,12 @@ public class ClickGUI extends MinecraftGUI {
 
                             @Override
                             public double getMaximumValue() {
-                                return ((Num) kc).max;
+                                return ((MConfNum) kc).max;
                             }
 
                             @Override
                             public double getMinimumValue() {
-                                return ((Num) kc).min;
+                                return ((MConfNum) kc).min;
                             }
 
                             @Override
@@ -225,11 +224,11 @@ public class ClickGUI extends MinecraftGUI {
                                 return 1;
                             }
                         };
-                        NumberComponent nc = new NumberComponent(kc.key, null, theme.getComponentRenderer(), ns, ((Num) kc).min,
-                                ((Num) kc).max);
+                        NumberComponent nc = new NumberComponent(kc.key, null, theme.getComponentRenderer(), ns, ((MConfNum) kc).min,
+                                ((MConfNum) kc).max);
                         mc.addComponent(nc);
-                    } else if (kc instanceof RGBAColor) {
-                        RGBAColor rgbaColor = (RGBAColor) kc;
+                    } else if (kc instanceof MConfColor) {
+                        MConfColor rgbaColor = (MConfColor) kc;
                         ColorSetting c = new ColorSetting() {
                             @Override
                             public Color getValue() {
@@ -258,7 +257,7 @@ public class ClickGUI extends MinecraftGUI {
                         };
 
                         ColorComponent cc = new ColorComponent(kc.key, null, theme.getComponentRenderer(),
-                                new SettingsAnimation(ClientConfig.animSpeed), theme.getComponentRenderer(), c, false, true,
+                                new SettingsAnimation(CConf.animSpeed), theme.getComponentRenderer(), c, false, true,
                                 new com.lukflug.panelstudio.settings.Toggleable() {
                                     boolean bruh = false;
 

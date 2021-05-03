@@ -9,14 +9,14 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.module;
 
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.ms.ModuleType;
 
 public class ClientProgression extends Module {
-    public static Toggleable hasFinishedTut = new Toggleable("finishedTutorial", false);
+    public static MConfToggleable hasFinishedTut = new MConfToggleable("finishedTutorial", false);
 
     public ClientProgression() {
-        super("clientprogression", "how much you progressed with using the client", MType.HIDDEN);
+        super("clientprogression", "how much you progressed with using the client", ModuleType.HIDDEN);
         this.mconf.add(hasFinishedTut);
     }
 }

@@ -3,7 +3,7 @@ package me.constantindev.ccl.command;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.Notification;
 import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.hit.EntityHitResult;
@@ -18,13 +18,13 @@ public class RemovePlayer extends Command {
     public void onExecute(String[] args) {
         HitResult hr = Cornos.minecraft.crosshairTarget;
         if (!(hr instanceof EntityHitResult)) {
-            ClientHelper.sendChat("Not sure if you are looking at an entity");
+            STL.notifyUser("Not sure if you are looking at an entity");
             return;
         }
         EntityHitResult ehr = (EntityHitResult) hr;
         Entity e = ehr.getEntity();
         if (!(e instanceof PlayerEntity)) {
-            ClientHelper.sendChat("Not sure if you are looking at a player");
+            STL.notifyUser("Not sure if you are looking at a player");
             return;
         }
         e.remove();

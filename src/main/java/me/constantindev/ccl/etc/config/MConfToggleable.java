@@ -1,9 +1,9 @@
 package me.constantindev.ccl.etc.config;
 
-public class Toggleable extends ModuleConfig.ConfigKey {
+public class MConfToggleable extends MConf.ConfigKey {
     boolean enabled;
 
-    public Toggleable(String name, boolean initialStatus) {
+    public MConfToggleable(String name, boolean initialStatus) {
         super(name, initialStatus ? "on" : "off");
         enabled = initialStatus;
     }

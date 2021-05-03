@@ -10,19 +10,19 @@ package me.constantindev.ccl.module.ext;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Direction;
 
 public class FastUse extends Module {
-    public Toggleable fastuse = new Toggleable("fastuse", true);
-    public Toggleable nbd = new Toggleable("nobreakdelay", true);
+    public MConfToggleable fastuse = new MConfToggleable("fastuse", true);
+    public MConfToggleable nbd = new MConfToggleable("nobreakdelay", true);
 
     public FastUse() {
-        super("Fast", "Makes you go brrr", MType.WORLD);
+        super("Fast", "Makes you go brrr", ModuleType.WORLD);
         this.mconf.add(fastuse);
         this.mconf.add(nbd);
     }

@@ -11,12 +11,12 @@ package me.constantindev.ccl.module.MOVEMENT;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.ColoredBlockEntry;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.ClientConfig;
-import me.constantindev.ccl.etc.config.Num;
+import me.constantindev.ccl.etc.config.CConf;
+import me.constantindev.ccl.etc.config.MConfNum;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.etc.render.RenderableLine;
 import net.minecraft.client.util.math.MatrixStack;
@@ -31,13 +31,13 @@ public class QuickMove extends Module {
     int counter = 0;
 
     public QuickMove() {
-        super("QuickMove", "Lets you draw a tail and then quickly travels alongside of it (Basically blink but poggers)", MType.MOVEMENT);
+        super("QuickMove", "Lets you draw a tail and then quickly travels alongside of it (Basically blink but poggers)", ModuleType.MOVEMENT);
         Module parent = this;
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
             if (pe.packet instanceof PlayerMoveC2SPacket && parent.isEnabled()) event.cancel();
         });
-        this.mconf.add(new Num("delay", 20, 100, 0));
+        this.mconf.add(new MConfNum("delay", 20, 100, 0));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class QuickMove extends Module {
         counter++;
         if (counter > (ModuleRegistry.budgetGraphicsInstance.isEnabled() ? 80 : 10)) {
             assert Cornos.minecraft.player != null;
-            bpl.add(new ColoredBlockEntry(Cornos.minecraft.player.getPos(), new Color(ClientConfig.latestRGBVal)));
+            bpl.add(new ColoredBlockEntry(Cornos.minecraft.player.getPos(), new Color(CConf.latestRGBVal)));
             counter = 0;
         }
         super.onRender(ms, td);
@@ -72,7 +72,7 @@ public class QuickMove extends Module {
             Cornos.minecraft.player.setNoGravity(true);
             for (ColoredBlockEntry bp : bpl) {
                 try {
-                    Thread.sleep((long) ((Num) this.mconf.getByName("delay")).getValue());
+                    Thread.sleep((long) ((MConfNum) this.mconf.getByName("delay")).getValue());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

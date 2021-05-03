@@ -130,7 +130,7 @@ public class ModuleRegistry {
         return tabManager;
     }
 
-    public static Module getByName(String name) {
+    public static Module search(String name) {
         return cache.get(name.toLowerCase());
     }
 }

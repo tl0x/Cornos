@@ -2,8 +2,8 @@ package me.constantindev.ccl.module.WORLD;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.block.BlockState;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.util.math.BlockPos;
@@ -15,13 +15,13 @@ public class Nuker extends Module {
     int current = 0;
 
     public Nuker() {
-        super("Nuker", "Stabs blocks like there is no tomorrow", MType.WORLD);
-        this.mconf.add(new Num("range", 5, 10, 0));
+        super("Nuker", "Stabs blocks like there is no tomorrow", ModuleType.WORLD);
+        this.mconf.add(new MConfNum("range", 5, 10, 0));
     }
 
     @Override
     public void onExecute() {
-        int range = (int) ((Num) this.mconf.getByName("range")).getValue();
+        int range = (int) ((MConfNum) this.mconf.getByName("range")).getValue();
         current++;
         if (current > 2) current = 0;
         else return;

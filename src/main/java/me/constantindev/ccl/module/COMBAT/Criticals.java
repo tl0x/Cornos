@@ -2,11 +2,11 @@ package me.constantindev.ccl.module.COMBAT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
@@ -14,10 +14,10 @@ import net.minecraft.util.math.Vec3d;
 import java.util.Objects;
 
 public class Criticals extends Module {
-    MultiOption mode = new MultiOption("mode", "packet", new String[]{"packet", "tphop", "visual"});
+    MConfMultiOption mode = new MConfMultiOption("mode", "packet", new String[]{"packet", "tphop", "visual"});
 
     public Criticals() {
-        super("Criticals", "more damage", MType.COMBAT);
+        super("Criticals", "more damage", ModuleType.COMBAT);
         this.mconf.add(mode);
         Module parent = this;
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {

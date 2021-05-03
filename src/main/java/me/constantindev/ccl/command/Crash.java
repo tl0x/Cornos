@@ -2,7 +2,7 @@ package me.constantindev.ccl.command;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
@@ -23,14 +23,14 @@ public class Crash extends Command {
     @Override
     public void onExecute(String[] args) {
         if (args.length == 0) {
-            ClientHelper.sendChat("Could you like provide the amount of packets to send? (~ 40 is pog)");
+            STL.notifyUser("Could you like provide the amount of packets to send? (~ 40 is pog)");
             return;
         }
         int amount;
         try {
             amount = Integer.parseInt(args[0]);
         } catch (Exception ignored) {
-            ClientHelper.sendChat("Im not sure if " + args[0] + " a number");
+            STL.notifyUser("Im not sure if " + args[0] + " a number");
             return;
         }
         ItemStack stack = new ItemStack(Items.WRITABLE_BOOK);

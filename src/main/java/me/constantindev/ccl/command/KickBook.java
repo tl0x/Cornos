@@ -2,7 +2,7 @@ package me.constantindev.ccl.command;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.helper.ClientHelper;
+import me.constantindev.ccl.etc.helper.STL;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.ListTag;
@@ -36,13 +36,13 @@ public class KickBook extends Command {
 
     @Override
     public void onExecute(String[] args) {
-        ClientHelper.sendChat("Get 4 of these in a named shulker and kill someone with it ;)");
-        ClientHelper.sendChat("Turn off chat to be immune");
+        STL.notifyUser("Get 4 of these in a named shulker and kill someone with it ;)");
+        STL.notifyUser("Turn off chat to be immune");
         assert Cornos.minecraft.player != null;
         int s = Cornos.minecraft.player.inventory.selectedSlot;
         ItemStack stack = Cornos.minecraft.player.inventory.getStack(s);
         if (stack.getItem() != Items.WRITABLE_BOOK) {
-            ClientHelper.sendChat("pls hold a writable book thx");
+            STL.notifyUser("pls hold a writable book thx");
             return;
         }
         String exploit = genBook(65533);

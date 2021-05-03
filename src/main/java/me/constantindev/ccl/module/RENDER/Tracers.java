@@ -10,12 +10,11 @@ package me.constantindev.ccl.module.RENDER;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.helper.RenderHelper;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.helper.Renderer;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.etc.render.RenderableBlock;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
@@ -28,14 +27,14 @@ import net.minecraft.util.math.Vec3d;
 import java.awt.*;
 
 public class Tracers extends Module {
-    Toggleable entities = new Toggleable("Entities", true);
-    Toggleable players = new Toggleable("Players", true);
-    Toggleable tracers = new Toggleable("Tracers", true);
-    Toggleable debug = new Toggleable("debug", false);
-    Num dist = new Num("Distance", 100, 1000, 10);
+    MConfToggleable entities = new MConfToggleable("Entities", true);
+    MConfToggleable players = new MConfToggleable("Players", true);
+    MConfToggleable tracers = new MConfToggleable("Tracers", true);
+    MConfToggleable debug = new MConfToggleable("debug", false);
+    MConfNum dist = new MConfNum("Distance", 100, 1000, 10);
 
     public Tracers() {
-        super("PlayerInfo", "Shows nearby entities and/or players", MType.RENDER);
+        super("PlayerInfo", "Shows nearby entities and/or players", ModuleType.RENDER);
         this.mconf.add(entities);
         this.mconf.add(players);
         this.mconf.add(dist);
@@ -66,15 +65,14 @@ public class Tracers extends Module {
                 if ((currE instanceof OtherClientPlayerEntity) && !p) continue;
                 else if (!e && !(currE instanceof OtherClientPlayerEntity)) continue;
                 Vec3d off = new Vec3d(currE.getWidth(), currE.getHeight(), currE.getWidth());
-                RenderableBlock rb = new RenderableBlock(currE.getPos().add(off.multiply(-.5)).add(0, off.y / 2, 0), gInit, (int) rInit2, 50, 255, off);
+                Renderer.renderBlockOutline(currE.getPos().add(off.multiply(-.5)).add(0, off.y / 2, 0), off, gInit, (int) rInit2, 50, 255);
                 //RenderHelper.addToQueue(rb);
-                this.rbq.add(rb);
-                if (((Toggleable) this.mconf.getByName("Tracers")).isEnabled() && !ModuleRegistry.budgetGraphicsInstance.isEnabled()) {
+                if (((MConfToggleable) this.mconf.getByName("Tracers")).isEnabled() && !ModuleRegistry.budgetGraphicsInstance.isEnabled()) {
                     Color c = Color.GREEN;
                     if (currE instanceof HostileEntity) c = Color.YELLOW;
                     if (currE instanceof PlayerEntity) c = Color.RED;
                     if (currE instanceof ItemEntity) c = Color.CYAN;
-                    RenderHelper.renderLine(currE.getPos(), RenderHelper.getCrosshairVector(), c, 1);
+                    Renderer.renderLine(currE.getPos(), Renderer.getCrosshairVector(), c, 1);
                 }
             }
         }

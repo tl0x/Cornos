@@ -2,11 +2,11 @@ package me.constantindev.ccl.module.MOVEMENT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.ms.ModuleType;
 
 public class MoonGravity extends Module {
     public MoonGravity() {
-        super("MoonGravity", "Makes you go weee", MType.MOVEMENT);
+        super("MoonGravity", "Makes you go weee", ModuleType.MOVEMENT);
     }
 
     @Override

@@ -2,8 +2,8 @@ package me.constantindev.ccl.module.WORLD;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.ms.MType;
-import me.constantindev.ccl.etc.render.RenderableBlock;
+import me.constantindev.ccl.etc.helper.Renderer;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
 import net.minecraft.util.Hand;
@@ -18,7 +18,7 @@ public class MidAirPlace extends Module {
     int timeout = 20;
 
     public MidAirPlace() {
-        super("MidAirPlace", "Allows you to place blocks midair", MType.WORLD);
+        super("MidAirPlace", "Allows you to place blocks midair", ModuleType.WORLD);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class MidAirPlace extends Module {
         if (hr instanceof BlockHitResult) {
             BlockPos bp = ((BlockHitResult) hr).getBlockPos();
             Vec3d vec3d = new Vec3d(bp.getX(), bp.getY(), bp.getZ());
-            this.rbq.add(new RenderableBlock(vec3d, 255, 50, 50, 255));
+            Renderer.renderBlockOutline(vec3d, new Vec3d(1, 1, 1), 50, 50, 255, 255);
             if (Cornos.minecraft.options.keyUse.isPressed()) {
                 timeout--;
                 if (timeout != 19 && timeout > 0) return;

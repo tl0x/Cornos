@@ -3,9 +3,9 @@ package me.constantindev.ccl.mixin.gui;
 import com.google.common.collect.Lists;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.ClientConfig;
-import me.constantindev.ccl.etc.config.Num;
-import me.constantindev.ccl.etc.config.Toggleable;
+import me.constantindev.ccl.etc.config.CConf;
+import me.constantindev.ccl.etc.config.MConfNum;
+import me.constantindev.ccl.etc.config.MConfToggleable;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
 import me.constantindev.ccl.module.ext.NoRender;
@@ -36,8 +36,8 @@ public class InGameHudMixin {
 
     @Inject(method = "render", at = @At("RETURN"))
     public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-        Hud hud = (Hud) ModuleRegistry.getByName("hud");
-        double rgbMulti = ((Num) ModuleRegistry.getByName("hud").mconf.getByName("rgbSpeed")).getValue();
+        Hud hud = (Hud) ModuleRegistry.search("hud");
+        double rgbMulti = ((MConfNum) ModuleRegistry.search("hud").mconf.getByName("rgbSpeed")).getValue();
         long elapsed = System.currentTimeMillis() - latestTime;
         if (elapsed != 0) latestTime = System.currentTimeMillis();
         rgbSeed += (elapsed * rgbMulti) / 20;
@@ -75,20 +75,20 @@ public class InGameHudMixin {
         }
         float[] ham = Color.RGBtoHSB(r, g, b, null);
         int rgb = Color.HSBtoRGB(ham[0], 0.6f, ham[2]);
-        ClientConfig.latestRGBVal = rgb;
+        CConf.latestRGBVal = rgb;
         if (swap > 10) {
             lastValues.add(rgb);
             swap = 0;
         }
 
-        if (ModuleRegistry.getByName("hud").isEnabled()) {
-            if (((Toggleable) hud.mconf.getByName("modules")).isEnabled()) {
+        if (ModuleRegistry.search("hud").isEnabled()) {
+            if (((MConfToggleable) hud.mconf.getByName("modules")).isEnabled()) {
                 boolean doRgb = Hud.themeColor.isRainbow();
                 AtomicInteger offset = new AtomicInteger(0);
                 List<Module> ml = ModuleRegistry.getAll();
                 List<Module> mlR = new ArrayList<>();
                 ml.forEach(module -> {
-                    if (module.isEnabled() && (((Toggleable) module.mconf.getByName("visible")).isEnabled()))
+                    if (module.isEnabled() && (((MConfToggleable) module.mconf.getByName("visible")).isEnabled()))
                         mlR.add(module);
                 });
                 mlR.sort(Comparator.comparingInt(o -> Cornos.minecraft.textRenderer.getWidth(o.name)));
@@ -110,26 +110,26 @@ public class InGameHudMixin {
                     Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 3, 2 + off, doRgb ? colorToUse : Hud.themeColor.getRGB());
                 });
             }
-            ClientConfig.hudElements.render(matrices, tickDelta);
+            CConf.hudElements.render(matrices, tickDelta);
         }
         for (Module m : ModuleRegistry.getAll()) {
             if (m.isEnabled()) m.onHudRender(matrices, tickDelta);
         }
-        if (ModuleRegistry.getByName("TabGUI").isEnabled() && ClientConfig.tabGUI != null) {
-            ClientConfig.tabGUI.render(matrices, tickDelta);
+        if (ModuleRegistry.search("TabGUI").isEnabled() && CConf.tabGUI != null) {
+            CConf.tabGUI.render(matrices, tickDelta);
         }
     }
 
     @Inject(at = {@At("HEAD")}, method = "renderStatusEffectOverlay", cancellable = true)
     private void renderStatusEffectOverlay(MatrixStack matrices, CallbackInfo ci) {
-        if (ModuleRegistry.getByName("hud").isEnabled()) {
+        if (ModuleRegistry.search("hud").isEnabled()) {
             ci.cancel();
         }
     }
 
     @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
     public void renderPumpkinOverlayReplacement(CallbackInfo ci) {
-        if (NoRender.pumpkin.isEnabled() && ModuleRegistry.getByName("norender").isEnabled()) {
+        if (NoRender.pumpkin.isEnabled() && ModuleRegistry.search("norender").isEnabled()) {
             ci.cancel();
             MatrixStack defaultM = new MatrixStack();
             int w2d = Cornos.minecraft.getWindow().getScaledWidth() / 2;

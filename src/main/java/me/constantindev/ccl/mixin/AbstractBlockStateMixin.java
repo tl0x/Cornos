@@ -17,7 +17,7 @@ public class AbstractBlockStateMixin {
 
     @Inject(at = {@At("HEAD")}, method = "getLuminance", cancellable = true)
     public void getLuminace(CallbackInfoReturnable<Integer> cir) {
-        if (xray == null) xray = ModuleRegistry.getByName("xray");
+        if (xray == null) xray = ModuleRegistry.search("xray");
         if (xray.isEnabled()) {
             cir.setReturnValue(15);
         }
@@ -25,7 +25,7 @@ public class AbstractBlockStateMixin {
 
     @Inject(at = {@At("TAIL")}, method = "isFullCube", cancellable = true)
     private void isFullCube(BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (freecam == null) freecam = ModuleRegistry.getByName("Freecam");
+        if (freecam == null) freecam = ModuleRegistry.search("Freecam");
         if (freecam.isEnabled()) {
             cir.setReturnValue(false);
         }

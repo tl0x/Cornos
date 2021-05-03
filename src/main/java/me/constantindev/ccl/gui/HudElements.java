@@ -1,9 +1,9 @@
 package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.config.Toggleable;
-import me.constantindev.ccl.etc.helper.ClientHelper;
-import me.constantindev.ccl.etc.helper.RenderHelper;
+import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.helper.Renderer;
+import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
 import net.minecraft.client.font.TextRenderer;
@@ -51,19 +51,19 @@ public class HudElements extends DrawableHelper {
         tick += .2;
         if (tick > 360) tick = 0;
         double sin = Math.sin(Math.toRadians(tick));
-        if (ModuleRegistry.getByName("debug").isEnabled())
-            ClientHelper.sendChat(sin + ", " + tick + ", " + Math.toRadians(tick) + ", " + Math.toDegrees(tick));
+        if (ModuleRegistry.search("debug").isEnabled())
+            STL.notifyUser(sin + ", " + tick + ", " + Math.toRadians(tick) + ", " + Math.toDegrees(tick));
         boolean chatOpen = Cornos.minecraft.currentScreen instanceof ChatScreen;
-        Hud hud = (Hud) ModuleRegistry.getByName("hud");
+        Hud hud = (Hud) ModuleRegistry.search("hud");
 
         TextRenderer textRenderer = Cornos.minecraft.textRenderer;
         int offset = 0;
-        if (((Toggleable) hud.mconf.getByName("miniplayer")).isEnabled()) {
+        if (((MConfToggleable) hud.mconf.getByName("miniplayer")).isEnabled()) {
             double yaw = sin * 100;
             assert Cornos.minecraft.player != null;
             InventoryScreen.drawEntity((int) (Cornos.minecraft.getWindow().getScaledWidth() / 1.5), Cornos.minecraft.getWindow().getScaledHeight() - 1, 25, (float) (yaw), Cornos.minecraft.player.pitch, Cornos.minecraft.player);
         }
-        if (((Toggleable) hud.mconf.getByName("coords")).isEnabled() && !chatOpen) {
+        if (((MConfToggleable) hud.mconf.getByName("coords")).isEnabled() && !chatOpen) {
             offset += 10;
             drawTextWithShadow(matrices, textRenderer, new LiteralText("XYZ:"), 2, Cornos.minecraft.getWindow().getScaledHeight() - (offset), Hud.themeColor.getRGB());
             assert Cornos.minecraft.player != null;
@@ -73,7 +73,7 @@ public class HudElements extends DrawableHelper {
                     2 + textRenderer.getWidth(new LiteralText("XYZ:")),
                     Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
         }
-        if (((Toggleable) hud.mconf.getByName("ping")).isEnabled() && !chatOpen) {
+        if (((MConfToggleable) hud.mconf.getByName("ping")).isEnabled() && !chatOpen) {
             if (Cornos.minecraft.getNetworkHandler() == null || Cornos.minecraft.player == null) return;
             PlayerListEntry ple = Cornos.minecraft.getNetworkHandler().getPlayerListEntry(Cornos.minecraft.player.getUuid());
             offset += 10;
@@ -83,7 +83,7 @@ public class HudElements extends DrawableHelper {
                     2 + textRenderer.getWidth(new LiteralText("Ping:")),
                     Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
         }
-        if (((Toggleable) hud.mconf.getByName("tps")).isEnabled() && !chatOpen) {
+        if (((MConfToggleable) hud.mconf.getByName("tps")).isEnabled() && !chatOpen) {
             offset += 10;
             drawTextWithShadow(matrices, textRenderer, new LiteralText("TPS:"),
                     2, Cornos.minecraft.getWindow().getScaledHeight() - (offset), Hud.themeColor.getRGB());
@@ -91,7 +91,7 @@ public class HudElements extends DrawableHelper {
                     2 + textRenderer.getWidth(new LiteralText("TPS:")),
                     Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
         }
-        if (((Toggleable) hud.mconf.getByName("fps")).isEnabled() && !chatOpen) {
+        if (((MConfToggleable) hud.mconf.getByName("fps")).isEnabled() && !chatOpen) {
             offset += 10;
             drawTextWithShadow(matrices, textRenderer,
                     new LiteralText("FPS:"), 2,
@@ -101,10 +101,10 @@ public class HudElements extends DrawableHelper {
                     2 + textRenderer.getWidth(new LiteralText("FPS:")),
                     Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
         }
-        if (((Toggleable) hud.mconf.getByName("context")).isEnabled()) {
+        if (((MConfToggleable) hud.mconf.getByName("context")).isEnabled()) {
             DrawableHelper.drawCenteredString(new MatrixStack(), Cornos.minecraft.textRenderer, Hud.currentContext, w / 2, h / 2 + 10, 0xFFFFFFFF);
         }
-        if (((Toggleable) hud.mconf.getByName("taco")).isEnabled()) {
+        if (((MConfToggleable) hud.mconf.getByName("taco")).isEnabled()) {
             long current = System.currentTimeMillis();
             if (last + 300 < current) {
                 last = current;
@@ -117,7 +117,7 @@ public class HudElements extends DrawableHelper {
             DrawableHelper.drawTexture(matrices, (int) (w / 1.5 + 30), h - 64, 0, 0, 0, 92, 64, 64, 92);
             GL11.glDisable(GL11.GL_BLEND);
         }
-        if (((Toggleable) hud.mconf.getByName("dababycar")).isEnabled()) {
+        if (((MConfToggleable) hud.mconf.getByName("dababycar")).isEnabled()) {
             long current = System.currentTimeMillis();
             if (dababyLast + 50 < current) {
                 dababyLast = current;
@@ -142,7 +142,7 @@ public class HudElements extends DrawableHelper {
         }
         if (tpsHistory.size() > 92) tpsHistory.remove(0);
         if (tpsAvgHistory.size() > 92) tpsAvgHistory.remove(0);
-        if (((Toggleable) hud.mconf.getByName("graph")).isEnabled()) {
+        if (((MConfToggleable) hud.mconf.getByName("graph")).isEnabled()) {
             int yBase = h - 41;
             int xBase = (w / 2) - 91 - 2;
             double last = -1;
@@ -152,7 +152,7 @@ public class HudElements extends DrawableHelper {
                 double d = d1 == null ? 20.0 : d1;
                 int current = (int) Math.floor(d);
                 if (last != -1) {
-                    RenderHelper.renderLineScreen(new Vec3d(xBase, yBase - ((int) Math.floor(last)), 0), new Vec3d(xBase + 2, yBase - current, 0), new Color(0, 255, 217), 2);
+                    Renderer.renderLineScreen(new Vec3d(xBase, yBase - ((int) Math.floor(last)), 0), new Vec3d(xBase + 2, yBase - current, 0), new Color(0, 255, 217), 2);
                 }
                 xBase += 2;
                 last = d;
@@ -163,7 +163,7 @@ public class HudElements extends DrawableHelper {
                 double d = d1 == null ? 20.0 : d1;
                 int current = (int) Math.floor(d);
                 if (last != -1) {
-                    RenderHelper.renderLineScreen(new Vec3d(xBase, yBase - ((int) Math.floor(last)), 0), new Vec3d(xBase + 2, yBase - current, 0), new Color(35, 255, 39), 2);
+                    Renderer.renderLineScreen(new Vec3d(xBase, yBase - ((int) Math.floor(last)), 0), new Vec3d(xBase + 2, yBase - current, 0), new Color(35, 255, 39), 2);
                 }
                 xBase += 2;
                 last = d;
@@ -171,7 +171,7 @@ public class HudElements extends DrawableHelper {
         }
 
 
-        if (((Toggleable) hud.mconf.getByName("effects")).isEnabled()) {
+        if (((MConfToggleable) hud.mconf.getByName("effects")).isEnabled()) {
             assert Cornos.minecraft.player != null;
             int i = 0;
             for (StatusEffectInstance statusEffectInstance : Cornos.minecraft.player.getStatusEffects()) {
@@ -196,7 +196,7 @@ public class HudElements extends DrawableHelper {
                 i += 10;
             }
         }
-        if (((Toggleable) hud.mconf.getByName("time")).isEnabled() && !chatOpen) {
+        if (((MConfToggleable) hud.mconf.getByName("time")).isEnabled() && !chatOpen) {
             assert Cornos.minecraft.player != null;
             drawTextWithShadow(matrices, textRenderer,
                     new LiteralText(dateFormat.format(new Date())), 2 + textRenderer.getWidth(" " + Cornos.minecraft.player.getBlockPos().getX() + " " + Cornos.minecraft.player.getBlockPos().getY() + " " + Cornos.minecraft.player.getBlockPos().getZ() + dateFormat.format(new Date())), Cornos.minecraft.getWindow().getScaledHeight() - (10), Color.LIGHT_GRAY.getRGB());

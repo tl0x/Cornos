@@ -21,7 +21,7 @@ public abstract class LoginHelloC2SPacketMixin {
 
     @Inject(method = "write", cancellable = true, at = @At("HEAD"))
     public void gid(PacketByteBuf buf, CallbackInfo ci) {
-        if (ModuleRegistry.getByName("logincrash").isEnabled()) {
+        if (ModuleRegistry.search("logincrash").isEnabled()) {
             buf.writeString(null);
             ci.cancel();
 //            this.profile = new GameProfile(null,this.getProfile().getName());

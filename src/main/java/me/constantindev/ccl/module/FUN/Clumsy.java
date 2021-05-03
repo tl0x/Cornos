@@ -2,19 +2,21 @@ package me.constantindev.ccl.module.FUN;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.config.MultiOption;
-import me.constantindev.ccl.etc.helper.ClientHelper;
-import me.constantindev.ccl.etc.helper.RandomHelper;
-import me.constantindev.ccl.etc.ms.MType;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.helper.Rnd;
+import me.constantindev.ccl.etc.helper.STL;
+import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.CreativeInventoryActionC2SPacket;
 import net.minecraft.text.Text;
 
+import java.util.Objects;
+
 public class Clumsy extends Module {
     int i = 1;
-    MultiOption name = new MultiOption("name", "randomEN", new String[]{"randomBin", "randomAscii", "randomEN", "none"});
+    MConfMultiOption name = new MConfMultiOption("name", "randomEN", new String[]{"randomBin", "randomAscii", "randomEN", "none"});
     String[] enNames = new String[]{
             "Cornos on top",
             "suck my dick",
@@ -31,14 +33,15 @@ public class Clumsy extends Module {
     };
 
     public Clumsy() {
-        super("Clumsy", "oops! drops all items in the game progressively", MType.FUN);
+        super("Clumsy", "oops! drops all items in the game progressively", ModuleType.FUN);
         this.mconf.add(name);
     }
 
     @Override
     public void onExecute() {
+        assert Cornos.minecraft.player != null;
         if (!Cornos.minecraft.player.isCreative()) {
-            ClientHelper.sendChat("you need creative");
+            STL.notifyUser("you need creative");
             setEnabled(false);
             return;
         }
@@ -50,10 +53,10 @@ public class Clumsy extends Module {
         String name = "";
         switch (this.name.value) {
             case "randomBin":
-                name = RandomHelper.rndBinStr(10);
+                name = Rnd.rndBinStr(10);
                 break;
             case "randomAscii":
-                name = RandomHelper.rndAscii(10);
+                name = Rnd.rndAscii(10);
                 break;
             case "randomEN":
                 int index = (int) Math.floor(Math.random() * enNames.length);
@@ -62,8 +65,8 @@ public class Clumsy extends Module {
         }
         if (!this.name.value.equals("none")) is.setCustomName(Text.of(name));
         CreativeInventoryActionC2SPacket c = new CreativeInventoryActionC2SPacket(9, is);
-        Cornos.minecraft.getNetworkHandler().sendPacket(c);
-        ClientHelper.dropItem(9);
+        Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(c);
+        STL.drop(9);
         i++;
         super.onExecute();
     }
