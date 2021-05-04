@@ -1,5 +1,9 @@
 package me.constantindev.ccl.etc.helper;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MConf;
@@ -19,28 +23,35 @@ public class ConfMan {
 
 
     public static void sconf() {
-        List<String> confFinal = new ArrayList<>();
-        ModuleRegistry.getAll().forEach(module -> {
-            List<String> configKeys = new ArrayList<>();
-            module.mconf.config.forEach(configKey -> configKeys.add(configKey.key + ":" + configKey.value));
-            confFinal.add(module.name + "=" + String.join(",", configKeys));
-        });
-        String finalC = String.join(";", confFinal);
-        List<String> enabledM = new ArrayList<>();
-        for (Module m : ModuleRegistry.getAll()) {
-            if (m.isEnabled()) enabledM.add(m.name);
+        JsonObject configContainer = new JsonObject();
+        JsonArray configuration = new JsonArray();
+        JsonArray enabled = new JsonArray();
+        for (Module module : ModuleRegistry.getAll()) {
+            if (module.isEnabled()) {
+                enabled.add(module.name);
+            }
+            JsonObject modConfig = new JsonObject();
+            modConfig.addProperty("module",module.name);
+            JsonArray actualConfig = new JsonArray();
+            for (MConf.ConfigKey configKey : module.mconf.config) {
+                JsonObject lol = new JsonObject();
+                lol.addProperty("key", configKey.key);
+                lol.addProperty("value", configKey.value);
+                actualConfig.add(lol);
+            }
+            modConfig.add("conf",actualConfig);
+            configuration.add(modConfig);
         }
-        String enabledMFinal = String.join(":", enabledM);
+        configContainer.add("config", configuration);
+        configContainer.add("enabledMods", enabled);
         try {
             boolean garbage;
             boolean garbage1 = true;
-            File f = new File(Cornos.minecraft.runDirectory + "/ccl_moduleconfig.bin");
+            File f = new File(Cornos.minecraft.runDirectory + "/ccl_moduleconfig.json");
             if (f.exists()) garbage1 = f.delete();
             garbage = f.createNewFile();
             FileWriter fw = new FileWriter(f);
-            fw.write(xor((char) 42069, finalC));
-            fw.write("\n");
-            fw.write(xor((char) 694, enabledMFinal));
+            fw.write(configContainer.toString());
             fw.flush();
             fw.close();
             if (garbage && garbage1) {
@@ -52,10 +63,9 @@ public class ConfMan {
 
     public static void lconf() {
         try {
-            File f = new File(Cornos.minecraft.runDirectory + "/ccl_moduleconfig.bin");
+            File f = new File(Cornos.minecraft.runDirectory + "/ccl_moduleconfig.json");
             if (!f.exists()) return;
             Scanner s = new Scanner(f);
-            StringBuilder sb = new StringBuilder();
             StringBuilder fileData = new StringBuilder();
             while (s.hasNextLine()) {
                 String data = s.nextLine();
@@ -63,30 +73,31 @@ public class ConfMan {
             }
             String fileDataS = fileData.toString();
             System.out.println(fileDataS);
-            sb.append(xor((char) 42069, fileDataS.split("\n")[0]));
-            try {
-                for (String str : xor((char) 694, fileDataS.split("\n")[1]).split(":")) {
-                    ModuleRegistry.search(str).setEnabled(true);
+            Gson g = new Gson();
+            JsonObject jobj = g.fromJson(fileDataS,JsonObject.class);
+            if (jobj.has("config")) {
+                JsonArray configBody = jobj.getAsJsonArray("config");
+                for (JsonElement configInner : configBody) {
+                    JsonObject configInnerJob = configInner.getAsJsonObject();
+                    String t = configInnerJob.get("module").getAsString();
+                    Module m = ModuleRegistry.search(t);
+                    if (m != null) {
+                        JsonArray confInner = configInnerJob.getAsJsonArray("conf");
+                        for (JsonElement jsonElement : confInner) {
+                            JsonObject configElementBody = jsonElement.getAsJsonObject();
+                            String k = configElementBody.get("key").getAsString();
+                            String v = configElementBody.get("value").getAsString();
+                            m.mconf.getOrDefault(k,new MConf.ConfigKey(k,v)).setValue(v);
+                        }
+                    }
                 }
-            } catch (Exception ignored) {
             }
-            System.out.println(sb);
-            for (String ck : sb.toString().split(";")) {
-                //System.out.println(ck);
-                String[] datapair = ck.split("=");
-                if (datapair.length != 2) continue;
-                String mname = datapair[0];
-                String config = datapair[1];
-                Module m = ModuleRegistry.search(mname);
-                //System.out.println(m);
-                if (m == null) continue;
-                Cornos.log(Level.INFO, "Loading config for module " + m.name);
-                if (config.isEmpty()) continue;
-                for (String v : config.split(",")) {
-                    String k = v.split(":")[0];
-                    String v1 = v.split(":")[1];
-                    m.mconf.getOrDefault(k, new MConf.ConfigKey(k, v1)).setValue(v1);
-                    Cornos.log(Level.INFO, "  " + k + " = " + v1);
+            if (jobj.has("enabledMods")) {
+                JsonArray cum = jobj.getAsJsonArray("enabledMods");
+                for (JsonElement jsonElement : cum) {
+                    String mname = jsonElement.getAsString();
+                    Module m = ModuleRegistry.search(mname);
+                    if (m != null) m.setEnabled(true);
                 }
             }
         } catch (Exception e) {
