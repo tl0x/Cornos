@@ -106,7 +106,9 @@ public class ConfMan {
             Module m = ModuleRegistry.search(mname);
             if (m != null) {
                 try {
+                    m.showNotifications = false;
                     m.setEnabled(true);
+                    m.showNotifications = true;
                 } catch (Exception ignored) {
                 }
             }
