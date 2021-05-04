@@ -69,7 +69,7 @@ public class MainScreen extends Screen {
         DrawableHelper.drawTexture(matrices, 0, 0, 0, 0, 0, width, height, height, width);
         Renderer.drawImage(matrices, new Identifier("ccl", "hscreenlogo.png"), -11, 1, 960 / 4, 233 / 4, (float) c.getRed() / 255, (float) c.getGreen() / 255, (float) c.getBlue() / 255);
         int diff = 32;
-        Renderer.renderRoundedQuad(new Vec3d(5, height - 5 - diff, 0), new Vec3d(211, height - 5, 0), 4, new Color(0, 0, 0, 20));
+        Renderer.renderRoundedQuad(5, height - 5 - diff, 211, height - 5, 4, new Color(0, 0, 0, 20));
         int centerX = 107;
         int centerY = (height - 5) / 2 + (height - 5 - diff) / 2 + 5;
         Date d = new Date();

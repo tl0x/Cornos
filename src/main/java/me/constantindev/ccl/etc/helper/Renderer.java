@@ -123,11 +123,11 @@ public class Renderer {
         GL11.glPopMatrix();
     }
 
-    public static void renderRoundedQuad(Vec3d from1, Vec3d to1, int rad, Color col) {
+    public static void renderRoundedQuad(double fromX, double fromY, double toX, double toY, int rad, Color col) {
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+
         GL11.glLineWidth(3);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_CULL_FACE);
@@ -135,32 +135,33 @@ public class Renderer {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glColor4f(col.getRed() / 255F, col.getGreen() / 255F, col.getBlue() / 255F, col.getAlpha() / 255F);
         GL11.glBegin(GL11.GL_POLYGON);
-        {
-            Vec3d to = to1.subtract(rad, rad, 0);
-            Vec3d from = from1.add(rad, rad, 0);
-            int initial = -90;
-            double[][] map = new double[][]{
-                    new double[]{to.x, to.y},
-                    new double[]{to.x, from.y},
-                    new double[]{from.x, from.y},
-                    new double[]{from.x, to.y}
-            };
-            for (int i = 0; i < 4; i++) {
-                double[] current = map[i];
-                initial += 90;
-                for (int r = initial; r < (360 / 4 + initial); r++) {
-                    double rad1 = Math.toRadians(r);
-                    double sin = Math.sin(rad1) * rad;
-                    double cos = Math.cos(rad1) * rad;
-                    GL11.glVertex2d(current[0] + sin, current[1] + cos);
-                }
+
+        double toX1 = toX - rad;
+        double toY1 = toY - rad;
+        double fromX1 = fromX + rad;
+        double fromY1 = fromY + rad;
+        int initial = -90;
+        double[][] map = new double[][]{
+                new double[]{toX1, toY1},
+                new double[]{toX1, fromY1},
+                new double[]{fromX1, fromY1},
+                new double[]{fromX1, toY1}
+        };
+        for (int i = 0; i < 4; i++) {
+            double[] current = map[i];
+            initial += 90;
+            for (int r = initial; r < (360 / 4 + initial); r++) {
+                double rad1 = Math.toRadians(r);
+                double sin = Math.sin(rad1) * rad;
+                double cos = Math.cos(rad1) * rad;
+                GL11.glVertex2d(current[0] + sin, current[1] + cos);
             }
         }
+
         GL11.glEnd();
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_BLEND);
-        GL11.glDisable(GL11.GL_LINE_SMOOTH);
         GL11.glPopMatrix();
     }
 

@@ -40,7 +40,7 @@ public class RoundedButtonWidget extends AbstractPressableButtonWidget {
         } else {
             c = unselectedColor;
         }
-        Renderer.renderRoundedQuad(new Vec3d(x, y, 0), new Vec3d(x + width, y + height, 0), r, c);
+        Renderer.renderRoundedQuad(x,y, x + width, y + height, r, c);
         drawCenteredText(matrices, Cornos.minecraft.textRenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, Color.white.getRGB());
     }
 }
