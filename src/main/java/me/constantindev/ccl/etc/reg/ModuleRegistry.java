@@ -107,6 +107,7 @@ public class ModuleRegistry {
         ml.add(new Clumsy());
         ml.add(new Safewalk());
         ml.add(new Twerk());
+        ml.add(new SpotifyConfig());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

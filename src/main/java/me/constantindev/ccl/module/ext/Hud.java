@@ -27,6 +27,7 @@ public class Hud extends Module {
         this.mconf.add(new MConfToggleable("modules", true));
         this.mconf.add(new MConfToggleable("miniplayer", true));
         this.mconf.add(new MConfToggleable("context", true));
+        this.mconf.add(new MConfToggleable("spotify", true));
         this.mconf.add(new MConfToggleable("taco", false));
         this.mconf.add(new MConfToggleable("dababycar", false));
         themeColor.setRainbow(true);
