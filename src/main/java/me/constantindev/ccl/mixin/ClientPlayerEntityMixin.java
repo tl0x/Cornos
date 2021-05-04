@@ -6,6 +6,7 @@ import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.Event;
+import me.constantindev.ccl.etc.helper.ConfMan;
 import me.constantindev.ccl.etc.helper.KeybindMan;
 import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
@@ -39,6 +40,7 @@ public class ClientPlayerEntityMixin {
             STL.update();
             CConf.checkedForUpdates = true;
         }
+        if (!ConfMan.enabledMods) ConfMan.enableModsToBeEnabled();
         for (Module m : ModuleRegistry.getAll()) {
             if (Cornos.minecraft.player == null) return; // so this mf will stop complaining
             try {

@@ -17,9 +17,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ConfMan {
-    private static String xor(char key, String content) {
-        return content;
-    }
+    private static JsonArray modReg;
+    public static boolean enabledMods = false;
 
 
     public static void sconf() {
@@ -93,16 +92,26 @@ public class ConfMan {
                 }
             }
             if (jobj.has("enabledMods")) {
-                JsonArray cum = jobj.getAsJsonArray("enabledMods");
-                for (JsonElement jsonElement : cum) {
-                    String mname = jsonElement.getAsString();
-                    Module m = ModuleRegistry.search(mname);
-                    if (m != null) m.setEnabled(true);
-                }
+                modReg = jobj.getAsJsonArray("enabledMods");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    public static void enableModsToBeEnabled() {
+        if (enabledMods) return;
+        enabledMods = true;
+        JsonArray cum = modReg;
+        for (JsonElement jsonElement : cum) {
+            String mname = jsonElement.getAsString();
+            Module m = ModuleRegistry.search(mname);
+            if (m != null) {
+                try {
+                    m.setEnabled(true);
+                } catch (Exception ignored) {}
+            }
+        }
     }
 }
