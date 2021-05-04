@@ -111,6 +111,7 @@ public class SpotifyIntegrationManager {
             get.addHeader("Authorization", "Bearer " + accessToken);
             HttpClient c = HttpClients.createDefault();
             HttpResponse hrs = c.execute(get);
+            if (hrs.getEntity() == null) return "";
             InputStream res = hrs.getEntity().getContent();
             ret = IOUtils.toString(res);
             System.out.println(ret);
