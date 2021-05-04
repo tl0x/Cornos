@@ -71,11 +71,13 @@ public class Module {
     }
 
     public final void setEnabled(boolean isEnabled) {
+        this.isOn.setState(isEnabled);
         if (isEnabled) {
+            if(this.showNotifications) Notification.create("Module toggle", new String[]{"§aEnabled§r " + this.name}, 1000);
             this.onEnable();
         } else {
+            if(this.showNotifications) Notification.create("Module toggle", new String[]{"§cDisabled§r " + this.name}, 1000);
             this.onDisable();
         }
-        this.isOn.setState(isEnabled);
     }
 }

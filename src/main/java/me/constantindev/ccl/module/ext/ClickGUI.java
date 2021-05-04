@@ -16,7 +16,7 @@ public class ClickGUI extends Module {
     public void onEnable() {
         if (CConf.cg == null) CConf.cg = new me.constantindev.ccl.gui.ClickGUI();
         Cornos.minecraft.openScreen(CConf.cg);
-        super.onEnable();
         this.setEnabled(false);
+        super.onEnable();
     }
 }
