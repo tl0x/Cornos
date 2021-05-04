@@ -44,7 +44,7 @@ public class ClientPlayerEntityMixin {
         for (Module m : ModuleRegistry.getAll()) {
             if (Cornos.minecraft.player == null) return; // so this mf will stop complaining
             try {
-                if (m.isEnabled()) m.onExecute();
+                if (m.isEnabled()) m.onExecuteIntern();
             } catch (Exception ignored) {
             }
         }

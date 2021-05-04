@@ -12,14 +12,11 @@ import org.apache.logging.log4j.Level;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class ConfMan {
-    private static JsonArray modReg;
     public static boolean enabledMods = false;
-
+    private static JsonArray modReg;
 
     public static void sconf() {
         JsonObject configContainer = new JsonObject();
@@ -30,7 +27,7 @@ public class ConfMan {
                 enabled.add(module.name);
             }
             JsonObject modConfig = new JsonObject();
-            modConfig.addProperty("module",module.name);
+            modConfig.addProperty("module", module.name);
             JsonArray actualConfig = new JsonArray();
             for (MConf.ConfigKey configKey : module.mconf.config) {
                 JsonObject lol = new JsonObject();
@@ -38,7 +35,7 @@ public class ConfMan {
                 lol.addProperty("value", configKey.value);
                 actualConfig.add(lol);
             }
-            modConfig.add("conf",actualConfig);
+            modConfig.add("conf", actualConfig);
             configuration.add(modConfig);
         }
         configContainer.add("config", configuration);
@@ -73,7 +70,7 @@ public class ConfMan {
             String fileDataS = fileData.toString();
             System.out.println(fileDataS);
             Gson g = new Gson();
-            JsonObject jobj = g.fromJson(fileDataS,JsonObject.class);
+            JsonObject jobj = g.fromJson(fileDataS, JsonObject.class);
             if (jobj.has("config")) {
                 JsonArray configBody = jobj.getAsJsonArray("config");
                 for (JsonElement configInner : configBody) {
@@ -86,7 +83,7 @@ public class ConfMan {
                             JsonObject configElementBody = jsonElement.getAsJsonObject();
                             String k = configElementBody.get("key").getAsString();
                             String v = configElementBody.get("value").getAsString();
-                            m.mconf.getOrDefault(k,new MConf.ConfigKey(k,v)).setValue(v);
+                            m.mconf.getOrDefault(k, new MConf.ConfigKey(k, v)).setValue(v);
                         }
                     }
                 }
@@ -110,7 +107,8 @@ public class ConfMan {
             if (m != null) {
                 try {
                     m.setEnabled(true);
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
             }
         }
     }

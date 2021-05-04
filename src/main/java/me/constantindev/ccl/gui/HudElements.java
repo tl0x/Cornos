@@ -112,9 +112,6 @@ public class HudElements extends DrawableHelper {
             SpotifyIntegrationManager.update();
             drawCenteredString(matrices, textRenderer, current, w - ((width) / 2) - 5, h - 16, 0xFFFFFF);
         }
-        if (((MConfToggleable) hud.mconf.getByName("context")).isEnabled()) {
-            DrawableHelper.drawCenteredString(new MatrixStack(), Cornos.minecraft.textRenderer, Hud.currentContext, w / 2, h / 2 + 10, 0xFFFFFFFF);
-        }
         if (((MConfToggleable) hud.mconf.getByName("taco")).isEnabled()) {
             long current = System.currentTimeMillis();
             if (last + 300 < current) {

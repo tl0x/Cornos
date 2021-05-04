@@ -37,6 +37,11 @@ public class Module {
         this.mconf.add(new MConfToggleable("visible", true));
     }
 
+    public final void onExecuteIntern() {
+        if (!this.isEnabled()) return;
+        onExecute();
+    }
+
     public void onExecute() {
     }
 
@@ -73,10 +78,12 @@ public class Module {
     public final void setEnabled(boolean isEnabled) {
         this.isOn.setState(isEnabled);
         if (isEnabled) {
-            if(this.showNotifications) Notification.create("Module toggle", new String[]{"§aEnabled§r " + this.name}, 1000);
+            if (this.showNotifications)
+                Notification.create("Module toggle", new String[]{"§aEnabled§r " + this.name}, 1000);
             this.onEnable();
         } else {
-            if(this.showNotifications) Notification.create("Module toggle", new String[]{"§cDisabled§r " + this.name}, 1000);
+            if (this.showNotifications)
+                Notification.create("Module toggle", new String[]{"§cDisabled§r " + this.name}, 1000);
             this.onDisable();
         }
     }

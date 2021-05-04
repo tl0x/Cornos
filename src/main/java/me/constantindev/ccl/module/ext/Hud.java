@@ -10,7 +10,6 @@ import java.awt.*;
 
 public class Hud extends Module {
     public static MConfColor themeColor = new MConfColor("theme", new Color(255, 255, 255));
-    public static String currentContext = "";
 
     public Hud() {
         super("HUD", "Will make shit fancy", ModuleType.RENDER);
@@ -26,7 +25,6 @@ public class Hud extends Module {
         this.mconf.add(new MConfToggleable("ping", true));
         this.mconf.add(new MConfToggleable("modules", true));
         this.mconf.add(new MConfToggleable("miniplayer", true));
-        this.mconf.add(new MConfToggleable("context", true));
         this.mconf.add(new MConfToggleable("spotify", true));
         this.mconf.add(new MConfToggleable("taco", false));
         this.mconf.add(new MConfToggleable("dababycar", false));
