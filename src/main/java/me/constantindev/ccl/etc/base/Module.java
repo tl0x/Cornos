@@ -23,8 +23,6 @@ public class Module {
     public boolean showNotifications = true;
     public List<RenderableBlock> rbq = new ArrayList<>();
     public List<RenderableLine> rlq = new ArrayList<>();
-    boolean calledVitalsOnenable = true;
-    boolean calledVitalsOndisable = true;
 
     public Module(String n, String d) {
         this(n, d, ModuleType.MISC);
@@ -37,26 +35,6 @@ public class Module {
         this.mconf = new MConf(this);
         this.mconf.add(new Keybind("keybind", -1));
         this.mconf.add(new MConfToggleable("visible", true));
-    }
-
-    public final void updateVitals() {
-        if (this.isOn.isOn()) {
-            this.calledVitalsOndisable = false;
-            if (!this.calledVitalsOnenable) {
-                this.onEnable();
-                this.calledVitalsOnenable = true;
-                if (showNotifications)
-                    Notification.create("Module toggle", new String[]{"§aEnabled§r " + this.name}, 1000);
-            }
-        } else {
-            this.calledVitalsOnenable = false;
-            if (!this.calledVitalsOndisable) {
-                this.onDisable();
-                if (showNotifications)
-                    Notification.create("Module toggle", new String[]{"§cDisabled§r " + this.name}, 1000);
-                this.calledVitalsOndisable = true;
-            }
-        }
     }
 
     public void onExecute() {

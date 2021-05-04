@@ -40,7 +40,6 @@ public class ClientPlayerEntityMixin {
             CConf.checkedForUpdates = true;
         }
         for (Module m : ModuleRegistry.getAll()) {
-            m.updateVitals();
             if (Cornos.minecraft.player == null) return; // so this mf will stop complaining
             try {
                 if (m.isEnabled()) m.onExecute();
