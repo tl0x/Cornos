@@ -35,7 +35,7 @@ public class BoatFly extends Module {
         assert Cornos.minecraft.player != null;
         Entity vehicle = Cornos.minecraft.player.getVehicle();
         if (vehicle == null) {
-            Notification.create("EntityFly", new String[]{"Disabled due to lack", "of riding entity"}, 5000);
+            Notification.create("EntityFly", new String[]{"Disabled due to lack", "of riding entity"}, 4000);
             this.setEnabled(false);
             return;
         }
@@ -55,7 +55,7 @@ public class BoatFly extends Module {
                 break;
             case "velocity":
             case "static":
-                float y = vehicle.yaw;
+                float y = Cornos.minecraft.player.yaw;
                 int mx = 0, my = 0, mz = 0;
                 if (go.keyJump.isPressed()) my++;
                 if (go.keyBack.isPressed()) mz++;
