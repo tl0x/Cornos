@@ -123,12 +123,7 @@ public class SpotifyIntegrationManager {
 
     public static String getPlaying() throws IOException {
         String r = getPlayingInternal();
-        if (r == null) {
-            SpotifyConfig.token.setValue("0");
-            login();
-            return "Unknown";
-        }
-        if (r.isEmpty()) {
+        if (r == null || r.isEmpty()) {
             return "Nothing";
         }
         Gson gson = new Gson();
@@ -136,6 +131,7 @@ public class SpotifyIntegrationManager {
         if (jobj.has("error")) {
             SpotifyConfig.token.setValue("0");
             login();
+            return "Unknown";
         }
         JsonObject item = jobj.getAsJsonObject("item");
         String name = item.get("name").getAsString();
