@@ -177,7 +177,7 @@ public class ClickGUI extends MinecraftGUI {
 
                             @Override
                             public void setKey(int key) {
-                                if (key == 47) kc.setValue(-1 + "");
+                                if (key == 47 || key == 0) kc.setValue(-1 + "");
                                 else kc.setValue(key + "");
                                 KeybindMan.reload();
                             }
