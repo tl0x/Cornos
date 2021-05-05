@@ -13,6 +13,7 @@ public class RoundedButtonWidget extends AbstractPressableButtonWidget {
     public Color unselectedColor = new Color(30, 30, 30, 100);
     public Color selectedColor = new Color(12, 12, 12, 100);
     protected int r;
+    long lastCache = 0;
     double timer = 0;
     Runnable onPressed;
 
@@ -36,8 +37,18 @@ public class RoundedButtonWidget extends AbstractPressableButtonWidget {
     @Override
     public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         if (this.isHovered()) {
-            timer+=0.05;
-        } else timer-=0.05;
+            long current = System.currentTimeMillis();
+            if(current-lastCache>3) {
+                lastCache = System.currentTimeMillis();
+                timer+=0.02;
+            }
+        } else {
+            long current = System.currentTimeMillis();
+            if(current-lastCache>3) {
+                lastCache = System.currentTimeMillis();
+                timer-=0.02;
+            }
+        }
         timer = MathHelper.clamp(timer,0,1);
         double a = easeInOutQuart(timer);
         if ((a*width) > r) Renderer.renderRoundedQuad(x,y,x+(a*width),y+height,r-1,selectedColor);
