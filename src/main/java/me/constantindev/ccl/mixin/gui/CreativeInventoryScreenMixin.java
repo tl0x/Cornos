@@ -31,7 +31,7 @@ public class CreativeInventoryScreenMixin extends Screen {
             if (this.client == null) return;
             this.client.openScreen(new FunnyItemsScreen());
         }));
-        this.addButton(new RoundedButtonWidget(1, 21, 120, 20, 5, Text.of("Heads"), () -> {
+        this.addButton(new RoundedButtonWidget(1, 22, 120, 20, 5, Text.of("Heads"), () -> {
             if (this.client == null) return;
             this.client.openScreen(new HeadsScreen());
         }));

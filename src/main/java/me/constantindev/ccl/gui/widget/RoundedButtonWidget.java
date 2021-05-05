@@ -5,6 +5,7 @@ import me.constantindev.ccl.etc.helper.Renderer;
 import net.minecraft.client.gui.widget.AbstractPressableButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.MathHelper;
 
 import java.awt.*;
 
@@ -12,6 +13,7 @@ public class RoundedButtonWidget extends AbstractPressableButtonWidget {
     public Color unselectedColor = new Color(30, 30, 30, 100);
     public Color selectedColor = new Color(12, 12, 12, 100);
     protected int r;
+    double timer = 0;
     Runnable onPressed;
 
     public RoundedButtonWidget(int x, int y, int width, int height, Text message, Runnable onPress) {
@@ -33,13 +35,17 @@ public class RoundedButtonWidget extends AbstractPressableButtonWidget {
 
     @Override
     public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        Color c;
         if (this.isHovered()) {
-            c = selectedColor;
-        } else {
-            c = unselectedColor;
-        }
-        Renderer.renderRoundedQuad(x, y, x + width, y + height, r, c);
+            timer+=0.05;
+        } else timer-=0.05;
+        timer = MathHelper.clamp(timer,0,1);
+        double a = easeInOutQuart(timer);
+        if ((a*width) > r) Renderer.renderRoundedQuad(x,y,x+(a*width),y+height,r-1,selectedColor);
+        Renderer.renderRoundedQuad(x, y, x + width, y + height, r, unselectedColor);
         drawCenteredText(matrices, Cornos.minecraft.textRenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, Color.white.getRGB());
+    }
+
+    double easeInOutQuart(double x) {
+        return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
     }
 }
