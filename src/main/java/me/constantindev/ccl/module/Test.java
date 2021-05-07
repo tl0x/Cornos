@@ -22,23 +22,8 @@ public class Test extends Module {
     }
 
     @Override
-    public void onRender(MatrixStack ms, float td) {
-        super.onRender(ms, td);
-    }
-
-    @Override
     public void onEnable() {
-        try {
-            ((GameRendererMixin) Cornos.minecraft.gameRenderer).setShader(new ShaderEffect(Cornos.minecraft.getTextureManager(),Cornos.minecraft.getResourceManager(),Cornos.minecraft.getFramebuffer(),new Identifier("shaders/post/green.json")));
-        } catch (Exception ig) {
-            ig.printStackTrace();
-        }
-        super.onEnable();
-    }
 
-    @Override
-    public void onDisable() {
-        ((GameRendererMixin) Cornos.minecraft.gameRenderer).setShader(null);
-        super.onDisable();
+        super.onEnable();
     }
 }

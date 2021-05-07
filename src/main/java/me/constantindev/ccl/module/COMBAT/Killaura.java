@@ -21,16 +21,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class Killaura extends Module {
-    MConfMultiOption mode = new MConfMultiOption("mode", "single", new String[]{"single", "multi"});
+    MConfMultiOption mode = new MConfMultiOption("mode", "multi", new String[]{"single", "multi"});
     MConfToggleable entities = new MConfToggleable("entities", false);
     MConfToggleable players = new MConfToggleable("players", true);
-    MConfToggleable mobs = new MConfToggleable("mobs", true);
+    MConfToggleable mobs = new MConfToggleable("mobs", false);
     MConfToggleable swing = new MConfToggleable("swing", true);
-    MConfNum range = new MConfNum("range", 3.0, 10.0, 1.0);
-    MConfNum delay = new MConfNum("delay", 2.0, 20.0, 0);
+    MConfNum range = new MConfNum("range", 4.0, 10.0, 1.0);
+    MConfNum delay = new MConfNum("delay", 12.52, 20.0, 0);
     MConfToggleable abNoname = new MConfToggleable("ab:noname", true);
     MConfToggleable abColorName = new MConfToggleable("ab:colorname", true);
-    MConfToggleable abInvalidName = new MConfToggleable("ab:invalidName", true);
+    MConfToggleable abInvalidName = new MConfToggleable("ab:invalidName", false);
     int delayWaited = 0;
     List<LivingEntity> attacks = new ArrayList<>();
 

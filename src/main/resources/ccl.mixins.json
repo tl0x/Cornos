@@ -41,6 +41,7 @@
     "gui.ServerEntryMixin",
     "gui.SplashScreenMixin",
     "gui.TitleScreenMixin",
+    "gui.WorldRendererMixin",
     "packet.ChatMessageC2SPacketMixin",
     "packet.CombatEventS2CPacketMixin",
     "packet.EntitySpawnS2CPacketMixin",

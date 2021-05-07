@@ -46,7 +46,7 @@ public class NotificationManager {
         int height = Cornos.minecraft.getWindow().getScaledHeight();
         double val = 0.0;
         if (curr-lastCurr>3) {
-            val = 0.01;
+            val = ((double)(curr-lastCurr))/400;
             lastCurr = curr;
         }
         for (Notification notification : Lists.reverse(notifs)) {
