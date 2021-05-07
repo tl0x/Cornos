@@ -6,16 +6,22 @@ import me.constantindev.ccl.etc.config.MConfNum;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
+import me.constantindev.ccl.etc.helper.Renderer;
 import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.options.Perspective;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.EntityType;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
 
+import java.awt.*;
 import java.util.Objects;
+import java.util.Random;
 
 public class Freecam extends Module {
     // this shit is excessively documented because even i dont understand how it works
@@ -25,7 +31,6 @@ public class Freecam extends Module {
     // start cache
     Vec3d startloc;
     float pitch = 0, yaw = 0;
-    OtherClientPlayerEntity clone;
 
     public Freecam() {
         super("Freecam", "Become a ghost and leave your body", ModuleType.RENDER);
@@ -49,13 +54,7 @@ public class Freecam extends Module {
         yaw = Cornos.minecraft.player.yaw;
         // make player entity that shows where we left off when we started the module
         assert Cornos.minecraft.world != null;
-        OtherClientPlayerEntity clone = new OtherClientPlayerEntity(Cornos.minecraft.world, Cornos.minecraft.player.getGameProfile());
-        clone.copyPositionAndRotation(Cornos.minecraft.player);
-        clone.headYaw = Cornos.minecraft.player.headYaw;
-        clone.copyFrom(Cornos.minecraft.player);
-        this.clone = clone;
-        // spawn the entity
-        Cornos.minecraft.world.addEntity(-69, clone);
+
         // make us fly & disable vanilla flight
         Cornos.minecraft.player.abilities.flying = true;
         Cornos.minecraft.player.abilities.setFlySpeed(0);
@@ -65,9 +64,6 @@ public class Freecam extends Module {
     @Override
     public void onDisable() {
         assert Cornos.minecraft.player != null;
-        // remove the fake player
-        if (clone != null) clone.remove();
-        clone = null;
         // place us back where we started
         if (startloc != null) {
             Cornos.minecraft.player.updatePositionAndAngles(startloc.x, startloc.y, startloc.z, yaw, pitch);
@@ -134,6 +130,12 @@ public class Freecam extends Module {
         Cornos.minecraft.player.noClip = true;
         assert Cornos.minecraft.cameraEntity != null;
         Cornos.minecraft.cameraEntity.noClip = true;
+
+        if(startloc != null) {
+
+            Renderer.renderBlockOutline(startloc.subtract(0.6/2,0,0.6/2),new Vec3d(0.6,1.8,0.6),50,255,173,255);
+            Renderer.renderLine(Renderer.getCrosshairVector(),startloc.subtract(0,-1.8/2,0),new Color(50,255, 173),2);
+        }
         super.onRender(ms, td);
     }
 }
