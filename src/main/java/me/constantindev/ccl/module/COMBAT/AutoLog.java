@@ -22,8 +22,9 @@ public class AutoLog extends Module {
         float h = Cornos.minecraft.player.getHealth();
         float mh = Cornos.minecraft.player.getMaxHealth();
         float hper = h / mh * 100;
-        if (hper < perHealth.getValue()) {
-            Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).getConnection().disconnect(Text.of("AutoLog reached " + hper + "% health"));
+        if (hper < perHealth.getValue() && h != 0) {
+            Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).getConnection().disconnect(Text.of("AutoLog reached " + hper + "% health. Autolog is disabled."));
+            this.setEnabled(false);
         }
         super.onExecute();
     }
