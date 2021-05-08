@@ -14,10 +14,10 @@ import java.awt.*;
 
 public class MConfColor extends MConf.ConfigKey {
     Color c;
-    boolean rainbow;
+    boolean rainbow = false;
 
     public MConfColor(String k, Color rgb) {
-        super(k, rgb.getRGB() + "");
+        super(k, rgb.getRGB() + ":0");
         this.c = rgb;
     }
 
@@ -29,6 +29,8 @@ public class MConfColor extends MConf.ConfigKey {
 
     public void setColor(Color newColor) {
         c = newColor;
+        String[] p = this.value.split(":");
+        this.value = newColor.getRGB()+":"+p[1];
     }
 
     public int getRGB() {
@@ -39,10 +41,16 @@ public class MConfColor extends MConf.ConfigKey {
 
     @Override
     public void setValue(String newV) {
-        if (!STL.tryParseI(newV)) return;
-        int bruh = Integer.parseInt(newV);
-        if (bruh > 0xFFFFFF || bruh < 0) return;
-        super.setValue(new Color(Integer.parseInt(newV)).getRGB() + "");
+        String[] pair = newV.split(":");
+        if (pair.length != 2) return;
+        String color = pair[0];
+        String rgb = pair[1].toLowerCase();
+        if (!rgb.equals("1") && !rgb.equals("0")) return;
+        if (!STL.tryParseI(color)) return;
+        int bruh = Integer.parseInt(color);
+        this.setRainbow(rgb.equals("1"));
+        this.setColor(new Color(bruh));
+        super.setValue(new Color(bruh).getRGB() + ":" + rgb);
     }
 
     public boolean isRainbow() {
@@ -51,5 +59,8 @@ public class MConfColor extends MConf.ConfigKey {
 
     public void setRainbow(boolean isRainbow) {
         rainbow = isRainbow;
+        String[] p = this.value.split(":");
+        String c = p[0];
+        this.value = c+":"+(rainbow?"1":"0");
     }
 }

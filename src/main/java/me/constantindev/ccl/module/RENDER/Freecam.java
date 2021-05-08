@@ -18,6 +18,7 @@ import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.shape.VoxelShape;
 
 import java.awt.*;
 import java.util.Objects;
@@ -132,7 +133,6 @@ public class Freecam extends Module {
         Cornos.minecraft.cameraEntity.noClip = true;
 
         if(startloc != null) {
-
             Renderer.renderBlockOutline(startloc.subtract(0.6/2,0,0.6/2),new Vec3d(0.6,1.8,0.6),50,255,173,255);
             Renderer.renderLine(Renderer.getCrosshairVector(),startloc.subtract(0,-1.8/2,0),new Color(50,255, 173),2);
         }
