@@ -8,7 +8,6 @@ import net.minecraft.client.network.ServerInfo;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
@@ -21,17 +20,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
 
 @Mixin(MultiplayerServerListWidget.ServerEntry.class)
 public class ServerEntryMixin {
 
-    @Shadow @Final private MultiplayerScreen screen;
-    @Shadow @Final private ServerInfo server;
     private final Identifier infoImage = new Identifier("ccl", "gui/infoicon16x.png");
+    @Shadow
+    @Final
+    private MultiplayerScreen screen;
+    @Shadow
+    @Final
+    private ServerInfo server;
     private byte INFO_RESOLVE_STATE = 0;
     private String realIP;
     private String protection;

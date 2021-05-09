@@ -10,8 +10,6 @@ package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.gui.MainScreen;
-import me.constantindev.ccl.mixin.GameRendererMixin;
-import net.minecraft.client.gl.ShaderEffect;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;

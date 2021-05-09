@@ -45,8 +45,8 @@ public class NotificationManager {
         int width = Cornos.minecraft.getWindow().getScaledWidth();
         int height = Cornos.minecraft.getWindow().getScaledHeight();
         double val = 0.0;
-        if (curr-lastCurr>3) {
-            val = ((double)(curr-lastCurr))/400;
+        if (curr - lastCurr > 3) {
+            val = ((double) (curr - lastCurr)) / 400;
             lastCurr = curr;
         }
         for (Notification notification : Lists.reverse(notifs)) {
@@ -68,11 +68,11 @@ public class NotificationManager {
             Color rc = Hud.themeColor.getColor();
             DrawableHelper.fill(matrices, (int) (width - xOff - 1), height - offset - dheight - 1, width, height - offset + 1, rc.getRGB());
             DrawableHelper.fill(matrices, (int) (width - xOff), height - offset - dheight, width - 3, height - offset, new Color(30, 30, 30).getRGB());
-            String t = Cornos.minecraft.textRenderer.trimToWidth(notification.title,(int)Math.floor(xOff));
+            String t = Cornos.minecraft.textRenderer.trimToWidth(notification.title, (int) Math.floor(xOff));
             Cornos.minecraft.textRenderer.draw(matrices, t, (float) ((width - xOff + 1)), (float) ((height - offset - dheight + 1)), 0xFFFFFFFF);
             int off1 = 12;
             for (String s : notification.description) {
-                StringVisitable td = Cornos.minecraft.textRenderer.trimToWidth(Text.of(s),(int)Math.floor(xOff));
+                StringVisitable td = Cornos.minecraft.textRenderer.trimToWidth(Text.of(s), (int) Math.floor(xOff));
                 Cornos.minecraft.textRenderer.draw(matrices, td.getString(), (float) ((width - xOff + 1)), (float) ((height - offset - dheight + off1)), 0xFFFFFFFF);
                 off1 += 9;
             }

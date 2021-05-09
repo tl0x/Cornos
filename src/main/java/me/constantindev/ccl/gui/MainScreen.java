@@ -2,7 +2,6 @@ package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.Renderer;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
 import me.constantindev.ccl.module.ClientProgression;
 import net.minecraft.client.gui.DrawableHelper;

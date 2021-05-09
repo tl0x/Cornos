@@ -2,7 +2,6 @@ package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.NameTags;
-import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -27,14 +26,10 @@ public abstract class EntityRendererMixin<T extends Entity> {
     @Final
     protected EntityRenderDispatcher dispatcher;
 
-    @Shadow
-    protected abstract void renderLabelIfPresent(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light);
-
-    @Shadow
-    public abstract TextRenderer getFontRenderer();
-
     @Inject(at = {@At("HEAD")}, method = "renderLabelIfPresent", cancellable = true)
     private void onRenderLabel(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
+        if (entity.getCustomName() != null && entity.getCustomName().equals(Text.of("DoNotRenderThisUsernameISwearToGod")))
+            ci.cancel();
         //GL11.glDisable(GL11.GL_LIGHTING);
         if (ModuleRegistry.search("Nametags").isEnabled()) {
             if (entity instanceof PlayerEntity) {

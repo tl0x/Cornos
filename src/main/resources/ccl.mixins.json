@@ -12,7 +12,6 @@
     "ClientPlayNetworkHandlerMixin",
     "ClientWorldMixin",
     "EntityRendererMixin",
-    "GameRendererMixin",
     "IdentifierMixin",
     "ItemStackMixin",
     "LivingEntityAccessor",

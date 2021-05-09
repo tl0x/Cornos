@@ -30,7 +30,7 @@ public class NoFall extends Module {
         this.mconf.add(fallDistance);
         this.mconf.add(mode);
         Module parent = this;
-        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND,event -> {
+        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
             if (pe.packet instanceof PlayerMoveC2SPacket && parent.isEnabled() && mode.value.equalsIgnoreCase("onground")) {
                 PlayerMoveC2SPacket p = (PlayerMoveC2SPacket) pe.packet;

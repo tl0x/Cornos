@@ -12,6 +12,7 @@ import me.constantindev.ccl.module.FUN.Twerk;
 import me.constantindev.ccl.module.MOVEMENT.*;
 import me.constantindev.ccl.module.RENDER.Animations;
 import me.constantindev.ccl.module.RENDER.Freecam;
+import me.constantindev.ccl.module.RENDER.PVPInfo;
 import me.constantindev.ccl.module.RENDER.Tracers;
 import me.constantindev.ccl.module.WORLD.*;
 import me.constantindev.ccl.module.ext.*;
@@ -107,7 +108,7 @@ public class ModuleRegistry {
         ml.add(new Clumsy());
         ml.add(new Safewalk());
         ml.add(new Twerk());
-        ml.add(new SpotifyConfig());
+        ml.add(new PVPInfo());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

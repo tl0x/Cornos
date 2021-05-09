@@ -38,20 +38,20 @@ public class RoundedButtonWidget extends AbstractPressableButtonWidget {
     public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         if (this.isHovered()) {
             long current = System.currentTimeMillis();
-            if(current-lastCache>3) {
+            if (current - lastCache > 3) {
                 lastCache = System.currentTimeMillis();
-                timer+=0.02;
+                timer += 0.02;
             }
         } else {
             long current = System.currentTimeMillis();
-            if(current-lastCache>3) {
+            if (current - lastCache > 3) {
                 lastCache = System.currentTimeMillis();
-                timer-=0.02;
+                timer -= 0.02;
             }
         }
-        timer = MathHelper.clamp(timer,0,1);
+        timer = MathHelper.clamp(timer, 0, 1);
         double a = easeInOutQuart(timer);
-        if ((a*width) > r) Renderer.renderRoundedQuad(x,y,x+(a*width),y+height,r-1,selectedColor);
+        if ((a * width) > r) Renderer.renderRoundedQuad(x, y, x + (a * width), y + height, r - 1, selectedColor);
         Renderer.renderRoundedQuad(x, y, x + width, y + height, r, unselectedColor);
         drawCenteredText(matrices, Cornos.minecraft.textRenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, Color.white.getRGB());
     }

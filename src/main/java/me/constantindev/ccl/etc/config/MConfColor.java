@@ -30,7 +30,7 @@ public class MConfColor extends MConf.ConfigKey {
     public void setColor(Color newColor) {
         c = newColor;
         String[] p = this.value.split(":");
-        this.value = newColor.getRGB()+":"+p[1];
+        this.value = newColor.getRGB() + ":" + p[1];
     }
 
     public int getRGB() {
@@ -61,6 +61,6 @@ public class MConfColor extends MConf.ConfigKey {
         rainbow = isRainbow;
         String[] p = this.value.split(":");
         String c = p[0];
-        this.value = c+":"+(rainbow?"1":"0");
+        this.value = c + ":" + (rainbow ? "1" : "0");
     }
 }

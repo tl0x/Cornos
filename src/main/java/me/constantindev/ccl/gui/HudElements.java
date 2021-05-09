@@ -1,13 +1,11 @@
 package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.SpotifyIntegrationManager;
 import me.constantindev.ccl.etc.config.MConfToggleable;
 import me.constantindev.ccl.etc.helper.Renderer;
 import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
-import me.constantindev.ccl.module.ext.SpotifyConfig;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.ChatScreen;
@@ -103,14 +101,6 @@ public class HudElements extends DrawableHelper {
                     new LiteralText(" " + Cornos.minecraft.fpsDebugString.split(" ")[0]),
                     2 + textRenderer.getWidth(new LiteralText("FPS:")),
                     Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
-        }
-        if (((MConfToggleable) hud.mconf.getByName("spotify")).isEnabled()) {
-            String current = SpotifyConfig.token.value.substring(1).isEmpty() ? "Please log in" : spotPlaying;
-            int width = Math.max(textRenderer.getWidth(current) + 20, textRenderer.getWidth("Spotify") + 20);
-            Renderer.renderRoundedQuad(w - width - 5, h - 30, w - 5, h - 5, 5, new Color(0, 0, 0, 40));
-            drawCenteredString(matrices, textRenderer, "Spotify", w - ((width) / 2) - 5, h - 28, 0xFFFFFF);
-            SpotifyIntegrationManager.update();
-            drawCenteredString(matrices, textRenderer, current, w - ((width) / 2) - 5, h - 16, 0xFFFFFF);
         }
         if (((MConfToggleable) hud.mconf.getByName("taco")).isEnabled()) {
             long current = System.currentTimeMillis();

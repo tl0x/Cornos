@@ -65,14 +65,18 @@ public class Tracers extends Module {
                 if ((currE instanceof OtherClientPlayerEntity) && !p) continue;
                 else if (!e && !(currE instanceof OtherClientPlayerEntity)) continue;
                 Vec3d off = new Vec3d(currE.getWidth(), currE.getHeight(), currE.getWidth());
-                Renderer.renderBlockOutline(currE.getPos().add(off.multiply(-.5)).add(0, off.y / 2, 0), off, gInit, (int) rInit2, 50, 255);
+                Vec3d currEV = currE.getPos();
+
+                Renderer.renderBlockOutline(currEV.add(off.multiply(-.5)).add(0, off.y / 2, 0), off, gInit, (int) rInit2, 50, 255);
                 //RenderHelper.addToQueue(rb);
                 if (((MConfToggleable) this.mconf.getByName("Tracers")).isEnabled() && !ModuleRegistry.budgetGraphicsInstance.isEnabled()) {
                     Color c = Color.GREEN;
-                    if (currE instanceof HostileEntity) c = Color.YELLOW;
-                    if (currE instanceof PlayerEntity) c = Color.RED;
-                    if (currE instanceof ItemEntity) c = Color.CYAN;
-                    Renderer.renderLine(currE.getPos(), Renderer.getCrosshairVector(), c, 1);
+                    if (PVPInfo.current != null && PVPInfo.current.getUuid().equals(currE.getUuid()))
+                        c = new Color(0, 255, 136);
+                    else if (currE instanceof HostileEntity) c = Color.YELLOW;
+                    else if (currE instanceof PlayerEntity) c = Color.RED;
+                    else if (currE instanceof ItemEntity) c = Color.CYAN;
+                    Renderer.renderLine(currEV.add(0, currE.getHeight() / 2, 0), Renderer.getCrosshairVector(), c, 1);
                 }
             }
         }

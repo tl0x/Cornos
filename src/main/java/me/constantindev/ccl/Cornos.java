@@ -2,7 +2,6 @@ package me.constantindev.ccl;
 
 import com.thealtening.auth.TheAlteningAuthentication;
 import me.constantindev.ccl.etc.NotificationManager;
-import me.constantindev.ccl.etc.SpotifyIntegrationManager;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.event.EventHelper;
@@ -79,8 +78,6 @@ public class Cornos implements ModInitializer {
         ConfMan.lconf();
         log(Level.INFO, "Registering all keybinds");
         KeybindMan.init();
-        log(Level.INFO, "Starting spotify integration");
-        SpotifyIntegrationManager.init();
         log(Level.INFO, "All features registered. Ready to load game");
 
         fastUpdater = new Thread(() -> {

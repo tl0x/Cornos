@@ -8,7 +8,6 @@ import me.constantindev.ccl.etc.config.MConfToggleable;
 import me.constantindev.ccl.etc.helper.Rnd;
 import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.client.render.SkyProperties;
-import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -22,7 +21,7 @@ public class Vibe extends Module {
     public static MConfNum dim = new MConfNum("brightness", 80, 100, 0);
     public static MConfNum ch = new MConfNum("cloudsHeight", 128, 255, 0);
     public static MConfNum rgbnoise = new MConfNum("rgbNoise", 5, 100, 0);
-    public static MConfColor blockOutline = new MConfColor("blockOutline", new Color(0,0,0));
+    public static MConfColor blockOutline = new MConfColor("blockOutline", new Color(0, 0, 0));
     static double prevOff = 0;
 
     public Vibe() {
