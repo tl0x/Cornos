@@ -19,6 +19,10 @@ public class ConfMan {
     private static JsonArray modReg;
 
     public static void sconf() {
+        if (!enabledMods) {
+            Cornos.log(Level.INFO,"Not saving config due to modules not being enabled from config.");
+            return;
+        }
         JsonObject configContainer = new JsonObject();
         JsonArray configuration = new JsonArray();
         JsonArray enabled = new JsonArray();
@@ -68,7 +72,6 @@ public class ConfMan {
                 fileData.append(data).append("\n");
             }
             String fileDataS = fileData.toString();
-            System.out.println(fileDataS);
             Gson g = new Gson();
             JsonObject jobj = g.fromJson(fileDataS, JsonObject.class);
             if (jobj.has("config")) {

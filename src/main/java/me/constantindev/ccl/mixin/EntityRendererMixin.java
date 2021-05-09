@@ -28,8 +28,10 @@ public abstract class EntityRendererMixin<T extends Entity> {
 
     @Inject(at = {@At("HEAD")}, method = "renderLabelIfPresent", cancellable = true)
     private void onRenderLabel(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
-        if (entity.getCustomName() != null && entity.getCustomName().equals(Text.of("DoNotRenderThisUsernameISwearToGod")))
+        if (entity.getCustomName() != null && entity.getCustomName().equals(Text.of("DoNotRenderThisUsernameISwearToGod"))) {
             ci.cancel();
+            return;
+        }
         //GL11.glDisable(GL11.GL_LIGHTING);
         if (ModuleRegistry.search("Nametags").isEnabled()) {
             if (entity instanceof PlayerEntity) {
