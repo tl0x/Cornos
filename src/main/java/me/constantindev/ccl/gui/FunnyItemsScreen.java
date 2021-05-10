@@ -84,11 +84,11 @@ public class FunnyItemsScreen extends Screen {
         standAuraName = new TextFieldWidget(textRenderer, 5, 130, 200, 20, Text.of("Sus"));
         standAuraName.setMaxLength(65535);
         auraText = new TextFieldWidget(textRenderer, 5, 165, 200, 20, Text.of("Your Text that hologramAura will build"));
-        auraText.setMaxLength(40);
+        auraText.setMaxLength(65535);
         RoundedButtonWidget enableStandAura = new RoundedButtonWidget(5, 190, 200, 20, Text.of("Enable stand aura"), () -> {
             if (standAuraName.getText().isEmpty()) return;
             HologramAura.message = standAuraName.getText();
-            HologramAura.message2build = auraText.getText();
+            HologramAura.argument = auraText.getText();
             //System.out.println(HologramAura.message2build);
             ModuleRegistry.search("hologramaura").setEnabled(true);
         });
@@ -201,7 +201,7 @@ public class FunnyItemsScreen extends Screen {
         standAuraName.render(matrices, mouseX, mouseY, delta);
         pos.render(matrices, mouseX, mouseY, delta);
         auraText.render(matrices, mouseX, mouseY, delta);
-        DrawableHelper.drawCenteredString(matrices, textRenderer, "Hologram Text to build", 105, 155, 0xFFFFFF);
+        DrawableHelper.drawCenteredString(matrices, textRenderer, "Hologram arg (Text / URL)", 105, 155, 0xFFFFFF);
         // item presets
         DrawableHelper.drawCenteredString(matrices, textRenderer, "Funny items²", 310, 5, 0xFFFFFF);
         DrawableHelper.drawCenteredString(matrices, textRenderer, "Cornos raid kit", 515, 5, 0xFFFFFF);

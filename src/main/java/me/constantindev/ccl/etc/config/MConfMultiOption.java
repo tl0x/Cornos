@@ -14,11 +14,14 @@ public class MConfMultiOption extends MConf.ConfigKey {
     @Override
     public void setValue(String newV) {
         boolean pass = false;
+        int currentIndex = 0;
         for (String s : possibleValues) {
             if (s.equals(newV)) {
                 pass = true;
+                current = currentIndex;
                 break;
             }
+            currentIndex++;
         }
         if (!pass) {
             STL.notifyUser("[Config] You tried to set a value that is not possible. The values you can set are " + String.join(", ", possibleValues));
