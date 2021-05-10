@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "id": "ccl",
-  "version": "${version}",
+  "version": "1.5.3",
   "name": "Cornos",
-  "description": "swag client",
+  "description": "Utility Mod for Minecraft",
   "authors": [
     "ConstantinDev"
   ],
