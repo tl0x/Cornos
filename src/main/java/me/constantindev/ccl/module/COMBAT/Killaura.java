@@ -85,6 +85,9 @@ public class Killaura extends Module {
                 for (Entity e : entities) {
                     if (!(e instanceof LivingEntity)) continue;
                     LivingEntity le1 = (LivingEntity) e;
+                    if (le1 instanceof PlayerEntity && Cornos.friendsManager.getFriends().containsKey(le1.getName().asString())) {
+                        return;
+                    }
                     if (le1.isDead() || !le1.isAttackable()) continue;
                     attacks.add(le1);
                     break;
@@ -94,6 +97,9 @@ public class Killaura extends Module {
                 entities.forEach(entity -> {
                     if (!(entity instanceof LivingEntity)) return;
                     LivingEntity le1 = (LivingEntity) entity;
+                    if (le1 instanceof PlayerEntity && Cornos.friendsManager.getFriends().containsKey(le1.getName().asString())) {
+                        return;
+                    }
                     if (le1.isDead() || !le1.isAttackable()) return;
                     attacks.add(le1);
                 });

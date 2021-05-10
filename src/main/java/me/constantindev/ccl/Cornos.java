@@ -1,6 +1,7 @@
 package me.constantindev.ccl;
 
 import com.thealtening.auth.TheAlteningAuthentication;
+import me.constantindev.ccl.etc.FriendsManager;
 import me.constantindev.ccl.etc.NotificationManager;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.CConf;
@@ -34,6 +35,7 @@ public class Cornos implements ModInitializer {
     public static MinecraftClient minecraft = MinecraftClient.getInstance();
     public static Thread fastUpdater;
     public static NotificationManager notifMan;
+    public static FriendsManager friendsManager;
 
     public static me.constantindev.ccl.module.ext.ClientConfig config;
 
@@ -64,6 +66,7 @@ public class Cornos implements ModInitializer {
         Registry.register(Registry.SOUND_EVENT, BONG_SOUND.getId(), BONG_SOUND);
         Registry.register(Registry.SOUND_EVENT, HITMARKER_SOUND.getId(), HITMARKER_SOUND);
         notifMan = new NotificationManager();
+        friendsManager = new FriendsManager();
 
         log(Level.INFO, "Initializing configuration");
         CConf.init();

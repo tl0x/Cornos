@@ -109,6 +109,7 @@ public class ModuleRegistry {
         ml.add(new Safewalk());
         ml.add(new Twerk());
         ml.add(new PVPInfo());
+        ml.add(new NameProtect());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

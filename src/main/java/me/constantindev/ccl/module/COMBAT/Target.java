@@ -41,6 +41,9 @@ public class Target extends Module {
             if ((e instanceof PlayerEntity) && !players.isEnabled()) continue;
             if (!entities.isEnabled() && !(e instanceof PlayerEntity)) continue;
             LivingEntity le = (LivingEntity) e;
+            if (Cornos.friendsManager.getFriends().containsKey(e.getName().asString())) {
+                return;
+            }
             if (e.getBoundingBox().intersects(selector) && e.getUuid() != Cornos.minecraft.player.getUuid() && e.isAttackable() && !le.isDead()) {
                 Vec3d finP = e.getPos().add(0, e.getHeight() / 2, 0);
                 Cornos.minecraft.player.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, finP);

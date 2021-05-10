@@ -12,6 +12,7 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MConfNum;
 import me.constantindev.ccl.etc.ms.ModuleType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.hit.EntityHitResult;
 
 public class TriggerBot extends Module {
@@ -33,6 +34,9 @@ public class TriggerBot extends Module {
             EntityHitResult ehr = (EntityHitResult) Cornos.minecraft.crosshairTarget;
             if (!ehr.getEntity().isAttackable() || !ehr.getEntity().isAlive()) return;
             assert Cornos.minecraft.interactionManager != null;
+            if (ehr.getEntity() instanceof PlayerEntity && Cornos.friendsManager.getFriends().containsKey(ehr.getEntity().getName().asString())) {
+                return;
+            }
             Cornos.minecraft.interactionManager.attackEntity(Cornos.minecraft.player, ehr.getEntity());
 
         }

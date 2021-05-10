@@ -33,7 +33,7 @@ public class ServerEntryMixin {
     @Shadow
     @Final
     private ServerInfo server;
-    private byte INFO_RESOLVE_STATE = 0;
+    private byte infoResolveState = 0;
     private String realIP;
     private String protection;
 
@@ -48,11 +48,11 @@ public class ServerEntryMixin {
         List<Text> list = new ArrayList<>(Collections.emptyList());
         list.add(Text.of("Host: " + server.address));
         wrapLong("Version: " + server.version.getString() + " - " + server.protocolVersion, list);
-        if (INFO_RESOLVE_STATE == 0) {
+        if (infoResolveState == 0) {
             try {
                 InetAddress address = java.net.InetAddress.getByName(server.address);
                 realIP = address.getHostAddress();
-                INFO_RESOLVE_STATE = 1;
+                infoResolveState = 1;
                 MultiplayerServerListWidgetAccessor.getServerPingerThreadPool().submit(() -> {
                     if (Cornos.minecraft.currentScreen instanceof MultiplayerScreen) {
                         MultiplayerScreen multiplayerScreen = (MultiplayerScreen) Cornos.minecraft.currentScreen;
@@ -70,17 +70,17 @@ public class ServerEntryMixin {
                             e.printStackTrace();
                         }
                     }
-                    INFO_RESOLVE_STATE = 2;
+                    infoResolveState = 2;
                 });
-                if (INFO_RESOLVE_STATE != 2) {
+                if (infoResolveState != 2) {
                     protection = "\u00A7cError";
                 }
-                INFO_RESOLVE_STATE = 2;
+                infoResolveState = 2;
             } catch (UnknownHostException e) {
                 realIP = "\u00A7cError";
-                INFO_RESOLVE_STATE = 1;
+                infoResolveState = 1;
                 protection = "\u00A7cError";
-                INFO_RESOLVE_STATE = 2;
+                infoResolveState = 2;
             }
         }
         list.add(Text.of("Address: " + realIP));

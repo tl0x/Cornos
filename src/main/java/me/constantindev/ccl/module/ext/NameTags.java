@@ -43,6 +43,9 @@ public class NameTags extends Module {
             return;
         }
         if (entity instanceof PlayerEntity) {
+            if (Cornos.friendsManager.getFriends().containsKey(tag)) {
+                tag = "\u00A79" + Cornos.friendsManager.getFriends().get(tag).getFakeName();
+            }
             matrices.push();
             float scale = 3F;
             scale /= 50.0f;
