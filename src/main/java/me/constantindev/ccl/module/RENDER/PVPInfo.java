@@ -75,12 +75,12 @@ public class PVPInfo extends Module {
             Renderer.renderLineScreen(new Vec3d(x2, y1, 0), new Vec3d(x2, y2, 0), Hud.themeColor.getColor(), 2);
             Renderer.renderLineScreen(new Vec3d(x2, y2, 0), new Vec3d(x1, y2, 0), Hud.themeColor.getColor(), 2);
             Renderer.renderLineScreen(new Vec3d(x1, y2, 0), new Vec3d(x1, y1, 0), Hud.themeColor.getColor(), 2);
-            DrawableHelper.drawCenteredString(ms, Cornos.minecraft.textRenderer, uname, x1 + (width / 2), y1 + 2, Color.WHITE.getRGB());
+            InventoryScreen.drawEntity(x1 + 8, y1 + 30, 15, (float) -(w1 / 10), (float) -(h / 10), current);
+            Cornos.minecraft.textRenderer.draw(ms,uname,x2-Cornos.minecraft.textRenderer.getWidth(uname)-1,y1+2,0xFFFFFF);
             GL11.glScaled(innerCompScale, innerCompScale, innerCompScale);
             Cornos.minecraft.textRenderer.draw(ms, "Distance: " + distLatest, (float) ((x1 + 8 + 7 + 2) / innerCompScale), (float) ((y1 + 11) / innerCompScale), Color.WHITE.getRGB());
             Cornos.minecraft.textRenderer.draw(ms, "Health: " + ((int) Math.floor(current.getHealth())) + " / " + ((int) Math.floor(current.getMaxHealth())), (float) ((x1 + 8 + 7 + 2) / innerCompScale), (float) ((y1 + 11 + 10) / innerCompScale), Color.WHITE.getRGB());
             GL11.glScaled(1 / innerCompScale, 1 / innerCompScale, 1 / innerCompScale);
-            InventoryScreen.drawEntity(x1 + 8, y1 + 30, 15, (float) -(w1 / 10), (float) -(h / 10), current);
             current.setCustomName(null);
         }
         super.onHudRender(ms, td);

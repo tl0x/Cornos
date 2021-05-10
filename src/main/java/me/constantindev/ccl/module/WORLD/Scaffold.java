@@ -4,9 +4,12 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MConfToggleable;
 import me.constantindev.ccl.etc.ms.ModuleType;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.c2s.play.HandSwingC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -61,7 +64,7 @@ public class Scaffold extends Module {
                 else {
                     for (int i = 0; i < 9; i++) {
                         ItemStack currStack = Cornos.minecraft.player.inventory.getStack(i);
-                        if (currStack.getItem() instanceof BlockItem) {
+                        if(Block.getBlockFromItem(currStack.getItem()) != Blocks.AIR) {
                             isIndex = i;
                             break;
                         }
@@ -72,6 +75,7 @@ public class Scaffold extends Module {
                 BlockHitResult bhr = new BlockHitResult(new Vec3d(.5, .5, .5), Direction.DOWN, current, false);
                 assert Cornos.minecraft.interactionManager != null;
                 Cornos.minecraft.interactionManager.interactBlock(Cornos.minecraft.player, Cornos.minecraft.world, Hand.MAIN_HAND, bhr);
+                Cornos.minecraft.getNetworkHandler().sendPacket(new HandSwingC2SPacket(Hand.MAIN_HAND));
             }
         }
         super.onExecute();
