@@ -23,6 +23,7 @@
     "ScreenMixin",
     "SessionAccessor",
     "SignBlockEntityRendererMixin",
+    "TextRendererMixin",
     "gui.ChatScreenMixin",
     "gui.CreativeInventoryScreenMixin",
     "gui.EditGameRulesScreenMixin",

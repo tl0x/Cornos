@@ -1,6 +1,8 @@
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.Friend;
+import me.constantindev.ccl.etc.FriendsManager;
 import me.constantindev.ccl.etc.base.Command;
 import me.constantindev.ccl.etc.helper.KeybindMan;
 import me.constantindev.ccl.etc.helper.STL;
@@ -9,6 +11,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.Formatting;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,6 +44,21 @@ public class ScreenMixin {
                 return;
             }
             c.onExecute(argsTrimmed);
+            return;
+        }
+        if (!Cornos.friendsManager.getFriends().isEmpty()) {
+            if (msg.contains("-")) {
+                String[] strings = msg.split(" ");
+                for (String string : strings) {
+                    if (string.contains("-")) {
+                        for (Friend friend : Cornos.friendsManager.getFriends().values()) {
+                            if (friend.getFakeName().equalsIgnoreCase(string.replace("-", ""))) {
+                                msg = msg.replace(string, friend.getRealName());
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

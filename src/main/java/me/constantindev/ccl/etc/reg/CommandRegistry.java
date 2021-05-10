@@ -36,6 +36,7 @@ public class CommandRegistry {
         cl.add(new AutoSign());
         cl.add(new KickBook());
         cl.add(new XrayConfig());
+        cl.add(new Friend());
     }
 
     public static List<Command> getAll() {

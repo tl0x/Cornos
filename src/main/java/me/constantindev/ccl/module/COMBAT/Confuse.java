@@ -51,6 +51,9 @@ public class Confuse extends Module {
     @Override
     public void onRender(MatrixStack ms, float td) {
         if (target != null) {
+            if (Cornos.friendsManager.getFriends().containsKey(target.getEntityName())) {
+                return;
+            }
             boolean flag = ModuleRegistry.budgetGraphicsInstance.isEnabled();
             Vec3d last = null;
             addition += flag ? 0 : 1.0;
