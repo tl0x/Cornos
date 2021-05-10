@@ -65,9 +65,10 @@ public class Friend extends Command {
             case "rename":
                 try {
                     String name = args[1];
+                    String newName = args[2];
                     for (Map.Entry<String, me.constantindev.ccl.etc.Friend> entry : Cornos.friendsManager.getFriends().entrySet()) {
                         if (entry.getValue().getRealName().equalsIgnoreCase(name) || entry.getValue().getFakeName().equalsIgnoreCase(name)) {
-                            entry.getValue().setFakeName(name);
+                            entry.getValue().setFakeName(newName);
                             STL.notifyUser("Renamed " + name + "!");
                         }
                     }
