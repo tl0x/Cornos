@@ -5,27 +5,36 @@ import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.MConfMultiOption;
 import me.constantindev.ccl.etc.config.MConfNum;
 import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.event.EventHelper;
+import me.constantindev.ccl.etc.event.EventType;
+import me.constantindev.ccl.etc.event.arg.PacketEvent;
 import me.constantindev.ccl.etc.helper.Rnd;
 import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.entity.player.PlayerAbilities;
+import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
+import net.minecraft.network.packet.c2s.play.TeleportConfirmC2SPacket;
 import net.minecraft.network.packet.c2s.play.UpdatePlayerAbilitiesC2SPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Flight extends Module {
     int counter = 0;
     int counter1 = 0;
     float flyingSince = 0;
-    MConfMultiOption mode = new MConfMultiOption("mode", "vanilla", new String[]{"vanilla", "3d", "static", "jetpack", "airhop", "zika"});
+    MConfMultiOption mode = new MConfMultiOption("mode", "vanilla", new String[]{"vanilla", "3d", "static", "jetpack", "airhop", "zika", "packet"});
     MConfToggleable toggleFast = new MConfToggleable("toggleFast", true);
     MConfNum speed = new MConfNum("speed", 1.0, 10, 0);
     MConfNum airhopUp = new MConfNum("airhopUp", 1.0, 3, 0.1);
     MConfToggleable sendAbilitiesUpdate = new MConfToggleable("abilities", true);
     PlayerAbilities abilitiesBefore = null;
     double startheight = 0;
+    public static int tpid = 0;
+    List<PlayerMoveC2SPacket> trustedPackets = new ArrayList<>();
 
     public Flight() {
         super("Flight", "Allows you to fly", ModuleType.MOVEMENT);
@@ -34,6 +43,18 @@ public class Flight extends Module {
         this.mconf.add(sendAbilitiesUpdate);
         this.mconf.add(speed);
         this.mconf.add(airhopUp);
+        Module parent = this;
+        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND,event -> {
+            PacketEvent pe = (PacketEvent) event;
+            if (pe.packet instanceof PlayerMoveC2SPacket && parent.isEnabled()) {
+                PlayerMoveC2SPacket p = (PlayerMoveC2SPacket) pe.packet;
+                if (trustedPackets.contains(p)) {
+                    trustedPackets.remove(p);
+                } else {
+                    event.cancel();
+                }
+            }
+        });
     }
 
     @Override
@@ -74,6 +95,7 @@ public class Flight extends Module {
                     Cornos.minecraft.player.setVelocity(-rot.x, -rot.y, -rot.z);
                 else Cornos.minecraft.player.setVelocity(0, 0, 0);
                 break;
+            case "packet":
             case "static":
                 assert Cornos.minecraft.player != null;
                 float y = Cornos.minecraft.player.yaw;
@@ -94,7 +116,29 @@ public class Flight extends Module {
                 nx += ts * mx * -c;
                 nz += ts * mx * -s;
                 Vec3d nv3 = new Vec3d(nx, ny, nz);
-                Cornos.minecraft.player.setVelocity(nv3);
+                if (mode.value.equalsIgnoreCase("static")) Cornos.minecraft.player.setVelocity(nv3);
+                else {
+                    boolean flag1 = go.keyForward.isPressed() || go.keyBack.isPressed() || go.keyRight.isPressed() || go.keyLeft.isPressed() || go.keySneak.isPressed() || go.keyJump.isPressed();
+                    Cornos.minecraft.player.setVelocity(0,0,0);
+                    if (flag1) {
+                        Vec3d ppos = Cornos.minecraft.player.getPos();
+                        Vec3d bruh = nv3.multiply(0.2);
+                        //Cornos.minecraft.player.updatePosition(ppos.x+bruh.x,ppos.y+bruh.y,ppos.z+bruh.z);
+                        PlayerMoveC2SPacket p = new PlayerMoveC2SPacket.PositionOnly(ppos.x,ppos.y+1850,ppos.z,Cornos.minecraft.player.isOnGround());
+                        PlayerMoveC2SPacket p1 = new PlayerMoveC2SPacket.PositionOnly(ppos.x+bruh.x,ppos.y+bruh.y,ppos.z+bruh.z,Cornos.minecraft.player.isOnGround());
+                        trustedPackets.add(p);
+                        trustedPackets.add(p1);
+                        trustedPackets.add(p1);
+                        Cornos.minecraft.getNetworkHandler().sendPacket(p1);
+                        Cornos.minecraft.getNetworkHandler().sendPacket(new TeleportConfirmC2SPacket(++tpid));
+                        Cornos.minecraft.getNetworkHandler().sendPacket(p);
+                        Cornos.minecraft.getNetworkHandler().sendPacket(new TeleportConfirmC2SPacket(++tpid));
+                        Cornos.minecraft.getNetworkHandler().sendPacket(p1);
+                        Cornos.minecraft.getNetworkHandler().sendPacket(new TeleportConfirmC2SPacket(tpid));
+                        Cornos.minecraft.player.setPos(ppos.x+bruh.x,ppos.y+bruh.y,ppos.z+bruh.z);
+                        //Cornos.minecraft.getNetworkHandler().sendPacket(p);
+                    }
+                }
                 break;
             case "jetpack":
                 if (Cornos.minecraft.world == null) return;

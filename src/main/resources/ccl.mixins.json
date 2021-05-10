@@ -48,6 +48,7 @@
     "packet.ExplosionS2CPacketMixin",
     "packet.LoginHelloC2SPacketMixin",
     "packet.PlayerMoveC2SPacketAccessor",
+    "packet.PlayerPositionLookS2CPacketMixin",
     "packet.PlaySoundS2CPacketMixin",
     "packet.ResourcePackStatusC2SPacketMixin",
     "packet.SignEditorOpenS2CPacketMixin",
