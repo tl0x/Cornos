@@ -26,7 +26,7 @@ public class Flight extends Module {
     int counter = 0;
     int counter1 = 0;
     float flyingSince = 0;
-    MConfMultiOption mode = new MConfMultiOption("mode", "vanilla", new String[]{"vanilla", "3d", "static", "jetpack", "airhop", "zika", "packet"});
+    MConfMultiOption mode = new MConfMultiOption("mode", "vanilla", new String[]{"vanilla", "3d", "static", "jetpack", "airhop", "zika", "packet", "jboost"});
     MConfToggleable toggleFast = new MConfToggleable("toggleFast", true);
     MConfNum speed = new MConfNum("speed", 1.0, 10, 0);
     MConfNum airhopUp = new MConfNum("airhopUp", 1.0, 3, 0.1);
@@ -46,7 +46,7 @@ public class Flight extends Module {
         Module parent = this;
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND,event -> {
             PacketEvent pe = (PacketEvent) event;
-            if (pe.packet instanceof PlayerMoveC2SPacket && parent.isEnabled()) {
+            if (pe.packet instanceof PlayerMoveC2SPacket && parent.isEnabled() && mode.value.equals("packet")) {
                 PlayerMoveC2SPacket p = (PlayerMoveC2SPacket) pe.packet;
                 if (trustedPackets.contains(p)) {
                     trustedPackets.remove(p);
@@ -122,7 +122,7 @@ public class Flight extends Module {
                     Cornos.minecraft.player.setVelocity(0,0,0);
                     if (flag1) {
                         Vec3d ppos = Cornos.minecraft.player.getPos();
-                        Vec3d bruh = nv3.multiply(0.2);
+                        Vec3d bruh = nv3.multiply(0.8);
                         //Cornos.minecraft.player.updatePosition(ppos.x+bruh.x,ppos.y+bruh.y,ppos.z+bruh.z);
                         PlayerMoveC2SPacket p = new PlayerMoveC2SPacket.PositionOnly(ppos.x,ppos.y+1850,ppos.z,Cornos.minecraft.player.isOnGround());
                         PlayerMoveC2SPacket p1 = new PlayerMoveC2SPacket.PositionOnly(ppos.x+bruh.x,ppos.y+bruh.y,ppos.z+bruh.z,Cornos.minecraft.player.isOnGround());
@@ -180,6 +180,10 @@ public class Flight extends Module {
                     Cornos.minecraft.player.updatePosition(ppos.x, ppos.y + 0.8, ppos.z);
                 }
                 break;
+            case "jboost":
+                Cornos.minecraft.player.setOnGround(true);
+                Cornos.minecraft.player.setAir(0);
+                Cornos.minecraft.player.fallDistance = 0;
         }
         super.onExecute();
     }
