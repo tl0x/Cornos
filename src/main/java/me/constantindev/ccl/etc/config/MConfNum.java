@@ -1,5 +1,7 @@
 package me.constantindev.ccl.etc.config;
 
+import net.minecraft.util.math.MathHelper;
+
 public class MConfNum extends MConf.ConfigKey {
     public double max;
     public double min;
@@ -17,8 +19,9 @@ public class MConfNum extends MConf.ConfigKey {
     @Override
     public void setValue(String newV) {
         try {
-            Double.parseDouble(newV);
-            super.setValue(newV);
+            double d = Double.parseDouble(newV);
+            d = MathHelper.clamp(d,min,max);
+            super.setValue(d+"");
         } catch (Exception ignored) {
         }
     }
