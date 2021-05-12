@@ -10,7 +10,6 @@ import net.minecraft.text.CharacterVisitor;
 import net.minecraft.text.OrderedText;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
-import org.apache.commons.lang3.mutable.MutableFloat;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -22,9 +21,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(TextRenderer.class)
 public abstract class TextRendererMixin {
     Module fmod;
-    @Shadow protected abstract float drawLayer(String text, float x, float y, int color, boolean shadow, Matrix4f matrix, VertexConsumerProvider vertexConsumerProvider, boolean seeThrough, int underlineColor, int light);
+    @Shadow
+    @Final
+    private TextHandler handler;
 
-    @Shadow @Final private TextHandler handler;
+    @Shadow
+    protected abstract float drawLayer(String text, float x, float y, int color, boolean shadow, Matrix4f matrix, VertexConsumerProvider vertexConsumerProvider, boolean seeThrough, int underlineColor, int light);
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/font/TextRenderer;drawLayer(Ljava/lang/String;FFIZLnet/minecraft/util/math/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;ZII)F"), method = "drawInternal(Ljava/lang/String;FFIZLnet/minecraft/util/math/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;ZIIZ)I")
     private float drawInternal(TextRenderer textRenderer, String text, float x, float y, int color, boolean shadow, Matrix4f matrix, VertexConsumerProvider vertexConsumerProvider, boolean seeThrough, int underlineColor, int light) {
@@ -36,7 +38,7 @@ public abstract class TextRendererMixin {
         return Cornos.friendsManager.filterOrderedText(orderedText, visitor);
     }
 
-    @Inject(method="getWidth(Ljava/lang/String;)I",cancellable = true,at=@At("HEAD"))
+    @Inject(method = "getWidth(Ljava/lang/String;)I", cancellable = true, at = @At("HEAD"))
     public void getW(String text, CallbackInfoReturnable<Integer> cir) {
         if (fmod == null) fmod = ModuleRegistry.search("nameprotect");
         if (!fmod.isEnabled()) return;
@@ -44,7 +46,7 @@ public abstract class TextRendererMixin {
         cir.setReturnValue(MathHelper.ceil(this.handler.getWidth(nt)));
     }
 
-    @Inject(method="getWidth(Lnet/minecraft/text/OrderedText;)I",cancellable = true,at=@At("HEAD"))
+    @Inject(method = "getWidth(Lnet/minecraft/text/OrderedText;)I", cancellable = true, at = @At("HEAD"))
     public void getW(OrderedText text, CallbackInfoReturnable<Integer> cir) {
         if (fmod == null) fmod = ModuleRegistry.search("nameprotect");
         if (!fmod.isEnabled()) return;

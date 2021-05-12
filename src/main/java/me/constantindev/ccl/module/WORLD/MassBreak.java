@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class MassBreak extends Module {
     public MassBreak() {
-        super("MassBreak", "Breaks a lot if you break a block", ModuleType.WORLD);
+        super("MassBreak", "block breaking but more of it", ModuleType.WORLD);
         this.mconf.add(new MConfNum("radius", 3.0, 10, 0));
     }
 

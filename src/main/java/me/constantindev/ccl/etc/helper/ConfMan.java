@@ -20,7 +20,7 @@ public class ConfMan {
 
     public static void sconf() {
         if (!enabledMods) {
-            Cornos.log(Level.INFO,"Not saving config due to modules not being enabled from config.");
+            Cornos.log(Level.INFO, "Not saving config due to modules not being enabled from config.");
             return;
         }
         JsonObject configContainer = new JsonObject();

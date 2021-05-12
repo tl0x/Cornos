@@ -33,7 +33,7 @@ public class Clumsy extends Module {
     };
 
     public Clumsy() {
-        super("Clumsy", "oops! drops all items in the game progressively", ModuleType.FUN);
+        super("Clumsy", "Seems as if you dropped the entirety of the game's items", ModuleType.FUN);
         this.mconf.add(name);
     }
 

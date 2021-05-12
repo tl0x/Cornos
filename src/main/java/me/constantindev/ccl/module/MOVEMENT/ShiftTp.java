@@ -9,7 +9,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class ShiftTp extends Module {
     public ShiftTp() {
-        super("ShiftTp", "Teleports you when shifting. Useful for phasing through walls", ModuleType.MOVEMENT);
+        super("ShiftTp", "you shift and you get teleported", ModuleType.MOVEMENT);
         this.mconf.add(new MConfNum("multiplier", 4.0, 15, 1));
     }
 

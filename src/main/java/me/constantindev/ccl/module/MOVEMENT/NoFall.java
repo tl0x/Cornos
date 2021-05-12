@@ -26,7 +26,7 @@ public class NoFall extends Module {
     MConfMultiOption mode = new MConfMultiOption("mode", "packet", new String[]{"packet", "breakFall", "onGround"});
 
     public NoFall() {
-        super("NoFall", "Prevents you from taking fall damage", ModuleType.MOVEMENT);
+        super("NoFall", "Tired of fall damage?", ModuleType.MOVEMENT);
         this.mconf.add(fallDistance);
         this.mconf.add(mode);
         Module parent = this;

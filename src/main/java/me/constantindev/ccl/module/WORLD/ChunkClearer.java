@@ -36,7 +36,7 @@ public class ChunkClearer extends Module {
     MConfMultiOption fast = new MConfMultiOption("overdrive", "none", new String[]{"none", "light", "strong", "max"});
 
     public ChunkClearer() {
-        super("ChunkClearer", "uh oh", ModuleType.WORLD);
+        super("ChunkClearer", "makes a chunk perish", ModuleType.WORLD);
         this.mconf.add(mode);
         this.mconf.add(ignoreXray);
         this.mconf.add(clientTeleport);

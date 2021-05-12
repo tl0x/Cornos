@@ -8,8 +8,9 @@ import org.lwjgl.glfw.GLFW;
 
 public class ClickGUI extends Module {
     public ClickGUI() {
-        super("ClickGUI", "Opens a graphical user interface for modules", ModuleType.RENDER);
+        super("ClickGUI", "its fancy", ModuleType.RENDER);
         this.mconf.getByName("keybind").setValue(GLFW.GLFW_KEY_RIGHT_SHIFT + "");
+        this.showNotifications = false;
     }
 
     @Override

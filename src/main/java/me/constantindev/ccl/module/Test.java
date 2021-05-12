@@ -13,12 +13,11 @@ import me.constantindev.ccl.etc.ms.ModuleType;
 
 public class Test extends Module {
     public Test() {
-        super("TestModule", "Poggê", ModuleType.HIDDEN);
+        super("TestModule", "j", ModuleType.HIDDEN);
     }
 
     @Override
     public void onExecute() {
-
         super.onExecute();
     }
 }

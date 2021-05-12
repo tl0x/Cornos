@@ -11,6 +11,7 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.*;
 import me.constantindev.ccl.etc.helper.KeybindMan;
+import me.constantindev.ccl.etc.helper.Renderer;
 import me.constantindev.ccl.etc.ms.ModuleType;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
@@ -82,11 +83,16 @@ public class ClickGUI extends MinecraftGUI {
             public int getOpacity() {
                 return 255;
             }
-        }, 8, 4, 4);
+        }, 8, 4, 1);
         gui = new com.lukflug.panelstudio.ClickGUI(guiInterface, context -> {
-            int height = Cornos.minecraft.textRenderer.fontHeight;
-            int wH = Cornos.minecraft.getWindow().getScaledHeight();
-            Cornos.minecraft.textRenderer.draw(new MatrixStack(), context.getDescription(), 1, wH - height - 1, 0xFFFFFFFF);
+            double x = Cornos.minecraft.mouse.getX() / 2 + 5;
+            double y = Cornos.minecraft.mouse.getY() / 2 + 5;
+            MatrixStack ms = new MatrixStack();
+            String desc = context.getDescription();
+            int l = Cornos.minecraft.textRenderer.getWidth(desc);
+            int h = Cornos.minecraft.textRenderer.fontHeight;
+            Renderer.renderRoundedQuad(x, y, (int) (x + l + 4), (int) (y + h + 4), 4, new Color(20, 20, 20, 200));
+            Cornos.minecraft.textRenderer.draw(ms, context.getDescription(), (int) x + 2, (int) y + 3, 0xFFFFFFFF);
         });
         int offset = 10 - 114;
         int offsetY = 10;
@@ -110,7 +116,7 @@ public class ClickGUI extends MinecraftGUI {
                 @Override
                 protected int getScrollHeight(int childHeight) {
                     int h = Cornos.minecraft.getWindow().getScaledHeight();
-                    return Math.min(Math.min(h - 10, 200), childHeight);
+                    return Math.min(Math.min(h - 20, 400), childHeight);
                 }
             };
             gui.addComponent(container);

@@ -30,7 +30,7 @@ public class ArrowAvoid extends Module {
     RenderableLine rlL = null;
 
     public ArrowAvoid() {
-        super("ArrowAvoid", "Avoids arrows, if possible", ModuleType.MOVEMENT);
+        super("ArrowAvoid", "skeletons are fucking horrible", ModuleType.MOVEMENT);
         this.mconf.add(new MConfMultiOption("Type", "Packet", new String[]{"Client", "Packet"}));
         this.mconf.add(new MConfNum("Speed", 1, 2, 0.1));
     }

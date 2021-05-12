@@ -20,7 +20,7 @@ public class NoRender extends Module {
     public static MConfToggleable particles = new MConfToggleable("particles", false);
 
     public NoRender() {
-        super("NoRender", "Does not render some things", ModuleType.RENDER);
+        super("NoRender", "Doesnt render annoying shit", ModuleType.RENDER);
         this.mconf.add(fire);
         this.mconf.add(pumpkin);
         this.mconf.add(sign);

@@ -11,18 +11,6 @@ public class AutoFemboy extends Module {
     public static Map<UUID, Integer> repository = new HashMap<>();
 
     public AutoFemboy() {
-        super("AutoFemboy", "Makes everyone a femboy", ModuleType.FUN);
-    }
-
-    @Override
-    public void onEnable() {
-        //Cornos.minecraft.worldRenderer.reload();
-        super.onEnable();
-    }
-
-    @Override
-    public void onDisable() {
-        //Cornos.minecraft.worldRenderer.reload();
-        super.onDisable();
+        super("AutoFemboy", "uwu owo uwu owo", ModuleType.FUN);
     }
 }

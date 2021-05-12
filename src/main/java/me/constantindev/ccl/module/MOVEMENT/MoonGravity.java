@@ -6,7 +6,7 @@ import me.constantindev.ccl.etc.ms.ModuleType;
 
 public class MoonGravity extends Module {
     public MoonGravity() {
-        super("MoonGravity", "Makes you go weee", ModuleType.MOVEMENT);
+        super("MoonGravity", "Tired of being on earth?", ModuleType.MOVEMENT);
     }
 
     @Override

@@ -20,8 +20,8 @@ public class MConfNum extends MConf.ConfigKey {
     public void setValue(String newV) {
         try {
             double d = Double.parseDouble(newV);
-            d = MathHelper.clamp(d,min,max);
-            super.setValue(d+"");
+            d = MathHelper.clamp(d, min, max);
+            super.setValue(d + "");
         } catch (Exception ignored) {
         }
     }

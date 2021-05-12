@@ -35,7 +35,7 @@ public class Killaura extends Module {
     List<LivingEntity> attacks = new ArrayList<>();
 
     public Killaura() {
-        super("Killaura", "bruh (ab = antibot)", ModuleType.COMBAT);
+        super("Killaura", "a white person on twitter when she sees a straight dude (ab = antibot)", ModuleType.COMBAT);
         this.mconf.add(mode);
         this.mconf.add(delay);
         this.mconf.add(players);

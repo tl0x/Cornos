@@ -12,7 +12,7 @@ import me.constantindev.ccl.etc.base.Module;
 
 public class ResourcePackSpoof extends Module {
     public ResourcePackSpoof() {
-        super("ResourcePackSpoof", "Tells the server you accepted their shitty resource pack while you declined");
+        super("ResourcePackSpoof", "Tells the server you accepted their shitty resource pack");
     }
     // ResourcePackStatusMixin.java
 }

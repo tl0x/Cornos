@@ -10,7 +10,7 @@ public class Step extends Module {
     MConfNum height = new MConfNum("height", 1.0, 10, 0);
 
     public Step() {
-        super("Step", "Step up full blocks", ModuleType.MOVEMENT);
+        super("Step", "spiders are impressed", ModuleType.MOVEMENT);
         this.mconf.add(height);
     }
 

@@ -6,7 +6,7 @@ import me.constantindev.ccl.etc.ms.ModuleType;
 
 public class XRAY extends Module {
     public XRAY() {
-        super("XRAY", "When you just need some blocks", ModuleType.WORLD);
+        super("XRAY", "Tired of stripmining?", ModuleType.WORLD);
     }
 
     @Override

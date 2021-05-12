@@ -28,7 +28,7 @@ public class Animations extends Module {
     private static final MConfNum customRotZ = new MConfNum("customMZ", 0, 5, -5);
 
     public Animations() {
-        super("Animations", "makes items go brrr", ModuleType.RENDER);
+        super("Animations", "The item in your hand shrunk", ModuleType.RENDER);
         this.mconf.add(type);
         this.mconf.add(customOffX);
         this.mconf.add(customOffY);

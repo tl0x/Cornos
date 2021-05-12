@@ -12,7 +12,7 @@ public class Hud extends Module {
     public static MConfColor themeColor = new MConfColor("theme", new Color(255, 255, 255));
 
     public Hud() {
-        super("HUD", "Will make shit fancy", ModuleType.RENDER);
+        super("HUD", "Shows stuff on screen ig", ModuleType.RENDER);
         this.setEnabled(true);
         this.mconf.add(new MConfNum("rgbSpeed", 5, 20, 1));
         this.mconf.add(themeColor);

@@ -6,7 +6,7 @@ import me.constantindev.ccl.etc.ms.ModuleType;
 
 public class TabGUI extends Module {
     public TabGUI() {
-        super("TabGUI", "Opens a tab gui which can be used to toggle modules without opening a new menu.", ModuleType.RENDER);
+        super("TabGUI", "top left watermark + module manager but small", ModuleType.RENDER);
     }
 
     @Override

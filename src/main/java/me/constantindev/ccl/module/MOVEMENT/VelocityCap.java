@@ -20,7 +20,7 @@ public class VelocityCap extends Module {
     MConfNum z = new MConfNum("z", 5, 10, 0);
 
     public VelocityCap() {
-        super("VelocityCap", "Prevents you from going faster than the velocity you specified", ModuleType.MOVEMENT);
+        super("VelocityCap", "makes you go slower", ModuleType.MOVEMENT);
         this.mconf.add(x);
         this.mconf.add(y);
         this.mconf.add(z);

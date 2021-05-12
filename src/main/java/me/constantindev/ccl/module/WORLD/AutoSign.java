@@ -27,7 +27,7 @@ public class AutoSign extends Module {
     MConfMultiOption type;
 
     public AutoSign() {
-        super("AutoSign", "Lulw", ModuleType.WORLD);
+        super("AutoSign", "Writes signs automatically", ModuleType.WORLD);
         type = (MConfMultiOption) this.mconf.add(new MConfMultiOption("mode", "noise", new String[]{"noise", "copypasta", "longlines", "custom"}));
         Module parent = this;
         EventHelper.BUS.registerEvent(EventType.ONPACKETHANDLE, event -> {

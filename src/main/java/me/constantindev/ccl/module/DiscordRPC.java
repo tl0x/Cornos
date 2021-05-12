@@ -15,7 +15,7 @@ public class DiscordRPC extends Module {
     DiscordRPCMan instance = null;
 
     public DiscordRPC() {
-        super("DiscordRPC", "Displays a nice rich presence if you have the discord client on");
+        super("DiscordRPC", "Flex on others on discord");
     }
 
     @Override

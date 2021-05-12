@@ -7,7 +7,6 @@ import me.constantindev.ccl.etc.ms.ModuleType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.c2s.play.HandSwingC2SPacket;
 import net.minecraft.util.Hand;
@@ -22,7 +21,7 @@ public class Scaffold extends Module {
     MConfToggleable placeMidAir = new MConfToggleable("placemidair", true);
 
     public Scaffold() {
-        super("Scaffold", "POGGERS", ModuleType.WORLD);
+        super("Scaffold", "Tired of falling but dont wanna use safewalk?", ModuleType.WORLD);
         this.mconf.add(lookForBlocks);
         this.mconf.add(placeMidAir);
         this.mconf.add(preventFalling);
@@ -64,7 +63,7 @@ public class Scaffold extends Module {
                 else {
                     for (int i = 0; i < 9; i++) {
                         ItemStack currStack = Cornos.minecraft.player.inventory.getStack(i);
-                        if(Block.getBlockFromItem(currStack.getItem()) != Blocks.AIR) {
+                        if (Block.getBlockFromItem(currStack.getItem()) != Blocks.AIR) {
                             isIndex = i;
                             break;
                         }

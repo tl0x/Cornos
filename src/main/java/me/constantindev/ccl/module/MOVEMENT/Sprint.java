@@ -6,7 +6,7 @@ import me.constantindev.ccl.etc.ms.ModuleType;
 
 public class Sprint extends Module {
     public Sprint() {
-        super("Sprint", "Like toggle sprint but as a hack :)", ModuleType.MOVEMENT);
+        super("Sprint", "toggle sprint for poor people", ModuleType.MOVEMENT);
     }
 
     @Override

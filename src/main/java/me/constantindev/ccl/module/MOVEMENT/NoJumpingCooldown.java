@@ -15,7 +15,7 @@ import me.constantindev.ccl.mixin.LivingEntityAccessor;
 
 public class NoJumpingCooldown extends Module {
     public NoJumpingCooldown() {
-        super("NoJumpingCooldown", "Removes gay shit", ModuleType.MOVEMENT);
+        super("NoJumpingCooldown", "fast jumping", ModuleType.MOVEMENT);
     }
 
     @Override

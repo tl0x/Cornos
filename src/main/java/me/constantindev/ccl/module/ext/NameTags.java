@@ -25,7 +25,7 @@ public class NameTags extends Module {
     MConfToggleable renderSelf = new MConfToggleable("RenderSelf", false);
 
     public NameTags() {
-        super("NameTags", "Shows bigger better nametags that give you more info about the player", ModuleType.RENDER);
+        super("NameTags", "big name labels", ModuleType.RENDER);
         this.mconf.add(health);
 
         this.mconf.add(renderSelf);

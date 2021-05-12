@@ -18,7 +18,7 @@ public class Blink extends Module {
     boolean blockPackets = false;
 
     public Blink() {
-        super("Blink", "makes you lag intentionally", ModuleType.MOVEMENT);
+        super("Blink", "Tired of a good internet connection?", ModuleType.MOVEMENT);
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
             if (blockPackets && !(pe.packet instanceof KeepAliveC2SPacket)) {

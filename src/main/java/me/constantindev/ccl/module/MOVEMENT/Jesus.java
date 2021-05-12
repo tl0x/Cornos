@@ -11,7 +11,7 @@ public class Jesus extends Module {
     public static MConfMultiOption mode = new MConfMultiOption("mode", "jump", new String[]{"jump", "velocity", "vanilla", "dontfall", "solid", "herobrine", "herobrine2", "herobrine3"});
 
     public Jesus() {
-        super("Jesus", "Yisus.", ModuleType.MOVEMENT);
+        super("Jesus", "water walker enchantment", ModuleType.MOVEMENT);
         this.mconf.add(mode);
     }
 

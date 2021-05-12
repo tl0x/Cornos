@@ -15,7 +15,7 @@ public class Nuker extends Module {
     int current = 0;
 
     public Nuker() {
-        super("Nuker", "Stabs blocks like there is no tomorrow", ModuleType.WORLD);
+        super("Nuker", "massbreak on drugs", ModuleType.WORLD);
         this.mconf.add(new MConfNum("range", 5, 10, 0));
     }
 

@@ -7,7 +7,7 @@ import net.minecraft.network.packet.c2s.play.ClientStatusC2SPacket;
 
 public class AutoRespawn extends Module {
     public AutoRespawn() {
-        super("AutoRespawn", "Automatically respawns you upon death", ModuleType.MISC);
+        super("AutoRespawn", "Automatically respawns you when you die", ModuleType.MISC);
     }
 
     @Override

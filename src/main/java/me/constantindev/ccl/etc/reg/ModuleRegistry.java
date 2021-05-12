@@ -110,6 +110,7 @@ public class ModuleRegistry {
         ml.add(new Twerk());
         ml.add(new PVPInfo());
         ml.add(new NameProtect());
+        ml.add(new RedstoneHighlighter());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

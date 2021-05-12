@@ -28,7 +28,7 @@ public class Freecam extends Module {
     float pitch = 0, yaw = 0;
 
     public Freecam() {
-        super("Freecam", "Become a ghost and leave your body", ModuleType.RENDER);
+        super("Freecam", "You can look outside yourself now", ModuleType.RENDER);
         this.mconf.add(speed);
         Module parent = this;
         // prevent movement packets from sending when module is enabled

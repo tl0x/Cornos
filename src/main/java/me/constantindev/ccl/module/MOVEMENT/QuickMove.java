@@ -31,7 +31,7 @@ public class QuickMove extends Module {
     int counter = 0;
 
     public QuickMove() {
-        super("QuickMove", "Lets you draw a tail and then quickly travels alongside of it (Basically blink but poggers)", ModuleType.MOVEMENT);
+        super("QuickMove", "Blink but only movement", ModuleType.MOVEMENT);
         Module parent = this;
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
