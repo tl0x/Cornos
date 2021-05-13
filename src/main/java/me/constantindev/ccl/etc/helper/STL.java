@@ -6,9 +6,7 @@ import com.google.common.io.Files;
 import com.mojang.authlib.Agent;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
-import com.thealtening.auth.service.AlteningServiceType;
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.mixin.SessionAccessor;
 import net.minecraft.client.util.Session;
 import net.minecraft.item.ItemStack;
@@ -64,11 +62,6 @@ public class STL {
         YggdrasilUserAuthentication auth =
                 (YggdrasilUserAuthentication) new YggdrasilAuthenticationService(
                         Proxy.NO_PROXY, "").createUserAuthentication(Agent.MINECRAFT);
-        if (username.contains("@alt") && username.contains("-")) {
-            CConf.authentication.updateService(AlteningServiceType.THEALTENING);
-        } else {
-            CConf.authentication.updateService(AlteningServiceType.MOJANG);
-        }
         auth.setPassword(password);
         auth.setUsername(username);
         try {

@@ -1,7 +1,6 @@
 package me.constantindev.ccl.etc.config;
 
 import com.lukflug.panelstudio.settings.NumberSetting;
-import com.thealtening.auth.TheAlteningAuthentication;
 import me.constantindev.ccl.gui.ClickGUI;
 import me.constantindev.ccl.gui.HudElements;
 import me.constantindev.ccl.gui.TabGUI;
@@ -17,7 +16,6 @@ public class CConf {
     public static HudElements hudElements;
     public static TabGUI tabGUI;
     public static int latestRGBVal = 0;
-    public static TheAlteningAuthentication authentication;
     public static String[][] dict;
     public static boolean checkedForUpdates = false;
 

@@ -8,7 +8,6 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.gui;
 
-import com.thealtening.auth.service.AlteningServiceType;
 import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.gui.widget.CustomButtonWidget;
@@ -38,8 +37,6 @@ public class AltManagerScreen extends Screen {
         // do not question it, fabric api is fucking retarded
         super.init();
 
-
-        CConf.authentication.updateService(AlteningServiceType.MOJANG);
         email = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) - 35, 200, 20, Text.of("Email"));
         email.setMaxLength(1000);
         passwd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2), 200, 20, Text.of("Password"));

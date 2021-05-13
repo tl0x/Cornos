@@ -13,7 +13,7 @@ import net.minecraft.util.math.Vec3d;
 import java.awt.*;
 
 public class CustomButtonWidget extends AbstractPressableButtonWidget {
-    public Color unselectedColor = new Color(30, 30, 30, 100);
+    public Color unselectedColor = new Color(25, 44, 49, 50);
     protected int r;
     long lastCache = 0;
     double timer = 0;
@@ -41,7 +41,7 @@ public class CustomButtonWidget extends AbstractPressableButtonWidget {
         Color c = CConf.getRGB();
         long current = System.currentTimeMillis();
         if (current - lastCache > 3) {
-            double cvalA = (double) (current - lastCache) / 250.0;
+            double cvalA = (double) (current - lastCache) / 400.0;
             double cval = this.isHovered() ? cvalA : -cvalA;
             timer += cval;
             lastCache = current;
@@ -49,12 +49,15 @@ public class CustomButtonWidget extends AbstractPressableButtonWidget {
         timer = MathHelper.clamp(timer, 0, 1);
         if (timer != 0) {
             double a = easeInOutQuart(timer);
-            double yProg = a * (double) height;
-            double xProg = a * (double) width;
-            Renderer.renderLineScreen(new Vec3d(x, y, 0), new Vec3d(x, y + yProg, 0), c, 2);
-            Renderer.renderLineScreen(new Vec3d(x, y + height, 0), new Vec3d(x + xProg, y + height, 0), c, 2);
-            Renderer.renderLineScreen(new Vec3d(x + width, y + height, 0), new Vec3d(x + width, y + height - yProg, 0), c, 2);
-            Renderer.renderLineScreen(new Vec3d(x + width, y, 0), new Vec3d(x + width - xProg, y, 0), c, 2);
+            double bruh = a*4;
+            double p1 = MathHelper.clamp(bruh,0,1);
+            double p2 = MathHelper.clamp(bruh-1,0,1);
+            double p3 = MathHelper.clamp(bruh-2,0,1);
+            double p4 = MathHelper.clamp(bruh-3,0,1);
+            Renderer.renderLineScreen(new Vec3d(x, y, 0), new Vec3d(x, y + (p1*height), 0), c, 2);
+            Renderer.renderLineScreen(new Vec3d(x, y + height, 0), new Vec3d(x + (p2*width), y + height, 0), c, 2);
+            Renderer.renderLineScreen(new Vec3d(x + width, y + height, 0), new Vec3d(x + width, y + height - (p3*height), 0), c, 2);
+            Renderer.renderLineScreen(new Vec3d(x + width, y, 0), new Vec3d(x + width - (p4*width), y, 0), c, 2);
         }
         //if ((a * width) > r) Renderer.renderRoundedQuad(x, y, x + (a * width), y + height, r - 1, selectedColor);
         //Renderer.renderRoundedQuad(x, y, x + width, y + height, r, unselectedColor);

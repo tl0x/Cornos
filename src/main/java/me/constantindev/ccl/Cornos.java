@@ -1,6 +1,5 @@
 package me.constantindev.ccl;
 
-import com.thealtening.auth.TheAlteningAuthentication;
 import me.constantindev.ccl.etc.FriendsManager;
 import me.constantindev.ccl.etc.NotificationManager;
 import me.constantindev.ccl.etc.base.Module;
@@ -95,8 +94,6 @@ public class Cornos implements ModInitializer {
                 } catch (Exception ignored) {
                 }
             }
-        });
-        CConf.authentication = TheAlteningAuthentication.mojang(yggdrasilEnvironment -> {
         });
         fastUpdater.start();
     }
