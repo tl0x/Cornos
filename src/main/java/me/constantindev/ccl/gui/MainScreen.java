@@ -1,8 +1,9 @@
 package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.helper.Renderer;
-import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
+import me.constantindev.ccl.gui.widget.CustomButtonWidget;
 import me.constantindev.ccl.module.ClientProgression;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -34,20 +35,21 @@ public class MainScreen extends Screen {
 
     @Override
     protected void init() {
+        super.init();
         if (!ClientProgression.hasFinishedTut.isEnabled()) {
             assert this.client != null;
             this.client.openScreen(new TutorialScreen());
             return;
         }
-        this.addButton(new RoundedButtonWidget(width - 125, height - 150, 120, 20, Text.of("Alts"), () -> {
+        this.addButton(new CustomButtonWidget(width - 125, height - 150, 120, 20, Text.of("Alts"), () -> {
             assert this.client != null;
             this.client.openScreen(new AltManagerScreen());
         }));
-        this.addButton(new RoundedButtonWidget(width - 125, height - 125, 120, 20, Text.of("Settings"), () -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));
-        this.addButton(new RoundedButtonWidget(width - 125, height - 100, 120, 20, Text.of("Singleplayer"), () -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
-        this.addButton(new RoundedButtonWidget(width - 125, height - 75, 120, 20, Text.of("Multiplayer"), () -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));
-        RoundedButtonWidget btnw = new RoundedButtonWidget(width - 125, height - 50, 120, 20, Text.of("Realms"), () -> Cornos.minecraft.openScreen(new RealmsMainScreen(this)));
-        this.addButton(new RoundedButtonWidget(width - 125, height - 25, 120, 20, Text.of("Vanilla homescreen"), () -> {
+        this.addButton(new CustomButtonWidget(width - 125, height - 125, 120, 20, Text.of("Settings"), () -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));
+        this.addButton(new CustomButtonWidget(width - 125, height - 100, 120, 20, Text.of("Singleplayer"), () -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
+        this.addButton(new CustomButtonWidget(width - 125, height - 75, 120, 20, Text.of("Multiplayer"), () -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));
+        CustomButtonWidget btnw = new CustomButtonWidget(width - 125, height - 50, 120, 20, Text.of("Realms"), () -> Cornos.minecraft.openScreen(new RealmsMainScreen(this)));
+        this.addButton(new CustomButtonWidget(width - 125, height - 25, 120, 20, Text.of("Vanilla homescreen"), () -> {
             Cornos.config.mconf.getByName("homescreen").setValue("vanilla");
             Cornos.minecraft.openScreen(new TitleScreen());
         }));
@@ -56,12 +58,11 @@ public class MainScreen extends Screen {
             btnw.setMessage(Text.of("Roleplay"));
             showSecrets = true;
         }));
-        super.init();
     }
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        Color c = Color.getHSBColor((float) (((double) (System.currentTimeMillis() % 10000)) / 10000), 1, 1);
+        Color c = CConf.getRGB();
         Cornos.minecraft.getTextureManager().bindTexture(bg);
         DrawableHelper.drawTexture(matrices, 0, 0, 0, 0, 0, width, height, height, width);
         Renderer.drawImage(matrices, new Identifier("ccl", "hscreenlogo.png"), -11, 1, 960 / 4, 233 / 4, (float) c.getRed() / 255, (float) c.getGreen() / 255, (float) c.getBlue() / 255);

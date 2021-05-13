@@ -2,7 +2,7 @@ package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.gui.MainScreen;
-import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
+import me.constantindev.ccl.gui.widget.CustomButtonWidget;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.text.Text;
@@ -24,7 +24,7 @@ public class TitleScreenMixin extends Screen {
             cbi.cancel();
             return;
         }
-        this.addButton(new RoundedButtonWidget(width - 121, 1, 120, 20, Text.of("Return to pog menu"), () -> {
+        this.addButton(new CustomButtonWidget(width - 121, 1, 120, 20, Text.of("Return to pog menu"), () -> {
             Cornos.config.mconf.getByName("homescreen").setValue("client");
             Cornos.minecraft.openScreen(this);
         }));

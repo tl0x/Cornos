@@ -10,7 +10,7 @@ package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.gui.FunnyItemsScreen;
 import me.constantindev.ccl.gui.HeadsScreen;
-import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
+import me.constantindev.ccl.gui.widget.CustomButtonWidget;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.text.Text;
@@ -27,11 +27,11 @@ public class CreativeInventoryScreenMixin extends Screen {
 
     @Inject(method = "init", at = @At("RETURN"))
     public void init(CallbackInfo ci) {
-        this.addButton(new RoundedButtonWidget(1, 1, 120, 20, 5, Text.of("Funny items"), () -> {
+        this.addButton(new CustomButtonWidget(1, 1, 120, 20, 5, Text.of("Funny items"), () -> {
             if (this.client == null) return;
             this.client.openScreen(new FunnyItemsScreen());
         }));
-        this.addButton(new RoundedButtonWidget(1, 22, 120, 20, 5, Text.of("Heads"), () -> {
+        this.addButton(new CustomButtonWidget(1, 22, 120, 20, 5, Text.of("Heads"), () -> {
             if (this.client == null) return;
             this.client.openScreen(new HeadsScreen());
         }));

@@ -2,7 +2,8 @@ package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.CConf;
-import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
+import me.constantindev.ccl.etc.config.Colors;
+import me.constantindev.ccl.gui.widget.CustomButtonWidget;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.Screen;
@@ -32,7 +33,7 @@ public class XrayConfigScreen extends Screen {
         newBlocks.clear();
         newBlocks.addAll(Arrays.asList(CConf.xrayBlocks));
         newBlock = new TextFieldWidget(textRenderer, 5, 5, 100, 20, Text.of(""));
-        RoundedButtonWidget add = new RoundedButtonWidget(110, 5, 45, 20, Text.of("Add"), () -> {
+        CustomButtonWidget add = new CustomButtonWidget(110, 5, 45, 20, Text.of("Add"), () -> {
             Block b = Registry.BLOCK.get(new Identifier(newBlock.getText()));
             if (b == Blocks.AIR) {
                 newBlock.setEditableColor(Color.RED.getRGB());
@@ -48,7 +49,7 @@ public class XrayConfigScreen extends Screen {
         int offset = 40;
         int offsetX = 5;
         for (Block block : newBlocks.toArray(new Block[0])) {
-            RoundedButtonWidget delete = new RoundedButtonWidget(offsetX, offset, 150, 20, block.getName(), () -> {
+            CustomButtonWidget delete = new CustomButtonWidget(offsetX, offset, 150, 20, block.getName(), () -> {
                 newBlocks.remove(block);
                 CConf.xrayBlocks = newBlocks.toArray(new Block[0]);
                 assert this.client != null;
@@ -66,7 +67,7 @@ public class XrayConfigScreen extends Screen {
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         Window w = Cornos.minecraft.getWindow();
-        fill(matrices, 0, 0, w.getScaledWidth(), w.getScaledHeight(), new Color(0, 0, 0, 120).getRGB());
+        fill(matrices, 0, 0, w.getScaledWidth(), w.getScaledHeight(), Colors.GUIBACKGROUND.get().getRGB());
         newBlock.render(matrices, mouseX, mouseY, delta);
         super.render(matrices, mouseX, mouseY, delta);
     }

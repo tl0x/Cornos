@@ -9,6 +9,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.config.Colors;
 import me.constantindev.ccl.gui.MainScreen;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -18,8 +19,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.awt.*;
 
 @Mixin(Screen.class)
 public class ScreenMixin {
@@ -31,7 +30,7 @@ public class ScreenMixin {
         DrawableHelper.drawTexture(new MatrixStack(), 0, 0, 0, 0, 0, width, height, height, width);
         if (!(Cornos.minecraft.currentScreen instanceof MainScreen)) {
 
-            DrawableHelper.fill(new MatrixStack(), 0, 0, width, height, new Color(0, 0, 0, 60).getRGB());
+            DrawableHelper.fill(new MatrixStack(), 0, 0, width, height, Colors.GUIBACKGROUND.get().getRGB());
         }
         ci.cancel();
     }

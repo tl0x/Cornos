@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class HudElements extends DrawableHelper {
-    public static String spotPlaying = "Nothing";
     public static List<Double> tpsHistory = new ArrayList<>();
     public static List<Double> tpsAvgHistory = new ArrayList<>();
     public static long lastRecv = 0;

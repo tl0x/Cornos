@@ -10,6 +10,7 @@ package me.constantindev.ccl.etc;
 
 import com.google.common.collect.Lists;
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.config.Colors;
 import me.constantindev.ccl.module.ext.Hud;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
@@ -67,13 +68,13 @@ public class NotificationManager {
             dheight = dheight == 0 ? 10 : dheight + 12;
             Color rc = Hud.themeColor.getColor();
             DrawableHelper.fill(matrices, (int) (width - xOff - 1), height - offset - dheight - 1, width, height - offset + 1, rc.getRGB());
-            DrawableHelper.fill(matrices, (int) (width - xOff), height - offset - dheight, width - 3, height - offset, new Color(30, 30, 30).getRGB());
+            DrawableHelper.fill(matrices, (int) (width - xOff), height - offset - dheight, width - 3, height - offset, Colors.NOTIFICATION.get().getRGB());
             String t = Cornos.minecraft.textRenderer.trimToWidth(notification.title, (int) Math.floor(xOff));
-            Cornos.minecraft.textRenderer.draw(matrices, t, (float) ((width - xOff + 1)), (float) ((height - offset - dheight + 1)), 0xFFFFFFFF);
+            Cornos.minecraft.textRenderer.draw(matrices, t, (float) ((width - xOff + 1)), (float) ((height - offset - dheight + 1)), Colors.TEXT.get().getRGB());
             int off1 = 12;
             for (String s : notification.description) {
                 StringVisitable td = Cornos.minecraft.textRenderer.trimToWidth(Text.of(s), (int) Math.floor(xOff));
-                Cornos.minecraft.textRenderer.draw(matrices, td.getString(), (float) ((width - xOff + 1)), (float) ((height - offset - dheight + off1)), 0xFFFFFFFF);
+                Cornos.minecraft.textRenderer.draw(matrices, td.getString(), (float) ((width - xOff + 1)), (float) ((height - offset - dheight + off1)), Colors.TEXT.get().getRGB());
                 off1 += 9;
             }
             offset += dheight + 3;

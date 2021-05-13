@@ -56,17 +56,17 @@ public class ClickGUI extends MinecraftGUI {
         Theme theme = new com.lukflug.panelstudio.theme.GameSenseTheme(new ColorScheme() {
             @Override
             public Color getActiveColor() {
-                return new Color(47, 47, 47, 153);
+                return Colors.ACTIVE.get();
             }
 
             @Override
             public Color getInactiveColor() {
-                return new Color(30, 30, 30, 153);
+                return Colors.INACTIVE.get();
             }
 
             @Override
             public Color getBackgroundColor() {
-                return new Color(20, 20, 20, 153);
+                return Colors.BACKGROUND.get();
             }
 
             @Override
@@ -76,7 +76,7 @@ public class ClickGUI extends MinecraftGUI {
 
             @Override
             public Color getFontColor() {
-                return new Color(255, 255, 255);
+                return Colors.TEXT.get();
             }
 
             @Override
@@ -91,7 +91,7 @@ public class ClickGUI extends MinecraftGUI {
             String desc = context.getDescription();
             int l = Cornos.minecraft.textRenderer.getWidth(desc);
             int h = Cornos.minecraft.textRenderer.fontHeight;
-            Renderer.renderRoundedQuad(x, y, (int) (x + l + 4), (int) (y + h + 4), 4, new Color(20, 20, 20, 200));
+            Renderer.renderRoundedQuad(x, y, (int) (x + l + 4), (int) (y + h + 4), 4, Colors.WIDGET.get());
             Cornos.minecraft.textRenderer.draw(ms, context.getDescription(), (int) x + 2, (int) y + 3, 0xFFFFFFFF);
         });
         int offset = 10 - 114;
@@ -303,7 +303,7 @@ public class ClickGUI extends MinecraftGUI {
     public void render(MatrixStack matrices, int mouseX, int mouseY, float partialTicks) {
         int h = Cornos.minecraft.getWindow().getScaledHeight();
         int w = Cornos.minecraft.getWindow().getScaledWidth();
-        DrawableHelper.fill(matrices, 0, 0, w, h, new Color(0, 0, 0, 100).getRGB());
+        DrawableHelper.fill(matrices, 0, 0, w, h, Colors.GUIBACKGROUND.get().getRGB());
         super.render(matrices, mouseX, mouseY, partialTicks);
     }
 }

@@ -11,7 +11,7 @@ package me.constantindev.ccl.gui;
 import com.thealtening.auth.service.AlteningServiceType;
 import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.helper.STL;
-import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
+import me.constantindev.ccl.gui.widget.CustomButtonWidget;
 import me.constantindev.ccl.module.Alts;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -35,6 +35,10 @@ public class AltManagerScreen extends Screen {
 
     @Override
     protected void init() {
+        // do not question it, fabric api is fucking retarded
+        super.init();
+
+
         CConf.authentication.updateService(AlteningServiceType.MOJANG);
         email = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) - 35, 200, 20, Text.of("Email"));
         email.setMaxLength(1000);
@@ -42,11 +46,11 @@ public class AltManagerScreen extends Screen {
         passwd.setMaxLength(1000);
         emailpasswd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) + 35, 200, 20, Text.of("Username:password"));
         emailpasswd.setMaxLength(2000);
-        RoundedButtonWidget login = new RoundedButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 60, 120, 20, Text.of("Login"), () -> {
+        CustomButtonWidget login = new CustomButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 60, 120, 20, Text.of("Login"), () -> {
             boolean success = STL.auth(this.email.getText(), this.passwd.getText());
             this.errormsg = success ? "§aLogged in!" : "§cFailed to log in. Check the password and email.";
         });
-        RoundedButtonWidget saveAlt = new RoundedButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 85, 120, 20, Text.of("Save alt"), () -> {
+        CustomButtonWidget saveAlt = new CustomButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 85, 120, 20, Text.of("Save alt"), () -> {
             String email = this.email.getText();
             String passwd = this.passwd.getText();
             if (email.isEmpty()) {
@@ -77,12 +81,12 @@ public class AltManagerScreen extends Screen {
         for (List<String> good : goodalts) {
             hasSavedAlts = true;
             fal.add(encStr(good.get(0), 6001) + ((char) 998) + encStr(good.get(1), 6000));
-            RoundedButtonWidget alt = new RoundedButtonWidget(width - 141, offset, 140, 20, Text.of(good.get(0)), () -> {
+            CustomButtonWidget alt = new CustomButtonWidget(width - 141, offset, 140, 20, Text.of(good.get(0)), () -> {
                 this.email.setText(good.get(0));
                 if (!good.get(1).equalsIgnoreCase("ThisDoesNotMatterSinceTheAccountIsCracked"))
                     this.passwd.setText(good.get(1));
             });
-            RoundedButtonWidget delete = new RoundedButtonWidget(width - 141 - 21, offset, 20, 20, Text.of("X"), () -> {
+            CustomButtonWidget delete = new CustomButtonWidget(width - 141 - 21, offset, 20, 20, Text.of("X"), () -> {
                 fal.remove(encStr(good.get(0), 6001) + ((char) 998) + encStr(good.get(1), 6000));
                 Alts.k.setValue("0" + String.join(((char) 999) + "", fal));
                 assert this.client != null;
@@ -93,8 +97,6 @@ public class AltManagerScreen extends Screen {
             this.addButton(delete);
         }
         Alts.k.setValue("0" + String.join(((char) 999) + "", fal));
-
-        super.init();
     }
 
     @Override

@@ -8,6 +8,8 @@ import me.constantindev.ccl.gui.TabGUI;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 
+import java.awt.*;
+
 public class CConf {
     public static Block[] xrayBlocks;
     public static NumberSetting animSpeed;
@@ -89,5 +91,9 @@ public class CConf {
         };
         hudElements = new HudElements();
         tabGUI = new TabGUI();
+    }
+
+    public static Color getRGB() {
+        return Color.getHSBColor((float) (((double) (System.currentTimeMillis() % 10000)) / 10000), 0.8f, 1);
     }
 }

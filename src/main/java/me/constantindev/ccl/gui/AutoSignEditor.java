@@ -1,7 +1,8 @@
 package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.gui.widget.RoundedButtonWidget;
+import me.constantindev.ccl.etc.config.Colors;
+import me.constantindev.ccl.gui.widget.CustomButtonWidget;
 import me.constantindev.ccl.module.WORLD.AutoSign;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
@@ -23,6 +24,7 @@ public class AutoSignEditor extends Screen {
 
     @Override
     protected void init() {
+        super.init();
         line1 = new TextFieldWidget(textRenderer, 6, 20, 100, 20, Text.of(""));
         line1.setMaxLength(15);
         line2 = new TextFieldWidget(textRenderer, 6, 45, 100, 20, Text.of(""));
@@ -31,14 +33,13 @@ public class AutoSignEditor extends Screen {
         line3.setMaxLength(15);
         line4 = new TextFieldWidget(textRenderer, 6, 95, 100, 20, Text.of(""));
         line4.setMaxLength(15);
-        RoundedButtonWidget save = new RoundedButtonWidget(5, 120, 100, 20, Text.of("Save"), () -> {
+        CustomButtonWidget save = new CustomButtonWidget(5, 120, 100, 20, Text.of("Save"), () -> {
             AutoSign.line1 = line1.getText();
             AutoSign.line2 = line2.getText();
             AutoSign.line3 = line3.getText();
             AutoSign.line4 = line4.getText();
         });
         this.addButton(save);
-        super.init();
     }
 
     @Override
@@ -53,7 +54,7 @@ public class AutoSignEditor extends Screen {
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         Window w = Cornos.minecraft.getWindow();
-        fill(matrices, 0, 0, w.getScaledWidth(), w.getScaledHeight(), new Color(0, 0, 0, 120).getRGB());
+        fill(matrices, 0, 0, w.getScaledWidth(), w.getScaledHeight(), Colors.GUIBACKGROUND.get().getRGB());
         textRenderer.draw(matrices, "Custom text editor for AutoSign", 5, 5, Color.WHITE.getRGB());
         if (line1.getText().isEmpty()) line1.setSuggestion("Line 1");
         else line1.setSuggestion("");
