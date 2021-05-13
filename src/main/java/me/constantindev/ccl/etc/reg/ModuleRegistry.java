@@ -6,14 +6,9 @@ import me.constantindev.ccl.module.*;
 import me.constantindev.ccl.module.COMBAT.*;
 import me.constantindev.ccl.module.EXPLOIT.*;
 import me.constantindev.ccl.module.EXPLOIT.CRASH.*;
-import me.constantindev.ccl.module.FUN.Clumsy;
-import me.constantindev.ccl.module.FUN.LSD;
-import me.constantindev.ccl.module.FUN.Twerk;
+import me.constantindev.ccl.module.FUN.*;
 import me.constantindev.ccl.module.MOVEMENT.*;
-import me.constantindev.ccl.module.RENDER.Animations;
-import me.constantindev.ccl.module.RENDER.Freecam;
-import me.constantindev.ccl.module.RENDER.PVPInfo;
-import me.constantindev.ccl.module.RENDER.Tracers;
+import me.constantindev.ccl.module.RENDER.*;
 import me.constantindev.ccl.module.WORLD.*;
 import me.constantindev.ccl.module.ext.*;
 
@@ -111,6 +106,7 @@ public class ModuleRegistry {
         ml.add(new PVPInfo());
         ml.add(new NameProtect());
         ml.add(new RedstoneHighlighter());
+        ml.add(new AntiPacketKick());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

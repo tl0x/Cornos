@@ -7,6 +7,7 @@
     "AbstractClientPlayerEntityMixin",
     "BlockHitResultMixin",
     "BlockMixin",
+    "ClientConnectionMixin",
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
     "ClientPlayNetworkHandlerMixin",

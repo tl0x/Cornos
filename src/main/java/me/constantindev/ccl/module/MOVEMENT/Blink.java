@@ -2,6 +2,7 @@ package me.constantindev.ccl.module.MOVEMENT;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
+import me.constantindev.ccl.etc.config.MConfMultiOption;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.PacketEvent;
@@ -16,14 +17,16 @@ import java.util.Objects;
 public class Blink extends Module {
     List<Packet<?>> pl = new ArrayList<>();
     boolean blockPackets = false;
+    MConfMultiOption mode = new MConfMultiOption("mode", "delay", new String[]{"delay", "drop"});
 
     public Blink() {
         super("Blink", "Tired of a good internet connection?", ModuleType.MOVEMENT);
+        mconf.add(mode);
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             PacketEvent pe = (PacketEvent) event;
             if (blockPackets && !(pe.packet instanceof KeepAliveC2SPacket)) {
                 pe.cancel();
-                pl.add(pe.packet);
+                if (mode.value.equals("delay")) pl.add(pe.packet);
             }
         });
     }
