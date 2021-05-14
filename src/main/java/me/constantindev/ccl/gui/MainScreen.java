@@ -1,6 +1,7 @@
 package me.constantindev.ccl.gui;
 
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.Particles;
 import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.helper.Renderer;
 import me.constantindev.ccl.gui.widget.CustomButtonWidget;
@@ -27,6 +28,7 @@ public class MainScreen extends Screen {
     Identifier bg = new Identifier("ccl", "bg.jpg");
     DateFormat line1 = new SimpleDateFormat("h:mm aa");
     DateFormat line2 = new SimpleDateFormat("E, d. M");
+    Particles p;
     boolean showSecrets = false;
 
     public MainScreen() {
@@ -36,6 +38,7 @@ public class MainScreen extends Screen {
     @Override
     protected void init() {
         super.init();
+        p = new Particles(100);
         if (!ClientProgression.hasFinishedTut.isEnabled()) {
             assert this.client != null;
             this.client.openScreen(new TutorialScreen());
@@ -65,6 +68,7 @@ public class MainScreen extends Screen {
         Color c = CConf.getRGB();
         Cornos.minecraft.getTextureManager().bindTexture(bg);
         DrawableHelper.drawTexture(matrices, 0, 0, 0, 0, 0, width, height, height, width);
+        p.render();
         Renderer.drawImage(matrices, new Identifier("ccl", "hscreenlogo.png"), -11, 1, 960 / 4, 233 / 4, (float) c.getRed() / 255, (float) c.getGreen() / 255, (float) c.getBlue() / 255);
         int diff = 32;
         Renderer.renderRoundedQuad(5, height - 5 - diff, 211, height - 5, 4, new Color(0, 0, 0, 20));
@@ -78,5 +82,11 @@ public class MainScreen extends Screen {
         GL11.glScaled(.5, .5, 1);
         DrawableHelper.drawCenteredString(matrices, textRenderer, line2F, centerX, centerY + 1, 0xFFFFFF);
         super.render(matrices, mouseX, mouseY, delta);
+    }
+
+    @Override
+    public void tick() {
+        p.tick();
+        super.tick();
     }
 }

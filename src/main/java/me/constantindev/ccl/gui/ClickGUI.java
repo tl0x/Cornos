@@ -8,6 +8,7 @@ import com.lukflug.panelstudio.settings.*;
 import com.lukflug.panelstudio.theme.ColorScheme;
 import com.lukflug.panelstudio.theme.Theme;
 import me.constantindev.ccl.Cornos;
+import me.constantindev.ccl.etc.Particles;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.*;
 import me.constantindev.ccl.etc.helper.KeybindMan;
@@ -27,8 +28,10 @@ import java.util.List;
 public class ClickGUI extends MinecraftGUI {
     private final GUIInterface guiInterface;
     private final com.lukflug.panelstudio.ClickGUI gui;
+    Particles p;
 
     public ClickGUI() {
+        p = new Particles(100);
         guiInterface = new GUIInterface(true) {
             @Override
             protected String getResourcePrefix() {
@@ -304,6 +307,13 @@ public class ClickGUI extends MinecraftGUI {
         int h = Cornos.minecraft.getWindow().getScaledHeight();
         int w = Cornos.minecraft.getWindow().getScaledWidth();
         DrawableHelper.fill(matrices, 0, 0, w, h, Colors.GUIBACKGROUND.get().getRGB());
+        p.render();
         super.render(matrices, mouseX, mouseY, partialTicks);
+    }
+
+    @Override
+    public void tick() {
+        p.tick();
+        super.tick();
     }
 }
