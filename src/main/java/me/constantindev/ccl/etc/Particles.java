@@ -3,6 +3,7 @@ package me.constantindev.ccl.etc;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.Renderer;
 import net.minecraft.client.util.Window;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
@@ -33,21 +34,29 @@ public class Particles {
             double cos = Math.cos(particle.rotation);
             particle.posX += sin * particle.speed;
             particle.posY += cos * particle.speed;
+            boolean bounced = false;
+            boolean useState2 = false;
             if (particle.posX < 0) {
                 particle.posX = 0;
-                particle.rotation = (Math.random() - 0.5) * Math.PI * 2;
+                bounced = true;
+                useState2 = true;
             }
             if (particle.posX > w.getScaledWidth()) {
                 particle.posX = w.getScaledWidth();
-                particle.rotation = (Math.random() - 0.5) * Math.PI * 2;
+                bounced = true;
+                useState2 = true;
             }
             if (particle.posY < 0) {
                 particle.posY = 0;
-                particle.rotation = (Math.random() - 0.5) * Math.PI * 2;
+                bounced = true;
             }
             if (particle.posY > w.getScaledHeight()) {
                 particle.posY = w.getScaledHeight();
-                particle.rotation = (Math.random() - 0.5) * Math.PI * 2;
+                bounced = true;
+            }
+            if (bounced) {
+                double rot = (useState2?360:180)-Math.toDegrees(particle.rotation);
+                particle.rotation = Math.toRadians(rot);
             }
         }
     }
@@ -57,6 +66,7 @@ public class Particles {
             double sin = Math.sin(particle.rotation);
             double cos = Math.cos(particle.rotation);
             Renderer.renderLineScreen(new Vec3d(particle.posX, particle.posY, 0), new Vec3d(particle.posX + sin, particle.posY + cos, 0), Color.WHITE, 2);
+            // /*debug*/ Cornos.minecraft.textRenderer.draw(new MatrixStack(),""+particle.rotation,(int)particle.posX,(int)particle.posY,0xFFFFFF);
             for (Particle particle1 : particles) {
                 double dist = Math.sqrt(Math.pow(particle.posX - particle1.posX, 2) + Math.pow(particle.posY - particle1.posY, 2));
                 if (dist < maxDist) {
