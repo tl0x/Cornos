@@ -3,6 +3,7 @@ package me.constantindev.ccl.mixin;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.MOVEMENT.Jesus;
+import me.constantindev.ccl.module.RENDER.Freecam;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
@@ -18,7 +19,7 @@ public class LivingEntityMixin {
         if (((Object) this) instanceof ClientPlayerEntity) {
             ClientPlayerEntity e = (ClientPlayerEntity) ((Object) this);
             if (Cornos.minecraft.player.getUuid().equals(e.getUuid())) {
-                if (ModuleRegistry.search("jesus").isEnabled() && (Jesus.mode.value.equalsIgnoreCase("solid") || Jesus.mode.value.equalsIgnoreCase("herobrine3")))
+                if (ModuleRegistry.search(Jesus.class).isEnabled() && (Jesus.mode.value.equalsIgnoreCase("solid") || Jesus.mode.value.equalsIgnoreCase("herobrine3")))
                     cir.setReturnValue(true);
             }
         }
@@ -29,7 +30,7 @@ public class LivingEntityMixin {
         if (((Object) this) instanceof ClientPlayerEntity) {
             ClientPlayerEntity e = (ClientPlayerEntity) ((Object) this);
             if (Cornos.minecraft.player.getUuid().equals(e.getUuid())) {
-                if (ModuleRegistry.search("freecam").isEnabled())
+                if (ModuleRegistry.search(Freecam.class).isEnabled())
                     cir.setReturnValue(false);
             }
         }

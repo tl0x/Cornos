@@ -3,6 +3,7 @@ package me.constantindev.ccl.mixin;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.NameProtect;
 import net.minecraft.client.font.TextHandler;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -40,7 +41,7 @@ public abstract class TextRendererMixin {
 
     @Inject(method = "getWidth(Ljava/lang/String;)I", cancellable = true, at = @At("HEAD"))
     public void getW(String text, CallbackInfoReturnable<Integer> cir) {
-        if (fmod == null) fmod = ModuleRegistry.search("nameprotect");
+        if (fmod == null) fmod = ModuleRegistry.search(NameProtect.class);
         if (!fmod.isEnabled()) return;
         String nt = Cornos.friendsManager.filterString(text);
         cir.setReturnValue(MathHelper.ceil(this.handler.getWidth(nt)));
@@ -48,7 +49,7 @@ public abstract class TextRendererMixin {
 
     @Inject(method = "getWidth(Lnet/minecraft/text/OrderedText;)I", cancellable = true, at = @At("HEAD"))
     public void getW(OrderedText text, CallbackInfoReturnable<Integer> cir) {
-        if (fmod == null) fmod = ModuleRegistry.search("nameprotect");
+        if (fmod == null) fmod = ModuleRegistry.search(NameProtect.class);
         if (!fmod.isEnabled()) return;
 
     }

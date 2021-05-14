@@ -41,7 +41,7 @@ public class Animations extends Module {
 
     public static void render(LivingEntity entity, ItemStack stack, ModelTransformation.Mode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci, ItemRenderer itemRenderer) {
         assert Cornos.minecraft.player != null;
-        if (entity.getUuid() == Cornos.minecraft.player.getUuid() && Cornos.minecraft.options.getPerspective() == Perspective.FIRST_PERSON && ModuleRegistry.search("Animations").isEnabled()) {
+        if (entity.getUuid() == Cornos.minecraft.player.getUuid() && Cornos.minecraft.options.getPerspective() == Perspective.FIRST_PERSON && ModuleRegistry.search(Animations.class).isEnabled()) {
             switch (type.value) {
                 case "laidBack":
                     matrices.multiply(new Quaternion(0.3f, 0f, 0f, 1f));

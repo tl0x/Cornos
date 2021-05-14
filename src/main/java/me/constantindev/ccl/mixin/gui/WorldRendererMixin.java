@@ -35,7 +35,7 @@ public abstract class WorldRendererMixin {
 
     @Inject(method = "drawBlockOutline", at = @At("HEAD"), cancellable = true)
     public void drawBlockOutline(MatrixStack matrixStack, VertexConsumer vertexConsumer, Entity entity, double d, double e, double f, BlockPos blockPos, BlockState blockState, CallbackInfo ci) {
-        if (vibe == null) vibe = ModuleRegistry.search("vibe");
+        if (vibe == null) vibe = ModuleRegistry.search(Vibe.class);
         if (!vibe.isEnabled()) return;
         HitResult hr = Cornos.minecraft.crosshairTarget;
         if (hr instanceof BlockHitResult) {

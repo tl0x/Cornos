@@ -34,7 +34,7 @@ public class Tracers extends Module {
     MConfNum dist = new MConfNum("Distance", 100, 1000, 10);
 
     public Tracers() {
-        super("PlayerInfo", "Tired of getting creeped up against?", ModuleType.RENDER);
+        super("Tracers", "Tired of getting creeped up against?", ModuleType.RENDER);
         this.mconf.add(entities);
         this.mconf.add(players);
         this.mconf.add(dist);

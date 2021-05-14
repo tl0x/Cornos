@@ -9,6 +9,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.mixin.packet;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.ResourcePackSpoof;
 import net.minecraft.network.packet.c2s.play.ResourcePackStatusC2SPacket;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,7 +24,7 @@ public class ResourcePackStatusC2SPacketMixin {
 
     @Inject(method = "<init>(Lnet/minecraft/network/packet/c2s/play/ResourcePackStatusC2SPacket$Status;)V", at = @At("TAIL"))
     public void init(ResourcePackStatusC2SPacket.Status status, CallbackInfo ci) {
-        if (ModuleRegistry.search("resourcepackspoof").isEnabled()) {
+        if (ModuleRegistry.search(ResourcePackSpoof.class).isEnabled()) {
             this.status = ResourcePackStatusC2SPacket.Status.SUCCESSFULLY_LOADED;
         }
     }

@@ -15,14 +15,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ClientWorldMixin {
     @Inject(method = "getSkyProperties", at = @At("HEAD"), cancellable = true)
     public void bruh(CallbackInfoReturnable<SkyProperties> cir) {
-        if (ModuleRegistry.search("vibe").isEnabled()) {
+        if (ModuleRegistry.search(Vibe.class).isEnabled()) {
             cir.setReturnValue(Vibe.getProps());
         }
     }
 
     @Inject(method = "getColor", at = @At("HEAD"), cancellable = true)
     public void bruh1(BlockPos pos, ColorResolver colorResolver, CallbackInfoReturnable<Integer> cir) {
-        if (ModuleRegistry.search("vibe").isEnabled() && Vibe.rgbBlocks.isEnabled()) {
+        if (ModuleRegistry.search(Vibe.class).isEnabled() && Vibe.rgbBlocks.isEnabled()) {
             cir.setReturnValue(Vibe.calculateBP(pos));
         }
     }

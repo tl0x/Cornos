@@ -9,6 +9,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.mixin.packet;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.EXPLOIT.CRASH.LoginCrash;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.c2s.login.LoginHelloC2SPacket;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,7 +22,7 @@ public abstract class LoginHelloC2SPacketMixin {
 
     @Inject(method = "write", cancellable = true, at = @At("HEAD"))
     public void gid(PacketByteBuf buf, CallbackInfo ci) {
-        if (ModuleRegistry.search("logincrash").isEnabled()) {
+        if (ModuleRegistry.search(LoginCrash.class).isEnabled()) {
             buf.writeString(null);
             ci.cancel();
 //            this.profile = new GameProfile(null,this.getProfile().getName());

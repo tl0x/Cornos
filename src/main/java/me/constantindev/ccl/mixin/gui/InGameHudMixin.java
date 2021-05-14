@@ -9,6 +9,7 @@ import me.constantindev.ccl.etc.config.MConfToggleable;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.Hud;
 import me.constantindev.ccl.module.ext.NoRender;
+import me.constantindev.ccl.module.ext.TabGUI;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
@@ -36,8 +37,8 @@ public class InGameHudMixin {
 
     @Inject(method = "render", at = @At("RETURN"))
     public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-        Hud hud = (Hud) ModuleRegistry.search("hud");
-        double rgbMulti = ((MConfNum) ModuleRegistry.search("hud").mconf.getByName("rgbSpeed")).getValue();
+        Hud hud = (Hud) ModuleRegistry.search(Hud.class);
+        double rgbMulti = ((MConfNum) ModuleRegistry.search(Hud.class).mconf.getByName("rgbSpeed")).getValue();
         long elapsed = System.currentTimeMillis() - latestTime;
         if (elapsed != 0) latestTime = System.currentTimeMillis();
         rgbSeed += (elapsed * rgbMulti) / 20;
@@ -81,55 +82,56 @@ public class InGameHudMixin {
             swap = 0;
         }
 
-        if (ModuleRegistry.search("hud").isEnabled()) {
+        if (ModuleRegistry.search(Hud.class).isEnabled()) {
             if (((MConfToggleable) hud.mconf.getByName("modules")).isEnabled()) {
                 boolean doRgb = Hud.themeColor.isRainbow();
                 AtomicInteger offset = new AtomicInteger(0);
                 List<Module> ml = ModuleRegistry.getAll();
                 List<Module> mlR = new ArrayList<>();
-                ml.forEach(module -> {
+                for (Module module : ml) {
                     if (module.isEnabled() && (((MConfToggleable) module.mconf.getByName("visible")).isEnabled()))
                         mlR.add(module);
-                });
+                }
                 mlR.sort(Comparator.comparingInt(o -> Cornos.minecraft.textRenderer.getWidth(o.name)));
                 List<Module> mlR1 = Lists.reverse(mlR);
                 if (lastValues.size() > mlR1.size()) {
                     lastValues.subList(0, 1).clear();
                 }
-                AtomicInteger current = new AtomicInteger(0);
-                mlR1.forEach(module -> {
+                int current = 0;
+                for (Module module : mlR1) {
                     int colorToUse;
                     try {
-                        colorToUse = lastValues.get(current.addAndGet(1));
+                        colorToUse = lastValues.get(current);
                     } catch (Exception ignored) {
                         colorToUse = Hud.themeColor.getRGB();
                     }
+                    current++;
                     int off = offset.getAndAdd(11);
                     DrawableHelper.fill(matrices, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 2 - 3, off, scaledWidth - 2, off + 11, new Color(47, 47, 47, 90).getRGB());
                     DrawableHelper.fill(matrices, scaledWidth - 2, off, scaledWidth, off + 11, doRgb ? colorToUse : Hud.themeColor.getRGB());
                     Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 3, 2 + off, doRgb ? colorToUse : Hud.themeColor.getRGB());
-                });
+                }
             }
             CConf.hudElements.render(matrices, tickDelta);
         }
         for (Module m : ModuleRegistry.getAll()) {
             if (m.isEnabled()) m.onHudRender(matrices, tickDelta);
         }
-        if (ModuleRegistry.search("TabGUI").isEnabled() && CConf.tabGUI != null) {
+        if (ModuleRegistry.search(TabGUI.class).isEnabled() && CConf.tabGUI != null) {
             CConf.tabGUI.render(matrices, tickDelta);
         }
     }
 
     @Inject(at = {@At("HEAD")}, method = "renderStatusEffectOverlay", cancellable = true)
     private void renderStatusEffectOverlay(MatrixStack matrices, CallbackInfo ci) {
-        if (ModuleRegistry.search("hud").isEnabled()) {
+        if (ModuleRegistry.search(Hud.class).isEnabled()) {
             ci.cancel();
         }
     }
 
     @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
     public void renderPumpkinOverlayReplacement(CallbackInfo ci) {
-        if (NoRender.pumpkin.isEnabled() && ModuleRegistry.search("norender").isEnabled()) {
+        if (NoRender.pumpkin.isEnabled() && ModuleRegistry.search(NoRender.class).isEnabled()) {
             ci.cancel();
             MatrixStack defaultM = new MatrixStack();
             int w2d = Cornos.minecraft.getWindow().getScaledWidth() / 2;

@@ -21,7 +21,7 @@ public class MemeSFX extends Module {
     public MemeSFX() {
         super("MemeSFX", "Taco bell", ModuleType.FUN);
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
-            if (!ModuleRegistry.search("memesfx").isEnabled()) return;
+            if (!ModuleRegistry.search(MemeSFX.class).isEnabled()) return;
             PacketEvent pe = (PacketEvent) event;
             if (pe.packet instanceof PlayerInteractEntityC2SPacket) {
                 assert Cornos.minecraft.player != null;

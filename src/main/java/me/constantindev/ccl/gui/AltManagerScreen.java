@@ -8,7 +8,6 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.gui;
 
-import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.gui.widget.CustomButtonWidget;
 import me.constantindev.ccl.module.Alts;

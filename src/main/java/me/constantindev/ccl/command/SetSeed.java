@@ -14,7 +14,7 @@ public class SetSeed extends Command {
     @Override
     public void onExecute(String[] args) {
         if (args.length == 1 && STL.tryParseL(args[0])) {
-            ((OreSim) ModuleRegistry.search("oresim")).setWorldSeed(Long.parseLong(args[0]));
+            ((OreSim) ModuleRegistry.search(OreSim.class)).setWorldSeed(Long.parseLong(args[0]));
         } else {
             STL.notifyUser("You need to input a valid number example: .setseed -42069");
         }

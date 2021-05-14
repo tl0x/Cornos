@@ -5,6 +5,7 @@ import me.constantindev.ccl.etc.config.MConfToggleable;
 import me.constantindev.ccl.etc.helper.Renderer;
 import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.Debug;
 import me.constantindev.ccl.module.ext.Hud;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
@@ -51,10 +52,10 @@ public class HudElements extends DrawableHelper {
         tick += .2;
         if (tick > 360) tick = 0;
         double sin = Math.sin(Math.toRadians(tick));
-        if (ModuleRegistry.search("debug").isEnabled())
+        if (ModuleRegistry.search(Debug.class).isEnabled())
             STL.notifyUser(sin + ", " + tick + ", " + Math.toRadians(tick) + ", " + Math.toDegrees(tick));
         boolean chatOpen = Cornos.minecraft.currentScreen instanceof ChatScreen;
-        Hud hud = (Hud) ModuleRegistry.search("hud");
+        Hud hud = (Hud) ModuleRegistry.search(Hud.class);
 
         TextRenderer textRenderer = Cornos.minecraft.textRenderer;
         int offset = 0;

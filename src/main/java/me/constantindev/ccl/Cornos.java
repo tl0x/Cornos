@@ -9,6 +9,7 @@ import me.constantindev.ccl.etc.helper.ConfMan;
 import me.constantindev.ccl.etc.helper.KeybindMan;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.ClientConfig;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ConfirmScreen;
@@ -75,7 +76,7 @@ public class Cornos implements ModInitializer {
         CommandRegistry.init();
         log(Level.INFO, "Initializing module registry");
         ModuleRegistry.init();
-        config = (me.constantindev.ccl.module.ext.ClientConfig) ModuleRegistry.search("ClientConfig");
+        config = (me.constantindev.ccl.module.ext.ClientConfig) ModuleRegistry.search(ClientConfig.class);
         log(Level.INFO, "Loading the configuration file");
         ConfMan.lconf();
         log(Level.INFO, "Registering all keybinds");

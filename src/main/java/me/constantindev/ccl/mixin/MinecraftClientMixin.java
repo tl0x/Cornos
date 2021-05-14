@@ -27,7 +27,7 @@ public class MinecraftClientMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     public void tick(CallbackInfo ci) {
-        FastUse fuse = (FastUse) ModuleRegistry.search("fast");
+        FastUse fuse = (FastUse) ModuleRegistry.search(FastUse.class);
         if (!fuse.isEnabled()) return;
         if (fuse.fastuse.isEnabled()) this.itemUseCooldown = 0;
     }

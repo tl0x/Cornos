@@ -10,6 +10,7 @@ import me.constantindev.ccl.etc.helper.ConfMan;
 import me.constantindev.ccl.etc.helper.KeybindMan;
 import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.RENDER.Freecam;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,14 +23,14 @@ public class ClientPlayerEntityMixin {
 
     @Inject(at = @At("INVOKE"), method = "pushOutOfBlocks", cancellable = true)
     private void pushOutOfBlocks(double x, double d, CallbackInfo ci) {
-        if (ModuleRegistry.search("Freecam").isEnabled()) {
+        if (ModuleRegistry.search(Freecam.class).isEnabled()) {
             ci.cancel();
         }
     }
 
     @Inject(at = {@At("HEAD")}, method = "isSubmergedInWater", cancellable = true)
     private void isSubmergedInWater(CallbackInfoReturnable<Boolean> cir) {
-        if (ModuleRegistry.search("Freecam").isEnabled()) {
+        if (ModuleRegistry.search(Freecam.class).isEnabled()) {
             cir.setReturnValue(false);
         }
     }

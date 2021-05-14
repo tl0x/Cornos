@@ -2,6 +2,7 @@ package me.constantindev.ccl.mixin.packet;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.MemeSFX;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.ExplosionS2CPacket;
 import net.minecraft.sound.SoundCategory;
@@ -24,7 +25,7 @@ public class ExplosionS2CPacketMixin {
 
     @Inject(at = @At("HEAD"), method = "apply")
     private void playSound(ClientPlayPacketListener clientPlayPacketListener, CallbackInfo ci) {
-        if (ModuleRegistry.search("memesfx").isEnabled()) {
+        if (ModuleRegistry.search(MemeSFX.class).isEnabled()) {
             assert Cornos.minecraft.world != null;
             Cornos.minecraft.world.playSound(x, y, z, Cornos.VINEBOOM_SOUND, SoundCategory.BLOCKS, 4f, 1f, false);
         }

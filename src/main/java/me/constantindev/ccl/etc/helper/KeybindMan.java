@@ -4,6 +4,7 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.ms.KeyBind;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.TabGUI;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import java.util.Map;
 public class KeybindMan {
     public static Map<String, KeyBind> binds = new HashMap<>();
     public static boolean freezeTabGui;
-    static Module tab = ModuleRegistry.search("TabGUI");
+    static Module tab = ModuleRegistry.search(TabGUI.class);
 
     public static void init() {
         for (Module module : ModuleRegistry.getAll()) {

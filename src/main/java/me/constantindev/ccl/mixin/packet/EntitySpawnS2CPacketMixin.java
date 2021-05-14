@@ -1,6 +1,7 @@
 package me.constantindev.ccl.mixin.packet;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.AntiBlockban;
 import net.minecraft.entity.EntityType;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
@@ -17,7 +18,7 @@ public class EntitySpawnS2CPacketMixin {
 
     @Inject(method = "apply", at = @At("TAIL"), cancellable = true)
     public void a(ClientPlayPacketListener clientPlayPacketListener, CallbackInfo ci) {
-        if (this.entityTypeId == EntityType.AREA_EFFECT_CLOUD && ModuleRegistry.search("antiblockban").isEnabled()) {
+        if (this.entityTypeId == EntityType.AREA_EFFECT_CLOUD && ModuleRegistry.search(AntiBlockban.class).isEnabled()) {
             ci.cancel();
         }
     }

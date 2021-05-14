@@ -15,6 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public class ClientPlayNetworkHandlerMixin {
+    OreSim oresim;
+
     @Inject(method = "sendPacket", cancellable = true, at = @At("HEAD"))
     public void callEventQueue(Packet<?> packet, CallbackInfo ci) {
         boolean flag = EventHelper.BUS.invokeEventCall(EventType.ONPACKETSEND, new PacketEvent(packet));
@@ -23,8 +25,9 @@ public class ClientPlayNetworkHandlerMixin {
 
     @Inject(method = "onChunkData", at = @At(value = "TAIL"))
     private void onChunkData(ChunkDataS2CPacket packet, CallbackInfo ci) {
-        if (ModuleRegistry.search("oresim").isEnabled()) {
-            ((OreSim) ModuleRegistry.search("oresim")).doMathOnChunk(packet.getX(), packet.getZ());
+        if (oresim == null) oresim = (OreSim) ModuleRegistry.search(OreSim.class);
+        if (oresim.isEnabled()) {
+            oresim.doMathOnChunk(packet.getX(), packet.getZ());
         }
     }
 }

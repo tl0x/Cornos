@@ -91,7 +91,7 @@ public class FunnyItemsScreen extends Screen {
             HologramAura.message = standAuraName.getText();
             HologramAura.argument = auraText.getText();
             //System.out.println(HologramAura.message2build);
-            ModuleRegistry.search("hologramaura").setEnabled(true);
+            ModuleRegistry.search(HologramAura.class).setEnabled(true);
         });
 
 

@@ -9,6 +9,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.ByteSizeViewer;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -29,7 +30,7 @@ import java.util.Objects;
 public class ItemStackMixin {
     @Inject(method = "getTooltip", at = @At("RETURN"), cancellable = true)
     public void getTooltip(PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir) {
-        if (!ModuleRegistry.search("ByteSizeViewer").isEnabled()) return;
+        if (!ModuleRegistry.search(ByteSizeViewer.class).isEnabled()) return;
         List<Text> tl = cir.getReturnValue();
         ItemStack is = (ItemStack) ((Object) this);
         tl.add(Text.of(" "));

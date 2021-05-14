@@ -2,6 +2,7 @@ package me.constantindev.ccl.etc;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.NameProtect;
 import net.minecraft.text.CharacterVisitor;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Style;
@@ -24,7 +25,7 @@ public class FriendsManager {
     }
 
     public String filterString(String text) {
-        if (!ModuleRegistry.search("NameProtect").isEnabled()) {
+        if (!ModuleRegistry.search(NameProtect.class).isEnabled()) {
             return text;
         }
         for (Friend friend : friends.values()) {
@@ -35,7 +36,7 @@ public class FriendsManager {
     }
 
     public boolean filterOrderedText(OrderedText orderedText, CharacterVisitor visitor) {
-        if (!ModuleRegistry.search("NameProtect").isEnabled()) {
+        if (!ModuleRegistry.search(NameProtect.class).isEnabled()) {
             return orderedText.accept(visitor);
         }
         DaBabyVisitor daBabyVisitor = new DaBabyVisitor();

@@ -2,6 +2,7 @@ package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.module.ext.AntiBlockban;
 import me.constantindev.ccl.module.ext.NameTags;
 import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -38,8 +39,8 @@ public abstract class EntityRendererMixin<T extends Entity> {
             if (Cornos.friendsManager.getFriends().containsKey(text.asString())) {
                 text = Text.of("\u00A79" + Cornos.friendsManager.getFriends().get(text.asString()).getFakeName());
             }
-            if (ModuleRegistry.search("Nametags").isEnabled()) {
-                ((NameTags) ModuleRegistry.search("Nametags")).renderCustomLabel(entity, text, matrices, vertexConsumers, light, dispatcher);
+            if (ModuleRegistry.search(NameTags.class).isEnabled()) {
+                ((NameTags) ModuleRegistry.search(NameTags.class)).renderCustomLabel(entity, text, matrices, vertexConsumers, light, dispatcher);
                 ci.cancel();
             }
         }
@@ -47,13 +48,13 @@ public abstract class EntityRendererMixin<T extends Entity> {
 
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
     public void sR(T entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> cir) {
-        if (entity.getType().equals(EntityType.AREA_EFFECT_CLOUD) && ModuleRegistry.search("antiblockban").isEnabled())
+        if (entity.getType().equals(EntityType.AREA_EFFECT_CLOUD) && ModuleRegistry.search(AntiBlockban.class).isEnabled())
             cir.setReturnValue(false);
     }
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void render(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
-        if (entity.getType().equals(EntityType.AREA_EFFECT_CLOUD) && ModuleRegistry.search("antiblockban").isEnabled())
+        if (entity.getType().equals(EntityType.AREA_EFFECT_CLOUD) && ModuleRegistry.search(AntiBlockban.class).isEnabled())
             ci.cancel();
     }
 }
