@@ -112,6 +112,7 @@ public class ModuleRegistry {
         ml.add(new NameProtect());
         ml.add(new RedstoneHighlighter());
         ml.add(new AntiPacketKick());
+        ml.add(new AutoInteract());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();
