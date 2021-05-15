@@ -14,15 +14,21 @@ import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.logging.log4j.Level;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.Proxy;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class STL {
@@ -131,5 +137,23 @@ public class STL {
         ItemStack is = Cornos.minecraft.player.inventory.getStack(index);
         ClickSlotC2SPacket p = new ClickSlotC2SPacket(0, index, 1, SlotActionType.THROW, is, actionID);
         Cornos.minecraft.getNetworkHandler().sendPacket(p);
+    }
+
+    public static List<String> downloadCapes() throws IOException {
+        URL u = new URL("https://raw.githubusercontent.com/AriliusClient/ariliusclient.github.io/master/contributors.txt");
+        HttpURLConnection huc = (HttpURLConnection) u.openConnection();
+        huc.setInstanceFollowRedirects(true);
+        huc.connect();
+        InputStream response = huc.getInputStream();
+        BufferedReader r = new BufferedReader(new InputStreamReader(response));
+        List<String> resp = new ArrayList<>();
+        String current;
+        while((current = r.readLine()) != null) {
+            resp.add(current);
+        }
+        r.close();
+        response.close();
+        huc.disconnect();
+        return resp;
     }
 }

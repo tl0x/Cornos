@@ -7,6 +7,7 @@ import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.helper.ConfMan;
 import me.constantindev.ccl.etc.helper.KeybindMan;
+import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.etc.reg.CommandRegistry;
 import me.constantindev.ccl.etc.reg.ModuleRegistry;
 import me.constantindev.ccl.module.ext.ClientConfig;
@@ -22,7 +23,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cornos implements ModInitializer {
 
@@ -36,6 +40,7 @@ public class Cornos implements ModInitializer {
     public static Thread fastUpdater;
     public static NotificationManager notifMan;
     public static FriendsManager friendsManager;
+    public static List<String> capes = new ArrayList<>();
 
     public static me.constantindev.ccl.module.ext.ClientConfig config;
 
@@ -81,6 +86,17 @@ public class Cornos implements ModInitializer {
         ConfMan.lconf();
         log(Level.INFO, "Registering all keybinds");
         KeybindMan.init();
+        try {
+            log(Level.INFO, "Getting capes");
+            capes = STL.downloadCapes();
+            log(Level.INFO, "Contributor UUIDs:");
+            for (String cape : capes) {
+                log(Level.INFO, "  "+cape);
+            }
+        } catch (IOException e) {
+            log(Level.INFO, "Failed to download capes.");
+            e.printStackTrace();
+        }
         log(Level.INFO, "All features registered. Ready to load game");
 
         fastUpdater = new Thread(() -> {

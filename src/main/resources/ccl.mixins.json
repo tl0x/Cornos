@@ -20,6 +20,7 @@
     "LivingEntityRendererMixin",
     "MinecraftClientMixin",
     "PlayerEntityMixin",
+    "PlayerListEntryMixin",
     "ScoreboardMixin",
     "ScreenMixin",
     "SessionAccessor",
