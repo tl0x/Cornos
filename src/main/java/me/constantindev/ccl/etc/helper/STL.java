@@ -14,11 +14,6 @@ import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.logging.log4j.Level;
 
 import java.io.*;
@@ -148,7 +143,7 @@ public class STL {
         BufferedReader r = new BufferedReader(new InputStreamReader(response));
         List<String> resp = new ArrayList<>();
         String current;
-        while((current = r.readLine()) != null) {
+        while ((current = r.readLine()) != null) {
             resp.add(current);
         }
         r.close();

@@ -11,6 +11,7 @@ import net.minecraft.util.hit.BlockHitResult;
 public class AutoInteract extends Module {
     MConfNum delay = new MConfNum("delay", 5, 20, 0);
     int passed = -1;
+
     public AutoInteract() {
         super("AutoInteract", "Automatically interacts with shit", ModuleType.WORLD);
         mconf.add(delay);
@@ -22,7 +23,7 @@ public class AutoInteract extends Module {
         if (passed >= delay.getValue()) {
             passed = -1;
             if (!(Cornos.minecraft.crosshairTarget instanceof BlockHitResult)) return;
-            Cornos.minecraft.interactionManager.interactBlock(Cornos.minecraft.player,Cornos.minecraft.world, Hand.MAIN_HAND,(BlockHitResult) Cornos.minecraft.crosshairTarget);
+            Cornos.minecraft.interactionManager.interactBlock(Cornos.minecraft.player, Cornos.minecraft.world, Hand.MAIN_HAND, (BlockHitResult) Cornos.minecraft.crosshairTarget);
         } else {
             Cornos.minecraft.player.currentScreenHandler.close(Cornos.minecraft.player);
             CloseHandledScreenC2SPacket p = new CloseHandledScreenC2SPacket(Cornos.minecraft.player.currentScreenHandler.syncId);

@@ -15,9 +15,11 @@ import java.util.UUID;
 
 @Mixin(PlayerListEntry.class)
 public class PlayerListEntryMixin {
-    @Shadow @Final private GameProfile profile;
+    @Shadow
+    @Final
+    private GameProfile profile;
 
-    @Inject(method="getCapeTexture",at=@At("HEAD"),cancellable = true)
+    @Inject(method = "getCapeTexture", at = @At("HEAD"), cancellable = true)
     public void getCapeTexture(CallbackInfoReturnable<Identifier> cir) {
         GameProfile context = this.profile;
         boolean hasCape = false;

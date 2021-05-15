@@ -91,7 +91,7 @@ public class Cornos implements ModInitializer {
             capes = STL.downloadCapes();
             log(Level.INFO, "Contributor UUIDs:");
             for (String cape : capes) {
-                log(Level.INFO, "  "+cape);
+                log(Level.INFO, "  " + cape);
             }
         } catch (IOException e) {
             log(Level.INFO, "Failed to download capes.");

@@ -38,7 +38,7 @@ public class MainScreen extends Screen {
     @Override
     protected void init() {
         super.init();
-        p = new Particles(100);
+        p = new Particles(150);
         if (!ClientProgression.hasFinishedTut.isEnabled()) {
             assert this.client != null;
             this.client.openScreen(new TutorialScreen());
@@ -52,11 +52,11 @@ public class MainScreen extends Screen {
         this.addButton(new CustomButtonWidget(width - 125, height - 100, 120, 20, Text.of("Singleplayer"), () -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
         this.addButton(new CustomButtonWidget(width - 125, height - 75, 120, 20, Text.of("Multiplayer"), () -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));
         CustomButtonWidget btnw = new CustomButtonWidget(width - 125, height - 50, 120, 20, Text.of("Realms"), () -> Cornos.minecraft.openScreen(new RealmsMainScreen(this)));
+        this.addButton(btnw);
         this.addButton(new CustomButtonWidget(width - 125, height - 25, 120, 20, Text.of("Vanilla homescreen"), () -> {
             Cornos.config.mconf.getByName("homescreen").setValue("vanilla");
             Cornos.minecraft.openScreen(new TitleScreen());
         }));
-        this.addButton(btnw);
         this.addButton(new TexturedButtonWidget(width - 20, 0, 20, 20, 0, 0, 0, new Identifier("ccl", "transparent.png"), (b) -> {
             btnw.setMessage(Text.of("Roleplay"));
             showSecrets = true;
