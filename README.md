@@ -112,7 +112,14 @@ After you obtained the jarfile, read the section above, "Installing the jarfile"
 # Credits
 
 Thanks to everyone who contributed to this! Special thanks go to:
-@@ -107,3 +121,13 @@ Without you, this project would've gone to the bin a long time ago. Thanks!
+- xlvin#2111 for making the logo
+- Chicken#0002 for a ton of work on the client
+- and everyone else who contributed.
+
+Without you, this project would've gone to the bin a long time ago. Thanks!
+
+---
+
 # Contributors Stats:
 
 <img align="center" src="https://github-readme-stats.vercel.app/api?username=NotNoahDev&show_icons=true&theme=radical&line_height=21"/>
@@ -126,3 +133,5 @@ Thanks to everyone who contributed to this! Special thanks go to:
 <img align="center" src="https://github-readme-stats.vercel.app/api?username=GalaxyLinus&show_icons=true&theme=radical&line_height=21"/>
 <img align="center" src="https://github-readme-stats.vercel.app/api?username=CASTLEdev&show_icons=true&theme=radical&line_height=21"/>
 <img align="center" src="https://github-readme-stats.vercel.app/api?username=3060ti&show_icons=true&theme=radical&line_height=21"/>
+
+---
