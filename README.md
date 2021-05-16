@@ -5,7 +5,9 @@ based block game hax
 
 # Support
 
-You can open an issue for help or feature requests. If that is not the right thing for you, you can DM 0x150#9893 on discord.
+we have discor
+
+https://discord.gg/rvC7F798xQ
 
 # Installation
 
