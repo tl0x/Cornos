@@ -91,3 +91,11 @@ After you obtained the jarfile, read the section above, "Installing the jarfile"
 
 ![grafik](https://user-images.githubusercontent.com/80022388/115186272-b504ab80-a0e1-11eb-8cc0-fba7afdb2d69.png)
 
+# Credits
+
+Thanks to everyone who contributed to this! Special thanks go to:
+- xlvin#2111 for making the logo
+- Chicken#0002 for a ton of work on the client
+- and everyone else who contributed.
+
+Without you, this project would've gone to the bin a long time ago. Thanks!
