@@ -65,7 +65,7 @@ public class Vibe extends Module {
     public static int calculateBP(BlockPos pos) {
         float bruh = (pos.getX() + pos.getY() + pos.getZ()) * 10f;
         prevOff += Rnd.rndD(4) - 2;
-        prevOff = MathHelper.clamp(prevOff, -rgbnoise.getValue(), rgbnoise.getValue());
+        prevOff = MathHelper.clamp(prevOff, (float) -rgbnoise.getValue(), (float) rgbnoise.getValue());
         bruh += prevOff;
         bruh = Math.abs(bruh);
         bruh %= 255 * 3;
