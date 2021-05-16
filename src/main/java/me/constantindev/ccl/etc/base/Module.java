@@ -75,6 +75,10 @@ public class Module {
         return isOn.isOn();
     }
 
+    protected void setEnabledWithoutUpdate(boolean nv) {
+        this.isOn.setState(nv);
+    }
+
     public final void setEnabled(boolean isEnabled) {
         this.isOn.setState(isEnabled);
         if (isEnabled) {

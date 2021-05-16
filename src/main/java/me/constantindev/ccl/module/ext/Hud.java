@@ -13,7 +13,7 @@ public class Hud extends Module {
 
     public Hud() {
         super("HUD", "Shows stuff on screen ig", ModuleType.RENDER);
-        this.setEnabled(true);
+        this.setEnabledWithoutUpdate(true);
         this.mconf.add(new MConfNum("rgbSpeed", 5, 20, 1));
         this.mconf.add(themeColor);
         this.mconf.add(new MConfToggleable("fps", true));

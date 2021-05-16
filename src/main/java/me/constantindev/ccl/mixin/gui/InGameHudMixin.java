@@ -112,7 +112,9 @@ public class InGameHudMixin {
                     Cornos.minecraft.textRenderer.draw(matrices, module.name, scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 3, 2 + off, doRgb ? colorToUse : Hud.themeColor.getRGB());
                 }
             }
-            CConf.hudElements.render(matrices, tickDelta);
+            try {
+                CConf.hudElements.render(matrices, tickDelta);
+            } catch (Exception ignored) {}
         }
         for (Module m : ModuleRegistry.getAll()) {
             if (m.isEnabled()) m.onHudRender(matrices, tickDelta);
