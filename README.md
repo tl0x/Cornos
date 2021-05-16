@@ -1,16 +1,17 @@
 # Cornos
-Cornos is a Hacked Client for a Game Called `Minecraft`
+Cornos is a cheat client for minecraft
 
 <img src="https://img.shields.io/github/stars/AriliusClient/Cornos?color=000000&style=for-the-badge" /><br>
 
-# How to get Support!
+# How to get Support
 
-We have a Discord Server!
+We have a Discord Server
+
 </br></br>
 <a href="https://discord.gg/rvC7F798xQ"><img src="https://invidget.switchblade.xyz/rvC7F798xQ"/></a>
 <br><br>
 
-## Reposotory:
+## Repository info
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=AriliusClient&repo=Cornos)](https://github.com/AriliusClient/Cornos)
 
 # Installation
@@ -90,24 +91,9 @@ After you obtained the jarfile, read the section above, "Installing the jarfile"
 
 ![grafik](https://user-images.githubusercontent.com/80022388/115186386-e54c4a00-a0e1-11eb-93ef-88a3a68c2510.png)
 
-
 ## HUD
 
 ![grafik](https://user-images.githubusercontent.com/80022388/115186272-b504ab80-a0e1-11eb-8cc0-fba7afdb2d69.png)
-
----
-
-# Documenation: 
-
-|  Cmd   | Usage    | Description                                                    | Catagory    |
-| ------ | -------- | -------------------------------------------------------------- | ----------- |
-|        |          |                                                                |             |
-|        |          |                                                                |             |
-|        |          |                                                                |             |
-|        |          |                                                                |             |
-|        |          |                                                                |             |
-
----
 
 # Credits
 
@@ -118,11 +104,9 @@ Thanks to everyone who contributed to this! Special thanks go to:
 
 Without you, this project would've gone to the bin a long time ago. Thanks!
 
----
 
 # Contributors Stats:
 
-<img align="center" src="https://github-readme-stats.vercel.app/api?username=NotNoahDev&show_icons=true&theme=radical&line_height=21"/>
 <img align="center" src="https://github-readme-stats.vercel.app/api?username=FloppaDev&show_icons=true&theme=radical&line_height=21"/>
 <img align="center" src="https://github-readme-stats.vercel.app/api?username=FreakingChicken&show_icons=true&theme=radical&line_height=21"/>
 <img align="center" src="https://github-readme-stats.vercel.app/api?username=feliscatusmeows&show_icons=true&theme=radical&line_height=21"/>
@@ -133,5 +117,5 @@ Without you, this project would've gone to the bin a long time ago. Thanks!
 <img align="center" src="https://github-readme-stats.vercel.app/api?username=GalaxyLinus&show_icons=true&theme=radical&line_height=21"/>
 <img align="center" src="https://github-readme-stats.vercel.app/api?username=CASTLEdev&show_icons=true&theme=radical&line_height=21"/>
 <img align="center" src="https://github-readme-stats.vercel.app/api?username=3060ti&show_icons=true&theme=radical&line_height=21"/>
+<img align="center" src="https://github-readme-stats.vercel.app/api?username=NotNoahDev&show_icons=true&theme=radical&line_height=21"/>
 
----
