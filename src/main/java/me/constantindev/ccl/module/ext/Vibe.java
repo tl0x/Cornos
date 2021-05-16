@@ -22,7 +22,7 @@ public class Vibe extends Module {
     public static MConfNum ch = new MConfNum("cloudsHeight", 128, 255, 0);
     public static MConfNum rgbnoise = new MConfNum("rgbNoise", 5, 100, 0);
     public static MConfColor blockOutline = new MConfColor("blockOutline", new Color(0, 0, 0));
-    static double prevOff = 0;
+    static float prevOff = 0;
 
     public Vibe() {
         super("Vibe", "Changes world render settings", ModuleType.RENDER);
