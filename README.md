@@ -3,11 +3,12 @@ based block game hax
 
 <img src="https://img.shields.io/github/stars/AriliusClient/Cornos?color=000000&style=for-the-badge" /><br>
 
-# Support
+# How to get Support!
 
-we have discor
-
-https://discord.gg/rvC7F798xQ
+We have a Discord Server!
+</br></br>
+<a href="https://discord.gg/rvC7F798xQ"><img src="https://invidget.switchblade.xyz/rvC7F798xQ"/></a>
+<br><br>
 
 # Installation
 
@@ -99,3 +100,5 @@ Thanks to everyone who contributed to this! Special thanks go to:
 - and everyone else who contributed.
 
 Without you, this project would've gone to the bin a long time ago. Thanks!
+
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=AriliusClient&repo=Cornos)](https://github.com/AriliusClient/Cornos)
