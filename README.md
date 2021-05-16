@@ -1,5 +1,5 @@
 # Cornos
-based block game hax
+Cornos is a Hacked Client for a Game Called `Minecraft`
 
 <img src="https://img.shields.io/github/stars/AriliusClient/Cornos?color=000000&style=for-the-badge" /><br>
 
