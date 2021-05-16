@@ -13,9 +13,6 @@ We have a Discord Server!
 ## Reposotory:
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=AriliusClient&repo=Cornos)](https://github.com/AriliusClient/Cornos)
 
-## Coding Stats for Nerds:
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=AriliusClient&layout=compact)](https://github.com/AriliusClient/Cornos)
-
 # Installation
 
 ## Easy installation
@@ -106,3 +103,7 @@ Thanks to everyone who contributed to this! Special thanks go to:
 - and everyone else who contributed.
 
 Without you, this project would've gone to the bin a long time ago. Thanks!
+
+# Contributors Stats:
+
+<img align="center" src="https://github-readme-stats.vercel.app/api?username=NotNoahDev&show_icons=true&theme=radical&line_height=21"/>
