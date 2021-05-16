@@ -6,6 +6,7 @@ import me.constantindev.ccl.etc.config.MConfToggleable;
 
 public class ClientConfig extends Module {
     public MConfToggleable particles = new MConfToggleable("particles", true);
+
     public ClientConfig() {
         super("ClientConfig", "Config for the client");
         this.mconf.add(new MConfMultiOption("prefix", ".", new String[]{"}", ".", "-", "+", "#", "@", "&", "%", "$"}));

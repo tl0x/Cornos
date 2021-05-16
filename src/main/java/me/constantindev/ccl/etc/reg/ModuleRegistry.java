@@ -113,6 +113,7 @@ public class ModuleRegistry {
         ml.add(new RedstoneHighlighter());
         ml.add(new AntiPacketKick());
         ml.add(new AutoInteract());
+        ml.add(new Surround());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

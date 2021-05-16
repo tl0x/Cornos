@@ -39,14 +39,14 @@ public class TutorialScreen extends Screen {
         homescreen = new CheckboxWidget(4, 65, 100, 20, Text.of("Client home screen"), true);
         mpscreen = new CheckboxWidget(4, 90, 100, 20, Text.of("Client multiplayer screen"), false);
         customPIcon = new CheckboxWidget(4, 115, 100, 20, Text.of("Custom process icon"), true);
-        doParticles = new CheckboxWidget(4,115+25,100,20,Text.of("Particles on home screen"),true);
+        doParticles = new CheckboxWidget(4, 115 + 25, 100, 20, Text.of("Particles on home screen"), true);
         continueBTN = new CustomButtonWidget(width - 81, height - 21, 80, 20, Text.of("Next"), () -> {
             if (finished) {
                 ClientConfig m = Cornos.config;
                 m.mconf.getByName("homescreen").setValue(homescreen.isChecked() ? "client" : "vanilla");
                 m.mconf.getByName("mpscreen").setValue(mpscreen.isChecked() ? "client" : "vanilla");
                 m.mconf.getByName("customProcessIcon").setValue(customPIcon.isChecked() ? "on" : "off");
-                m.particles.setValue(doParticles.isChecked()?"on":"off");
+                m.particles.setValue(doParticles.isChecked() ? "on" : "off");
                 ClientProgression.hasFinishedTut.setValue("on");
                 assert this.client != null;
                 this.client.openScreen(null);
