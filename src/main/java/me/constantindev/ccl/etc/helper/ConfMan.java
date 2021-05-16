@@ -113,6 +113,7 @@ public class ConfMan {
                     m.setEnabled(true);
                     m.showNotifications = true;
                 } catch (Exception ignored) {
+
                 }
             }
         }

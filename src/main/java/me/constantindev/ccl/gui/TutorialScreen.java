@@ -25,6 +25,7 @@ public class TutorialScreen extends Screen {
     CheckboxWidget homescreen;
     CheckboxWidget mpscreen;
     CheckboxWidget customPIcon;
+    CheckboxWidget doParticles;
     int page = 0;
     boolean finished = false;
 
@@ -38,12 +39,14 @@ public class TutorialScreen extends Screen {
         homescreen = new CheckboxWidget(4, 65, 100, 20, Text.of("Client home screen"), true);
         mpscreen = new CheckboxWidget(4, 90, 100, 20, Text.of("Client multiplayer screen"), false);
         customPIcon = new CheckboxWidget(4, 115, 100, 20, Text.of("Custom process icon"), true);
+        doParticles = new CheckboxWidget(4,115+25,100,20,Text.of("Particles on home screen"),true);
         continueBTN = new CustomButtonWidget(width - 81, height - 21, 80, 20, Text.of("Next"), () -> {
             if (finished) {
                 ClientConfig m = Cornos.config;
                 m.mconf.getByName("homescreen").setValue(homescreen.isChecked() ? "client" : "vanilla");
                 m.mconf.getByName("mpscreen").setValue(mpscreen.isChecked() ? "client" : "vanilla");
                 m.mconf.getByName("customProcessIcon").setValue(customPIcon.isChecked() ? "on" : "off");
+                m.particles.setValue(doParticles.isChecked()?"on":"off");
                 ClientProgression.hasFinishedTut.setValue("on");
                 assert this.client != null;
                 this.client.openScreen(null);
@@ -95,6 +98,7 @@ public class TutorialScreen extends Screen {
                 homescreen.render(matrices, mouseX, mouseY, delta);
                 mpscreen.render(matrices, mouseX, mouseY, delta);
                 customPIcon.render(matrices, mouseX, mouseY, delta);
+                doParticles.render(matrices, mouseX, mouseY, delta);
                 break;
             default:
                 messages.add("Congrats! You are ready to use the client now");
@@ -116,6 +120,7 @@ public class TutorialScreen extends Screen {
         homescreen.mouseClicked(mouseX, mouseY, button);
         mpscreen.mouseClicked(mouseX, mouseY, button);
         customPIcon.mouseClicked(mouseX, mouseY, button);
+        doParticles.mouseClicked(mouseX, mouseY, button);
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
@@ -124,6 +129,7 @@ public class TutorialScreen extends Screen {
         homescreen.mouseReleased(mouseX, mouseY, button);
         mpscreen.mouseReleased(mouseX, mouseY, button);
         customPIcon.mouseReleased(mouseX, mouseY, button);
+        doParticles.mouseReleased(mouseX, mouseY, button);
         return super.mouseReleased(mouseX, mouseY, button);
     }
 
@@ -132,6 +138,7 @@ public class TutorialScreen extends Screen {
         homescreen.mouseMoved(mouseX, mouseY);
         mpscreen.mouseMoved(mouseX, mouseY);
         customPIcon.mouseMoved(mouseX, mouseY);
+        doParticles.mouseMoved(mouseX, mouseY);
         super.mouseMoved(mouseX, mouseY);
     }
 }

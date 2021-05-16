@@ -2,6 +2,7 @@ package me.constantindev.ccl.etc;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.Renderer;
+import me.constantindev.ccl.module.ext.ClientConfig;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.util.Window;
 import net.minecraft.util.math.Vec3d;
@@ -29,6 +30,7 @@ public class Particles {
     }
 
     public void tick() {
+        if(!Cornos.config.particles.isEnabled()) return;
         Window w = Cornos.minecraft.getWindow();
         maxDist = Math.sqrt(w.getScaledWidth() * w.getScaledWidth() + w.getScaledHeight() * w.getScaledHeight()) / 9;
         Mouse m = Cornos.minecraft.mouse;
@@ -73,6 +75,7 @@ public class Particles {
     }
 
     public void render() {
+        if (!Cornos.config.particles.isEnabled()) return;
         for (Particle particle : particles) {
             for (Particle particle1 : particles) {
                 double dist = Math.sqrt(Math.pow(particle.posX - particle1.posX, 2) + Math.pow(particle.posY - particle1.posY, 2));
