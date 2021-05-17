@@ -38,6 +38,7 @@ public class CommandRegistry {
         cl.add(new XrayConfig());
         cl.add(new Friend());
         cl.add(new Teleport());
+        cl.add(new Fireball());
     }
 
     public static List<Command> getAll() {
