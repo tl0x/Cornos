@@ -11,6 +11,7 @@ package me.constantindev.ccl.gui.screen;
 import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.features.module.impl.misc.Alts;
 import me.constantindev.ccl.gui.widget.CustomButtonWidget;
+import me.constantindev.ccl.gui.widget.PasswordField;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
@@ -22,8 +23,9 @@ import java.util.List;
 
 public class AltManagerScreen extends Screen {
     TextFieldWidget email;
-    TextFieldWidget passwd;
+    PasswordField passwd;
     TextFieldWidget emailpasswd;
+    CustomButtonWidget showpass;
     String errormsg = "";
     boolean hasSavedAlts = false;
 
@@ -38,8 +40,16 @@ public class AltManagerScreen extends Screen {
 
         email = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) - 35, 200, 20, Text.of("Email"));
         email.setMaxLength(1000);
-        passwd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2), 200, 20, Text.of("Password"));
+        passwd = new PasswordField(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2), 200, 20, Text.of("Password"));
         passwd.setMaxLength(1000);
+        showpass = new CustomButtonWidget(width / 2 - (200 / 2) + 210, height / 2 - (20 / 2), 30, 20, Text.of("Show"), () -> {
+            passwd.setShowPassword(!passwd.isShowPassword());
+            if (passwd.isShowPassword()) {
+                showpass.setMessage(Text.of("Hide"));
+            } else {
+                showpass.setMessage(Text.of("Show"));
+            }
+        });
         emailpasswd = new TextFieldWidget(textRenderer, width / 2 - (200 / 2), height / 2 - (20 / 2) + 35, 200, 20, Text.of("Username:password"));
         emailpasswd.setMaxLength(2000);
         CustomButtonWidget login = new CustomButtonWidget(width / 2 - (120 / 2), height / 2 - (20 / 2) + 60, 120, 20, Text.of("Login"), () -> {
@@ -60,6 +70,7 @@ public class AltManagerScreen extends Screen {
         });
         this.addButton(login);
         this.addButton(saveAlt);
+        this.addButton(showpass);
 
         List<List<String>> goodalts = new ArrayList<>();
         for (String s : Alts.k.value.substring(1).split(((char) 999) + "")) {

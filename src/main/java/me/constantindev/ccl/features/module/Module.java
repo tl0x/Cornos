@@ -1,6 +1,6 @@
 package me.constantindev.ccl.features.module;
 
-import me.constantindev.ccl.etc.config.Keybind;
+import me.constantindev.ccl.etc.config.MConfKeyBind;
 import me.constantindev.ccl.etc.config.MConf;
 import me.constantindev.ccl.etc.config.MConfToggleable;
 import me.constantindev.ccl.etc.config.Toggleable$1;
@@ -32,7 +32,7 @@ public class Module {
         this.description = d;
         this.type = type;
         this.mconf = new MConf(this);
-        this.mconf.add(new Keybind("keybind", -1));
+        this.mconf.add(new MConfKeyBind("keybind", -1));
         this.mconf.add(new MConfToggleable("visible", true));
     }
 

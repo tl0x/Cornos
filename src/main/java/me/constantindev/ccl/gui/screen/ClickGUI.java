@@ -177,11 +177,11 @@ public class ClickGUI extends MinecraftGUI {
                         };
                         EnumComponent ec = new EnumComponent(kc.key, null, theme.getComponentRenderer(), es);
                         mc.addComponent(ec);
-                    } else if (kc instanceof Keybind) {
+                    } else if (kc instanceof MConfKeyBind) {
                         KeybindSetting ks = new KeybindSetting() {
                             @Override
                             public int getKey() {
-                                return (int) ((Keybind) kc).getValue();
+                                return (int) ((MConfKeyBind) kc).getValue();
                             }
 
                             @Override
