@@ -8,7 +8,7 @@ import me.constantindev.ccl.features.module.impl.external.OreSim;
 public class SetSeed extends Command {
 
     public SetSeed() {
-        super(".SetSeed", "Specify your worldseed for OreSim", new String[]{"setseed"});
+        super("SetSeed", "Specify your worldseed for OreSim", new String[]{"setseed"});
     }
 
     @Override
