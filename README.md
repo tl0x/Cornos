@@ -39,16 +39,15 @@ After you obtained the jarfile, read the section above, "Installing the jarfile"
 
 ## Home screen
 
-![grafik](https://user-images.githubusercontent.com/80022388/115186302-c057d700-a0e1-11eb-818c-acf8a7de2346.png)
+![grafik](https://user-images.githubusercontent.com/80022388/118516053-434a6c80-b736-11eb-9bd2-7a8016ee094a.png)
 
 ## ClickGUI
 
-![grafik](https://user-images.githubusercontent.com/80022388/115186386-e54c4a00-a0e1-11eb-93ef-88a3a68c2510.png)
-
+![grafik](https://user-images.githubusercontent.com/80022388/118516241-6d039380-b736-11eb-9e98-971088d7cb00.png)
 
 ## HUD
 
-![grafik](https://user-images.githubusercontent.com/80022388/115186272-b504ab80-a0e1-11eb-8cc0-fba7afdb2d69.png)
+![grafik](https://user-images.githubusercontent.com/80022388/118516305-7ab91900-b736-11eb-8740-957b75f8aa01.png)
 
 # Credits
 
