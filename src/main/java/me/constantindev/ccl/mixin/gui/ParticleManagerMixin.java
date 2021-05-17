@@ -1,7 +1,7 @@
 package me.constantindev.ccl.mixin.gui;
 
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.ext.NoRender;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.external.NoRender;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleManager;
 import org.spongepowered.asm.mixin.Mixin;

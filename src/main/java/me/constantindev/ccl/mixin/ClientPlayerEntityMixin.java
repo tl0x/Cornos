@@ -1,16 +1,16 @@
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.event.EventHelper;
 import me.constantindev.ccl.etc.event.EventType;
 import me.constantindev.ccl.etc.event.arg.Event;
-import me.constantindev.ccl.etc.helper.ConfMan;
-import me.constantindev.ccl.etc.helper.KeybindMan;
 import me.constantindev.ccl.etc.helper.STL;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.RENDER.Freecam;
+import me.constantindev.ccl.etc.manager.ConfigManager;
+import me.constantindev.ccl.etc.manager.KeybindManager;
+import me.constantindev.ccl.features.module.Module;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.render.Freecam;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,7 +41,7 @@ public class ClientPlayerEntityMixin {
             STL.update();
             CConf.checkedForUpdates = true;
         }
-        if (!ConfMan.enabledMods) ConfMan.enableModsToBeEnabled();
+        if (!ConfigManager.enabledMods) ConfigManager.enableModsToBeEnabled();
         for (Module m : ModuleRegistry.getAll()) {
             if (Cornos.minecraft.player == null) return; // so this mf will stop complaining
             try {
@@ -49,7 +49,7 @@ public class ClientPlayerEntityMixin {
             } catch (Exception ignored) {
             }
         }
-        KeybindMan.tick();
+        KeybindManager.tick();
         Cornos.notifMan.tick();
         EventHelper.BUS.invokeEventCall(EventType.ONTICK, new Event());
     }

@@ -1,9 +1,9 @@
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.MOVEMENT.Jesus;
-import me.constantindev.ccl.module.RENDER.Freecam;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.movement.Jesus;
+import me.constantindev.ccl.features.module.impl.render.Freecam;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;

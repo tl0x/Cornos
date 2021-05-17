@@ -9,8 +9,8 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.mixin.packet;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.ext.MemeSFX;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.external.MemeSFX;
 import net.minecraft.entity.damage.DamageTracker;
 import net.minecraft.network.packet.s2c.play.CombatEventS2CPacket;
 import net.minecraft.text.Text;

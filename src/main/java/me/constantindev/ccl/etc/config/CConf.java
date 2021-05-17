@@ -1,9 +1,9 @@
 package me.constantindev.ccl.etc.config;
 
 import com.lukflug.panelstudio.settings.NumberSetting;
-import me.constantindev.ccl.gui.ClickGUI;
-import me.constantindev.ccl.gui.HudElements;
-import me.constantindev.ccl.gui.TabGUI;
+import me.constantindev.ccl.gui.screen.ClickGUI;
+import me.constantindev.ccl.gui.screen.HudElements;
+import me.constantindev.ccl.gui.screen.TabGUI;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 

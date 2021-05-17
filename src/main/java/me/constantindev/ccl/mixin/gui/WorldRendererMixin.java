@@ -1,9 +1,9 @@
 package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.ext.Vibe;
+import me.constantindev.ccl.features.module.Module;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.external.Vibe;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.client.render.VertexConsumer;

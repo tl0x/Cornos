@@ -1,9 +1,9 @@
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.ext.NameProtect;
+import me.constantindev.ccl.features.module.Module;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.external.NameProtect;
 import net.minecraft.client.font.TextHandler;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;

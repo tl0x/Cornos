@@ -1,6 +1,6 @@
 package me.constantindev.ccl.mixin.packet;
 
-import me.constantindev.ccl.module.MOVEMENT.Flight;
+import me.constantindev.ccl.features.module.impl.movement.Flight;
 import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

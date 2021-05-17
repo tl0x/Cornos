@@ -8,7 +8,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.mixin.packet;
 
-import me.constantindev.ccl.gui.HudElements;
+import me.constantindev.ccl.gui.screen.HudElements;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

@@ -8,8 +8,8 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.mixin.gui;
 
-import me.constantindev.ccl.gui.FunnyItemsScreen;
-import me.constantindev.ccl.gui.HeadsScreen;
+import me.constantindev.ccl.gui.screen.FunnyItemsScreen;
+import me.constantindev.ccl.gui.screen.HeadsScreen;
 import me.constantindev.ccl.gui.widget.CustomButtonWidget;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;

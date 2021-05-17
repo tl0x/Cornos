@@ -1,9 +1,9 @@
 package me.constantindev.ccl.mixin;
 
-import me.constantindev.ccl.etc.base.Module;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.RENDER.Freecam;
-import me.constantindev.ccl.module.ext.XRAY;
+import me.constantindev.ccl.features.module.Module;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.external.XRAY;
+import me.constantindev.ccl.features.module.impl.render.Freecam;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;

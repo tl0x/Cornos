@@ -1,8 +1,8 @@
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.etc.config.CConf;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.ext.XRAY;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.external.XRAY;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

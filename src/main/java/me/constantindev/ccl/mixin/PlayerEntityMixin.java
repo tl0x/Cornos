@@ -1,9 +1,9 @@
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.WORLD.Scaffold;
-import me.constantindev.ccl.module.ext.Safewalk;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.external.Safewalk;
+import me.constantindev.ccl.features.module.impl.world.Scaffold;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

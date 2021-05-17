@@ -2,14 +2,14 @@ package me.constantindev.ccl.mixin.gui;
 
 import com.google.common.collect.Lists;
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.base.Module;
 import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.config.MConfNum;
 import me.constantindev.ccl.etc.config.MConfToggleable;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.ext.Hud;
-import me.constantindev.ccl.module.ext.NoRender;
-import me.constantindev.ccl.module.ext.TabGUI;
+import me.constantindev.ccl.features.module.Module;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.external.Hud;
+import me.constantindev.ccl.features.module.impl.external.NoRender;
+import me.constantindev.ccl.features.module.impl.external.TabGUI;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
@@ -114,7 +114,8 @@ public class InGameHudMixin {
             }
             try {
                 CConf.hudElements.render(matrices, tickDelta);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
         for (Module m : ModuleRegistry.getAll()) {
             if (m.isEnabled()) m.onHudRender(matrices, tickDelta);

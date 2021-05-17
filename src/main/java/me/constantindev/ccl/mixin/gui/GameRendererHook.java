@@ -9,7 +9,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
+import me.constantindev.ccl.features.module.ModuleRegistry;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import org.objectweb.asm.Opcodes;

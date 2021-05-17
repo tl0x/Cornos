@@ -1,11 +1,11 @@
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.Friend;
-import me.constantindev.ccl.etc.base.Command;
-import me.constantindev.ccl.etc.helper.KeybindMan;
+import me.constantindev.ccl.etc.config.Friend;
 import me.constantindev.ccl.etc.helper.STL;
-import me.constantindev.ccl.etc.reg.CommandRegistry;
+import me.constantindev.ccl.etc.manager.KeybindManager;
+import me.constantindev.ccl.features.command.Command;
+import me.constantindev.ccl.features.command.CommandRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.Formatting;
@@ -25,7 +25,7 @@ public class ScreenMixin {
 
     @Inject(method = "sendMessage(Ljava/lang/String;)V", at = @At("HEAD"), cancellable = true)
     public void onChatMessageSent(String msg, CallbackInfo cbi) {
-        KeybindMan.freezeTabGui = true;
+        KeybindManager.freezeTabGui = true;
         String prefix = Cornos.config.mconf.getByName("prefix").value;
         if (msg.toLowerCase().startsWith(prefix.toLowerCase())) {
             cbi.cancel();

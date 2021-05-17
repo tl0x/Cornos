@@ -1,7 +1,7 @@
 package me.constantindev.ccl.mixin.packet;
 
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.ext.AntiBlockban;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.external.AntiBlockban;
 import net.minecraft.entity.EntityType;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;

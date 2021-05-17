@@ -1,6 +1,6 @@
 package me.constantindev.ccl.etc.config;
 
-import me.constantindev.ccl.etc.base.Module;
+import me.constantindev.ccl.features.module.Module;
 
 import java.util.ArrayList;
 import java.util.List;

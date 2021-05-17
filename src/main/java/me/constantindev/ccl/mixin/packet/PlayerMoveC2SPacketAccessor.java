@@ -9,6 +9,18 @@ public interface PlayerMoveC2SPacketAccessor {
     @Accessor("y")
     void setY(double y);
 
+    @Accessor("yaw")
+    float getYaw();
+
+    @Accessor("yaw")
+    void setYaw(float yaw);
+
+    @Accessor("pitch")
+    float getPitch();
+
+    @Accessor("pitch")
+    void setPitch(float pitch);
+
     @Accessor("onGround")
     void setOnGround(boolean onGround);
 }

@@ -1,6 +1,6 @@
 package me.constantindev.ccl.mixin.gui;
 
-import me.constantindev.ccl.module.RENDER.Animations;
+import me.constantindev.ccl.features.module.impl.render.Animations;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.client.render.item.ItemRenderer;

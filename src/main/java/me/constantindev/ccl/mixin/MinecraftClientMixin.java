@@ -9,9 +9,9 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.constantindev.ccl.mixin;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.etc.helper.ConfMan;
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.ext.FastUse;
+import me.constantindev.ccl.etc.manager.ConfigManager;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.external.FastUse;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.RunArgs;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,6 +39,6 @@ public class MinecraftClientMixin {
 
     @Inject(method = "stop", at = @At("HEAD"))
     public void sdHook(CallbackInfo ci) {
-        ConfMan.sconf();
+        ConfigManager.sconf();
     }
 }

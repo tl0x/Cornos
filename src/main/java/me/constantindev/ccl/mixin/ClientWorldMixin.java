@@ -1,7 +1,7 @@
 package me.constantindev.ccl.mixin;
 
-import me.constantindev.ccl.etc.reg.ModuleRegistry;
-import me.constantindev.ccl.module.ext.Vibe;
+import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.external.Vibe;
 import net.minecraft.client.render.SkyProperties;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;

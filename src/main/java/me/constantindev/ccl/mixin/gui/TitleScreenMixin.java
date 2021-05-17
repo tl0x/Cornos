@@ -1,7 +1,7 @@
 package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.Cornos;
-import me.constantindev.ccl.gui.MainScreen;
+import me.constantindev.ccl.gui.screen.MainScreen;
 import me.constantindev.ccl.gui.widget.CustomButtonWidget;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
