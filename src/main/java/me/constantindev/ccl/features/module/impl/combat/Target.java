@@ -10,6 +10,7 @@ package me.constantindev.ccl.features.module.impl.combat;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.MConfToggleable;
+import me.constantindev.ccl.etc.helper.SilentRotations;
 import me.constantindev.ccl.features.module.Module;
 import me.constantindev.ccl.features.module.ModuleType;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
@@ -22,11 +23,13 @@ import net.minecraft.util.math.Vec3d;
 public class Target extends Module {
     MConfToggleable players = new MConfToggleable("players", true);
     MConfToggleable entities = new MConfToggleable("entities", false);
+    MConfToggleable silentrot = new MConfToggleable("silentrotations", false);
 
     public Target() {
         super("Target", "Helps you aim at shit", ModuleType.COMBAT);
         this.mconf.add(players);
         this.mconf.add(entities);
+        this.mconf.add(silentrot);
     }
 
     @Override
@@ -46,7 +49,11 @@ public class Target extends Module {
             }
             if (e.getBoundingBox().intersects(selector) && e.getUuid() != Cornos.minecraft.player.getUuid() && e.isAttackable() && !le.isDead()) {
                 Vec3d finP = e.getPos().add(0, e.getHeight() / 2, 0);
-                Cornos.minecraft.player.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, finP);
+                if (silentrot.isEnabled()) {
+                    SilentRotations.doSilentRotation(EntityAnchorArgumentType.EntityAnchor.EYES, finP);
+                } else {
+                    Cornos.minecraft.player.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, finP);
+                }
                 break;
             }
         }
