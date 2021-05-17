@@ -2,8 +2,7 @@
 based block game hax
 ![cornos-logo](https://github.com/AriliusClient/Cornos/blob/master/src/main/resources/assets/ccl/hscreenlogo.png?raw=true)
 
-<img alt="GitHub" src="https://img.shields.io/github/license/AriliusClient/Cornos"> <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/AriliusClient/Cornos?style=flat?color=green">
-
+<img alt="GitHub" src="https://img.shields.io/github/license/AriliusClient/Cornos"> <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/AriliusClient/Cornos?style=flat?color=green"> <img alt="Size" src="https://img.shields.io/github/languages/code-size/AriliusClient/Cornos"> 
 # Support
 
 we have discor
