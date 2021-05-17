@@ -8,11 +8,32 @@ import me.constantindev.ccl.etc.event.arg.PacketEvent;
 import me.constantindev.ccl.etc.helper.Renderer;
 import me.constantindev.ccl.features.module.Module;
 import me.constantindev.ccl.features.module.ModuleType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ChestBlock;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.options.Perspective;
+import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EntityPose;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
+import net.minecraft.network.packet.c2s.play.PlayerInputC2SPacket;
+import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
+import net.minecraft.screen.GenericContainerScreenHandler;
+import net.minecraft.screen.ScreenHandlerFactory;
+import net.minecraft.text.Text;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
@@ -33,9 +54,19 @@ public class Freecam extends Module {
         Module parent = this;
         // prevent movement packets from sending when module is enabled
         EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
+            if (!parent.isEnabled()) return;
             PacketEvent pe = (PacketEvent) event;
             if (pe.packet instanceof PlayerMoveC2SPacket) {
-                if (parent.isEnabled()) event.cancel();
+                event.cancel();
+            }
+            if(pe.packet instanceof PlayerInputC2SPacket) {
+                event.cancel();
+            }
+            if(pe.packet instanceof PlayerInteractBlockC2SPacket) {
+                event.cancel();
+            }
+            if (pe.packet instanceof PlayerActionC2SPacket) {
+                event.cancel();
             }
         });
     }
@@ -130,6 +161,7 @@ public class Freecam extends Module {
             Renderer.renderBlockOutline(startloc.subtract(0.6 / 2, 0, 0.6 / 2), new Vec3d(0.6, 1.8, 0.6), 50, 255, 173, 255);
             Renderer.renderLine(Renderer.getCrosshairVector(), startloc.subtract(0, -1.8 / 2, 0), new Color(50, 255, 173), 2);
         }
+
         super.onRender(ms, td);
     }
 }

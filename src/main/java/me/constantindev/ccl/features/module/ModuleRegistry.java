@@ -113,6 +113,7 @@ public class ModuleRegistry {
         ml.add(new AntiPacketKick());
         ml.add(new AutoInteract());
         ml.add(new Surround());
+        ml.add(new PortalGodMode());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();
