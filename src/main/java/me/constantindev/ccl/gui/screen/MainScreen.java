@@ -22,12 +22,9 @@ import org.lwjgl.opengl.GL11;
 import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MainScreen extends Screen {
     Identifier bg = new Identifier("ccl", "bg.jpg");
-    DateFormat line1 = new SimpleDateFormat("h:mm aa");
-    DateFormat line2 = new SimpleDateFormat("E, d. M");
     Particles p;
     boolean showSecrets = false;
 
@@ -47,6 +44,10 @@ public class MainScreen extends Screen {
         this.addButton(new CustomButtonWidget(width - 125, height - 150, 120, 20, Text.of("Alts"), () -> {
             assert this.client != null;
             this.client.openScreen(new AltManagerScreen());
+        }));
+        this.addButton(new CustomButtonWidget(width - 955, height - 25, 120, 20, Text.of("Menu Config"), () -> {
+            assert this.client != null;
+            this.client.openScreen(new MenuConfigScreen());
         }));
         this.addButton(new CustomButtonWidget(width - 125, height - 125, 120, 20, Text.of("Settings"), () -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));
         this.addButton(new CustomButtonWidget(width - 125, height - 100, 120, 20, Text.of("Singleplayer"), () -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
@@ -71,16 +72,8 @@ public class MainScreen extends Screen {
         p.render();
         Renderer.drawImage(matrices, new Identifier("ccl", "hscreenlogo.png"), -11, 1, 960 / 4, 233 / 4, (float) c.getRed() / 255, (float) c.getGreen() / 255, (float) c.getBlue() / 255);
         int diff = 32;
-        Renderer.renderRoundedQuad(5, height - 5 - diff, 211, height - 5, 4, new Color(0, 0, 0, 20));
-        int centerX = 107;
-        int centerY = (height - 5) / 2 + (height - 5 - diff) / 2 + 5;
-        Date d = new Date();
-        String line1F = line1.format(d);
-        String line2F = line2.format(d);
         GL11.glScaled(2, 2, 1);
-        DrawableHelper.drawCenteredString(matrices, textRenderer, line1F, centerX / 2, (centerY - 18) / 2, 0xFFFFFF);
         GL11.glScaled(.5, .5, 1);
-        DrawableHelper.drawCenteredString(matrices, textRenderer, line2F, centerX, centerY + 1, 0xFFFFFF);
         super.render(matrices, mouseX, mouseY, delta);
     }
 
