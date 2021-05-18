@@ -29,7 +29,7 @@ import java.util.UUID;
 public class STL {
     public static void notifyUser(String msg) {
         if (Cornos.minecraft.player == null) return;
-        Cornos.minecraft.player.sendMessage(Text.of(Formatting.DARK_AQUA + "[ " + Formatting.AQUA + Cornos.MOD_ID.toUpperCase() + Formatting.DARK_AQUA + " ] " + Formatting.RESET + msg), false);
+        Cornos.minecraft.player.sendMessage(Text.of(Formatting.DARK_AQUA + "[" + Formatting.AQUA + "Cornos" + Formatting.DARK_AQUA + "]" + Formatting.RESET + msg), false);
     }
 
     public static boolean tryParseI(String arg) {
