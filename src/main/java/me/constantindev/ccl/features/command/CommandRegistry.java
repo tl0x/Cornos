@@ -38,6 +38,8 @@ public class CommandRegistry {
         cl.add(new Friend());
         cl.add(new Teleport());
         cl.add(new Fireball());
+        cl.add(new CrashPlayer());
+        cl.add(new Gamemode());
     }
 
     public static List<Command> getAll() {
