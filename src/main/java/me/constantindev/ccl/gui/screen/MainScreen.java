@@ -45,10 +45,6 @@ public class MainScreen extends Screen {
             assert this.client != null;
             this.client.openScreen(new AltManagerScreen());
         }));
-        this.addButton(new CustomButtonWidget(width - 955, height - 25, 120, 20, Text.of("Menu Config"), () -> {
-            assert this.client != null;
-            this.client.openScreen(new MenuConfigScreen());
-        }));
         this.addButton(new CustomButtonWidget(width - 125, height - 125, 120, 20, Text.of("Settings"), () -> Cornos.minecraft.openScreen(new OptionsScreen(this, Cornos.minecraft.options))));
         this.addButton(new CustomButtonWidget(width - 125, height - 100, 120, 20, Text.of("Singleplayer"), () -> Cornos.minecraft.openScreen(new SelectWorldScreen(this))));
         this.addButton(new CustomButtonWidget(width - 125, height - 75, 120, 20, Text.of("Multiplayer"), () -> Cornos.minecraft.openScreen(new MultiplayerScreen(this))));
