@@ -25,11 +25,11 @@ public class PasswordField extends TextFieldWidget {
         }
     }
 
-    public void setShowPassword(boolean showPassword) {
-        this.showPassword = showPassword;
-    }
-
     public boolean isShowPassword() {
         return showPassword;
+    }
+
+    public void setShowPassword(boolean showPassword) {
+        this.showPassword = showPassword;
     }
 }

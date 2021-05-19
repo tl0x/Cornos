@@ -40,6 +40,7 @@ public class CommandRegistry {
         cl.add(new Fireball());
         cl.add(new CrashPlayer());
         cl.add(new Gamemode());
+        cl.add(new RandomBook());
     }
 
     public static List<Command> getAll() {

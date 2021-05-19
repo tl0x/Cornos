@@ -6,6 +6,8 @@ import me.constantindev.ccl.etc.config.MConfToggleable;
 import me.constantindev.ccl.features.module.Module;
 import me.constantindev.ccl.features.module.ModuleType;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.options.GameOptions;
+import net.minecraft.client.options.KeyBinding;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
@@ -24,6 +26,7 @@ public class Surround extends Module {
     MConfToggleable instant = new MConfToggleable("instant", false);
     MConfToggleable switchToObby = new MConfToggleable("switchObby", true);
     MConfToggleable blockMovements = new MConfToggleable("blockMovements", true);
+    GameOptions backup;
     int delayWaited = 0;
 
     public Surround() {
@@ -66,9 +69,19 @@ public class Surround extends Module {
                     BlockState w = Cornos.minecraft.world.getBlockState(currentBP);
                     if (w.getMaterial().isReplaceable()) positionsWeCanReplace.add(position);
                 }
-                if (positionsWeCanReplace.isEmpty()) return;
+                if (positionsWeCanReplace.isEmpty()) {
+                    KeyBinding.updatePressedStates();
+                    return;
+                };
                 if (blockMovements.isEnabled()) {
                     Cornos.minecraft.player.setVelocity(0, 0, 0);
+                    GameOptions go = Cornos.minecraft.options;
+                    if (backup == null) backup = go;
+                    go.keyRight.setPressed(false);
+                    go.keyLeft.setPressed(false);
+                    go.keyForward.setPressed(false);
+                    go.keyBack.setPressed(false);
+                    go.keyJump.setPressed(false);
                 }
                 if (switchToObby.isEnabled()) {
                     int obsidianIndex = -1;

@@ -1,11 +1,8 @@
 package me.constantindev.ccl.etc.helper;
 
 import me.constantindev.ccl.Cornos;
-import net.minecraft.client.network.ClientPlayerInteractionManager;
-import net.minecraft.client.render.Camera;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 
 public class SilentRotations {

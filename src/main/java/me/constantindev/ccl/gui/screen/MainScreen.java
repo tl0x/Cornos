@@ -3,7 +3,7 @@ package me.constantindev.ccl.gui.screen;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.helper.Renderer;
-import me.constantindev.ccl.etc.render.Particles;
+import me.constantindev.ccl.etc.render.particles.LargeParticles;
 import me.constantindev.ccl.features.module.impl.misc.ClientProgression;
 import me.constantindev.ccl.gui.widget.CustomButtonWidget;
 import net.minecraft.client.gui.DrawableHelper;
@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 
 public class MainScreen extends Screen {
     Identifier bg = new Identifier("ccl", "bg.jpg");
-    Particles p;
+    LargeParticles p;
     boolean showSecrets = false;
 
     public MainScreen() {
@@ -35,7 +35,7 @@ public class MainScreen extends Screen {
     @Override
     protected void init() {
         super.init();
-        p = new Particles(150);
+        p = new LargeParticles(10);
         if (!ClientProgression.hasFinishedTut.isEnabled()) {
             assert this.client != null;
             this.client.openScreen(new TutorialScreen());

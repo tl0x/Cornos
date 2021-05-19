@@ -1,7 +1,7 @@
 package me.constantindev.ccl.features.module;
 
-import me.constantindev.ccl.etc.config.MConfKeyBind;
 import me.constantindev.ccl.etc.config.MConf;
+import me.constantindev.ccl.etc.config.MConfKeyBind;
 import me.constantindev.ccl.etc.config.MConfToggleable;
 import me.constantindev.ccl.etc.config.Toggleable$1;
 import me.constantindev.ccl.etc.helper.Renderer;

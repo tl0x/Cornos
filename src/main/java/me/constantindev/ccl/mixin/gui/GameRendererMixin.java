@@ -1,12 +1,16 @@
-package me.constantindev.ccl.mixin;
+package me.constantindev.ccl.mixin.gui;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.SilentRotations;
+import me.constantindev.ccl.features.module.ModuleRegistry;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,6 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
+
+    private boolean vb;
 
     @Redirect(method = "updateTargetedEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;raycast(DFZ)Lnet/minecraft/util/hit/HitResult;"))
     public HitResult raycast(Entity entity, double maxDistance, float tickDelta, boolean includeFluids) {
@@ -58,5 +64,25 @@ public class GameRendererMixin {
 
     private float getYaw(float yaw, float prevYaw, float tickDelta) {
         return tickDelta == 1.0F ? yaw : MathHelper.lerp(tickDelta, prevYaw, yaw);
+    }
+
+    @Inject(at = {@At(value = "FIELD", target = "Lnet/minecraft/client/render/GameRenderer;renderHand:Z", opcode = Opcodes.GETFIELD, ordinal = 0)}, method = "renderWorld")
+    private void onRenderWorld(float tickDelta, long limitTime, MatrixStack matrix, CallbackInfo ci) {
+        if (vb) {
+            Cornos.minecraft.options.bobView = true;
+            vb = false;
+        }
+        ModuleRegistry.getAll().forEach(m -> {
+            if (m.isEnabled()) m.onRender(matrix, tickDelta);
+        });
+
+    }
+
+    @Inject(at = {@At(value = "FIELD", target = "Lnet/minecraft/client/options/GameOptions;bobView:Z", opcode = Opcodes.GETFIELD, ordinal = 0)}, method = "renderWorld")
+    private void fixTracerBobbing(float tickDelta, long limitTime, MatrixStack matrix, CallbackInfo ci) {
+        if (Cornos.minecraft.options.bobView) {
+            vb = true;
+            Cornos.minecraft.options.bobView = false;
+        }
     }
 }

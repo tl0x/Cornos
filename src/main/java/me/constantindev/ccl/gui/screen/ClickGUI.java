@@ -11,7 +11,7 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.*;
 import me.constantindev.ccl.etc.helper.Renderer;
 import me.constantindev.ccl.etc.manager.KeybindManager;
-import me.constantindev.ccl.etc.render.Particles;
+import me.constantindev.ccl.etc.render.particles.ConnectingParticles;
 import me.constantindev.ccl.features.module.Module;
 import me.constantindev.ccl.features.module.ModuleRegistry;
 import me.constantindev.ccl.features.module.ModuleType;
@@ -28,10 +28,10 @@ import java.util.List;
 public class ClickGUI extends MinecraftGUI {
     private final GUIInterface guiInterface;
     private final com.lukflug.panelstudio.ClickGUI gui;
-    Particles p;
+    ConnectingParticles p;
 
     public ClickGUI() {
-        p = new Particles(100);
+        p = new ConnectingParticles(100);
         guiInterface = new GUIInterface(true) {
             @Override
             protected String getResourcePrefix() {

@@ -7,6 +7,7 @@ import me.constantindev.ccl.etc.config.MConfNum;
 import me.constantindev.ccl.etc.config.MConfToggleable;
 import me.constantindev.ccl.features.module.Module;
 import me.constantindev.ccl.features.module.ModuleRegistry;
+import me.constantindev.ccl.features.module.impl.external.BetterHotbar;
 import me.constantindev.ccl.features.module.impl.external.Hud;
 import me.constantindev.ccl.features.module.impl.external.NoRender;
 import me.constantindev.ccl.features.module.impl.external.TabGUI;
@@ -140,5 +141,10 @@ public class InGameHudMixin {
             int w2d = Cornos.minecraft.getWindow().getScaledWidth() / 2;
             Cornos.minecraft.textRenderer.draw(defaultM, "You are wearing a pumpkin", w2d - ((float) Cornos.minecraft.textRenderer.getWidth("You are wearing a pumpkin") / 2), 50, 0xFFFFFFFF);
         }
+    }
+
+    @Inject(method = "renderHotbar", at = @At("TAIL"))
+    public void renderHotbar(float tickDelta, MatrixStack matrices, CallbackInfo ci) {
+        if (ModuleRegistry.search(BetterHotbar.class).isEnabled()) BetterHotbar.renderHotbar();
     }
 }

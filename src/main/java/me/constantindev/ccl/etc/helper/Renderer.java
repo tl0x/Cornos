@@ -100,6 +100,10 @@ public class Renderer {
     }
 
     public static void renderLineScreen(Vec3d from, Vec3d to, Color col, int width) {
+        renderLineScreen(from.x, from.y, to.x, to.y, col, width);
+    }
+
+    public static void renderLineScreen(double fromX, double fromY, double toX, double toY, Color col, int width) {
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -112,8 +116,8 @@ public class Renderer {
         GL11.glColor4f(col.getRed() / 255F, col.getGreen() / 255F, col.getBlue() / 255F, col.getAlpha() / 255F);
         GL11.glBegin(GL11.GL_LINES);
         {
-            GL11.glVertex3d(from.x, from.y, from.z);
-            GL11.glVertex3d(to.x, to.y, to.z);
+            GL11.glVertex2d(fromX, fromY);
+            GL11.glVertex2d(toX, toY);
         }
         GL11.glEnd();
         GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -156,6 +160,33 @@ public class Renderer {
                 double cos = Math.cos(rad1) * rad;
                 GL11.glVertex2d(current[0] + sin, current[1] + cos);
             }
+        }
+
+        GL11.glEnd();
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glPopMatrix();
+    }
+
+    public static void renderCircle(double x, double y, double rad, Color col, double incr) {
+        GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+        GL11.glLineWidth(3);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_CULL_FACE);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glColor4f(col.getRed() / 255F, col.getGreen() / 255F, col.getBlue() / 255F, col.getAlpha() / 255F);
+        GL11.glBegin(GL11.GL_POLYGON);
+
+        for (double i = 0; i < 360; i += incr) {
+            double radians = Math.toRadians(i);
+            double sin = Math.sin(radians) * rad;
+            double cos = Math.cos(radians) * rad;
+            GL11.glVertex2d(x + sin, y + cos);
         }
 
         GL11.glEnd();
