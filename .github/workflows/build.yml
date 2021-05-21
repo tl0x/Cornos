@@ -24,5 +24,4 @@ jobs:
           prerelease: false
           title: "Latest build"
           files: |
-            LICENSE.txt
-            *.jar
+            builds/*.jar
