@@ -9,7 +9,9 @@ import me.constantindev.ccl.features.module.Module;
 import me.constantindev.ccl.features.module.ModuleType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.c2s.play.HandSwingC2SPacket;
 import net.minecraft.util.Hand;
@@ -31,6 +33,7 @@ public class Killaura extends Module {
     MConfToggleable abNoname = new MConfToggleable("ab:noname", true);
     MConfToggleable abColorName = new MConfToggleable("ab:colorname", true);
     MConfToggleable abInvalidName = new MConfToggleable("ab:invalidName", false);
+    MConfToggleable checkForHostile = new MConfToggleable("checkHostile", false);
     int delayWaited = 0;
     List<LivingEntity> attacks = new ArrayList<>();
 
@@ -46,6 +49,7 @@ public class Killaura extends Module {
         this.mconf.add(abColorName);
         this.mconf.add(abNoname);
         this.mconf.add(abInvalidName);
+        this.mconf.add(checkForHostile);
     }
 
     @Override
@@ -67,6 +71,13 @@ public class Killaura extends Module {
             if ((e instanceof PlayerEntity) && !players.isEnabled()) continue;
             if ((e instanceof HostileEntity) && !mobs.isEnabled()) continue;
             if (!(e instanceof PlayerEntity) && !(e instanceof HostileEntity) && !this.entities.isEnabled()) continue;
+            if (Cornos.friendsManager.getFriends().containsKey(e.getName().asString())) continue;
+            if (checkForHostile.isEnabled()) {
+                if (e instanceof HostileEntity) {
+                    HostileEntity m = (HostileEntity) e;
+                    if(m.getTarget() != null && !m.getTarget().getUuid().equals(Cornos.minecraft.player.getUuid())) continue;
+                }
+            }
             String n = e.getEntityName();
             List<Boolean> abThesis = new ArrayList<>();
             if (abColorName.isEnabled()) abThesis.add(n.contains("§"));

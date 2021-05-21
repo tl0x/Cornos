@@ -88,14 +88,8 @@ public class ClickGUI extends MinecraftGUI {
             }
         }, 8, 4, 1);
         gui = new com.lukflug.panelstudio.ClickGUI(guiInterface, context -> {
-            double x = Cornos.minecraft.mouse.getX() / 2 + 5;
-            double y = Cornos.minecraft.mouse.getY() / 2 + 5;
-            MatrixStack ms = new MatrixStack();
-            String desc = context.getDescription();
-            int l = Cornos.minecraft.textRenderer.getWidth(desc);
-            int h = Cornos.minecraft.textRenderer.fontHeight;
-            Renderer.renderRoundedQuad(x, y, (int) (x + l + 4), (int) (y + h + 4), 4, Colors.WIDGET.get());
-            Cornos.minecraft.textRenderer.draw(ms, context.getDescription(), (int) x + 2, (int) y + 3, 0xFFFFFFFF);
+            int h = Cornos.minecraft.getWindow().getScaledHeight();
+            Cornos.minecraft.textRenderer.draw(new MatrixStack(), context.getDescription(), 1, h - Cornos.minecraft.textRenderer.fontHeight - 1, 0xFFFFFFFF);
         });
         int offset = 10 - 114;
         int offsetY = 10;

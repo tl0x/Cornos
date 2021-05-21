@@ -2,6 +2,7 @@ package me.constantindev.ccl.mixin.gui;
 
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.CConf;
+import me.constantindev.ccl.etc.render.particles.ConnectingParticles;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.math.MatrixStack;
@@ -15,11 +16,15 @@ import java.awt.*;
 
 @Mixin(ChatScreen.class)
 public class ChatScreenMixin {
+    ConnectingParticles particles;
+
     @Shadow
     protected TextFieldWidget chatField;
 
     @Inject(at = {@At("HEAD")}, method = "render")
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+        if (particles == null) particles = new ConnectingParticles(100);
+        particles.render();
         if (chatField.getText().toCharArray().length > 0) {
             if (chatField.getText().toCharArray()[0] == Cornos.config.mconf.getByName("prefix").value.toCharArray()[0]) {
                 chatField.setEditableColor(new Color(CConf.latestRGBVal, true).brighter().getRGB());
@@ -29,5 +34,10 @@ public class ChatScreenMixin {
         } else {
             chatField.setEditableColor(14737632);
         }
+    }
+
+    @Inject(method="tick",at=@At("HEAD"))
+    public void tick(CallbackInfo ci) {
+        if(particles != null) particles.tick();
     }
 }
