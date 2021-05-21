@@ -24,4 +24,4 @@ jobs:
           prerelease: false
           title: "Latest build"
           files: |
-            builds/*.jar
+            builds/latest.jar
