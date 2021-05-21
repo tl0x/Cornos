@@ -103,6 +103,7 @@ public class ConfigManager {
     public static void enableModsToBeEnabled() {
         if (enabledMods) return;
         enabledMods = true;
+        if (modReg == null) return;
         JsonArray cum = modReg;
         for (JsonElement jsonElement : cum) {
             String mname = jsonElement.getAsString();
