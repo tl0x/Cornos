@@ -20,8 +20,6 @@ import net.minecraft.util.Identifier;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 public class MainScreen extends Screen {
     Identifier bg = new Identifier("ccl", "bg.jpg");

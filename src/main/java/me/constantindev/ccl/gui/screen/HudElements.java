@@ -9,7 +9,6 @@ import me.constantindev.ccl.features.module.impl.external.Hud;
 import me.constantindev.ccl.features.module.impl.misc.Debug;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.client.util.math.MatrixStack;

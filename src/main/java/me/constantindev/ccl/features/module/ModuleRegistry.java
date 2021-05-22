@@ -116,6 +116,7 @@ public class ModuleRegistry {
         ml.add(new PortalGodMode());
         ml.add(new BetterHotbar());
         ml.add(new LightningPlayerFinder());
+        ml.add(new AntiAntiXray());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

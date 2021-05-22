@@ -14,7 +14,7 @@ public class Notification {
     public final String title;
     public final String[] description;
     public final long creationTime;
-    public final long duration;
+    public long duration;
     public double animationProgress = 0;
     public double animationProgress2 = 0;
     public boolean isAnimationComplete = false;

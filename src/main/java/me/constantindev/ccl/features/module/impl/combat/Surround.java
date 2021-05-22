@@ -72,7 +72,7 @@ public class Surround extends Module {
                 if (positionsWeCanReplace.isEmpty()) {
                     KeyBinding.updatePressedStates();
                     return;
-                };
+                }
                 if (blockMovements.isEnabled()) {
                     Cornos.minecraft.player.setVelocity(0, 0, 0);
                     GameOptions go = Cornos.minecraft.options;

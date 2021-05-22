@@ -10,12 +10,12 @@ import net.minecraft.nbt.StringTag;
 
 public class RandomBook extends Command {
     public RandomBook() {
-        super("RandomBook", "Creates random noise into a book", new String[]{"randombook","cbook","rndbook","wbook"});
+        super("RandomBook", "Creates random noise into a book", new String[]{"randombook", "cbook", "rndbook", "wbook"});
     }
 
     @Override
     public void onExecute(String[] args) {
-        if(Cornos.minecraft.player.inventory.getMainHandStack().getItem() != Items.WRITABLE_BOOK) {
+        if (Cornos.minecraft.player.inventory.getMainHandStack().getItem() != Items.WRITABLE_BOOK) {
             STL.notifyUser("Hold a book please thank you");
             return;
         }
@@ -27,16 +27,16 @@ public class RandomBook extends Command {
             STL.notifyUser("Provide a **valid** maximum size please thank you");
             return;
         }
-        long max = "all".equalsIgnoreCase(args[0])?0xFFFFFF:Long.parseLong(args[0]);
+        long max = "all".equalsIgnoreCase(args[0]) ? 0xFFFFFF : Long.parseLong(args[0]);
         ListTag pages = new ListTag();
         long currentSize = 0;
         StringBuilder a = new StringBuilder();
-        while(currentSize < max && pages.size() < 100) {
-            for(int i = 0;i<255;i++) {
+        while (currentSize < max && pages.size() < 100) {
+            for (int i = 0; i < 255; i++) {
                 String current = Rnd.rndBinStr(1);
                 int l = current.getBytes().length;
-                currentSize+=l;
-                if(currentSize > max) break;
+                currentSize += l;
+                if (currentSize > max) break;
                 a.append(current);
             }
             pages.add(StringTag.of(a.toString()));

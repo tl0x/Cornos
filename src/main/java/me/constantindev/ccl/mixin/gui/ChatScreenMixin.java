@@ -34,8 +34,8 @@ public class ChatScreenMixin {
         }
     }
 
-    @Inject(method="tick",at=@At("HEAD"))
+    @Inject(method = "tick", at = @At("HEAD"))
     public void tick(CallbackInfo ci) {
-        if(CConf.chatScreenParticles != null) CConf.chatScreenParticles.tick();
+        if (CConf.chatScreenParticles != null) CConf.chatScreenParticles.tick();
     }
 }

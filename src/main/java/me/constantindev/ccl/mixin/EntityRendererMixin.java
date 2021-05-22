@@ -61,7 +61,7 @@ public abstract class EntityRendererMixin<T extends Entity> {
             ci.cancel();
         if (entity.getType().equals(EntityType.ITEM_FRAME) && NoRender.maps.isEnabled()) {
             ItemFrameEntity current = (ItemFrameEntity) entity;
-            if(current.getHeldItemStack().getItem() == Items.FILLED_MAP) {
+            if (current.getHeldItemStack().getItem() == Items.FILLED_MAP) {
                 ci.cancel();
             }
         }

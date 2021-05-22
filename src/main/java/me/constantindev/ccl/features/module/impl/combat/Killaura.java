@@ -9,9 +9,7 @@ import me.constantindev.ccl.features.module.Module;
 import me.constantindev.ccl.features.module.ModuleType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.c2s.play.HandSwingC2SPacket;
 import net.minecraft.util.Hand;
@@ -75,7 +73,8 @@ public class Killaura extends Module {
             if (checkForHostile.isEnabled()) {
                 if (e instanceof HostileEntity) {
                     HostileEntity m = (HostileEntity) e;
-                    if(m.getTarget() != null && !m.getTarget().getUuid().equals(Cornos.minecraft.player.getUuid())) continue;
+                    if (m.getTarget() != null && !m.getTarget().getUuid().equals(Cornos.minecraft.player.getUuid()))
+                        continue;
                 }
             }
             String n = e.getEntityName();

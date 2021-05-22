@@ -9,7 +9,6 @@ import com.lukflug.panelstudio.theme.ColorScheme;
 import com.lukflug.panelstudio.theme.Theme;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.*;
-import me.constantindev.ccl.etc.helper.Renderer;
 import me.constantindev.ccl.etc.manager.KeybindManager;
 import me.constantindev.ccl.etc.render.particles.ConnectingParticles;
 import me.constantindev.ccl.features.module.Module;

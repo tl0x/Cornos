@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MapRenderer.class)
 public class ItemFrameEntityRenderMixin {
-    @Inject(method = "draw",cancellable = true,at=@At("HEAD"))
+    @Inject(method = "draw", cancellable = true, at = @At("HEAD"))
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, MapState mapState, boolean bl, int i, CallbackInfo ci) {
         if (NoRender.maps.isEnabled() && ModuleRegistry.search(NoRender.class).isEnabled()) ci.cancel();
     }
