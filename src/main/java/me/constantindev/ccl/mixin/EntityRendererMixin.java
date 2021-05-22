@@ -4,6 +4,7 @@ import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.features.module.ModuleRegistry;
 import me.constantindev.ccl.features.module.impl.external.AntiBlockban;
 import me.constantindev.ccl.features.module.impl.external.NameTags;
+import me.constantindev.ccl.features.module.impl.external.NoRender;
 import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -11,7 +12,9 @@ import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -56,5 +59,11 @@ public abstract class EntityRendererMixin<T extends Entity> {
     public void render(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         if (entity.getType().equals(EntityType.AREA_EFFECT_CLOUD) && ModuleRegistry.search(AntiBlockban.class).isEnabled())
             ci.cancel();
+        if (entity.getType().equals(EntityType.ITEM_FRAME) && NoRender.maps.isEnabled()) {
+            ItemFrameEntity current = (ItemFrameEntity) entity;
+            if(current.getHeldItemStack().getItem() == Items.FILLED_MAP) {
+                ci.cancel();
+            }
+        }
     }
 }

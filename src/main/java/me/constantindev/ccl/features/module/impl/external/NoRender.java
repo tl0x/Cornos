@@ -18,6 +18,7 @@ public class NoRender extends Module {
     public static MConfToggleable sign = new MConfToggleable("signs", false);
     public static MConfToggleable armorstand = new MConfToggleable("armorstands", false);
     public static MConfToggleable particles = new MConfToggleable("particles", false);
+    public static MConfToggleable maps = new MConfToggleable("maps", true);
 
     public NoRender() {
         super("NoRender", "Doesnt render annoying shit", ModuleType.RENDER);
@@ -26,5 +27,6 @@ public class NoRender extends Module {
         this.mconf.add(sign);
         this.mconf.add(armorstand);
         this.mconf.add(particles);
+        this.mconf.add(maps);
     }
 }
