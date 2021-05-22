@@ -1,6 +1,7 @@
 package me.constantindev.ccl.etc.config;
 
 import com.lukflug.panelstudio.settings.NumberSetting;
+import me.constantindev.ccl.etc.render.particles.ConnectingParticles;
 import me.constantindev.ccl.gui.screen.ClickGUI;
 import me.constantindev.ccl.gui.screen.HudElements;
 import me.constantindev.ccl.gui.screen.TabGUI;
@@ -18,6 +19,7 @@ public class CConf {
     public static int latestRGBVal = 0;
     public static String[][] dict;
     public static boolean checkedForUpdates = false;
+    public static ConnectingParticles chatScreenParticles;
 
     public static void init() {
         xrayBlocks = new Block[]{

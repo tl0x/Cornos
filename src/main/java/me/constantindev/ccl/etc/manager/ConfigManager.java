@@ -87,6 +87,7 @@ public class ConfigManager {
                             String k = configElementBody.get("key").getAsString();
                             String v = configElementBody.get("value").getAsString();
                             m.mconf.getOrDefault(k, new MConf.ConfigKey(k, v)).setValue(v);
+                            System.out.println(m.name+"."+k+" = "+v);
                         }
                     }
                 }
@@ -112,6 +113,7 @@ public class ConfigManager {
                 try {
                     m.showNotifications = false;
                     m.setEnabled(true);
+                    System.out.println("Enabling "+m.name);
                     m.showNotifications = true;
                 } catch (Exception ignored) {
 
