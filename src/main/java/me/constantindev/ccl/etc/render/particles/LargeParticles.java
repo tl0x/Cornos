@@ -1,5 +1,6 @@
 package me.constantindev.ccl.etc.render.particles;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.helper.Renderer;
 
 import java.awt.*;
@@ -23,6 +24,7 @@ public class LargeParticles extends Particles {
 
     @Override
     public void render() {
+        if (!Cornos.config.particles.isEnabled()) return;
         for (Particle particle : particles) {
             Renderer.renderCircle(particle.posX, particle.posY, particle.cache.get(0), particle.color, 2);
         }

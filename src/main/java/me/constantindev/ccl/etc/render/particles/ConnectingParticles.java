@@ -1,5 +1,6 @@
 package me.constantindev.ccl.etc.render.particles;
 
+import me.constantindev.ccl.Cornos;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.util.Window;
@@ -17,6 +18,7 @@ public class ConnectingParticles extends Particles {
 
     @Override
     public void tick() {
+        if (!Cornos.config.particles.isEnabled()) return;
         Window w = MinecraftClient.getInstance().getWindow();
         maxDist = Math.sqrt(w.getScaledWidth() * w.getScaledWidth() + w.getScaledHeight() * w.getScaledHeight()) / 9;
         Mouse m = MinecraftClient.getInstance().mouse;
@@ -62,6 +64,7 @@ public class ConnectingParticles extends Particles {
 
     @Override
     public void render() {
+        if (!Cornos.config.particles.isEnabled()) return;
         for (Particle particle : particles) {
             for (Particle particle1 : particles) {
                 double dist = Math.sqrt(Math.pow(particle.posX - particle1.posX, 2) + Math.pow(particle.posY - particle1.posY, 2));

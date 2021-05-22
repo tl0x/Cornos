@@ -23,6 +23,7 @@ public class Particles {
     }
 
     public void tick() {
+        if (!Cornos.config.particles.isEnabled()) return;
         Window w = Cornos.minecraft.getWindow();
         for (Particle particle : particles) {
             double sin = Math.sin(particle.rotation);

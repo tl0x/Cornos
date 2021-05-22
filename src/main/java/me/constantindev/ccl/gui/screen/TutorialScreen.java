@@ -57,6 +57,7 @@ public class TutorialScreen extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        Cornos.minecraft.options.guiScale = 2;
         renderBackground(matrices);
         matrices.push();
         matrices.scale(2, 2, 1);

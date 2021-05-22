@@ -54,7 +54,6 @@ public class HudElements extends DrawableHelper {
         double sin = Math.sin(Math.toRadians(tick));
         if (ModuleRegistry.search(Debug.class).isEnabled())
             STL.notifyUser(sin + ", " + tick + ", " + Math.toRadians(tick) + ", " + Math.toDegrees(tick));
-        boolean chatOpen = Cornos.minecraft.currentScreen instanceof ChatScreen;
         Hud hud = (Hud) ModuleRegistry.search(Hud.class);
 
         TextRenderer textRenderer = Cornos.minecraft.textRenderer;
@@ -64,17 +63,7 @@ public class HudElements extends DrawableHelper {
             assert Cornos.minecraft.player != null;
             InventoryScreen.drawEntity((int) (Cornos.minecraft.getWindow().getScaledWidth() / 1.5), Cornos.minecraft.getWindow().getScaledHeight() - 1, 25, (float) (yaw), Cornos.minecraft.player.pitch, Cornos.minecraft.player);
         }
-        if (((MConfToggleable) hud.mconf.getByName("coords")).isEnabled() && !chatOpen) {
-            offset += 10;
-            drawTextWithShadow(matrices, textRenderer, new LiteralText("XYZ:"), 2, Cornos.minecraft.getWindow().getScaledHeight() - (offset), Hud.themeColor.getRGB());
-            assert Cornos.minecraft.player != null;
-            drawTextWithShadow(matrices, textRenderer,
-                    new LiteralText(" " + Cornos.minecraft.player.getBlockPos().getX()
-                            + " " + Cornos.minecraft.player.getBlockPos().getY() + " " + Cornos.minecraft.player.getBlockPos().getZ()),
-                    2 + textRenderer.getWidth(new LiteralText("XYZ:")),
-                    Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
-        }
-        if (((MConfToggleable) hud.mconf.getByName("ping")).isEnabled() && !chatOpen) {
+        if (((MConfToggleable) hud.mconf.getByName("ping")).isEnabled()) {
             if (Cornos.minecraft.getNetworkHandler() == null || Cornos.minecraft.player == null) return;
             PlayerListEntry ple = Cornos.minecraft.getNetworkHandler().getPlayerListEntry(Cornos.minecraft.player.getUuid());
             offset += 10;
@@ -84,7 +73,17 @@ public class HudElements extends DrawableHelper {
                     2 + textRenderer.getWidth(new LiteralText("Ping:")),
                     Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
         }
-        if (((MConfToggleable) hud.mconf.getByName("tps")).isEnabled() && !chatOpen) {
+        if (((MConfToggleable) hud.mconf.getByName("coords")).isEnabled()) {
+            offset += 9;
+            drawTextWithShadow(matrices, textRenderer, new LiteralText("XYZ:"), 2, Cornos.minecraft.getWindow().getScaledHeight() - (offset), Hud.themeColor.getRGB());
+            assert Cornos.minecraft.player != null;
+            drawTextWithShadow(matrices, textRenderer,
+                    new LiteralText(" " + Cornos.minecraft.player.getBlockPos().getX()
+                            + " " + Cornos.minecraft.player.getBlockPos().getY() + " " + Cornos.minecraft.player.getBlockPos().getZ()),
+                    2 + textRenderer.getWidth(new LiteralText("XYZ:")),
+                    Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
+        }
+        if (((MConfToggleable) hud.mconf.getByName("tps")).isEnabled()) {
             offset += 10;
             drawTextWithShadow(matrices, textRenderer, new LiteralText("TPS:"),
                     2, Cornos.minecraft.getWindow().getScaledHeight() - (offset), Hud.themeColor.getRGB());
@@ -92,7 +91,7 @@ public class HudElements extends DrawableHelper {
                     2 + textRenderer.getWidth(new LiteralText("TPS:")),
                     Cornos.minecraft.getWindow().getScaledHeight() - (offset), Color.LIGHT_GRAY.getRGB());
         }
-        if (((MConfToggleable) hud.mconf.getByName("fps")).isEnabled() && !chatOpen) {
+        if (((MConfToggleable) hud.mconf.getByName("fps")).isEnabled()) {
             offset += 10;
             drawTextWithShadow(matrices, textRenderer,
                     new LiteralText("FPS:"), 2,
@@ -189,15 +188,15 @@ public class HudElements extends DrawableHelper {
                         formatting = Formatting.GRAY;
                         break;
                 }
-                drawTextWithShadow(matrices, textRenderer, new LiteralText(StatusEffectUtil.durationToString(statusEffectInstance, 1)), Cornos.minecraft.getWindow().getScaledWidth() - (5 + textRenderer.getWidth(StatusEffectUtil.durationToString(statusEffectInstance, 1))), Cornos.minecraft.getWindow().getScaledHeight() - (10 + i), Color.LIGHT_GRAY.getRGB());
+                drawTextWithShadow(matrices, textRenderer, new LiteralText(StatusEffectUtil.durationToString(statusEffectInstance, 1)), Cornos.minecraft.getWindow().getScaledWidth() - (5 + textRenderer.getWidth(StatusEffectUtil.durationToString(statusEffectInstance, 1))), Cornos.minecraft.getWindow().getScaledHeight() - (9 + i), Color.LIGHT_GRAY.getRGB());
                 drawTextWithShadow(matrices, textRenderer, new LiteralText(statusEffectInstance.getEffectType().getName().getString() + " " + (statusEffectInstance.getAmplifier() + 1) + " "), Cornos.minecraft.getWindow().getScaledWidth() - (5 + textRenderer.getWidth(statusEffectInstance.getEffectType().getName().getString() + " " + (statusEffectInstance.getAmplifier() + 1) + " " + StatusEffectUtil.durationToString(statusEffectInstance, 1))), Cornos.minecraft.getWindow().getScaledHeight() - (10 + i), Objects.requireNonNull(formatting.getColorValue()));
                 i += 10;
             }
         }
-        if (((MConfToggleable) hud.mconf.getByName("time")).isEnabled() && !chatOpen) {
+        if (((MConfToggleable) hud.mconf.getByName("time")).isEnabled()) {
             assert Cornos.minecraft.player != null;
             drawTextWithShadow(matrices, textRenderer,
-                    new LiteralText(dateFormat.format(new Date())), 2 + textRenderer.getWidth(" " + Cornos.minecraft.player.getBlockPos().getX() + " " + Cornos.minecraft.player.getBlockPos().getY() + " " + Cornos.minecraft.player.getBlockPos().getZ() + dateFormat.format(new Date())), Cornos.minecraft.getWindow().getScaledHeight() - (10), Color.LIGHT_GRAY.getRGB());
+                    new LiteralText(dateFormat.format(new Date())), 2 + textRenderer.getWidth("lollmao" + dateFormat.format(new Date())), Cornos.minecraft.getWindow().getScaledHeight() - (9), Color.LIGHT_GRAY.getRGB());
         }
 
         if (lastRecv + 2000 < System.currentTimeMillis()) {
