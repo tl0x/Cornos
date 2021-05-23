@@ -39,6 +39,7 @@ public class Hologram extends Command {
     public static ItemStack getHoloStack(Vec3d pos, String text, boolean egg, boolean baby, String type) {
         return getHoloStack(pos, text, egg, baby, type, true);
     }
+
     public static ItemStack getHoloStack(Vec3d pos, String text, boolean egg, boolean baby, String type, boolean wrapName) {
         ItemStack is = new ItemStack(egg ? Items.BAT_SPAWN_EGG : Items.ARMOR_STAND);
         CompoundTag ct = is.getOrCreateTag();
@@ -54,7 +55,7 @@ public class Hologram extends Command {
         lt1.add(DoubleTag.of(pos.z));
         CompoundTag compoundTag = new CompoundTag();
         compoundTag.put("Pos", lt1);
-        if(wrapName) compoundTag.put("CustomName", StringTag.of("{\"text\":\"" + name + "\"}"));
+        if (wrapName) compoundTag.put("CustomName", StringTag.of("{\"text\":\"" + name + "\"}"));
         else compoundTag.put("CustomName", StringTag.of(name));
         compoundTag.put("CustomNameVisible", showName);
         compoundTag.put("Invisible", visible);
