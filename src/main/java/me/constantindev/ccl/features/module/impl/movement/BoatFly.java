@@ -3,6 +3,7 @@ package me.constantindev.ccl.features.module.impl.movement;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.KeyBind;
 import me.constantindev.ccl.etc.config.MConfMultiOption;
+import me.constantindev.ccl.etc.helper.STL;
 import me.constantindev.ccl.etc.render.Notification;
 import me.constantindev.ccl.features.module.Module;
 import me.constantindev.ccl.features.module.ModuleType;
@@ -22,6 +23,12 @@ public class BoatFly extends Module {
     public BoatFly() {
         super("EntityFly", "weee", ModuleType.MOVEMENT);
         mconf.add(mode);
+    }
+
+    @Override
+    public void onEnable() {
+        STL.notifyUser("alt = down. dont use shift");
+        super.onEnable();
     }
 
     @Override
@@ -72,7 +79,7 @@ public class BoatFly extends Module {
                 nx += ts * mx * -c;
                 nz += ts * mx * -s;
                 Vec3d nv3 = new Vec3d(nx, ny, nz);
-                np = np.add(nv3);
+                np = np.add(nv3.multiply(0.4));
                 if (mode.value.equals("static")) {
                     vehicle.updatePosition(np.x, np.y, np.z);
                     vehicle.setVelocity(0, 0, 0);
@@ -82,7 +89,8 @@ public class BoatFly extends Module {
                 }
                 break;
         }
-
+        vehicle.yaw = Cornos.minecraft.player.yaw;
+        //vehicle.pitch = Cornos.minecraft.player.pitch;
         VehicleMoveC2SPacket p = new VehicleMoveC2SPacket(vehicle);
         Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(p);
         super.onExecute();
