@@ -1,5 +1,10 @@
 # Cornos
 based block game hax
+
+## Notice
+Work on this has been paused or at least slowed down for some time because I'm busy with irl things. I'm also working on some other project for now, so you wont see as many changes to this for now. Bugs will still be worked on but no additional features apart from requests will be added for the time being.
+
+
 ![cornos-logo](https://github.com/AriliusClient/Cornos/blob/master/src/main/resources/assets/ccl/hscreenlogo.png?raw=true)
 
 <img alt="GitHub" src="https://img.shields.io/github/license/AriliusClient/Cornos"> <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/AriliusClient/Cornos?style=flat"> <img alt="Size" src="https://img.shields.io/github/languages/code-size/AriliusClient/Cornos"> 
