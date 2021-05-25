@@ -11,6 +11,7 @@ package me.constantindev.ccl.etc;
 import com.google.common.collect.Lists;
 import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.etc.config.Colors;
+import me.constantindev.ccl.etc.helper.Renderer;
 import me.constantindev.ccl.etc.render.Notification;
 import me.constantindev.ccl.features.module.impl.external.Hud;
 import net.minecraft.client.gui.DrawableHelper;
@@ -52,6 +53,8 @@ public class NotificationManager {
             lastCurr = curr;
         }
         for (Notification notification : Lists.reverse(notifs)) {
+            double remaining = (System.currentTimeMillis() - notification.creationTime) / (double) notification.duration;
+            remaining = MathHelper.clamp(remaining, 0, 1);
             if (notification.animationProgress2 < 1.0 && !notification.isAnimationComplete) {
                 notification.animationProgress2 += val;
                 notification.animationProgress2 = MathHelper.clamp(notification.animationProgress2, 0, 1.0);
@@ -67,15 +70,22 @@ public class NotificationManager {
             double xOff = 150.0 * notification.animationProgress;
             int dheight = (notification.description.length) * 9;
             dheight = dheight == 0 ? 10 : dheight + 12;
+            double x1Progress = MathHelper.clamp(remaining * 4, 0, 1);
+            double y1Progress = MathHelper.clamp(remaining * 4 - 1, 0, 1);
+            double x2Progress = -MathHelper.clamp(remaining * 4 - 2, 0, 1);
+            double y2Progress = -MathHelper.clamp(remaining * 4 - 3, 0, 1);
             Color rc = Hud.themeColor.getColor();
-            DrawableHelper.fill(matrices, (int) (width - xOff - 1), height - offset - dheight - 1, width, height - offset + 1, rc.getRGB());
-            DrawableHelper.fill(matrices, (int) (width - xOff), height - offset - dheight, width - 3, height - offset, Colors.NOTIFICATION.get().getRGB());
             String t = Cornos.minecraft.textRenderer.trimToWidth(notification.title, (int) Math.floor(xOff));
-            Cornos.minecraft.textRenderer.draw(matrices, t, (float) ((width - xOff + 1)), (float) ((height - offset - dheight + 1)), Colors.TEXT.get().getRGB());
+            DrawableHelper.fill(matrices, (int) (width - xOff - 3), height - offset - dheight, width - 3, height - offset, Colors.NOTIFICATION.get().getRGB());
+            Renderer.renderLineScreen(width - xOff - 3, height - offset - dheight, MathHelper.clamp(width + (x1Progress * 150) - xOff - 3, 0, width - 3), height - offset - dheight, rc, 2);
+            Renderer.renderLineScreen(width - 3, height - offset - dheight, width - 3, height - offset - dheight + (y1Progress * dheight), rc, 2);
+            Renderer.renderLineScreen(width - 3, height - offset, MathHelper.clamp(width + (x2Progress * 150) - 3, width - xOff - 3, width - 3), height - offset, rc, 2);
+            Renderer.renderLineScreen(width - xOff - 3, height - offset, width - xOff - 3, height - offset + (y2Progress * dheight), rc, 2);
+            Cornos.minecraft.textRenderer.draw(matrices, t, (float) (width - xOff), (float) ((height - offset - dheight + 2)), Colors.TEXT.get().getRGB());
             int off1 = 12;
             for (String s : notification.description) {
                 StringVisitable td = Cornos.minecraft.textRenderer.trimToWidth(Text.of(s), (int) Math.floor(xOff));
-                Cornos.minecraft.textRenderer.draw(matrices, td.getString(), (float) ((width - xOff + 1)), (float) ((height - offset - dheight + off1)), Colors.TEXT.get().getRGB());
+                Cornos.minecraft.textRenderer.draw(matrices, td.getString(), (float) (width - xOff), (float) (height - offset - dheight + off1), Colors.TEXT.get().getRGB());
                 off1 += 9;
             }
             offset += dheight + 3;

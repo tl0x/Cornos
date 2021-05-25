@@ -99,7 +99,8 @@ public class OreSim extends Module {
     public void onEnable() {
         reload();
         if (worldSeed == 0) {
-            Notification.create("OreSim", new String[]{"do .setseed [seed] to input your seed"}, 7000);
+            Notification.create("OreSim", new String[]{"do .setseed [seed] to input", "your seed"}, 5000);
+            setEnabled(false);
         }
         super.onEnable();
     }
