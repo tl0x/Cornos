@@ -6,7 +6,7 @@ based block game hax
 <img alt="GitHub" src="https://img.shields.io/github/license/AriliusClient/Cornos"> <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/AriliusClient/Cornos?style=flat"> <img alt="Size" src="https://img.shields.io/github/languages/code-size/AriliusClient/Cornos"> 
 # Support
 
-we have discor
+If you need any help please join our discord server. 
 
 <a href="https://discord.gg/rvC7F798xQ"><img src="https://invidget.switchblade.xyz/rvC7F798xQ"/></a>
 
@@ -19,20 +19,20 @@ To download the mod jarfile, read [How to obtain the mod without building](https
 
 To contribute or build the mod yourself, read [Building and contributing](https://github.com/AriliusClient/CornClient/wiki/Building-and-contributing)
 
-## Installing the jarfile
+## Installing as a fabric mod
 1. Install the [fabric loader](https://fabricmc.net/use/)
 2. Drag the mod jarfile and the [fabric api](https://www.curseforge.com/minecraft/mc-mods/fabric-api) to `(Minecraft folder)/mods`. If there is no `mods` folder, create one. If you have a custom version folder, use that one.
-3. Launch the fabric instance
+3. Launch the fabric instance using your Minecraft launcher
 
 ## Building
 1. Clone this repo
 2. Open the new folder in your terminal
-3. on linux: `$ ./gradlew build`. on windows: `gradlew.bat build`.
+3. On Linux/Mac: `$ chmod +x ./gradlew` followed by `$ ./gradlew build`. on Windows: `gradlew.bat build`.
 4. Jarfile will be in build/libs, ccl-(version).jar
 
-## Prebuilds
+## Prebuilt jar
 
-The prebuilt jarfile can be found in the `builds` folder.
+The prebuilt fabric mod jar can be found in the `builds` folder.
 
 After you obtained the jarfile, read the section above, "Installing the jarfile".
 
