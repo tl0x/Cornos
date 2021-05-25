@@ -6,7 +6,7 @@ based block game hax
 <img alt="GitHub" src="https://img.shields.io/github/license/AriliusClient/Cornos"> <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/AriliusClient/Cornos?style=flat"> <img alt="Size" src="https://img.shields.io/github/languages/code-size/AriliusClient/Cornos"> 
 # Support
 
-If you need any help please join our discord server. 
+we have discor
 
 <a href="https://discord.gg/rvC7F798xQ"><img src="https://invidget.switchblade.xyz/rvC7F798xQ"/></a>
 
@@ -27,7 +27,7 @@ To contribute or build the mod yourself, read [Building and contributing](https:
 ## Building
 1. Clone this repo
 2. Open the new folder in your terminal
-3. On Linux/Mac: `$ chmod +x ./gradlew` followed by `$ ./gradlew build`. on Windows: `gradlew.bat build`.
+3. On Linux/Mac: `$ chmod +x ./gradlew && ./gradlew build`. On Windows: `gradlew.bat build`.
 4. Jarfile will be in build/libs, ccl-(version).jar
 
 ## Prebuilt jar
