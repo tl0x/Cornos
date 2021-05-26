@@ -62,6 +62,15 @@ public class HudElements extends DrawableHelper {
             assert Cornos.minecraft.player != null;
             InventoryScreen.drawEntity((int) (Cornos.minecraft.getWindow().getScaledWidth() / 1.5), Cornos.minecraft.getWindow().getScaledHeight() - 1, 25, (float) (yaw), Cornos.minecraft.player.pitch, Cornos.minecraft.player);
         }
+        if (((MConfToggleable) hud.mconf.getByName("speedBPS")).isEnabled()) {
+            double lrx = Cornos.minecraft.player.lastRenderX;
+            double lry = Cornos.minecraft.player.lastRenderY;
+            double lrz = Cornos.minecraft.player.lastRenderZ;
+            double dist = Math.round(Cornos.minecraft.player.getPos().distanceTo(new Vec3d(lrx, lry, lrz)) * 200) / 10d;
+            offset += 10;
+            drawTextWithShadow(matrices, textRenderer, Text.of("Speed:"), 2, Cornos.minecraft.getWindow().getScaledHeight() - offset, Hud.themeColor.getRGB());
+            drawTextWithShadow(matrices, textRenderer, Text.of(" " + dist), 2 + textRenderer.getWidth(Text.of("Speed:")), Cornos.minecraft.getWindow().getScaledHeight() - offset, Color.LIGHT_GRAY.getRGB());
+        }
         if (((MConfToggleable) hud.mconf.getByName("ping")).isEnabled()) {
             if (Cornos.minecraft.getNetworkHandler() == null || Cornos.minecraft.player == null) return;
             PlayerListEntry ple = Cornos.minecraft.getNetworkHandler().getPlayerListEntry(Cornos.minecraft.player.getUuid());

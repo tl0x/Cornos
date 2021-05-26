@@ -21,8 +21,9 @@ public class Hud extends Module {
         this.mconf.add(new MConfToggleable("effects", true));
         this.mconf.add(new MConfToggleable("time", true));
         this.mconf.add(new MConfToggleable("tps", true));
-        this.mconf.add(new MConfToggleable("graph", true));
         this.mconf.add(new MConfToggleable("ping", true));
+        this.mconf.add(new MConfToggleable("speedBPS", true));
+        this.mconf.add(new MConfToggleable("graph", true));
         this.mconf.add(new MConfToggleable("modules", true));
         this.mconf.add(new MConfToggleable("miniplayer", true));
         this.mconf.add(new MConfToggleable("taco", false));
