@@ -5,6 +5,7 @@ import me.constantindev.ccl.etc.config.CConf;
 import me.constantindev.ccl.etc.helper.Renderer;
 import me.constantindev.ccl.etc.render.particles.LargeParticles;
 import me.constantindev.ccl.features.module.impl.misc.ClientProgression;
+import me.constantindev.ccl.gui.clickgui.ClickGUI;
 import me.constantindev.ccl.gui.widget.CustomButtonWidget;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -53,8 +54,9 @@ public class MainScreen extends Screen {
             Cornos.minecraft.openScreen(new TitleScreen());
         }));
         this.addButton(new TexturedButtonWidget(width - 20, 0, 20, 20, 0, 0, 0, new Identifier("ccl", "transparent.png"), (b) -> {
-            btnw.setMessage(Text.of("Roleplay"));
-            showSecrets = true;
+            /*btnw.setMessage(Text.of("Roleplay"));
+            showSecrets = true;*/
+            Cornos.minecraft.openScreen(new ClickGUI());
         }));
     }
 

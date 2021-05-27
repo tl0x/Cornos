@@ -8,8 +8,10 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.constantindev.ccl.features.module.impl.misc;
 
+import me.constantindev.ccl.Cornos;
 import me.constantindev.ccl.features.module.Module;
 import me.constantindev.ccl.features.module.ModuleType;
+import me.constantindev.ccl.gui.clickgui.ClickGUI;
 
 public class Test extends Module {
     public Test() {
@@ -17,8 +19,8 @@ public class Test extends Module {
     }
 
     @Override
-    public void onExecute() {
-
-        super.onExecute();
+    public void onEnable() {
+        setEnabled(false);
+        Cornos.minecraft.openScreen(new ClickGUI());
     }
 }

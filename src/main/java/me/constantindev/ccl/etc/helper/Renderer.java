@@ -130,7 +130,7 @@ public class Renderer {
         GL11.glPopMatrix();
     }
 
-    public static void renderRoundedQuad(double fromX, double fromY, double toX, double toY, int rad, Color col) {
+    public static void renderQuad(double fromX, double fromY, double toX, double toY, Color col) {
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -141,29 +141,12 @@ public class Renderer {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glColor4f(col.getRed() / 255F, col.getGreen() / 255F, col.getBlue() / 255F, col.getAlpha() / 255F);
-        GL11.glBegin(GL11.GL_POLYGON);
+        GL11.glBegin(GL11.GL_QUADS);
 
-        double toX1 = toX - rad;
-        double toY1 = toY - rad;
-        double fromX1 = fromX + rad;
-        double fromY1 = fromY + rad;
-        int initial = -90;
-        double[][] map = new double[][]{
-                new double[]{toX1, toY1},
-                new double[]{toX1, fromY1},
-                new double[]{fromX1, fromY1},
-                new double[]{fromX1, toY1}
-        };
-        for (int i = 0; i < 4; i++) {
-            double[] current = map[i];
-            initial += 90;
-            for (int r = initial; r < (360 / 4 + initial); r++) {
-                double rad1 = Math.toRadians(r);
-                double sin = Math.sin(rad1) * rad;
-                double cos = Math.cos(rad1) * rad;
-                GL11.glVertex2d(current[0] + sin, current[1] + cos);
-            }
-        }
+        GL11.glVertex2d(toX, toY);
+        GL11.glVertex2d(toX, fromY);
+        GL11.glVertex2d(fromX, fromY);
+        GL11.glVertex2d(fromX, toY);
 
         GL11.glEnd();
         GL11.glColor4f(1, 1, 1, 1);
@@ -235,5 +218,9 @@ public class Renderer {
         RenderSystem.disableBlend();
         RenderSystem.popMatrix();
 
+    }
+
+    public static Color getHSBRGB() {
+        return Color.getHSBColor((float) (((double) (System.currentTimeMillis() % 10000)) / 10000), 0.8f, 1);
     }
 }
