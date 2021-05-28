@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "ccl",
+  "id": "cornos",
   "version": "1.5.3",
   "name": "Cornos",
   "description": "Utility Mod for Minecraft",
@@ -26,11 +26,11 @@
   "environment": "client",
   "entrypoints": {
     "main": [
-      "me.constantindev.ccl.Cornos"
+      "me.zeroX150.cornos.Cornos"
     ],
     "client": [],
     "server": [
-      "me.constantindev.ccl.ServerInitializerErrorHandler"
+      "me.zeroX150.cornos.ServerInitializerErrorHandler"
     ]
   },
   "mixins": [

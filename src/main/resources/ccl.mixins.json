@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "me.constantindev.ccl.mixin",
+  "package": "me.zeroX150.cornos.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "AbstractBlockStateMixin",

@@ -56,6 +56,14 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 	from sourceSets.main.allSource
 }
 
+task execBuild() {
+	doLast {
+		file("./build/libs/ccl-1.0.0.jar").renameTo(file("./builds/latest.jar"))
+	}
+}
+
+build.dependsOn execBuild
+
 jar {
 	from "LICENSE"
 }
