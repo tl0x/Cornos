@@ -8,8 +8,6 @@ import net.minecraft.client.util.Window;
 
 import java.awt.*;
 
-import static me.zeroX150.cornos.etc.helper.Renderer.renderLineScreen;
-
 public class ConnectingParticles extends Particles {
     double maxDist;
 

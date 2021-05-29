@@ -58,7 +58,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 task execBuild() {
 	doLast {
-		file("./build/libs/ccl-1.0.0.jar").renameTo(file("./builds/latest.jar"))
+		file("./build/libs/cornos-1.0.0.jar").renameTo(file("./builds/latest.jar"))
 	}
 }
 
