@@ -17,20 +17,20 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class BlockEgg extends Command {
-	public BlockEgg() {
-		super("PBlock", "Places any block lulw", new String[]{"pblock", "placeblock"});
-	}
+    public BlockEgg() {
+        super("PBlock", "Places any block lulw", new String[]{"pblock", "placeblock"});
+    }
 
-	@Override
-	public void onExecute(String[] args) {
-		if (args.length == 0) {
-			STL.notifyUser("bruh.");
-			return;
-		}
-		Block b = Registry.BLOCK.get(new Identifier(args[0]));
-		assert Cornos.minecraft.player != null;
-		ItemStack is = Hologram.getFallingBlockStack(Cornos.minecraft.player.getPos(), b);
-		Cornos.minecraft.player.inventory.addPickBlock(is);
-		super.onExecute(args);
-	}
+    @Override
+    public void onExecute(String[] args) {
+        if (args.length == 0) {
+            STL.notifyUser("bruh.");
+            return;
+        }
+        Block b = Registry.BLOCK.get(new Identifier(args[0]));
+        assert Cornos.minecraft.player != null;
+        ItemStack is = Hologram.getFallingBlockStack(Cornos.minecraft.player.getPos(), b);
+        Cornos.minecraft.player.inventory.addPickBlock(is);
+        super.onExecute(args);
+    }
 }

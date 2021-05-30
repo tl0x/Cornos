@@ -8,24 +8,23 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.zeroX150.cornos.mixin.gui;
 
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.world.SelectWorldScreen;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.world.SelectWorldScreen;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.Text;
-
 @Mixin(SelectWorldScreen.class)
 public class SelectWorldScreenMixin extends Screen {
-	protected SelectWorldScreenMixin(Text title) {
-		super(title);
-	}
+    protected SelectWorldScreenMixin(Text title) {
+        super(title);
+    }
 
-	@Inject(method = "render", at = @At("HEAD"))
-	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-		this.renderBackground(matrices);// screen doesnt do it themselves so we do it
-	}
+    @Inject(method = "render", at = @At("HEAD"))
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+        this.renderBackground(matrices);// screen doesnt do it themselves so we do it
+    }
 }

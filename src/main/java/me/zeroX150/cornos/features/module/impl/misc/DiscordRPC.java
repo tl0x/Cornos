@@ -12,29 +12,29 @@ import me.zeroX150.cornos.etc.DiscordRPCMan;
 import me.zeroX150.cornos.features.module.Module;
 
 public class DiscordRPC extends Module {
-	DiscordRPCMan instance = null;
+    DiscordRPCMan instance = null;
 
-	public DiscordRPC() {
-		super("DiscordRPC", "Flex on others on discord");
-	}
+    public DiscordRPC() {
+        super("DiscordRPC", "Flex on others on discord");
+    }
 
-	@Override
-	public void onEnable() {
-		instance = new DiscordRPCMan();
-		super.onEnable();
-	}
+    @Override
+    public void onEnable() {
+        instance = new DiscordRPCMan();
+        super.onEnable();
+    }
 
-	@Override
-	public void onExecute() {
-		if (instance == null)
-			onEnable();
-		super.onExecute();
-	}
+    @Override
+    public void onExecute() {
+        if (instance == null)
+            onEnable();
+        super.onExecute();
+    }
 
-	@Override
-	public void onDisable() {
-		if (instance != null)
-			instance.shutdown();
-		super.onDisable();
-	}
+    @Override
+    public void onDisable() {
+        if (instance != null)
+            instance.shutdown();
+        super.onDisable();
+    }
 }

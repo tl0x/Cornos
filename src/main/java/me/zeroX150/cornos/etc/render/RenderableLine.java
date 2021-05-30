@@ -8,20 +8,20 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 */
 package me.zeroX150.cornos.etc.render;
 
-import java.awt.*;
-
 import net.minecraft.util.math.Vec3d;
 
-public class RenderableLine {
-	public final Vec3d bp1;
-	public final Vec3d bp2;
-	public final Color c;
-	public final int width;
+import java.awt.*;
 
-	public RenderableLine(Vec3d from, Vec3d to, int r, int g, int b, int a, int width) {
-		this.bp1 = from;
-		this.bp2 = to;
-		this.c = new Color(r, g, b, a);
-		this.width = width;
-	}
+public class RenderableLine {
+    public final Vec3d bp1;
+    public final Vec3d bp2;
+    public final Color c;
+    public final int width;
+
+    public RenderableLine(Vec3d from, Vec3d to, int r, int g, int b, int a, int width) {
+        this.bp1 = from;
+        this.bp2 = to;
+        this.c = new Color(r, g, b, a);
+        this.width = width;
+    }
 }

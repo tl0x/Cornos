@@ -1,43 +1,45 @@
 package me.zeroX150.cornos.features.module.impl.misc;
 
-import java.lang.reflect.Field;
-
 import me.zeroX150.cornos.Cornos;
 import me.zeroX150.cornos.features.module.Module;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.util.Hand;
 
-public class AutoFish extends Module {
-	public AutoFish() {
-		super("AutoFish", "Makes you fish, automatically");
-	}
+import java.lang.reflect.Field;
 
-	@Override
-	public void onExecute() {
-		FishingBobberEntity fishingBobberEntity = Cornos.minecraft.player.fishHook;
-		if (fishingBobberEntity == null)
-			return;
-		try {
-			Field f = fishingBobberEntity.getClass().getDeclaredField("caughtFish");
-			f.setAccessible(true);
-			boolean caughtFish = f.getBoolean(fishingBobberEntity);
-			if (caughtFish) {
-				Cornos.minecraft.interactionManager.interactItem(Cornos.minecraft.player, Cornos.minecraft.world,
-						Hand.MAIN_HAND);
-				fishingBobberEntity.remove();
-				new Thread(() -> {
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					Cornos.minecraft.interactionManager.interactItem(Cornos.minecraft.player, Cornos.minecraft.world,
-							Hand.MAIN_HAND);
-				}).start();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		super.onExecute();
-	}
+public class AutoFish extends Module {
+    public AutoFish() {
+        super("AutoFish", "Makes you fish, automatically");
+    }
+
+    @Override
+    public void onExecute() {
+        assert Cornos.minecraft.player != null;
+        FishingBobberEntity fishingBobberEntity = Cornos.minecraft.player.fishHook;
+        if (fishingBobberEntity == null)
+            return;
+        try {
+            Field f = fishingBobberEntity.getClass().getDeclaredField("caughtFish");
+            f.setAccessible(true);
+            boolean caughtFish = f.getBoolean(fishingBobberEntity);
+            if (caughtFish) {
+                assert Cornos.minecraft.interactionManager != null;
+                Cornos.minecraft.interactionManager.interactItem(Cornos.minecraft.player, Cornos.minecraft.world,
+                        Hand.MAIN_HAND);
+                fishingBobberEntity.remove();
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Cornos.minecraft.interactionManager.interactItem(Cornos.minecraft.player, Cornos.minecraft.world,
+                            Hand.MAIN_HAND);
+                }).start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onExecute();
+    }
 }

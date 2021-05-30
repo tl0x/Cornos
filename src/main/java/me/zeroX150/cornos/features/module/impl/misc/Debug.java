@@ -16,17 +16,17 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 
 public class Debug extends Module {
-	public Debug() {
-		super("Debug", "uhh", ModuleType.HIDDEN);
-	}
+    public Debug() {
+        super("Debug", "uhh", ModuleType.HIDDEN);
+    }
 
-	@Override
-	public void onExecute() {
-		STL.notifyUser("[D] MinecraftClient.currentScreen = " + Cornos.minecraft.currentScreen);
-		Camera c = BlockEntityRenderDispatcher.INSTANCE.camera;
-		STL.notifyUser("[D] Camera: " + c);
-		STL.notifyUser("[D] CameraRot: " + c.getRotation());
+    @Override
+    public void onExecute() {
+        STL.notifyUser("[D] MinecraftClient.currentScreen = " + Cornos.minecraft.currentScreen);
+        Camera c = BlockEntityRenderDispatcher.INSTANCE.camera;
+        STL.notifyUser("[D] Camera: " + c);
+        STL.notifyUser("[D] CameraRot: " + c.getRotation());
 
-		super.onExecute();
-	}
+        super.onExecute();
+    }
 }

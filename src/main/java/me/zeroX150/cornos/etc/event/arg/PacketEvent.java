@@ -11,9 +11,9 @@ package me.zeroX150.cornos.etc.event.arg;
 import net.minecraft.network.Packet;
 
 public class PacketEvent extends Event {
-	public Packet<?> packet;
+    public Packet<?> packet;
 
-	public PacketEvent(Packet<?> packetSent) {
-		this.packet = packetSent;
-	}
+    public PacketEvent(Packet<?> packetSent) {
+        this.packet = packetSent;
+    }
 }

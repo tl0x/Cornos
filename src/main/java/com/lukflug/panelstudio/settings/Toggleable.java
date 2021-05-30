@@ -6,15 +6,15 @@ package com.lukflug.panelstudio.settings;
  * @author lukflug
  */
 public interface Toggleable {
-	/**
-	 * Toggle the boolean value.
-	 */
-	void toggle();
+    /**
+     * Toggle the boolean value.
+     */
+    void toggle();
 
-	/**
-	 * Get the boolean value.
-	 *
-	 * @return the value
-	 */
-	boolean isOn();
+    /**
+     * Get the boolean value.
+     *
+     * @return the value
+     */
+    boolean isOn();
 }

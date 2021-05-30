@@ -14,13 +14,13 @@ import me.zeroX150.cornos.features.module.ModuleType;
 import me.zeroX150.cornos.gui.clickgui.ClickGUI;
 
 public class Test extends Module {
-	public Test() {
-		super("TestModule", "j", ModuleType.HIDDEN);
-	}
+    public Test() {
+        super("TestModule", "j", ModuleType.HIDDEN);
+    }
 
-	@Override
-	public void onEnable() {
-		setEnabled(false);
-		Cornos.minecraft.openScreen(new ClickGUI());
-	}
+    @Override
+    public void onEnable() {
+        setEnabled(false);
+        Cornos.minecraft.openScreen(new ClickGUI());
+    }
 }

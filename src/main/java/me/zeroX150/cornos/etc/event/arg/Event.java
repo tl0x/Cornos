@@ -9,14 +9,14 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.zeroX150.cornos.etc.event.arg;
 
 public class Event {
-	public boolean cancel = false;
-	public boolean passed = true;
+    public boolean cancel = false;
+    public boolean passed = true;
 
-	public void cancel() {
-		cancel = true;
-	}
+    public void cancel() {
+        cancel = true;
+    }
 
-	public void endEventCallQueue() {
-		passed = false;
-	}
+    public void endEventCallQueue() {
+        passed = false;
+    }
 }
