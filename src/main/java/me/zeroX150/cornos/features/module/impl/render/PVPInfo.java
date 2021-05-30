@@ -61,8 +61,8 @@ public class PVPInfo extends Module {
             Window w = Cornos.minecraft.getWindow();
             int w1 = w.getScaledWidth() / 2;
             int h = w.getScaledHeight() / 2;
-            int width = 100;
-            int height = 32;
+            int width = 120;
+            int height = 42;
             int x1 = w1 + 5;
             int x2 = x1 + width;
             int y1 = h + 5;
@@ -75,11 +75,18 @@ public class PVPInfo extends Module {
             Renderer.renderLineScreen(new Vec3d(x2, y1, 0), new Vec3d(x2, y2, 0), Hud.themeColor.getColor(), 2);
             Renderer.renderLineScreen(new Vec3d(x2, y2, 0), new Vec3d(x1, y2, 0), Hud.themeColor.getColor(), 2);
             Renderer.renderLineScreen(new Vec3d(x1, y2, 0), new Vec3d(x1, y1, 0), Hud.themeColor.getColor(), 2);
-            InventoryScreen.drawEntity(x1 + 8, y1 + 30, 15, (float) -(w1 / 10), (float) -(h / 10), current);
-            Cornos.minecraft.textRenderer.draw(ms, uname, x2 - Cornos.minecraft.textRenderer.getWidth(uname) - 1, y1 + 2, 0xFFFFFF);
+            InventoryScreen.drawEntity(x1 + 10, y1 + 40, 20, (float) -(w1 / 10), (float) -(h / 10), current);
+            DrawableHelper.drawCenteredString(ms, Cornos.minecraft.textRenderer, uname, x1+(width/2),y1+2,0xFFFFFF);
             GL11.glScaled(innerCompScale, innerCompScale, innerCompScale);
-            Cornos.minecraft.textRenderer.draw(ms, "Distance: " + distLatest, (float) ((x1 + 8 + 7 + 2) / innerCompScale), (float) ((y1 + 11) / innerCompScale), Color.WHITE.getRGB());
-            Cornos.minecraft.textRenderer.draw(ms, "Health: " + ((int) Math.floor(current.getHealth())) + " / " + ((int) Math.floor(current.getMaxHealth())), (float) ((x1 + 8 + 7 + 2) / innerCompScale), (float) ((y1 + 11 + 10) / innerCompScale), Color.WHITE.getRGB());
+            Cornos.minecraft.textRenderer.draw(ms, "Distance: " + distLatest, (float) ((x1 + 10 + 7 + 4) / innerCompScale), (float) ((y1 + 11) / innerCompScale), Color.WHITE.getRGB());
+            Cornos.minecraft.textRenderer.draw(ms, "Health: " + ((int) Math.floor(current.getHealth())) + " / " + ((int) Math.floor(current.getMaxHealth())), (float) ((x1 + 10 + 7 + 4) / innerCompScale), (float) ((y1 + 11 + 10) / innerCompScale), Color.WHITE.getRGB());
+            String winLoseState;
+            Color c = Color.WHITE;
+            if (current.getHealth()>Cornos.minecraft.player.getHealth()) {winLoseState = "Losing";c=new Color(196, 48, 48);}
+            else if (current.getHealth()==Cornos.minecraft.player.getHealth()) {winLoseState = "Stalemate";}
+            else {winLoseState = "Winning";c=new Color(35, 231, 100);}
+
+            Cornos.minecraft.textRenderer.draw(ms, winLoseState, (float) ((x1 + 10 + 7 + 4) / innerCompScale), (float) ((y1 + 11 + 20) / innerCompScale), c.getRGB());
             GL11.glScaled(1 / innerCompScale, 1 / innerCompScale, 1 / innerCompScale);
             current.setCustomName(null);
         }
