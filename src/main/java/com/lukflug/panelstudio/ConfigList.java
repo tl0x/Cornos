@@ -6,33 +6,37 @@ package com.lukflug.panelstudio;
  * @author lukflug
  */
 public interface ConfigList {
-    /**
-     * Begin loading/storing configuration.
-     *
-     * @param loading set if loading
-     */
-    void begin(boolean loading);
+	/**
+	 * Begin loading/storing configuration.
+	 *
+	 * @param loading
+	 *            set if loading
+	 */
+	void begin(boolean loading);
 
-    /**
-     * End loading/storing configuration.
-     *
-     * @param loading set if loading
-     */
-    void end(boolean loading);
+	/**
+	 * End loading/storing configuration.
+	 *
+	 * @param loading
+	 *            set if loading
+	 */
+	void end(boolean loading);
 
-    /**
-     * Add panel to the configuration.
-     *
-     * @param title the title
-     * @return the new panel configuration to be populated by the panel
-     */
-    PanelConfig addPanel(String title);
+	/**
+	 * Add panel to the configuration.
+	 *
+	 * @param title
+	 *            the title
+	 * @return the new panel configuration to be populated by the panel
+	 */
+	PanelConfig addPanel(String title);
 
-    /**
-     * Get panel configuration.
-     *
-     * @param title the title
-     * @return the panel configuration corresponding to the respective panel
-     */
-    PanelConfig getPanel(String title);
+	/**
+	 * Get panel configuration.
+	 *
+	 * @param title
+	 *            the title
+	 * @return the panel configuration corresponding to the respective panel
+	 */
+	PanelConfig getPanel(String title);
 }

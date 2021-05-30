@@ -8,22 +8,23 @@ import com.lukflug.panelstudio.settings.NumberSetting;
  * @author lukflug
  */
 public class SettingsAnimation extends Animation {
-    /**
-     * Setting to be used for {@link #getSpeed()}.
-     */
-    protected final NumberSetting speed;
+	/**
+	 * Setting to be used for {@link #getSpeed()}.
+	 */
+	protected final NumberSetting speed;
 
-    /**
-     * Constructor.
-     *
-     * @param speed speed setting
-     */
-    public SettingsAnimation(NumberSetting speed) {
-        this.speed = speed;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param speed
+	 *            speed setting
+	 */
+	public SettingsAnimation(NumberSetting speed) {
+		this.speed = speed;
+	}
 
-    @Override
-    protected int getSpeed() {
-        return (int) speed.getNumber();
-    }
+	@Override
+	protected int getSpeed() {
+		return (int) speed.getNumber();
+	}
 }

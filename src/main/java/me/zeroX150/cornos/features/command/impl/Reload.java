@@ -13,14 +13,14 @@ import me.zeroX150.cornos.features.command.CommandRegistry;
 import me.zeroX150.cornos.features.module.ModuleRegistry;
 
 public class Reload extends Command {
-    public Reload() {
-        super("Reload", "Reloads all commands and modules", new String[]{"reload", "rl", "mcrl"});
-    }
+	public Reload() {
+		super("Reload", "Reloads all commands and modules", new String[]{"reload", "rl", "mcrl"});
+	}
 
-    @Override
-    public void onExecute(String[] args) {
-        ModuleRegistry.reload();
-        CommandRegistry.reload();
-        super.onExecute(args);
-    }
+	@Override
+	public void onExecute(String[] args) {
+		ModuleRegistry.reload();
+		CommandRegistry.reload();
+		super.onExecute(args);
+	}
 }

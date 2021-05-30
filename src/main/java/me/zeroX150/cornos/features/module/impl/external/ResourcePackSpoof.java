@@ -11,8 +11,8 @@ package me.zeroX150.cornos.features.module.impl.external;
 import me.zeroX150.cornos.features.module.Module;
 
 public class ResourcePackSpoof extends Module {
-    public ResourcePackSpoof() {
-        super("ResourcePackSpoof", "Tells the server you accepted their shitty resource pack");
-    }
-    // ResourcePackStatusMixin.java
+	public ResourcePackSpoof() {
+		super("ResourcePackSpoof", "Tells the server you accepted their shitty resource pack");
+	}
+	// ResourcePackStatusMixin.java
 }

@@ -12,14 +12,15 @@ import me.zeroX150.cornos.Cornos;
 import me.zeroX150.cornos.features.command.Command;
 
 public class Leave extends Command {
-    public Leave() {
-        super("Leave", "Leaves the server", new String[]{"leave", "l", "quit"});
-    }
+	public Leave() {
+		super("Leave", "Leaves the server", new String[]{"leave", "l", "quit"});
+	}
 
-    @Override
-    public void onExecute(String[] args) {
-        if (Cornos.minecraft.world == null) return;
-        Cornos.minecraft.world.disconnect();
-        super.onExecute(args);
-    }
+	@Override
+	public void onExecute(String[] args) {
+		if (Cornos.minecraft.world == null)
+			return;
+		Cornos.minecraft.world.disconnect();
+		super.onExecute(args);
+	}
 }

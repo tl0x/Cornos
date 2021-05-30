@@ -6,15 +6,15 @@ package com.lukflug.panelstudio.settings;
  * @author lukflug
  */
 public interface EnumSetting {
-    /**
-     * Cycle through the values of the enumeration.
-     */
-    void increment();
+	/**
+	 * Cycle through the values of the enumeration.
+	 */
+	void increment();
 
-    /**
-     * Get the current value.
-     *
-     * @return the name of the current enum value
-     */
-    String getValueName();
+	/**
+	 * Get the current value.
+	 *
+	 * @return the name of the current enum value
+	 */
+	String getValueName();
 }

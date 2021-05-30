@@ -8,10 +8,11 @@ import com.lukflug.panelstudio.Context;
  * @author lukflug
  */
 public interface DescriptionRenderer {
-    /**
-     * Render a description
-     *
-     * @param context the context for the panel creating the description
-     */
-    void renderDescription(Context context);
+	/**
+	 * Render a description
+	 *
+	 * @param context
+	 *            the context for the panel creating the description
+	 */
+	void renderDescription(Context context);
 }

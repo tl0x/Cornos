@@ -1,53 +1,53 @@
 package me.zeroX150.cornos.etc.config;
 
-import me.zeroX150.cornos.features.module.Module;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import me.zeroX150.cornos.features.module.Module;
+
 public class MConf {
-    public final Module owner;
-    public List<ConfigKey> config = new ArrayList<>();
+	public final Module owner;
+	public List<ConfigKey> config = new ArrayList<>();
 
-    public MConf(Module owner) {
-        this.owner = owner;
-    }
+	public MConf(Module owner) {
+		this.owner = owner;
+	}
 
-    public ConfigKey add(ConfigKey pair) {
-        config.add(pair);
-        return pair;
-    }
+	public ConfigKey add(ConfigKey pair) {
+		config.add(pair);
+		return pair;
+	}
 
-    public ConfigKey getByName(String name) {
-        ConfigKey ref = null;
-        for (ConfigKey configKey : this.config) {
-            if (configKey.key.equalsIgnoreCase(name)) {
-                ref = configKey;
-                break;
-            }
-        }
-        return ref;
-    }
+	public ConfigKey getByName(String name) {
+		ConfigKey ref = null;
+		for (ConfigKey configKey : this.config) {
+			if (configKey.key.equalsIgnoreCase(name)) {
+				ref = configKey;
+				break;
+			}
+		}
+		return ref;
+	}
 
-    public ConfigKey getOrDefault(String name, ConfigKey defaultVal) {
-        ConfigKey r = getByName(name);
-        if (r == null) {
-            this.add(defaultVal);
-        }
-        return r == null ? defaultVal : r;
-    }
+	public ConfigKey getOrDefault(String name, ConfigKey defaultVal) {
+		ConfigKey r = getByName(name);
+		if (r == null) {
+			this.add(defaultVal);
+		}
+		return r == null ? defaultVal : r;
+	}
 
-    public static class ConfigKey {
-        public String key;
-        public String value;
+	public static class ConfigKey {
+		public String key;
+		public String value;
 
-        public ConfigKey(String k, String v) {
-            this.key = k;
-            this.value = v;
-        }
+		public ConfigKey(String k, String v) {
+			this.key = k;
+			this.value = v;
+		}
 
-        public void setValue(String newV) {
-            this.value = newV;
-        }
-    }
+		public void setValue(String newV) {
+			this.value = newV;
+		}
+	}
 }

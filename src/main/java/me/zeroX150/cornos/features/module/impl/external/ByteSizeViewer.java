@@ -11,8 +11,8 @@ package me.zeroX150.cornos.features.module.impl.external;
 import me.zeroX150.cornos.features.module.Module;
 
 public class ByteSizeViewer extends Module {
-    public ByteSizeViewer() {
-        super("ByteSizeViewer", "Allows you to see the size of an item in bytes");
-    }
-    // ByteSizeViewerHandler.java
+	public ByteSizeViewer() {
+		super("ByteSizeViewer", "Allows you to see the size of an item in bytes");
+	}
+	// ByteSizeViewerHandler.java
 }

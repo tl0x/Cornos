@@ -21,42 +21,46 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 
 public class Target extends Module {
-    MConfToggleable players = new MConfToggleable("players", true);
-    MConfToggleable entities = new MConfToggleable("entities", false);
-    MConfToggleable silentrot = new MConfToggleable("silentrotations", false);
+	MConfToggleable players = new MConfToggleable("players", true);
+	MConfToggleable entities = new MConfToggleable("entities", false);
+	MConfToggleable silentrot = new MConfToggleable("silentrotations", false);
 
-    public Target() {
-        super("Target", "Helps you aim at shit", ModuleType.COMBAT);
-        this.mconf.add(players);
-        this.mconf.add(entities);
-        this.mconf.add(silentrot);
-    }
+	public Target() {
+		super("Target", "Helps you aim at shit", ModuleType.COMBAT);
+		this.mconf.add(players);
+		this.mconf.add(entities);
+		this.mconf.add(silentrot);
+	}
 
-    @Override
-    public void onFastUpdate() {
-        assert Cornos.minecraft.player != null;
-        Vec3d init = Cornos.minecraft.player.getPos().add(-4, -4, -4);
-        Vec3d fin = init.add(8, 8, 8);
-        Box selector = new Box(init, fin);
-        assert Cornos.minecraft.world != null;
-        for (Entity e : Cornos.minecraft.world.getEntities()) {
-            if (!(e instanceof LivingEntity)) continue;
-            if ((e instanceof PlayerEntity) && !players.isEnabled()) continue;
-            if (!entities.isEnabled() && !(e instanceof PlayerEntity)) continue;
-            LivingEntity le = (LivingEntity) e;
-            if (Cornos.friendsManager.getFriends().containsKey(e.getName().asString())) {
-                return;
-            }
-            if (e.getBoundingBox().intersects(selector) && e.getUuid() != Cornos.minecraft.player.getUuid() && e.isAttackable() && !le.isDead()) {
-                Vec3d finP = e.getPos().add(0, e.getHeight() / 2, 0);
-                if (silentrot.isEnabled()) {
-                    SilentRotations.doSilentRotation(EntityAnchorArgumentType.EntityAnchor.EYES, finP);
-                } else {
-                    Cornos.minecraft.player.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, finP);
-                }
-                break;
-            }
-        }
-        super.onFastUpdate();
-    }
+	@Override
+	public void onFastUpdate() {
+		assert Cornos.minecraft.player != null;
+		Vec3d init = Cornos.minecraft.player.getPos().add(-4, -4, -4);
+		Vec3d fin = init.add(8, 8, 8);
+		Box selector = new Box(init, fin);
+		assert Cornos.minecraft.world != null;
+		for (Entity e : Cornos.minecraft.world.getEntities()) {
+			if (!(e instanceof LivingEntity))
+				continue;
+			if ((e instanceof PlayerEntity) && !players.isEnabled())
+				continue;
+			if (!entities.isEnabled() && !(e instanceof PlayerEntity))
+				continue;
+			LivingEntity le = (LivingEntity) e;
+			if (Cornos.friendsManager.getFriends().containsKey(e.getName().asString())) {
+				return;
+			}
+			if (e.getBoundingBox().intersects(selector) && e.getUuid() != Cornos.minecraft.player.getUuid()
+					&& e.isAttackable() && !le.isDead()) {
+				Vec3d finP = e.getPos().add(0, e.getHeight() / 2, 0);
+				if (silentrot.isEnabled()) {
+					SilentRotations.doSilentRotation(EntityAnchorArgumentType.EntityAnchor.EYES, finP);
+				} else {
+					Cornos.minecraft.player.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, finP);
+				}
+				break;
+			}
+		}
+		super.onFastUpdate();
+	}
 }

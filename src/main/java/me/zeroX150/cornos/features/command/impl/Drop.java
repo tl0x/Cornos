@@ -13,17 +13,17 @@ import me.zeroX150.cornos.features.command.Command;
 import net.minecraft.screen.slot.SlotActionType;
 
 public class Drop extends Command {
-    public Drop() {
-        super("Drop", "Drops all items in your inv", new String[]{"drop", "d", "throw"});
-    }
+	public Drop() {
+		super("Drop", "Drops all items in your inv", new String[]{"drop", "d", "throw"});
+	}
 
-    @Override
-    public void onExecute(String[] args) {
-        for (int i = 0; i < 46; i++) {
-            assert Cornos.minecraft.interactionManager != null;
-            Cornos.minecraft.interactionManager.clickSlot(0, i, 1, SlotActionType.THROW, Cornos.minecraft.player);
-        }
+	@Override
+	public void onExecute(String[] args) {
+		for (int i = 0; i < 46; i++) {
+			assert Cornos.minecraft.interactionManager != null;
+			Cornos.minecraft.interactionManager.clickSlot(0, i, 1, SlotActionType.THROW, Cornos.minecraft.player);
+		}
 
-        super.onExecute(args);
-    }
+		super.onExecute(args);
+	}
 }

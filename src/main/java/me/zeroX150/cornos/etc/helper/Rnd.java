@@ -11,35 +11,35 @@ package me.zeroX150.cornos.etc.helper;
 import java.util.Random;
 
 public class Rnd {
-    public static String rndStr(int size) {
-        StringBuilder end = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            // 65+57
-            end.append((char) (new Random().nextInt(65) + 57));
-        }
-        return end.toString();
-    }
+	public static String rndStr(int size) {
+		StringBuilder end = new StringBuilder();
+		for (int i = 0; i < size; i++) {
+			// 65+57
+			end.append((char) (new Random().nextInt(65) + 57));
+		}
+		return end.toString();
+	}
 
-    public static String rndAscii(int size) {
-        StringBuilder end = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            // 97+25
-            end.append((char) (new Random().nextInt(25) + 97));
-        }
-        return end.toString();
-    }
+	public static String rndAscii(int size) {
+		StringBuilder end = new StringBuilder();
+		for (int i = 0; i < size; i++) {
+			// 97+25
+			end.append((char) (new Random().nextInt(25) + 97));
+		}
+		return end.toString();
+	}
 
-    public static String rndBinStr(int size) {
-        StringBuilder end = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            // 65+57
-            end.append((char) (new Random().nextInt(0xFFFF)));
-        }
-        return end.toString();
-    }
+	public static String rndBinStr(int size) {
+		StringBuilder end = new StringBuilder();
+		for (int i = 0; i < size; i++) {
+			// 65+57
+			end.append((char) (new Random().nextInt(0xFFFF)));
+		}
+		return end.toString();
+	}
 
-    public static double rndD(double rad) {
-        Random r = new Random();
-        return r.nextDouble() * rad;
-    }
+	public static double rndD(double rad) {
+		Random r = new Random();
+		return r.nextDouble() * rad;
+	}
 }

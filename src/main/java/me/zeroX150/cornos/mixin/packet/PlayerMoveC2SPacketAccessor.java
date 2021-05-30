@@ -1,26 +1,27 @@
 package me.zeroX150.cornos.mixin.packet;
 
-import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
+import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
+
 @Mixin(PlayerMoveC2SPacket.class)
 public interface PlayerMoveC2SPacketAccessor {
-    @Accessor("y")
-    void setY(double y);
+	@Accessor("y")
+	void setY(double y);
 
-    @Accessor("yaw")
-    float getYaw();
+	@Accessor("yaw")
+	float getYaw();
 
-    @Accessor("yaw")
-    void setYaw(float yaw);
+	@Accessor("yaw")
+	void setYaw(float yaw);
 
-    @Accessor("pitch")
-    float getPitch();
+	@Accessor("pitch")
+	float getPitch();
 
-    @Accessor("pitch")
-    void setPitch(float pitch);
+	@Accessor("pitch")
+	void setPitch(float pitch);
 
-    @Accessor("onGround")
-    void setOnGround(boolean onGround);
+	@Accessor("onGround")
+	void setOnGround(boolean onGround);
 }

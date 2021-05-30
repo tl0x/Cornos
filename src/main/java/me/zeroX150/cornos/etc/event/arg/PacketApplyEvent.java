@@ -12,11 +12,11 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 
 public class PacketApplyEvent extends Event {
-    public Packet<?> packet;
-    public ClientPlayPacketListener packetListener;
+	public Packet<?> packet;
+	public ClientPlayPacketListener packetListener;
 
-    public PacketApplyEvent(Packet<?> p, ClientPlayPacketListener cppl) {
-        this.packet = p;
-        this.packetListener = cppl;
-    }
+	public PacketApplyEvent(Packet<?> p, ClientPlayPacketListener cppl) {
+		this.packet = p;
+		this.packetListener = cppl;
+	}
 }

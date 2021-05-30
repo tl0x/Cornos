@@ -14,14 +14,14 @@ import me.zeroX150.cornos.features.module.ModuleType;
 import me.zeroX150.cornos.mixin.LivingEntityAccessor;
 
 public class NoJumpingCooldown extends Module {
-    public NoJumpingCooldown() {
-        super("NoJumpingCooldown", "fast jumping", ModuleType.MOVEMENT);
-    }
+	public NoJumpingCooldown() {
+		super("NoJumpingCooldown", "fast jumping", ModuleType.MOVEMENT);
+	}
 
-    @Override
-    public void onExecute() {
-        assert Cornos.minecraft.player != null;
-        ((LivingEntityAccessor) Cornos.minecraft.player).setJumpingCooldown(0);
-        super.onExecute();
-    }
+	@Override
+	public void onExecute() {
+		assert Cornos.minecraft.player != null;
+		((LivingEntityAccessor) Cornos.minecraft.player).setJumpingCooldown(0);
+		super.onExecute();
+	}
 }
