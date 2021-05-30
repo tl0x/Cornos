@@ -49,16 +49,11 @@ public class CustomButtonWidget extends AbstractPressableButtonWidget {
         timer = MathHelper.clamp(timer, 0, 1);
         if (timer != 0) {
             double a = easeInOutQuart(timer);
-            double bruh = a * 4;
-            double p1 = MathHelper.clamp(bruh, 0, 1);
-            double p2 = MathHelper.clamp(bruh - 1, 0, 1);
-            double p3 = MathHelper.clamp(bruh - 2, 0, 1);
-            double p4 = MathHelper.clamp(bruh - 3, 0, 1);
-            Renderer.renderLineScreen(new Vec3d(x, y, 0), new Vec3d(x, y + (p1 * height), 0), c, 2);
-            Renderer.renderLineScreen(new Vec3d(x, y + height, 0), new Vec3d(x + (p2 * width), y + height, 0), c, 2);
+            Renderer.renderLineScreen(new Vec3d(x, y, 0), new Vec3d(x, y + (a * height), 0), c, 2);
+            Renderer.renderLineScreen(new Vec3d(x, y + height, 0), new Vec3d(x + (a * width), y + height, 0), c, 2);
             Renderer.renderLineScreen(new Vec3d(x + width, y + height, 0),
-                    new Vec3d(x + width, y + height - (p3 * height), 0), c, 2);
-            Renderer.renderLineScreen(new Vec3d(x + width, y, 0), new Vec3d(x + width - (p4 * width), y, 0), c, 2);
+                    new Vec3d(x + width, y + height - (a * height), 0), c, 2);
+            Renderer.renderLineScreen(new Vec3d(x + width, y, 0), new Vec3d(x + width - (a * width), y, 0), c, 2);
         }
         // if ((a * width) > r) Renderer.renderRoundedQuad(x, y, x + (a * width), y +
         // height, r - 1, selectedColor);

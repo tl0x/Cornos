@@ -33,10 +33,7 @@ public class IdentifierMixin {
     public void init(String[] id, CallbackInfo ci) {
         String ns = id[0];
         String p = id[1];
-        if (ns.equals("minecraft") && p.equals("textures/gui/widgets.png")) {
-            this.namespace = "ccl";
-            this.path = "widgets.png";
-        } else if (ns.equals("minecraft") && p.equals("textures/gui/options_background.png")) {
+        if (ns.equals("minecraft") && p.equals("textures/gui/options_background.png")) {
             this.namespace = "ccl";
             this.path = "transparent.png";
         }
