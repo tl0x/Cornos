@@ -118,6 +118,7 @@ public class ModuleRegistry {
         ml.add(new LightningPlayerFinder());
         ml.add(new AntiAntiXray());
         ml.add(new AutoItemFrame());
+        ml.add(new Timer());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

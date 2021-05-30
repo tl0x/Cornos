@@ -11,7 +11,7 @@ package me.zeroX150.cornos.features.module.impl.movement;
 import me.zeroX150.cornos.Cornos;
 import me.zeroX150.cornos.features.module.Module;
 import me.zeroX150.cornos.features.module.ModuleType;
-import me.zeroX150.cornos.mixin.LivingEntityAccessor;
+import me.zeroX150.cornos.mixin.ILivingEntityAccessor;
 
 public class NoJumpingCooldown extends Module {
     public NoJumpingCooldown() {
@@ -21,7 +21,7 @@ public class NoJumpingCooldown extends Module {
     @Override
     public void onExecute() {
         assert Cornos.minecraft.player != null;
-        ((LivingEntityAccessor) Cornos.minecraft.player).setJumpingCooldown(0);
+        ((ILivingEntityAccessor) Cornos.minecraft.player).setJumpingCooldown(0);
         super.onExecute();
     }
 }

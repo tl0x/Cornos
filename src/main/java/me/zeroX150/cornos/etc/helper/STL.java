@@ -7,7 +7,9 @@ import com.mojang.authlib.Agent;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import me.zeroX150.cornos.Cornos;
-import me.zeroX150.cornos.mixin.SessionAccessor;
+import me.zeroX150.cornos.mixin.IMinecraftClientAccessor;
+import me.zeroX150.cornos.mixin.IRenderTickCounterAccessor;
+import me.zeroX150.cornos.mixin.ISessionAccessor;
 import net.minecraft.client.util.Session;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
@@ -59,7 +61,7 @@ public class STL {
     public static boolean auth(String username, String password) {
         if (password.isEmpty()) {
             Session crackedSession = new Session(username, UUID.randomUUID().toString(), "CornosOnTOP", "mojang");
-            ((SessionAccessor) Cornos.minecraft).setSession(crackedSession);
+            ((ISessionAccessor) Cornos.minecraft).setSession(crackedSession);
             return true;
         }
         YggdrasilUserAuthentication auth = (YggdrasilUserAuthentication) new YggdrasilAuthenticationService(
@@ -70,7 +72,7 @@ public class STL {
             auth.logIn();
             Session ns = new Session(auth.getSelectedProfile().getName(), auth.getSelectedProfile().getId().toString(),
                     auth.getAuthenticatedToken(), "mojang");
-            ((SessionAccessor) Cornos.minecraft).setSession(ns);
+            ((ISessionAccessor) Cornos.minecraft).setSession(ns);
             return true;
         } catch (Exception ec) {
             Cornos.log(Level.ERROR, "Failed to log in: ");
@@ -156,5 +158,20 @@ public class STL {
         response.close();
         huc.disconnect();
         return resp;
+    }
+
+    public static float getClientTPS() {
+        IRenderTickCounterAccessor accessor = (IRenderTickCounterAccessor) ((IMinecraftClientAccessor) Cornos.minecraft).getRenderTickCounter();
+        return 1000f / accessor.getTickTime();
+    }
+
+    public static void setClientTPS(float newTPS) {
+        IRenderTickCounterAccessor accessor = (IRenderTickCounterAccessor) ((IMinecraftClientAccessor) Cornos.minecraft).getRenderTickCounter();
+        accessor.setTickTime(1000f / newTPS);
+    }
+
+    public static double roundToNTh(double in, int n) {
+        double s = Math.pow(10, n);
+        return Math.round(in * s) / s;
     }
 }
