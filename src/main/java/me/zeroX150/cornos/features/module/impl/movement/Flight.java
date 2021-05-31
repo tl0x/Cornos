@@ -28,11 +28,11 @@ public class Flight extends Module {
     int counter1 = 0;
     float flyingSince = 0;
     MConfMultiOption mode = new MConfMultiOption("mode", "vanilla",
-            new String[]{"vanilla", "3d", "static", "jetpack", "airhop", "zika", "packet", "jboost"});
-    MConfToggleable toggleFast = new MConfToggleable("toggleFast", true);
-    MConfNum speed = new MConfNum("speed", 1.0, 10, 0);
-    MConfNum airhopUp = new MConfNum("airhopUp", 1.0, 3, 0.1);
-    MConfToggleable sendAbilitiesUpdate = new MConfToggleable("abilities", true);
+            new String[]{"vanilla", "3d", "static", "jetpack", "airhop", "zika", "packet", "jboost"}, "Fly mode");
+    MConfToggleable toggleFast = new MConfToggleable("toggleFast", true, "Toggle flight ever so often to bypass vanilla ac");
+    MConfNum speed = new MConfNum("speed", 1.0, 10, 0, "yea");
+    MConfNum airhopUp = new MConfNum("airhopUp", 1.0, 3, 0.1, "(airhop only) speed to yeet you upwards with");
+    MConfToggleable sendAbilitiesUpdate = new MConfToggleable("abilities", true, "Send abilities update to bypass some acs");
     PlayerAbilities abilitiesBefore = null;
     double startheight = 0;
     List<PlayerMoveC2SPacket> trustedPackets = new ArrayList<>();

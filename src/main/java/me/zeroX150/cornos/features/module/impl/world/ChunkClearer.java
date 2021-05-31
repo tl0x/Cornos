@@ -28,12 +28,12 @@ import java.util.Objects;
 public class ChunkClearer extends Module {
     BlockPos start = null;
     BlockPos end = null;
-    MConfMultiOption mode = new MConfMultiOption("mode", "client", new String[]{"client", "packet", "legit"});
-    MConfToggleable ignoreXray = new MConfToggleable("ignoreXray", true);
-    MConfToggleable clientTeleport = new MConfToggleable("clientTP", false);
-    MConfNum delay = new MConfNum("delay", 0, 20, 0);
+    MConfMultiOption mode = new MConfMultiOption("mode", "client", new String[]{"client", "packet", "legit"}, "da mode");
+    MConfToggleable ignoreXray = new MConfToggleable("ignoreXray", true, "ignore xray blocks in config");
+    MConfToggleable clientTeleport = new MConfToggleable("clientTP", false, "teleport the player client side and server side");
+    MConfNum delay = new MConfNum("delay", 0, 20, 0, "da delay");
     int delayWaited = 0;
-    MConfMultiOption fast = new MConfMultiOption("overdrive", "none", new String[]{"none", "light", "strong", "max"});
+    MConfMultiOption fast = new MConfMultiOption("overdrive", "none", new String[]{"none", "light", "strong", "max"}, "how strong to fuck the chunk up");
 
     public ChunkClearer() {
         super("ChunkClearer", "makes a chunk perish", ModuleType.WORLD);

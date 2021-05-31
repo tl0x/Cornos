@@ -18,7 +18,7 @@ import java.util.Objects;
 public class BoatFly extends Module {
     Entity lastRide = null;
     KeyBind keyDown = new KeyBind(GLFW.GLFW_KEY_LEFT_ALT);
-    MConfMultiOption mode = new MConfMultiOption("mode", "vanilla", new String[]{"vanilla", "static", "velocity"});
+    MConfMultiOption mode = new MConfMultiOption("mode", "vanilla", new String[]{"vanilla", "static", "velocity"}, "weee mode");
 
     public BoatFly() {
         super("EntityFly", "weee", ModuleType.MOVEMENT);

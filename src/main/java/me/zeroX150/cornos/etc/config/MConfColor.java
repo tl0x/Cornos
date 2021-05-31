@@ -17,8 +17,13 @@ public class MConfColor extends MConf.ConfigKey {
     boolean rainbow = false;
 
     public MConfColor(String k, Color rgb) {
-        super(k, rgb.getRGB() + ":0");
+        super(k, rgb.getRGB() + ":0", "No description");
         this.c = rgb;
+    }
+
+    public MConfColor(String k, Color rgb, String d) {
+        this(k, rgb);
+        this.description = d;
     }
 
     public Color getColor() {

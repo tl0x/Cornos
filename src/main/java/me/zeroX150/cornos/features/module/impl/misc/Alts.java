@@ -13,7 +13,7 @@ import me.zeroX150.cornos.features.module.Module;
 import me.zeroX150.cornos.features.module.ModuleType;
 
 public class Alts extends Module {
-    public static MConf.ConfigKey k = new MConf.ConfigKey("list", "0");
+    public static MConf.ConfigKey k = new MConf.ConfigKey("list", "0", "bruh");
 
     public Alts() {
         super("alts", "you are not supposed to look at this shit", ModuleType.HIDDEN);

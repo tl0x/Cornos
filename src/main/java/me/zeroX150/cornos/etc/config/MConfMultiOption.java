@@ -7,8 +7,13 @@ public class MConfMultiOption extends MConf.ConfigKey {
     public int current = 0;
 
     public MConfMultiOption(String k, String initialValue, String[] possible) {
-        super(k, initialValue);
+        super(k, initialValue, "No description");
         this.possibleValues = possible;
+    }
+
+    public MConfMultiOption(String k, String initialValue, String[] possible, String description) {
+        this(k, initialValue, possible);
+        this.description = description;
     }
 
     @Override

@@ -7,7 +7,7 @@ import me.zeroX150.cornos.features.module.ModuleType;
 
 public class Step extends Module {
 
-    MConfNum height = new MConfNum("height", 1.0, 10, 0);
+    MConfNum height = new MConfNum("height", 1.0, 10, 0, "how many blocks to step you up");
 
     public Step() {
         super("Step", "spiders are impressed", ModuleType.MOVEMENT);

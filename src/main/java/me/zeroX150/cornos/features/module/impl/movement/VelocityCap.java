@@ -15,9 +15,9 @@ import me.zeroX150.cornos.features.module.ModuleType;
 import net.minecraft.util.math.Vec3d;
 
 public class VelocityCap extends Module {
-    MConfNum x = new MConfNum("x", 5, 10, 0);
-    MConfNum y = new MConfNum("y", 5, 10, 0);
-    MConfNum z = new MConfNum("z", 5, 10, 0);
+    MConfNum x = new MConfNum("x", 5, 10, 0, "max x vel");
+    MConfNum y = new MConfNum("y", 5, 10, 0, "max y vel");
+    MConfNum z = new MConfNum("z", 5, 10, 0, "max z vel");
 
     public VelocityCap() {
         super("VelocityCap", "makes you go slower", ModuleType.MOVEMENT);

@@ -85,11 +85,11 @@ public class ClickGUI extends MinecraftGUI {
             public int getOpacity() {
                 return 255;
             }
-        }, 8, 4, 1);
+        }, 8, 4, 0);
         gui = new com.lukflug.panelstudio.ClickGUI(guiInterface, context -> {
             int h = Cornos.minecraft.getWindow().getScaledHeight();
-            Cornos.minecraft.textRenderer.draw(new MatrixStack(), context.getDescription(), 1,
-                    h - Cornos.minecraft.textRenderer.fontHeight - 1, 0xFFFFFFFF);
+            int x = Cornos.minecraft.getWindow().getScaledWidth() / 2;
+            DrawableHelper.drawCenteredString(new MatrixStack(), Cornos.minecraft.textRenderer, context.getDescription(), x, h - 15, 0xFFFFFFFF);
         });
         int offset = 10 - 114;
         int offsetY = 10;
@@ -140,7 +140,7 @@ public class ClickGUI extends MinecraftGUI {
                     // it works.
                     // dont question it.
                     if (kc instanceof MConfToggleable) {
-                        BooleanComponent bc = new BooleanComponent(kc.key, null, theme.getComponentRenderer(),
+                        BooleanComponent bc = new BooleanComponent(kc.key, kc.description, theme.getComponentRenderer(),
                                 new com.lukflug.panelstudio.settings.Toggleable() {
                                     @Override
                                     public void toggle() {
@@ -172,7 +172,7 @@ public class ClickGUI extends MinecraftGUI {
                                 return ((MConfMultiOption) kc).possibleValues[current];
                             }
                         };
-                        EnumComponent ec = new EnumComponent(kc.key, null, theme.getComponentRenderer(), es);
+                        EnumComponent ec = new EnumComponent(kc.key, kc.description, theme.getComponentRenderer(), es);
                         mc.addComponent(ec);
                     } else if (kc instanceof MConfKeyBind) {
                         KeybindSetting ks = new KeybindSetting() {
@@ -233,7 +233,7 @@ public class ClickGUI extends MinecraftGUI {
                                 return 1;
                             }
                         };
-                        NumberComponent nc = new NumberComponent(kc.key, null, theme.getComponentRenderer(), ns,
+                        NumberComponent nc = new NumberComponent(kc.key, kc.description, theme.getComponentRenderer(), ns,
                                 ((MConfNum) kc).min, ((MConfNum) kc).max);
                         mc.addComponent(nc);
                     } else if (kc instanceof MConfColor) {
@@ -265,7 +265,7 @@ public class ClickGUI extends MinecraftGUI {
                             }
                         };
 
-                        ColorComponent cc = new ColorComponent(kc.key, null, theme.getComponentRenderer(),
+                        ColorComponent cc = new ColorComponent(kc.key, kc.description, theme.getComponentRenderer(),
                                 new SettingsAnimation(CConf.animSpeed), theme.getComponentRenderer(), c, false, true,
                                 new com.lukflug.panelstudio.settings.Toggleable() {
                                     boolean bruh = false;

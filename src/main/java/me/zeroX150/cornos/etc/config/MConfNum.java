@@ -7,9 +7,14 @@ public class MConfNum extends MConf.ConfigKey {
     public double min;
 
     public MConfNum(String k, double v, double max, double min) {
-        super(k, v + "");
+        super(k, v + "", "No description");
         this.max = max;
         this.min = min;
+    }
+
+    public MConfNum(String k, double v, double max, double min, String description) {
+        this(k, v, max, min);
+        this.description = description;
     }
 
     public double getValue() {

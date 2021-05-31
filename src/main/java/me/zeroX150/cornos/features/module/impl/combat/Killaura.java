@@ -21,17 +21,17 @@ import java.util.List;
 import java.util.Objects;
 
 public class Killaura extends Module {
-    MConfMultiOption mode = new MConfMultiOption("mode", "multi", new String[]{"single", "multi"});
-    MConfToggleable entities = new MConfToggleable("entities", false);
-    MConfToggleable players = new MConfToggleable("players", true);
-    MConfToggleable mobs = new MConfToggleable("mobs", false);
-    MConfToggleable swing = new MConfToggleable("swing", true);
-    MConfNum range = new MConfNum("range", 4.0, 10.0, 1.0);
-    MConfNum delay = new MConfNum("delay", 12.52, 20.0, 0);
-    MConfToggleable abNoname = new MConfToggleable("ab:noname", true);
-    MConfToggleable abColorName = new MConfToggleable("ab:colorname", true);
-    MConfToggleable abInvalidName = new MConfToggleable("ab:invalidName", false);
-    MConfToggleable checkForHostile = new MConfToggleable("checkHostile", false);
+    MConfMultiOption mode = new MConfMultiOption("mode", "multi", new String[]{"single", "multi"}, "The mode");
+    MConfToggleable entities = new MConfToggleable("entities", false, "Whether or not to attack entities");
+    MConfToggleable players = new MConfToggleable("players", true, "Whether or not to attack players");
+    MConfToggleable mobs = new MConfToggleable("mobs", false, "Whether or not to attack mobs");
+    MConfToggleable swing = new MConfToggleable("swing", true, "Whether or not to send a swing packet");
+    MConfNum range = new MConfNum("range", 4.0, 10.0, 1.0, "Self explanatory");
+    MConfNum delay = new MConfNum("delay", 12.52, 20.0, 0, "How much delay in ticks to wait between attacks");
+    MConfToggleable abNoname = new MConfToggleable("ab:noname", true, "Check if the entity has a name");
+    MConfToggleable abColorName = new MConfToggleable("ab:colorname", true, "Check if the entity has a colored name");
+    MConfToggleable abInvalidName = new MConfToggleable("ab:invalidName", false, "Check if the entity has an invalid name (Non a-zA-Z0-9)");
+    MConfToggleable checkForHostile = new MConfToggleable("checkHostile", false, "Check if the entity is hostile towards you");
     int delayWaited = 0;
     List<LivingEntity> attacks = new ArrayList<>();
 

@@ -16,7 +16,7 @@ import java.util.Objects;
 public class MassBreak extends Module {
     public MassBreak() {
         super("MassBreak", "block breaking but more of it", ModuleType.WORLD);
-        this.mconf.add(new MConfNum("radius", 3.0, 10, 0));
+        this.mconf.add(new MConfNum("radius", 3.0, 10, 0, "how many blocks to fucking kill"));
     }
 
     @Override

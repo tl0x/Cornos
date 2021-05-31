@@ -9,7 +9,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class Jesus extends Module {
     public static MConfMultiOption mode = new MConfMultiOption("mode", "jump",
-            new String[]{"jump", "velocity", "vanilla", "dontfall", "solid", "herobrine", "herobrine2", "herobrine3"});
+            new String[]{"jump", "velocity", "vanilla", "dontfall", "solid", "herobrine", "herobrine2", "herobrine3"}, "jesus mode");
 
     public Jesus() {
         super("Jesus", "water walker enchantment", ModuleType.MOVEMENT);

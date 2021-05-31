@@ -31,8 +31,8 @@ public class ArrowAvoid extends Module {
 
     public ArrowAvoid() {
         super("ArrowAvoid", "skeletons are fucking horrible", ModuleType.MOVEMENT);
-        this.mconf.add(new MConfMultiOption("Type", "Packet", new String[]{"Client", "Packet"}));
-        this.mconf.add(new MConfNum("Speed", 1, 2, 0.1));
+        this.mconf.add(new MConfMultiOption("Type", "Packet", new String[]{"Client", "Packet"}, "Movement type"));
+        this.mconf.add(new MConfNum("Speed", 1, 2, 0.1, "Speed to move with"));
     }
 
     @Override

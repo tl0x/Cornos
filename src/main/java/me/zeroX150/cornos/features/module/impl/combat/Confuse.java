@@ -31,10 +31,10 @@ import java.awt.*;
 import java.util.Random;
 
 public class Confuse extends Module {
-    MConfMultiOption mode = new MConfMultiOption("mode", "randomtp", new String[]{"randomtp", "switch", "circle"});
-    MConfNum delay = new MConfNum("delay", 3, 20, 0);
-    MConfNum circleSpeed = new MConfNum("circleSpeed", 10, 180, 1);
-    MConfToggleable moveThroughBlocks = new MConfToggleable("moveThroughBlocks", false);
+    MConfMultiOption mode = new MConfMultiOption("mode", "randomtp", new String[]{"randomtp", "switch", "circle"}, "The mode of the module");
+    MConfNum delay = new MConfNum("delay", 3, 20, 0, "How much delay in ticks to wait between TPs");
+    MConfNum circleSpeed = new MConfNum("circleSpeed", 10, 180, 1, "How much to increment the circle position by");
+    MConfToggleable moveThroughBlocks = new MConfToggleable("moveThroughBlocks", false, "Whether or not to move through solid blocks");
     int delayWaited = 0;
     double circleProgress = 0;
     double addition = 0.0;

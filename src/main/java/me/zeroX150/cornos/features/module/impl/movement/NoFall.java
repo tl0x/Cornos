@@ -22,8 +22,8 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import java.util.Objects;
 
 public class NoFall extends Module {
-    MConfNum fallDistance = new MConfNum("fallDistance", 2, 10, 0.1);
-    MConfMultiOption mode = new MConfMultiOption("mode", "packet", new String[]{"packet", "breakFall", "onGround"});
+    MConfNum fallDistance = new MConfNum("fallDistance", 2, 10, 0.1, "Fall distance to fall to kick in with the nofall");
+    MConfMultiOption mode = new MConfMultiOption("mode", "packet", new String[]{"packet", "breakFall", "onGround"}, "mode");
 
     public NoFall() {
         super("NoFall", "Tired of fall damage?", ModuleType.MOVEMENT);

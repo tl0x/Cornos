@@ -119,6 +119,7 @@ public class ModuleRegistry {
         ml.add(new AntiAntiXray());
         ml.add(new AutoItemFrame());
         ml.add(new Timer());
+        ml.add(new PingSpoof());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

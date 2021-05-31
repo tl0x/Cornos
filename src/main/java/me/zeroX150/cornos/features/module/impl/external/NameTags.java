@@ -21,14 +21,11 @@ import java.awt.*;
 
 public class NameTags extends Module {
 
-    MConfToggleable health = new MConfToggleable("Health", true);
-    MConfToggleable renderSelf = new MConfToggleable("RenderSelf", false);
+    MConfToggleable health = new MConfToggleable("Health", true, "Whether or not to show the player's health");
 
     public NameTags() {
         super("NameTags", "big name labels", ModuleType.RENDER);
         this.mconf.add(health);
-
-        this.mconf.add(renderSelf);
     }
 
     public void renderCustomLabel(Entity entity, Text text, MatrixStack matrices,
@@ -40,7 +37,7 @@ public class NameTags extends Module {
         String tag = entity.getEntityName();
         float f = entity.getHeight() + 0.5F;
         assert Cornos.minecraft.player != null;
-        if (entity.getUuid() == Cornos.minecraft.player.getUuid() && !renderSelf.isEnabled()) {
+        if (entity.getUuid() == Cornos.minecraft.player.getUuid()) {
             return;
         }
         if (entity instanceof PlayerEntity) {

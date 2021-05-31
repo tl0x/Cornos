@@ -20,12 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Surround extends Module {
-    MConfNum delay = new MConfNum("delay", 0, 20, 0);
-    MConfToggleable checkOnGround = new MConfToggleable("checkOnGround", true);
-    MConfToggleable checkVelocity = new MConfToggleable("checkVelocity", false);
-    MConfToggleable instant = new MConfToggleable("instant", false);
-    MConfToggleable switchToObby = new MConfToggleable("switchObby", true);
-    MConfToggleable blockMovements = new MConfToggleable("blockMovements", true);
+    MConfNum delay = new MConfNum("delay", 0, 20, 0, "Delay in ticks");
+    MConfToggleable checkOnGround = new MConfToggleable("checkOnGround", true, "Check if you are on solid ground");
+    MConfToggleable checkVelocity = new MConfToggleable("checkVelocity", false, "Check if you are not moving");
+    MConfToggleable instant = new MConfToggleable("instant", false, "Place all blocks instantly");
+    MConfToggleable switchToObby = new MConfToggleable("switchObby", true, "Switch to obsidian before placing");
+    MConfToggleable blockMovements = new MConfToggleable("blockMovements", true, "Block movements while placing");
     GameOptions backup;
     int delayWaited = 0;
 

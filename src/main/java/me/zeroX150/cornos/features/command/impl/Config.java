@@ -44,7 +44,7 @@ public class Config extends Command {
                 STL.notifyUser(Formatting.RED + "Module " + args[0] + " does not exist.");
                 return;
             }
-            MConf.ConfigKey cfk = m.mconf.getOrDefault(args[1], new MConf.ConfigKey(args[1], "0"));
+            MConf.ConfigKey cfk = m.mconf.getOrDefault(args[1], new MConf.ConfigKey(args[1], "0", ""));
             if (cfk instanceof MConfToggleable) {
                 boolean newState;
                 if (args[2].equalsIgnoreCase("on"))

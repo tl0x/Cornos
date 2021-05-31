@@ -15,7 +15,7 @@ import net.minecraft.util.math.Vec3d;
 import java.util.Objects;
 
 public class MidAirPlace extends Module {
-    int timeout = 20;
+    int timeout = 0;
 
     public MidAirPlace() {
         super("MidAirPlace", "Allows you to place blocks midair", ModuleType.WORLD);

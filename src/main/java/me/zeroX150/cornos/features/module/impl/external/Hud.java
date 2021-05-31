@@ -9,25 +9,25 @@ import me.zeroX150.cornos.features.module.ModuleType;
 import java.awt.*;
 
 public class Hud extends Module {
-    public static MConfColor themeColor = new MConfColor("theme", new Color(255, 255, 255));
+    public static MConfColor themeColor = new MConfColor("theme", new Color(255, 255, 255), "The theme color");
 
     public Hud() {
         super("HUD", "Shows stuff on screen ig", ModuleType.RENDER);
         this.setEnabledWithoutUpdate(true);
-        this.mconf.add(new MConfNum("rgbSpeed", 5, 20, 1));
+        this.mconf.add(new MConfNum("rgbSpeed", 5, 20, 1, "Speed to change rgb values"));
         this.mconf.add(themeColor);
-        this.mconf.add(new MConfToggleable("fps", true));
-        this.mconf.add(new MConfToggleable("coords", true));
-        this.mconf.add(new MConfToggleable("effects", true));
-        this.mconf.add(new MConfToggleable("time", true));
-        this.mconf.add(new MConfToggleable("tps", true));
-        this.mconf.add(new MConfToggleable("ping", true));
-        this.mconf.add(new MConfToggleable("speedBPS", true));
-        this.mconf.add(new MConfToggleable("graph", true));
-        this.mconf.add(new MConfToggleable("modules", true));
-        this.mconf.add(new MConfToggleable("miniplayer", true));
-        this.mconf.add(new MConfToggleable("taco", false));
-        this.mconf.add(new MConfToggleable("dababycar", false));
+        this.mconf.add(new MConfToggleable("fps", true, "Whether or not to show your fps"));
+        this.mconf.add(new MConfToggleable("coords", true, "Whether or not to show your XYZ"));
+        this.mconf.add(new MConfToggleable("effects", true, "Whether or not to show your player effects"));
+        this.mconf.add(new MConfToggleable("time", true, "Whether or not to show the current time"));
+        this.mconf.add(new MConfToggleable("tps", true, "Whether or not to show server TPS"));
+        this.mconf.add(new MConfToggleable("ping", true, "Whether or not to show your ping"));
+        this.mconf.add(new MConfToggleable("speedBPS", true, "Whether or not to show your speed in BPS"));
+        this.mconf.add(new MConfToggleable("graph", true, "Whether or not to show a graph of the server's TPS"));
+        this.mconf.add(new MConfToggleable("modules", true, "Whether or not to show the enabled modules list"));
+        this.mconf.add(new MConfToggleable("miniplayer", true, "Whether or not to show a little rendering of your player"));
+        this.mconf.add(new MConfToggleable("taco", false, "taco."));
+        this.mconf.add(new MConfToggleable("dababycar", false, "less gooo"));
         themeColor.setRainbow(true);
     }
     // Logic: IngameRenderHook.java

@@ -40,10 +40,12 @@ public class MConf {
     public static class ConfigKey {
         public String key;
         public String value;
+        public String description;
 
-        public ConfigKey(String k, String v) {
+        public ConfigKey(String k, String v, String d) {
             this.key = k;
             this.value = v;
+            this.description = d;
         }
 
         public void setValue(String newV) {

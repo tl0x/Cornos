@@ -9,7 +9,7 @@ import net.minecraft.text.Text;
 import java.util.Objects;
 
 public class AutoLog extends Module {
-    MConfNum perHealth = new MConfNum("health%", 5, 100, 1);
+    MConfNum perHealth = new MConfNum("health%", 5, 100, 1, "How much % of your health is required to pussy out");
 
     public AutoLog() {
         super("AutoLog", "automatically pussies out after a certain health %", ModuleType.COMBAT);

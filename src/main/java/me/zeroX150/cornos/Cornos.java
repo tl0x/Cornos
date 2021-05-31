@@ -2,7 +2,6 @@ package me.zeroX150.cornos;
 
 import me.zeroX150.cornos.etc.ItemExploits;
 import me.zeroX150.cornos.etc.NotificationManager;
-import me.zeroX150.cornos.etc.config.CConf;
 import me.zeroX150.cornos.etc.event.EventHelper;
 import me.zeroX150.cornos.etc.helper.STL;
 import me.zeroX150.cornos.etc.manager.ConfigManager;
@@ -98,9 +97,6 @@ public class Cornos implements ModInitializer {
         Registry.register(Registry.SOUND_EVENT, HITMARKER_SOUND.getId(), HITMARKER_SOUND);
         notifMan = new NotificationManager();
         friendsManager = new FriendsManager();
-
-        log(Level.INFO, "Initializing configuration");
-        CConf.init();
         log(Level.INFO, "Registering event bus");
         EventHelper.BUS.init();
         log(Level.INFO, "Initializing command registry");

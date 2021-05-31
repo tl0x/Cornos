@@ -26,15 +26,15 @@ import java.util.*;
 public class OreSim extends Module {
 
     private final HashMap<Long, HashMap<OreType, List<Vec3d>>> chunkRenderers = new HashMap<>();
-    MConfToggleable diamond = new MConfToggleable("Diamond", true);
-    MConfToggleable redstone = new MConfToggleable("Redstone", false);
-    MConfToggleable gold = new MConfToggleable("Gold", false);
-    MConfToggleable ancientDebris = new MConfToggleable("Ancient Debris", false);
-    MConfToggleable iron = new MConfToggleable("Iron", false);
-    MConfToggleable emerald = new MConfToggleable("Emerald", false);
-    MConfToggleable lapis = new MConfToggleable("Lapis", false);
-    MConfToggleable coal = new MConfToggleable("Coal", false);
-    MConfNum chunkRange = new MConfNum("Chunk Range", 5, 10, 0);
+    MConfToggleable diamond = new MConfToggleable("Diamond", true, "Render diamond positions");
+    MConfToggleable redstone = new MConfToggleable("Redstone", false, "Render redstone positions");
+    MConfToggleable gold = new MConfToggleable("Gold", false, "Render gold positions");
+    MConfToggleable ancientDebris = new MConfToggleable("Ancient Debris", false, "Render ancient debris positions");
+    MConfToggleable iron = new MConfToggleable("Iron", false, "Render iron positions");
+    MConfToggleable emerald = new MConfToggleable("Emerald", false, "Render emerald positions");
+    MConfToggleable lapis = new MConfToggleable("Lapis", false, "Render lapis positions");
+    MConfToggleable coal = new MConfToggleable("Coal", false, "Render coal positions");
+    MConfNum chunkRange = new MConfNum("Chunk Range", 5, 10, 0, "Range of chunks to render");
     private long worldSeed = 0L;
 
     public OreSim() {

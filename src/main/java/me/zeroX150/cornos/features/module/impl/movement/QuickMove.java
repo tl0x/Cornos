@@ -38,7 +38,7 @@ public class QuickMove extends Module {
             if (pe.packet instanceof PlayerMoveC2SPacket && parent.isEnabled())
                 event.cancel();
         });
-        this.mconf.add(new MConfNum("delay", 20, 100, 0));
+        this.mconf.add(new MConfNum("delay", 20, 100, 0, "Delay between traversal of the queue"));
     }
 
     @Override

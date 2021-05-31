@@ -17,7 +17,7 @@ import java.util.Objects;
 public class Blink extends Module {
     List<Packet<?>> pl = new ArrayList<>();
     boolean blockPackets = false;
-    MConfMultiOption mode = new MConfMultiOption("mode", "delay", new String[]{"delay", "drop"});
+    MConfMultiOption mode = new MConfMultiOption("mode", "delay", new String[]{"delay", "drop"}, "Mode to change packets by");
 
     public Blink() {
         super("Blink", "Tired of a good internet connection?", ModuleType.MOVEMENT);

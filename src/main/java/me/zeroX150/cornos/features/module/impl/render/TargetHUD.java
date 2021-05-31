@@ -21,7 +21,7 @@ import java.awt.*;
 
 public class TargetHUD extends Module {
     public static LivingEntity current = null;
-    MConfNum trackDistance = new MConfNum("trackDistance", 20.0, 100, 3);
+    MConfNum trackDistance = new MConfNum("trackDistance", 20.0, 100, 3, "distance to show the info modal");
     int distLatest = -1;
 
     public TargetHUD() {

@@ -16,7 +16,7 @@ public class Nuker extends Module {
 
     public Nuker() {
         super("Nuker", "massbreak on drugs", ModuleType.WORLD);
-        this.mconf.add(new MConfNum("range", 5, 10, 0));
+        this.mconf.add(new MConfNum("range", 5, 10, 0, "how many blocks to fuck up"));
     }
 
     @Override

@@ -15,14 +15,14 @@ import net.minecraft.util.math.Vec3d;
 import java.awt.*;
 
 public class Vibe extends Module {
-    public static MConfToggleable rgbBlocks = new MConfToggleable("rgbbocks", false);
-    public static MConfToggleable fog = new MConfToggleable("fog", true);
+    public static MConfToggleable rgbBlocks = new MConfToggleable("rgbbocks", false, "gaming blocks (reload chunks to show)");
+    public static MConfToggleable fog = new MConfToggleable("fog", true, "Render world fog");
     public static MConfMultiOption skyType = new MConfMultiOption("skyType", "overworld",
-            new String[]{"overworld", "nether", "end"});
-    public static MConfNum dim = new MConfNum("brightness", 80, 100, 0);
-    public static MConfNum ch = new MConfNum("cloudsHeight", 128, 255, 0);
-    public static MConfNum rgbnoise = new MConfNum("rgbNoise", 5, 100, 0);
-    public static MConfColor blockOutline = new MConfColor("blockOutline", new Color(0, 0, 0));
+            new String[]{"overworld", "nether", "end"}, "Sky type");
+    public static MConfNum dim = new MConfNum("brightness", 80, 100, 0, "Brightness of the world");
+    public static MConfNum ch = new MConfNum("cloudsHeight", 128, 255, 0, "Height of clouds");
+    public static MConfNum rgbnoise = new MConfNum("rgbNoise", 0, 100, 0, "dont enable this");
+    public static MConfColor blockOutline = new MConfColor("blockOutline", new Color(0, 0, 0), "gaming block outline");
     static float prevOff = 0;
 
     public Vibe() {

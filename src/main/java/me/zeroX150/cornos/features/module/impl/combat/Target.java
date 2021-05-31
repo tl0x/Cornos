@@ -21,9 +21,9 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 
 public class Target extends Module {
-    MConfToggleable players = new MConfToggleable("players", true);
-    MConfToggleable entities = new MConfToggleable("entities", false);
-    MConfToggleable silentrot = new MConfToggleable("silentrotations", false);
+    MConfToggleable players = new MConfToggleable("players", true, "Target players");
+    MConfToggleable entities = new MConfToggleable("entities", false, "Target entites");
+    MConfToggleable silentrot = new MConfToggleable("silentrotations", false, "I dont even know");
 
     public Target() {
         super("Target", "Helps you aim at shit", ModuleType.COMBAT);

@@ -19,10 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoBuild extends Module {
-    MConfMultiOption mode = new MConfMultiOption("mode", "bunker", new String[]{"bunker", "cock"});
+    MConfMultiOption mode = new MConfMultiOption("mode", "bunker", new String[]{"bunker", "cock"}, "bruh");
     Vec3d[] cock = new Vec3d[]{new Vec3d(0, 2, 0), new Vec3d(0, 1, 0), new Vec3d(1, 0, 0), new Vec3d(0, 0, 0),
             new Vec3d(-1, 0, 0)};
-    MConfNum delay = new MConfNum("delay", 100, 1000, 1);
+    MConfNum delay = new MConfNum("delay", 100, 1000, 1, "delay to build after");
     Vec3d[] bunker;
     double timer = 100.0;
 

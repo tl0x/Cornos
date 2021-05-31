@@ -13,12 +13,12 @@ import me.zeroX150.cornos.features.module.Module;
 import me.zeroX150.cornos.features.module.ModuleType;
 
 public class NoRender extends Module {
-    public static MConfToggleable fire = new MConfToggleable("fire", true);
-    public static MConfToggleable pumpkin = new MConfToggleable("pumpkin", true);
-    public static MConfToggleable sign = new MConfToggleable("signs", false);
-    public static MConfToggleable armorstand = new MConfToggleable("armorstands", false);
-    public static MConfToggleable particles = new MConfToggleable("particles", false);
-    public static MConfToggleable maps = new MConfToggleable("maps", true);
+    public static MConfToggleable fire = new MConfToggleable("fire", true, "Whether or not to show the fire overlay");
+    public static MConfToggleable pumpkin = new MConfToggleable("pumpkin", true, "Whether or not to show the pumpkin overlay");
+    public static MConfToggleable sign = new MConfToggleable("signs", false, "Whether or not to render signs");
+    public static MConfToggleable armorstand = new MConfToggleable("armorstands", false, "Whether or not to render armor stands");
+    public static MConfToggleable particles = new MConfToggleable("particles", true, "Whether or not to render particles");
+    public static MConfToggleable maps = new MConfToggleable("maps", true, "Whether or not to render maps");
 
     public NoRender() {
         super("NoRender", "Doesnt render annoying shit", ModuleType.RENDER);

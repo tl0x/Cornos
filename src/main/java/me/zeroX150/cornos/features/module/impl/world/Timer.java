@@ -6,7 +6,7 @@ import me.zeroX150.cornos.features.module.Module;
 import me.zeroX150.cornos.features.module.ModuleType;
 
 public class Timer extends Module {
-    MConfNum newTps = new MConfNum("tps", 20, 100, 1);
+    MConfNum newTps = new MConfNum("tps", 20, 100, 1, "new tps");
 
     public Timer() {
         super("Timer", "Changes the tps of your client", ModuleType.WORLD);

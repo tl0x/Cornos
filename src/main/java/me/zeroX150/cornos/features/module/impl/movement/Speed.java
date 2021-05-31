@@ -21,9 +21,9 @@ import java.util.Objects;
 
 public class Speed extends Module {
     public static MConfMultiOption mode = new MConfMultiOption("mode", "vanilla",
-            new String[]{"vanilla", "bhop", "legit", "minihop"});
-    public static MConfNum speedMulti = new MConfNum("speed", 2, 5, 0);
-    public static MConfNum bhopDown = new MConfNum("bhopDown", 1, 10, -0.7);
+            new String[]{"vanilla", "bhop", "legit", "minihop"}, "mode");
+    public static MConfNum speedMulti = new MConfNum("speed", 0.5, 5, 0, "Speed multiplier (0.2 is vanilla default)");
+    public static MConfNum bhopDown = new MConfNum("bhopDown", 1, 10, -0.7, "(bhop only) how much to yeet you downwards");
     double prev = 0.1;
 
     public Speed() {

@@ -11,7 +11,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import java.util.Objects;
 
 public class AutoInteract extends Module {
-    MConfNum delay = new MConfNum("delay", 5, 20, 0);
+    MConfNum delay = new MConfNum("delay", 5, 20, 0, "interaction delay");
     int passed = -1;
 
     public AutoInteract() {

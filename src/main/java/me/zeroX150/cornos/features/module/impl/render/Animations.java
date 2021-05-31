@@ -19,14 +19,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public class Animations extends Module {
     private static final MConfMultiOption type = new MConfMultiOption("type", "laidBack",
-            new String[]{"laidBack", "small", "smaller", "custom"});
-    private static final MConfNum customOffX = new MConfNum("customX", 0, 5, -5);
-    private static final MConfNum customOffY = new MConfNum("customY", 0, 5, -5);
-    private static final MConfNum customOffZ = new MConfNum("customZ", 0, 5, -5);
-    private static final MConfNum customScale = new MConfNum("customScale", 1, 5, 0);
-    private static final MConfNum customRotX = new MConfNum("customMX", 0, 5, -5);
-    private static final MConfNum customRotY = new MConfNum("customMY", 0, 5, -5);
-    private static final MConfNum customRotZ = new MConfNum("customMZ", 0, 5, -5);
+            new String[]{"laidBack", "small", "smaller", "custom"}, "mode");
+    private static final MConfNum customOffX = new MConfNum("customX", 0, 5, -5, "(custom mode only) x location modifier");
+    private static final MConfNum customOffY = new MConfNum("customY", 0, 5, -5, "(custom mode only) y location modifier");
+    private static final MConfNum customOffZ = new MConfNum("customZ", 0, 5, -5, "(custom mode only) z location modifier");
+    private static final MConfNum customScale = new MConfNum("customScale", 1, 5, 0, "(custom mode only) scale modifier");
+    private static final MConfNum customRotX = new MConfNum("customMX", 0, 5, -5, "(custom mode only) x multiplication modifier");
+    private static final MConfNum customRotY = new MConfNum("customMY", 0, 5, -5, "(custom mode only) y multiplication modifier");
+    private static final MConfNum customRotZ = new MConfNum("customMZ", 0, 5, -5, "(custom mode only) z multiplication modifier");
 
     public Animations() {
         super("Animations", "The item in your hand shrunk", ModuleType.RENDER);

@@ -12,9 +12,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 
 public class AutoItemFrame extends Module {
-    MConfNum delay = new MConfNum("delay", 0, 20, 0);
-    MConfNum range = new MConfNum("range", 4, 10, 1);
-    MConfNum itemsPerTick = new MConfNum("itemsPerTick", 2, 20, 1);
+    MConfNum delay = new MConfNum("delay", 0, 20, 0, "delay to interact after");
+    MConfNum range = new MConfNum("range", 4, 7, 1, "range of interacting");
+    MConfNum itemsPerTick = new MConfNum("itemsPerTick", 2, 20, 1, "how many item frames to click each time");
     int delayPassed = -1;
 
     public AutoItemFrame() {

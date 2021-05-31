@@ -13,7 +13,7 @@ import net.minecraft.util.hit.BlockHitResult;
 
 public class ChestStealer extends Module {
     int currentSlot = 0;
-    MConfNum delay = new MConfNum("delay", 2.0, 20.0, 0);
+    MConfNum delay = new MConfNum("delay", 2.0, 20.0, 0, "How much delay in ticks to wait between items");
     int delayWaited = 0;
 
     public ChestStealer() {

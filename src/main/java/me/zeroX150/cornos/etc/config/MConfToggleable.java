@@ -4,8 +4,13 @@ public class MConfToggleable extends MConf.ConfigKey {
     boolean enabled;
 
     public MConfToggleable(String name, boolean initialStatus) {
-        super(name, initialStatus ? "on" : "off");
+        super(name, initialStatus ? "on" : "off", "No description");
         enabled = initialStatus;
+    }
+
+    public MConfToggleable(String name, boolean initialStatus, String description) {
+        this(name, initialStatus);
+        this.description = description;
     }
 
     public void toggle() {

@@ -16,9 +16,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 public class Scaffold extends Module {
-    public static MConfToggleable preventFalling = new MConfToggleable("preventfall", true);
-    MConfToggleable lookForBlocks = new MConfToggleable("lookforblocks", true);
-    MConfToggleable placeMidAir = new MConfToggleable("placemidair", true);
+    public static MConfToggleable preventFalling = new MConfToggleable("preventFall", true, "Prevent falling down");
+    MConfToggleable lookForBlocks = new MConfToggleable("lookForBlocks", false, "look for blocks in your inv and switch before placing");
+    MConfToggleable placeMidAir = new MConfToggleable("placeMidair", true, "place blocks mid air");
 
     public Scaffold() {
         super("Scaffold", "Tired of falling but dont wanna use safewalk?", ModuleType.WORLD);

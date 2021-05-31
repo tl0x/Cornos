@@ -21,15 +21,15 @@ import java.util.List;
 
 public class RedstoneHighlighter extends Module {
     // forgive me god
-    MConfToggleable repeaters = new MConfToggleable("repeaters", true);
-    MConfToggleable dust = new MConfToggleable("dust", true);
-    MConfToggleable repeatersS1 = new MConfToggleable("repeatersS1", false);
-    MConfToggleable repeatersS2 = new MConfToggleable("repeatersS2", true);
-    MConfToggleable repeatersS3 = new MConfToggleable("repeatersS3", true);
-    MConfToggleable repeatersS4 = new MConfToggleable("repeatersS4", true);
-    MConfNum range = new MConfNum("range", 30, 100, 3);
-    MConfColor redstoneColor = new MConfColor("redstoneColor", new Color(50, 255, 255));
-    MConfColor repeaterColor = new MConfColor("repeaterColor", new Color(50, 255, 50));
+    MConfToggleable repeaters = new MConfToggleable("repeaters", true, "Render repeaters");
+    MConfToggleable dust = new MConfToggleable("dust", true, "Render redstone dust");
+    MConfToggleable repeatersS1 = new MConfToggleable("repeatersS1", false, "Render 1 tick delay repeaters");
+    MConfToggleable repeatersS2 = new MConfToggleable("repeatersS2", true, "Render 2 tick delay repeaters");
+    MConfToggleable repeatersS3 = new MConfToggleable("repeatersS3", true, "Render 3 tick delay repeaters");
+    MConfToggleable repeatersS4 = new MConfToggleable("repeatersS4", true, "Render 4 tick delay repeaters");
+    MConfNum range = new MConfNum("range", 30, 100, 3, "Range to search for blocks in");
+    MConfColor redstoneColor = new MConfColor("redstoneColor", new Color(50, 255, 255), "Color of redstone wire");
+    MConfColor repeaterColor = new MConfColor("repeaterColor", new Color(50, 255, 50), "Color of repeaters");
     int timeout = 0;
     List<BlockPos> blockMap = new ArrayList<>();
 
@@ -64,8 +64,7 @@ public class RedstoneHighlighter extends Module {
             for (int _y = y - r; _y < y + r; _y++) {
                 for (int _z = z - r; _z < z + r; _z++) {
                     BlockState bs = Cornos.minecraft.world.getBlockState(new BlockPos(_x, _y, _z));
-                    Vec3d p = new Vec3d(_x, _y, _z);
-                    if (bs.getBlock().is(Blocks.REDSTONE_WIRE) && bs.get(RedstoneWireBlock.POWER) != 0)
+                    if (bs.getBlock().is(Blocks.REDSTONE_WIRE) && bs.get(RedstoneWireBlock.POWER) != 0 && dust.isEnabled())
                         blockMap.add(new BlockPos(_x, _y, _z));
                     else if (bs.getBlock().is(Blocks.REPEATER)) {
                         int delay = bs.get(RepeaterBlock.DELAY);

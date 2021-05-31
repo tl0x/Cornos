@@ -14,7 +14,7 @@ import net.minecraft.util.math.Vec3d;
 import java.util.Objects;
 
 public class Criticals extends Module {
-    MConfMultiOption mode = new MConfMultiOption("mode", "packet", new String[]{"packet", "tphop", "visual"});
+    MConfMultiOption mode = new MConfMultiOption("mode", "packet", new String[]{"packet", "tphop", "visual"}, "The mode");
 
     public Criticals() {
         super("Criticals", "more damage", ModuleType.COMBAT);

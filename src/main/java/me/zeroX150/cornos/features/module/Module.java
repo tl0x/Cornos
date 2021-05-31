@@ -33,7 +33,7 @@ public class Module {
         this.type = type;
         this.mconf = new MConf(this);
         this.mconf.add(new MConfKeyBind("keybind", -1));
-        this.mconf.add(new MConfToggleable("visible", true));
+        this.mconf.add(new MConfToggleable("visible", true, "Whether or not to show the module in the enabled modules list"));
     }
 
     public final void onExecuteIntern() {

@@ -18,8 +18,8 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Direction;
 
 public class FastUse extends Module {
-    public MConfToggleable fastuse = new MConfToggleable("fastuse", true);
-    public MConfToggleable nbd = new MConfToggleable("nobreakdelay", true);
+    public MConfToggleable fastuse = new MConfToggleable("fastuse", true, "Whether or not to remove use delay");
+    public MConfToggleable nbd = new MConfToggleable("nobreakdelay", true, "Whether or not to remove break delay (kinda)");
 
     public FastUse() {
         super("Fast", "Makes you go brrr", ModuleType.WORLD);

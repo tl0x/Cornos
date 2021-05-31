@@ -21,17 +21,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
 
 public class Tracers extends Module {
-    MConfToggleable entities = new MConfToggleable("Entities", true);
-    MConfToggleable players = new MConfToggleable("Players", true);
-    MConfToggleable tracers = new MConfToggleable("Tracers", true);
-    MConfToggleable debug = new MConfToggleable("debug", false);
-    MConfNum dist = new MConfNum("Distance", 100, 1000, 10);
+    MConfToggleable entities = new MConfToggleable("Entities", true, "show entities");
+    MConfToggleable players = new MConfToggleable("Players", true, "show players");
+    MConfToggleable tracers = new MConfToggleable("Tracers", true, "show tracers + boxes");
+    MConfNum dist = new MConfNum("Distance", 100, 1000, 10, "max distance to stop tracking");
 
     public Tracers() {
         super("Tracers", "Tired of getting creeped up against?", ModuleType.RENDER);
@@ -39,14 +37,12 @@ public class Tracers extends Module {
         this.mconf.add(players);
         this.mconf.add(dist);
         this.mconf.add(tracers);
-        this.mconf.add(debug);
     }
 
     @Override
     public void onRender(MatrixStack ms, float td) {
         boolean e = entities.isEnabled();
         boolean p = players.isEnabled();
-        boolean debug = this.debug.isEnabled();
         double dist = this.dist.getValue();
         assert Cornos.minecraft.world != null;
         for (Entity currE : Cornos.minecraft.world.getEntities()) {
@@ -59,10 +55,6 @@ public class Tracers extends Module {
                 int gInit;
                 double rInit2 = rInit * (distance / dist);
                 gInit = (int) Math.round(rInit - rInit2);
-                if (debug) {
-                    currE.setCustomNameVisible(true);
-                    currE.setCustomName(Text.of(rInit2 + " " + gInit));
-                }
                 if ((currE instanceof OtherClientPlayerEntity) && !p)
                     continue;
                 else if (!e && !(currE instanceof OtherClientPlayerEntity))

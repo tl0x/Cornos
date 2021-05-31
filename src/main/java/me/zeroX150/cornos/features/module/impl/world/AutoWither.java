@@ -32,7 +32,7 @@ public class AutoWither extends Module {
 
     @Override
     public void onEnable() {
-        Notification.create("AutoWither notice", new String[]{"Press §cLAlt§r to place wither"}, 5000);
+        Notification.create("AutoWither", new String[]{"Press §cLAlt§r to place wither"}, 5000);
         super.onEnable();
     }
 

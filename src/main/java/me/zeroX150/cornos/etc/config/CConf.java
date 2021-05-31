@@ -21,7 +21,7 @@ public class CConf {
     public static boolean checkedForUpdates = false;
     public static ConnectingParticles chatScreenParticles;
 
-    public static void init() {
+    static {
         xrayBlocks = new Block[]{Blocks.DIAMOND_ORE, Blocks.COAL_ORE, Blocks.EMERALD_ORE, Blocks.GOLD_ORE,
                 Blocks.IRON_ORE, Blocks.LAPIS_ORE, Blocks.ANCIENT_DEBRIS, Blocks.REDSTONE_ORE};
         dict = new String[][]{
@@ -34,7 +34,7 @@ public class CConf {
                 new String[]{"U", "Ｕ"}, new String[]{"V", "Ｖ"}, new String[]{"W", "Ｗ"}, new String[]{"X", "Ｘ"},
                 new String[]{"Y", "Ｙ"}, new String[]{"Z", "Ｚ"}};
         animSpeed = new NumberSetting() {
-            double num = 0.1;
+            double num = 500;
 
             @Override
             public double getNumber() {
@@ -58,7 +58,7 @@ public class CConf {
 
             @Override
             public int getPrecision() {
-                return 0;
+                return 1;
             }
         };
         hudElements = new HudElements();

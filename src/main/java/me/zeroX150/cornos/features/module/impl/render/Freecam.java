@@ -26,7 +26,7 @@ public class Freecam extends Module {
     // works
 
     // options
-    MConfNum speed = new MConfNum("speed", 1, 10, 0);
+    MConfNum speed = new MConfNum("speed", 1, 10, 0, "schbeed");
     // start cache
     Vec3d startloc;
     float pitch = 0, yaw = 0;

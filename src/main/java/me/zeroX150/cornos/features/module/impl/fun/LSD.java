@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class LSD extends Module {
     public LSD() {
-        super("LSD", "drugs.", ModuleType.FUN);
+        super("LSD", "drugs", ModuleType.FUN);
     }
 
     @Override

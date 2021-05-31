@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Twerk extends Module {
 
-    MConfToggleable randomize = new MConfToggleable("randomize", false);
+    MConfToggleable randomize = new MConfToggleable("randomize", false, "Randomize twerks");
 
     public Twerk() {
         super("Twerk", "shake your ass for the whole server", ModuleType.FUN);

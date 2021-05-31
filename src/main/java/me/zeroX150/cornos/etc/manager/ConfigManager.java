@@ -88,7 +88,7 @@ public class ConfigManager {
                             JsonObject configElementBody = jsonElement.getAsJsonObject();
                             String k = configElementBody.get("key").getAsString();
                             String v = configElementBody.get("value").getAsString();
-                            m.mconf.getOrDefault(k, new MConf.ConfigKey(k, v)).setValue(v);
+                            m.mconf.getOrDefault(k, new MConf.ConfigKey(k, v, "")).setValue(v);
                             System.out.println(m.name + "." + k + " = " + v);
                         }
                     }
