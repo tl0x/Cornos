@@ -10,12 +10,18 @@ import me.zeroX150.cornos.Cornos;
 import me.zeroX150.cornos.mixin.IMinecraftClientAccessor;
 import me.zeroX150.cornos.mixin.IRenderTickCounterAccessor;
 import me.zeroX150.cornos.mixin.ISessionAccessor;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.util.Session;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import org.apache.logging.log4j.Level;
 
 import java.io.*;
@@ -56,6 +62,14 @@ public class STL {
             isValid = false;
         }
         return isValid;
+    }
+
+    public static void placeBlock(BlockPos pos) {
+        BlockState bs = Cornos.minecraft.world.getBlockState(pos);
+        if (bs.getMaterial().isReplaceable()) {
+            BlockHitResult bhr = new BlockHitResult(new Vec3d(.5, .5, .5), Direction.DOWN, pos, false);
+            Cornos.minecraft.interactionManager.interactBlock(Cornos.minecraft.player, Cornos.minecraft.world, Hand.MAIN_HAND, bhr);
+        }
     }
 
     public static boolean auth(String username, String password) {

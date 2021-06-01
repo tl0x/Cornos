@@ -42,6 +42,7 @@ public class CommandRegistry {
         cl.add(new Gamemode());
         cl.add(new RandomBook());
         cl.add(new DataDump());
+        cl.add(new Filler());
     }
 
     public static List<Command> getAll() {

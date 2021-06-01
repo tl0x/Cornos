@@ -120,6 +120,7 @@ public class ModuleRegistry {
         ml.add(new AutoItemFrame());
         ml.add(new Timer());
         ml.add(new PingSpoof());
+        ml.add(new Filler());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();
