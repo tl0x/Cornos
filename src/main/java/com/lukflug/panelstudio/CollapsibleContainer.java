@@ -79,6 +79,7 @@ public class CollapsibleContainer extends FocusableComponent implements Toggleab
         renderer.renderBackground(context, hasFocus(context));
         super.render(context);
         renderer.renderTitle(context, title, hasFocus(context), isActive(), open.getValue() != 0);
+        //double interpolatedOpenValue = easeOutBounce(open.getValue());
         if (open.getValue() != 0) {
             // Pre-calculate clipping rectangle
             Context subContext = getSubContext(context, open.getValue() == 1);
@@ -106,6 +107,7 @@ public class CollapsibleContainer extends FocusableComponent implements Toggleab
         }
         renderer.renderBorder(context, hasFocus(context), isActive(), open.getValue() != 0);
     }
+
 
     /**
      * Handles a mouse button state change.

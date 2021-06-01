@@ -21,7 +21,7 @@ public class Filler extends Module {
 
     MConfToggleable autoPlace = new MConfToggleable("autoPlace", true, "Automatically places blocks when in range");
     MConfToggleable aimBlock = new MConfToggleable("aimBlock", true, "Aims at the next block to place");
-    MConfMultiOption mode = new MConfMultiOption("fillMode", "surrounding", new String[]{"surrounding", "order"}, "The mode to place blocks with");
+    MConfMultiOption mode = new MConfMultiOption("mode", "y-", new String[]{"y-", "near", "order"}, "The mode to place blocks with");
     MConfNum bps = new MConfNum("ipt", 2, 20, 0, "Interactions per tick");
     BlockPos toPlaceNext = null;
 
@@ -112,12 +112,12 @@ public class Filler extends Module {
                 int zStart = Math.min(start.getZ(), end.getZ());
                 int zEnd = Math.max(start.getZ(), end.getZ()) + 1;
                 for (int x = -5; x < 6; x++) {
-                    for (int y = -5; y < 6; y++) {
+                    for (int y = -5; y < (mode.value.equalsIgnoreCase("y-") ? 0 : 6); y++) {
                         for (int z = -5; z < 6; z++) {
                             if (a) break;
+                            if (x == 0 && (y == 0 || y == 1) && z == 0) continue;
                             Vec3d offset = new Vec3d(x, y, z);
                             if (offset.distanceTo(Vec3d.ZERO) > 5) continue;
-                            //if (offset == Vec3d.ZERO || offset.subtract(0,1,0) == Vec3d.ZERO) continue;
                             Vec3d np = Cornos.minecraft.player.getPos().add(offset);
                             BlockState bs = Cornos.minecraft.world.getBlockState(new BlockPos(np.x, np.y, np.z));
                             // jesus fuck

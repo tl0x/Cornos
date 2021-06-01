@@ -78,6 +78,7 @@ public abstract class MinecraftGUI extends Screen {
         matrixStack = matrices;
         mouse = new Point(Math.round(mouseX), Math.round(mouseY));
         renderGUI();
+        super.render(matrices, mouseX, mouseY, partialTicks);
     }
 
     @Override
@@ -115,6 +116,7 @@ public abstract class MinecraftGUI extends Screen {
             }
             getGUI().handleButton(clickedButton);
         }
+        super.mouseClicked(mouseX, mouseY, clickedButton);
         return true;
     }
 

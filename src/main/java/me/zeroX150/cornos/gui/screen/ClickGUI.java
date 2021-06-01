@@ -2,6 +2,7 @@ package me.zeroX150.cornos.gui.screen;
 
 import com.lukflug.panelstudio.CollapsibleContainer;
 import com.lukflug.panelstudio.DraggableContainer;
+import com.lukflug.panelstudio.FixedComponent;
 import com.lukflug.panelstudio.SettingsAnimation;
 import com.lukflug.panelstudio.mc16.MinecraftGUI;
 import com.lukflug.panelstudio.settings.*;
@@ -16,7 +17,9 @@ import me.zeroX150.cornos.features.module.ModuleRegistry;
 import me.zeroX150.cornos.features.module.ModuleType;
 import me.zeroX150.cornos.features.module.impl.external.Hud;
 import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
@@ -58,17 +61,17 @@ public class ClickGUI extends MinecraftGUI {
         Theme theme = new com.lukflug.panelstudio.theme.GameSenseTheme(new ColorScheme() {
             @Override
             public Color getActiveColor() {
-                return Colors.ACTIVE.get();
+                return me.zeroX150.cornos.features.module.impl.external.ClickGUI.activeColor.getColor();
             }
 
             @Override
             public Color getInactiveColor() {
-                return Colors.INACTIVE.get();
+                return me.zeroX150.cornos.features.module.impl.external.ClickGUI.inactiveColor.getColor();
             }
 
             @Override
             public Color getBackgroundColor() {
-                return Colors.BACKGROUND.get();
+                return me.zeroX150.cornos.features.module.impl.external.ClickGUI.backgroundColor.getColor();
             }
 
             @Override
@@ -108,7 +111,7 @@ public class ClickGUI extends MinecraftGUI {
                 offsetY += 114;
             }
             com.lukflug.panelstudio.DraggableContainer container = new DraggableContainer(type.getN(), null,
-                    theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(CConf.animSpeed),
+                    theme.getContainerRenderer(), new SimpleToggleable(false), new SettingsAnimation(me.zeroX150.cornos.features.module.impl.external.ClickGUI.getNumSet()),
                     null, new Point(offset, offsetY), maxW + 8) {
                 @Override
                 protected int getScrollHeight(int childHeight) {
@@ -122,7 +125,7 @@ public class ClickGUI extends MinecraftGUI {
                     continue;
                 maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(m.name));
                 CollapsibleContainer mc = new CollapsibleContainer(m.name, m.description, theme.getContainerRenderer(),
-                        new SimpleToggleable(false), new SettingsAnimation(CConf.animSpeed),
+                        new SimpleToggleable(false), new SettingsAnimation(me.zeroX150.cornos.features.module.impl.external.ClickGUI.getNumSet()),
                         new SimpleToggleable(m.isEnabled()) {
                             @Override
                             public boolean isOn() {
@@ -266,7 +269,7 @@ public class ClickGUI extends MinecraftGUI {
                         };
 
                         ColorComponent cc = new ColorComponent(kc.key, kc.description, theme.getComponentRenderer(),
-                                new SettingsAnimation(CConf.animSpeed), theme.getComponentRenderer(), c, false, true,
+                                new SettingsAnimation(me.zeroX150.cornos.features.module.impl.external.ClickGUI.getNumSet()), theme.getComponentRenderer(), c, true, true,
                                 new com.lukflug.panelstudio.settings.Toggleable() {
                                     boolean bruh = false;
 
@@ -285,6 +288,31 @@ public class ClickGUI extends MinecraftGUI {
                 }
             }
         }
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        int w = Cornos.minecraft.getWindow().getScaledWidth();
+        int h = Cornos.minecraft.getWindow().getScaledHeight();
+        ButtonWidget expand = new ButtonWidget(w - 21, h - 21, 20, 20, Text.of("▼"), button -> {
+            for (FixedComponent component : gui.getComponents()) {
+                if (component instanceof CollapsibleContainer) {
+                    CollapsibleContainer collapsibleContainer = (CollapsibleContainer) component;
+                    if (!collapsibleContainer.isOn()) collapsibleContainer.toggle();
+                }
+            }
+        });
+        ButtonWidget no = new ButtonWidget(w - 21, h - 42, 20, 20, Text.of("▲"), button -> {
+            for (FixedComponent component : gui.getComponents()) {
+                if (component instanceof CollapsibleContainer) {
+                    CollapsibleContainer collapsibleContainer = (CollapsibleContainer) component;
+                    if (collapsibleContainer.isOn()) collapsibleContainer.toggle();
+                }
+            }
+        });
+        addButton(expand);
+        addButton(no);
     }
 
     @Override

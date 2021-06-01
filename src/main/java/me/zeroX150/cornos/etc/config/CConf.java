@@ -34,7 +34,7 @@ public class CConf {
                 new String[]{"U", "Ｕ"}, new String[]{"V", "Ｖ"}, new String[]{"W", "Ｗ"}, new String[]{"X", "Ｘ"},
                 new String[]{"Y", "Ｙ"}, new String[]{"Z", "Ｚ"}};
         animSpeed = new NumberSetting() {
-            double num = 500;
+            final double num = 700;
 
             @Override
             public double getNumber() {
@@ -43,17 +43,17 @@ public class CConf {
 
             @Override
             public void setNumber(double value) {
-                num = value;
+
             }
 
             @Override
             public double getMaximumValue() {
-                return 100;
+                return num;
             }
 
             @Override
             public double getMinimumValue() {
-                return 0;
+                return num - 1;
             }
 
             @Override

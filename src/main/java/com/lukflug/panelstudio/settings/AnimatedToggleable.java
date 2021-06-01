@@ -56,6 +56,10 @@ public final class AnimatedToggleable implements Toggleable {
             else
                 animation.setValue(0);
         }
-        return animation.getValue();
+        return easeOutBounce(animation.getValue());
+    }
+
+    double easeOutBounce(double x) {
+        return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
     }
 }
