@@ -100,4 +100,9 @@ public class RedstoneHighlighter extends Module {
         }
         super.onRender(ms, td);
     }
+
+    @Override
+    public String getContext() {
+        return blockMap.size() + "";
+    }
 }

@@ -22,4 +22,9 @@ public class Timer extends Module {
     public void onDisable() {
         STL.setClientTPS(20f);
     }
+
+    @Override
+    public String getContext() {
+        return STL.roundToNTh(newTps.getValue(), 2) + "";
+    }
 }

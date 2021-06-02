@@ -95,7 +95,7 @@ public class InGameHudMixin {
                     if (module.isEnabled() && (((MConfToggleable) module.mconf.getByName("visible")).isEnabled()))
                         mlR.add(module);
                 }
-                mlR.sort(Comparator.comparingInt(o -> Cornos.minecraft.textRenderer.getWidth(o.name)));
+                mlR.sort(Comparator.comparingInt(o -> Cornos.minecraft.textRenderer.getWidth(o.name + (o.getContext().isEmpty() ? "" : " " + o.getContext()))));
                 List<Module> mlR1 = Lists.reverse(mlR);
                 if (lastValues.size() > mlR1.size()) {
                     lastValues.subList(0, 1).clear();
@@ -110,14 +110,24 @@ public class InGameHudMixin {
                     }
                     current++;
                     int off = offset.getAndAdd(11);
+                    String s = module.name;
+                    String ctx = module.getContext();
+                    if (!ctx.isEmpty()) s += " §7" + ctx;
                     DrawableHelper.fill(matrices,
-                            scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 2 - 3, off,
+                            scaledWidth - Cornos.minecraft.textRenderer.getWidth(s) - 2 - 3, off,
                             scaledWidth - 2, off + 11, new Color(47, 47, 47, 90).getRGB());
                     DrawableHelper.fill(matrices, scaledWidth - 2, off, scaledWidth, off + 11,
                             doRgb ? colorToUse : Hud.themeColor.getRGB());
                     Cornos.minecraft.textRenderer.draw(matrices, module.name,
-                            scaledWidth - Cornos.minecraft.textRenderer.getWidth(module.name) - 3, 2 + off,
+                            scaledWidth - Cornos.minecraft.textRenderer.getWidth(s) - 3, 2 + off,
                             doRgb ? colorToUse : Hud.themeColor.getRGB());
+                    if (!ctx.isEmpty()) {
+                        Color use = new Color(doRgb ? colorToUse : Hud.themeColor.getRGB());
+                        int rInv = Math.abs(255 - use.getRed());
+                        int gInv = Math.abs(255 - use.getGreen());
+                        int bInv = Math.abs(255 - use.getBlue());
+                        Cornos.minecraft.textRenderer.draw(matrices, ctx, scaledWidth - Cornos.minecraft.textRenderer.getWidth(ctx) - 3, 2 + off, new Color(rInv, gInv, bInv).getRGB());
+                    }
                 }
             }
             try {

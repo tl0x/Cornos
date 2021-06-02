@@ -34,6 +34,13 @@ public class Speed extends Module {
     }
 
     @Override
+    public String getContext() {
+        char[] uFriendlyS = mode.value.toCharArray();
+        uFriendlyS[0] = Character.toUpperCase(uFriendlyS[0]);
+        return new String(uFriendlyS);
+    }
+
+    @Override
     public void onEnable() {
         assert Cornos.minecraft.player != null;
         EntityAttributeInstance eai = Cornos.minecraft.player.getAttributes()

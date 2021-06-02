@@ -82,7 +82,6 @@ public class ChunkClearer extends Module {
         if (start == null || end == null)
             return;
         for (int y = 0; y < 256; y++) {
-
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {
                     BlockPos bp1 = start.add(-x, -y, -z);

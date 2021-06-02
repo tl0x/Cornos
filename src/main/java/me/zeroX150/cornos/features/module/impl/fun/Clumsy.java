@@ -20,6 +20,7 @@ public class Clumsy extends Module {
             new String[]{"randomBin", "randomAscii", "randomEN", "none"}, "Mode to name blocks after");
     String[] enNames = new String[]{"Cornos on top", "suck my dick", "this item is worthless", "fucking retard",
             "i am dumb as fuck", "man.", "69420", "yep.", "just a random item", "sex is nice", "L", "retard moment"};
+    int dropped = 0;
 
     public Clumsy() {
         super("Clumsy", "Seems as if you dropped the entirety of the game's items", ModuleType.FUN);
@@ -56,8 +57,14 @@ public class Clumsy extends Module {
             is.setCustomName(Text.of(name));
         CreativeInventoryActionC2SPacket c = new CreativeInventoryActionC2SPacket(9, is);
         Objects.requireNonNull(Cornos.minecraft.getNetworkHandler()).sendPacket(c);
+        dropped++;
         STL.drop(9);
         i++;
         super.onExecute();
+    }
+
+    @Override
+    public String getContext() {
+        return i + "-" + dropped;
     }
 }

@@ -36,7 +36,7 @@ public class Filler extends Module {
     @Override
     public void onEnable() {
         if (start == null || end == null) {
-            Notification.create("AutoPlace error", new String[]{"Please set start and end", "positions first.", "Use the .filler command"}, 6000);
+            Notification.create("Filler", new String[]{"Please set start and end", "positions first.", "Use the .filler command"}, 6000);
             setEnabled(false);
         }
     }

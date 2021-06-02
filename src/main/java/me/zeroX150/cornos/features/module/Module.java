@@ -91,4 +91,8 @@ public class Module {
     protected void setEnabledWithoutUpdate(boolean nv) {
         this.isOn.setState(nv);
     }
+
+    public String getContext() {
+        return "";
+    }
 }

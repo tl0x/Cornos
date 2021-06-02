@@ -17,6 +17,13 @@ public class Jesus extends Module {
     }
 
     @Override
+    public String getContext() {
+        char[] uFriendlyS = mode.value.toCharArray();
+        uFriendlyS[0] = Character.toUpperCase(uFriendlyS[0]);
+        return new String(uFriendlyS);
+    }
+
+    @Override
     public void onExecute() {
         assert Cornos.minecraft.player != null;
         switch (mode.value) {

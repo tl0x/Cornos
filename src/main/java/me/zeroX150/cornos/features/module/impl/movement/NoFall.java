@@ -14,6 +14,7 @@ import me.zeroX150.cornos.etc.config.MConfNum;
 import me.zeroX150.cornos.etc.event.EventHelper;
 import me.zeroX150.cornos.etc.event.EventType;
 import me.zeroX150.cornos.etc.event.arg.PacketEvent;
+import me.zeroX150.cornos.etc.helper.STL;
 import me.zeroX150.cornos.features.module.Module;
 import me.zeroX150.cornos.features.module.ModuleType;
 import me.zeroX150.cornos.mixin.packet.PlayerMoveC2SPacketAccessor;
@@ -38,6 +39,13 @@ public class NoFall extends Module {
                 ((PlayerMoveC2SPacketAccessor) p).setOnGround(true);
             }
         });
+    }
+
+    @Override
+    public String getContext() {
+        char[] uFriendlyS = mode.value.toCharArray();
+        uFriendlyS[0] = Character.toUpperCase(uFriendlyS[0]);
+        return new String(uFriendlyS) + ((Cornos.minecraft.player != null && Cornos.minecraft.player.fallDistance > fallDistance.getValue()) ? (" " + STL.roundToNTh(Cornos.minecraft.player.fallDistance, 2)) : "");
     }
 
     @Override

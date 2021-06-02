@@ -4,6 +4,7 @@ import me.zeroX150.cornos.Cornos;
 import me.zeroX150.cornos.etc.config.Friend;
 import me.zeroX150.cornos.etc.helper.STL;
 import me.zeroX150.cornos.etc.manager.KeybindManager;
+import me.zeroX150.cornos.etc.render.Notification;
 import me.zeroX150.cornos.features.command.Command;
 import me.zeroX150.cornos.features.command.CommandRegistry;
 import net.minecraft.client.MinecraftClient;
@@ -57,6 +58,10 @@ public class ScreenMixin {
                     }
                 }
             }
+        }
+        if (msg.toLowerCase().contains("cornos.cf")) {
+            String[] c = !Cornos.minecraft.isIntegratedServerRunning() ? new String[]{"Thanks! 5 cornbux have", " been added to your balance"} : new String[]{"No cornbux for you", "You're on singleplayer"};
+            Notification.create("Ad reward", c, 7000);
         }
     }
 }

@@ -42,9 +42,8 @@ public class QuickMove extends Module {
     }
 
     @Override
-    public void onEnable() {
-
-        super.onEnable();
+    public String getContext() {
+        return (bpl.size() != 0 ? bpl.size() + "b" : "");
     }
 
     @Override

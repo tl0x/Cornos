@@ -21,6 +21,7 @@ import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import java.util.Objects;
 
 public class DiscordRPCMan {
+    public String contextPasser = "Connecting...";
     boolean stopped = false;
     int currentCat = 1;
     int currentCatCounter = 0;
@@ -30,6 +31,7 @@ public class DiscordRPCMan {
         DiscordRPC discordRPC = DiscordRPC.INSTANCE;
         DiscordEventHandlers handlers = new DiscordEventHandlers();
         handlers.ready = (user) -> {
+            contextPasser = user.username;
             if (MinecraftClient.getInstance().player != null)
                 STL.notifyUser(
                         "Connected to user " + user.username + "#" + user.discriminator + " (" + user.userId + ")");
@@ -72,7 +74,7 @@ public class DiscordRPCMan {
                 return "Playing locally with a client";
             if (MinecraftClient.getInstance().world != null) {
                 String addr = Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).getConnection()
-                        .getAddress().toString();
+                        .getAddress().toString(); // abc.xyz/123.45.67.89:12345
                 String host = addr.split("/")[0];
                 if (host.isEmpty())
                     host = addr.split("/")[1].split(":")[0];

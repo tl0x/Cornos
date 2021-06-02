@@ -1,4 +1,4 @@
-package me.zeroX150.cornos.features.module.impl.combat;
+package me.zeroX150.cornos.features.module.impl.misc;
 
 import me.zeroX150.cornos.Cornos;
 import me.zeroX150.cornos.etc.config.MConfNum;
@@ -17,7 +17,7 @@ public class ChestStealer extends Module {
     int delayWaited = 0;
 
     public ChestStealer() {
-        super("ChestStealer", "Steals chests", ModuleType.COMBAT);
+        super("ChestStealer", "Steals chests", ModuleType.MISC);
         this.mconf.add(delay);
     }
 

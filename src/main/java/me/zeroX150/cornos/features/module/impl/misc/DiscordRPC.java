@@ -25,6 +25,11 @@ public class DiscordRPC extends Module {
     }
 
     @Override
+    public String getContext() {
+        return instance == null ? "" : instance.contextPasser;
+    }
+
+    @Override
     public void onExecute() {
         if (instance == null)
             onEnable();

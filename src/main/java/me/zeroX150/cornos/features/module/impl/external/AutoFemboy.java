@@ -13,4 +13,9 @@ public class AutoFemboy extends Module {
     public AutoFemboy() {
         super("AutoFemboy", "uwu owo uwu owo", ModuleType.FUN);
     }
+
+    @Override
+    public String getContext() {
+        return repository.size() + " femboys";
+    }
 }

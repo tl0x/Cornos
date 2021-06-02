@@ -5,6 +5,7 @@ import me.zeroX150.cornos.etc.config.MConfMultiOption;
 import me.zeroX150.cornos.etc.event.EventHelper;
 import me.zeroX150.cornos.etc.event.EventType;
 import me.zeroX150.cornos.etc.event.arg.PacketEvent;
+import me.zeroX150.cornos.etc.helper.STL;
 import me.zeroX150.cornos.features.module.Module;
 import me.zeroX150.cornos.features.module.ModuleType;
 import net.minecraft.network.Packet;
@@ -18,6 +19,7 @@ public class Blink extends Module {
     List<Packet<?>> pl = new ArrayList<>();
     boolean blockPackets = false;
     MConfMultiOption mode = new MConfMultiOption("mode", "delay", new String[]{"delay", "drop"}, "Mode to change packets by");
+    long enableTime = 0;
 
     public Blink() {
         super("Blink", "Tired of a good internet connection?", ModuleType.MOVEMENT);
@@ -35,7 +37,13 @@ public class Blink extends Module {
     @Override
     public void onEnable() {
         blockPackets = true;
+        enableTime = System.currentTimeMillis();
         super.onEnable();
+    }
+
+    @Override
+    public String getContext() {
+        return STL.roundToNTh((System.currentTimeMillis() - enableTime) / 1000f, 2) + "s" + (pl.size() == 0 ? "" : " " + pl.size() + "p");
     }
 
     @Override

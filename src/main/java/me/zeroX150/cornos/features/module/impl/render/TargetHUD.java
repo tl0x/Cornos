@@ -58,6 +58,11 @@ public class TargetHUD extends Module {
     }
 
     @Override
+    public String getContext() {
+        return current == null ? "" : current.getEntityName();
+    }
+
+    @Override
     public void onHudRender(MatrixStack ms, float td) {
         if (current != null) {
             Window w = Cornos.minecraft.getWindow();
