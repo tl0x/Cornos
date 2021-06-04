@@ -10,11 +10,13 @@ import java.awt.*;
 
 public class Hud extends Module {
     public static MConfColor themeColor = new MConfColor("theme", new Color(255, 255, 255), "The theme color");
+    public static MConfNum modulesRgbScale = new MConfNum("rgbScale", 0.03, 0.3, 0.01, "The scale of a rgb segment in the module list (bigger = more rgb iterations)");
 
     public Hud() {
         super("HUD", "Shows stuff on screen ig", ModuleType.RENDER);
         this.setEnabledWithoutUpdate(true);
         this.mconf.add(new MConfNum("rgbSpeed", 5, 20, 1, "Speed to change rgb values"));
+        this.mconf.add(modulesRgbScale);
         this.mconf.add(themeColor);
         this.mconf.add(new MConfToggleable("fps", true, "Whether or not to show your fps"));
         this.mconf.add(new MConfToggleable("coords", true, "Whether or not to show your XYZ"));

@@ -24,27 +24,23 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
     double rgbSeed = 0;
-    double swap = 0;
     int stage = 0;
     long latestTime = System.currentTimeMillis();
-    List<Integer> lastValues = new ArrayList<>();
     @Shadow
     private int scaledWidth;
 
     @Inject(method = "render", at = @At("RETURN"))
     public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
         Hud hud = (Hud) ModuleRegistry.search(Hud.class);
-        double rgbMulti = ((MConfNum) ModuleRegistry.search(Hud.class).mconf.getByName("rgbSpeed")).getValue();
+        double rgbSpeed = ((MConfNum) ModuleRegistry.search(Hud.class).mconf.getByName("rgbSpeed")).getValue();
         long elapsed = System.currentTimeMillis() - latestTime;
         if (elapsed != 0)
             latestTime = System.currentTimeMillis();
-        rgbSeed += (elapsed * rgbMulti) / 20;
-        swap += (elapsed * rgbMulti) / 20;
+        rgbSeed += (elapsed * rgbSpeed) / 20;
         if (rgbSeed > 255) {
             rgbSeed = 0;
             stage++;
@@ -78,17 +74,12 @@ public class InGameHudMixin {
                 }
         }
         float[] ham = Color.RGBtoHSB(r, g, b, null);
-        int rgb = Color.HSBtoRGB(ham[0], 0.6f, ham[2]);
-        CConf.latestRGBVal = rgb;
-        if (swap > 10) {
-            lastValues.add(rgb);
-            swap = 0;
-        }
+        CConf.latestRGBVal = Color.HSBtoRGB(ham[0], 0.6f, ham[2]);
 
         if (ModuleRegistry.search(Hud.class).isEnabled()) {
             if (((MConfToggleable) hud.mconf.getByName("modules")).isEnabled()) {
                 boolean doRgb = Hud.themeColor.isRainbow();
-                AtomicInteger offset = new AtomicInteger(0);
+                int offset = -11;
                 List<Module> ml = ModuleRegistry.getAll();
                 List<Module> mlR = new ArrayList<>();
                 for (Module module : ml) {
@@ -97,36 +88,31 @@ public class InGameHudMixin {
                 }
                 mlR.sort(Comparator.comparingInt(o -> Cornos.minecraft.textRenderer.getWidth(o.name + (o.getContext().isEmpty() ? "" : " " + o.getContext()))));
                 List<Module> mlR1 = Lists.reverse(mlR);
-                if (lastValues.size() > mlR1.size()) {
-                    lastValues.subList(0, 1).clear();
-                }
-                int current = 0;
+                double majorBruhMoment = Math.abs(rgbSpeed - 21) * (250.0);
+                double hsvVal = (System.currentTimeMillis() % majorBruhMoment) / majorBruhMoment;
+                double hsvInc = Hud.modulesRgbScale.getValue();
                 for (Module module : mlR1) {
-                    int colorToUse;
-                    try {
-                        colorToUse = lastValues.get(current);
-                    } catch (Exception ignored) {
-                        colorToUse = Hud.themeColor.getRGB();
-                    }
-                    current++;
-                    int off = offset.getAndAdd(11);
+                    int colorToUse = doRgb ? Color.HSBtoRGB((float) hsvVal, 0.6f, 1) : Hud.themeColor.getRGB();
+                    hsvVal += hsvInc;
+                    hsvVal %= 1.0;
+                    offset += 11;
                     String s = module.name;
                     String ctx = module.getContext();
                     if (!ctx.isEmpty()) s += " §7" + ctx;
                     DrawableHelper.fill(matrices,
-                            scaledWidth - Cornos.minecraft.textRenderer.getWidth(s) - 2 - 3, off,
-                            scaledWidth - 2, off + 11, new Color(47, 47, 47, 90).getRGB());
-                    DrawableHelper.fill(matrices, scaledWidth - 2, off, scaledWidth, off + 11,
+                            scaledWidth - Cornos.minecraft.textRenderer.getWidth(s) - 2 - 3, offset,
+                            scaledWidth - 2, offset + 11, new Color(47, 47, 47, 90).getRGB());
+                    DrawableHelper.fill(matrices, scaledWidth - 2, offset, scaledWidth, offset + 11,
                             doRgb ? colorToUse : Hud.themeColor.getRGB());
                     Cornos.minecraft.textRenderer.draw(matrices, module.name,
-                            scaledWidth - Cornos.minecraft.textRenderer.getWidth(s) - 3, 2 + off,
+                            scaledWidth - Cornos.minecraft.textRenderer.getWidth(s) - 3, 2 + offset,
                             doRgb ? colorToUse : Hud.themeColor.getRGB());
                     if (!ctx.isEmpty()) {
                         Color use = new Color(doRgb ? colorToUse : Hud.themeColor.getRGB());
                         int rInv = Math.abs(255 - use.getRed());
                         int gInv = Math.abs(255 - use.getGreen());
                         int bInv = Math.abs(255 - use.getBlue());
-                        Cornos.minecraft.textRenderer.draw(matrices, ctx, scaledWidth - Cornos.minecraft.textRenderer.getWidth(ctx) - 3, 2 + off, new Color(rInv, gInv, bInv).getRGB());
+                        Cornos.minecraft.textRenderer.draw(matrices, ctx, scaledWidth - Cornos.minecraft.textRenderer.getWidth(ctx) - 3, 2 + offset, new Color(rInv, gInv, bInv).getRGB());
                     }
                 }
             }
