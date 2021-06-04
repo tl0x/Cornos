@@ -18,8 +18,8 @@
   ],
   "contact": {
     "homepage": "https://cornos.cf/",
-    "issues": "https://github.com/AriliusClient/Cornos/issues",
-    "sources": "https://github.com/AriliusClient/Cornos"
+    "issues": "https://github.com/cornos/Cornos/issues",
+    "sources": "https://github.com/cornos/Cornos"
   },
   "license": "GPL-3.0",
   "icon": "assets/ccl/icon1.png",
