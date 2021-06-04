@@ -151,7 +151,11 @@ public class OreSim extends Module {
                 assert worldAccess != null;
                 Identifier id = worldAccess.getRegistryManager().get(Registry.BIOME_KEY)
                         .getId(worldAccess.getBiomeAccess().getBiome(chunkX, 0, chunkZ));
-                assert id != null;
+                if (id == null) {
+                    Notification.create("OreSim", new String[]{"Error doing math", "Something went wrong, you may have", "some mods that mess with world generation"},8000);
+                    this.setEnabled(false);
+                    return;
+                }
                 String name = id.getPath();
                 if (name.equals("warped_forest")) {
                     index = 13;

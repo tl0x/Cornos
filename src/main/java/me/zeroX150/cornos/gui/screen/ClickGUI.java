@@ -269,7 +269,7 @@ public class ClickGUI extends MinecraftGUI {
                         };
 
                         ColorComponent cc = new ColorComponent(kc.key, kc.description, theme.getComponentRenderer(),
-                                new SettingsAnimation(me.zeroX150.cornos.features.module.impl.external.ClickGUI.getNumSet()), theme.getComponentRenderer(), c, true, true,
+                                new SettingsAnimation(me.zeroX150.cornos.features.module.impl.external.ClickGUI.getNumSet()), theme.getComponentRenderer(), c, false, true,
                                 new com.lukflug.panelstudio.settings.Toggleable() {
                                     boolean bruh = false;
 
