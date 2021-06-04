@@ -141,7 +141,7 @@ public class ClickGUI extends MinecraftGUI {
                 for (MConf.ConfigKey kc : m.mconf.config) {
                     maxW = Math.max(maxW, Cornos.minecraft.textRenderer.getWidth(kc.key + ": " + kc.value));
                     // it works.
-                    // dont question it.
+                    // don't question it.
                     if (kc instanceof MConfToggleable) {
                         BooleanComponent bc = new BooleanComponent(kc.key, kc.description, theme.getComponentRenderer(),
                                 new com.lukflug.panelstudio.settings.Toggleable() {
@@ -271,16 +271,16 @@ public class ClickGUI extends MinecraftGUI {
                         ColorComponent cc = new ColorComponent(kc.key, kc.description, theme.getComponentRenderer(),
                                 new SettingsAnimation(me.zeroX150.cornos.features.module.impl.external.ClickGUI.getNumSet()), theme.getComponentRenderer(), c, false, true,
                                 new com.lukflug.panelstudio.settings.Toggleable() {
-                                    boolean bruh = false;
+                                    boolean state = false;
 
                                     @Override
                                     public void toggle() {
-                                        bruh = !bruh;
+                                        state = !state;
                                     }
 
                                     @Override
                                     public boolean isOn() {
-                                        return bruh;
+                                        return state;
                                     }
                                 });
                         mc.addComponent(cc);
