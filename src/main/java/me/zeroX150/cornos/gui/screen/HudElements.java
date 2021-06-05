@@ -52,8 +52,6 @@ public class HudElements extends DrawableHelper {
         if (tick > 360)
             tick = 0;
         double sin = Math.sin(Math.toRadians(tick));
-        if (ModuleRegistry.search(Debug.class).isEnabled())
-            STL.notifyUser(sin + ", " + tick + ", " + Math.toRadians(tick) + ", " + Math.toDegrees(tick));
         Hud hud = (Hud) ModuleRegistry.search(Hud.class);
 
         TextRenderer textRenderer = Cornos.minecraft.textRenderer;

@@ -22,10 +22,7 @@ public class Debug extends Module {
 
     @Override
     public void onExecute() {
-        STL.notifyUser("[D] MinecraftClient.currentScreen = " + Cornos.minecraft.currentScreen);
-        Camera c = BlockEntityRenderDispatcher.INSTANCE.camera;
-        STL.notifyUser("[D] Camera: " + c);
-        STL.notifyUser("[D] CameraRot: " + c.getRotation());
+        STL.notifyUser("[D] VEL: "+Cornos.minecraft.player.getVelocity().toString());
 
         super.onExecute();
     }

@@ -12,6 +12,7 @@ import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.PlayerInteractItemC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 public class AutoMLG extends Module {
     MConfNum dist = new MConfNum("fallDist",6,20,3,"Distance to fall to do the funnies");
@@ -29,7 +30,7 @@ public class AutoMLG extends Module {
     }
 
     @Override
-    public void onExecute() {
+    public void onFastUpdate() {
         if (!Cornos.minecraft.player.isOnGround() && Cornos.minecraft.player.fallDistance > dist.getValue()) {
             Item used = null;
             int itemToUse = -1;
@@ -50,13 +51,17 @@ public class AutoMLG extends Module {
             }
             if (itemToUse == -1) return; // no item found that can be used for a mlg
             BlockPos bp = Cornos.minecraft.player.getBlockPos();
-            for(int yMin = bp.getY();yMin>bp.getY()-6;yMin--) {
+            for(int yMin = bp.getY();yMin>bp.getY()-13;yMin--) {
                 BlockPos c = new BlockPos(bp.getX(),yMin,bp.getZ());
                 BlockState bs = Cornos.minecraft.world.getBlockState(c);
+                Vec3d v = new Vec3d(c.getX(),c.getY(),c.getZ());
                 if (!bs.isAir()) {
-                    if(used != Items.WATER_BUCKET)STL.interactWithItemInHotbar(itemToUse,c.add(0,1,0));
+                    if(used != Items.WATER_BUCKET) {
+                        if (Cornos.minecraft.player.getPos().distanceTo(v) > 4) continue;
+                        STL.interactWithItemInHotbar(itemToUse,c.add(0,1,0));
+                    }
                     else {
-                        // i hate this
+                        // i hate this, thanks minecraft
                         Cornos.minecraft.player.inventory.selectedSlot = itemToUse;
                         Cornos.minecraft.player.pitch = 90f;
                         PlayerInteractItemC2SPacket p = new PlayerInteractItemC2SPacket(Hand.MAIN_HAND);
