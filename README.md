@@ -1,4 +1,5 @@
 # Cornos
+
 based block game hax
 
 ![cornos-logo](https://github.com/AriliusClient/Cornos/blob/master/src/main/resources/assets/ccl/hscreenlogo.png?raw=true)
@@ -13,18 +14,26 @@ we have discor
 # Installation
 
 ## Easy installation
-You can use the [cornos installer](https://github.com/AriliusClient/cornos-installer/releases) to easily install this mod. If you wish to install the mod manually, keep reading
 
-To download the mod jarfile, read [How to obtain the mod without building](https://github.com/AriliusClient/CornClient/wiki/How-to-obtain-the-mod-without-building)
+You can use the [cornos installer](https://github.com/AriliusClient/cornos-installer/releases) to easily install this
+mod. If you wish to install the mod manually, keep reading
 
-To contribute or build the mod yourself, read [Building and contributing](https://github.com/AriliusClient/CornClient/wiki/Building-and-contributing)
+To download the mod jarfile,
+read [How to obtain the mod without building](https://github.com/AriliusClient/CornClient/wiki/How-to-obtain-the-mod-without-building)
+
+To contribute or build the mod yourself,
+read [Building and contributing](https://github.com/AriliusClient/CornClient/wiki/Building-and-contributing)
 
 ## Installing as a fabric mod
+
 1. Install the [fabric loader](https://fabricmc.net/use/)
-2. Drag the mod jarfile and the [fabric api](https://www.curseforge.com/minecraft/mc-mods/fabric-api) to `(Minecraft folder)/mods`. If there is no `mods` folder, create one. If you have a custom version folder, use that one.
+2. Drag the mod jarfile and the [fabric api](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+   to `(Minecraft folder)/mods`. If there is no `mods` folder, create one. If you have a custom version folder, use that
+   one.
 3. Launch the fabric instance using your Minecraft launcher
 
 ## Building
+
 1. Clone this repo
 2. Open the new folder in your terminal
 3. On Linux/Mac: `$ chmod +x ./gradlew && ./gradlew build`. On Windows: `gradlew.bat build`.
@@ -53,6 +62,7 @@ After you obtained the jarfile, read the section above, "Installing the jarfile"
 # Credits
 
 Thanks to everyone who contributed to this! Special thanks go to:
+
 - xlvin#2111 for making the logo
 - Chicken#0002 for a ton of work on the client
 - and everyone else who contributed.

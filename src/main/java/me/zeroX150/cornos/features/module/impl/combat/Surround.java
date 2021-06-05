@@ -24,7 +24,7 @@ public class Surround extends Module {
     MConfToggleable checkOnGround = new MConfToggleable("checkOnGround", true, "Check if you are on solid ground");
     MConfToggleable checkVelocity = new MConfToggleable("checkVelocity", false, "Check if you are not moving");
     MConfToggleable instant = new MConfToggleable("instant", false, "Place all blocks instantly");
-    MConfToggleable switchToObby = new MConfToggleable("switchObby", true, "Switch to obsidian before placing");
+    MConfToggleable switchToObby = new MConfToggleable("useObby", true, "Switch to obsidian before placing");
     MConfToggleable blockMovements = new MConfToggleable("blockMovements", true, "Block movements while placing");
     GameOptions backup;
     int delayWaited = 0;
@@ -81,8 +81,9 @@ public class Surround extends Module {
                     go.keyBack.setPressed(false);
                     go.keyJump.setPressed(false);
                 }
+                int prevIndex = Cornos.minecraft.player.inventory.selectedSlot;
+                int obsidianIndex = -1;
                 if (switchToObby.isEnabled()) {
-                    int obsidianIndex = -1;
                     for (int i = 0; i < 9; i++) {
                         ItemStack current = Cornos.minecraft.player.inventory.getStack(i);
                         if (current.getItem() == Items.OBSIDIAN) {
@@ -96,7 +97,6 @@ public class Surround extends Module {
                     }
                     if (Cornos.minecraft.player.inventory.selectedSlot != obsidianIndex) {
                         Cornos.minecraft.player.inventory.selectedSlot = obsidianIndex;
-                        return;
                     }
                 }
                 BlockPos bruh = Cornos.minecraft.player.getBlockPos();
@@ -111,6 +111,7 @@ public class Surround extends Module {
                     if (!instant.isEnabled())
                         break;
                 }
+                Cornos.minecraft.player.inventory.selectedSlot = prevIndex;
             }
             if (delayWaited > delay.max + 1)
                 delayWaited = (int) Math.ceil(delay.max);

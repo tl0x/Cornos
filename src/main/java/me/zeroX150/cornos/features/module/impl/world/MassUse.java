@@ -17,17 +17,18 @@ import java.util.List;
 public class MassUse extends Module {
     List<Packet<?>> dontRepeat = new ArrayList<>();
     MConfNum amount = new MConfNum("amount", 10, 100, 1, "The amount of times to use the item at once");
+
     public MassUse() {
         super("MassUse", "Uses an item a lot of times at once", ModuleType.WORLD);
         mconf.add(amount);
         Module p = this;
-        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND,event -> {
+        EventHelper.BUS.registerEvent(EventType.ONPACKETSEND, event -> {
             if (!p.isEnabled()) return;
             PacketEvent pe = (PacketEvent) event;
             if (dontRepeat.contains(pe.packet)) return;
             if (pe.packet instanceof PlayerInteractBlockC2SPacket || pe.packet instanceof PlayerInteractItemC2SPacket) {
                 dontRepeat.add(pe.packet);
-                for(int i = 0;i<amount.getValue();i++) {
+                for (int i = 0; i < amount.getValue(); i++) {
                     Cornos.minecraft.getNetworkHandler().sendPacket(pe.packet);
                 }
                 dontRepeat.remove(pe.packet);

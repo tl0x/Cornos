@@ -65,11 +65,13 @@ public class Scaffold extends Module {
                 if (isIndex == -1)
                     return;
                 Cornos.minecraft.player.inventory.selectedSlot = isIndex;
-                BlockHitResult bhr = new BlockHitResult(new Vec3d(.5, .5, .5), Direction.DOWN, current, false);
+                int ofx = Direction.DOWN.getOffsetX(), ofy = Direction.DOWN.getOffsetY(), ofz = Direction.DOWN.getOffsetZ();
+                BlockHitResult bhr = new BlockHitResult(new Vec3d(current.getX(), current.getY(), current.getZ()).add(.5, .5, .5).add(ofx, ofy, ofz), Direction.DOWN, current, false);
                 assert Cornos.minecraft.interactionManager != null;
                 Cornos.minecraft.interactionManager.interactBlock(Cornos.minecraft.player, Cornos.minecraft.world,
                         Hand.MAIN_HAND, bhr);
                 Cornos.minecraft.getNetworkHandler().sendPacket(new HandSwingC2SPacket(Hand.MAIN_HAND));
+                Cornos.minecraft.player.inventory.selectedSlot = prevIndex;
             }
         }
         super.onExecute();

@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PlayerEntityMixin {
     @Inject(method = "clipAtLedge", at = @At("HEAD"), cancellable = true)
     public void cAL(CallbackInfoReturnable<Boolean> cir) {
+        // shut up stinky
         PlayerEntity context = (PlayerEntity) ((Object) this);
         if (Cornos.minecraft.player == null)
             return;

@@ -122,6 +122,7 @@ public class ModuleRegistry {
         ml.add(new PingSpoof());
         ml.add(new Filler());
         ml.add(new MassUse());
+        ml.add(new AutoSneak());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();
