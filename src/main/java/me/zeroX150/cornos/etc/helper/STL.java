@@ -188,4 +188,15 @@ public class STL {
         double s = Math.pow(10, n);
         return Math.round(in * s) / s;
     }
+
+    public static void interactWithItemInHotbar(int slot, BlockPos position) {
+        if (slot < 0 || slot > 8 || Cornos.minecraft.player == null || Cornos.minecraft.interactionManager == null) return;
+        int prev = Cornos.minecraft.player.inventory.selectedSlot;
+        Cornos.minecraft.player.inventory.selectedSlot = slot;
+        int ofx = Direction.DOWN.getOffsetX(), ofy = Direction.DOWN.getOffsetY(), ofz = Direction.DOWN.getOffsetZ();
+        BlockHitResult bhr = new BlockHitResult(new Vec3d(position.getX(), position.getY(), position.getZ()).add(.5, .5, .5).add(ofx, ofy, ofz), Direction.DOWN, position, false);
+        Cornos.minecraft.interactionManager.interactBlock(Cornos.minecraft.player, Cornos.minecraft.world,
+                Hand.MAIN_HAND, bhr);
+        Cornos.minecraft.player.inventory.selectedSlot = prev;
+    }
 }

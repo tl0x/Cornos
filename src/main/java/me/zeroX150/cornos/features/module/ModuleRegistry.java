@@ -123,6 +123,7 @@ public class ModuleRegistry {
         ml.add(new Filler());
         ml.add(new MassUse());
         ml.add(new AutoSneak());
+        ml.add(new AutoMLG());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

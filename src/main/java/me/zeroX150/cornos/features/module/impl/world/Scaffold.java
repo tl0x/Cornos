@@ -2,6 +2,7 @@ package me.zeroX150.cornos.features.module.impl.world;
 
 import me.zeroX150.cornos.Cornos;
 import me.zeroX150.cornos.etc.config.MConfToggleable;
+import me.zeroX150.cornos.etc.helper.STL;
 import me.zeroX150.cornos.features.module.Module;
 import me.zeroX150.cornos.features.module.ModuleType;
 import net.minecraft.block.Block;
@@ -64,14 +65,9 @@ public class Scaffold extends Module {
                 }
                 if (isIndex == -1)
                     return;
-                Cornos.minecraft.player.inventory.selectedSlot = isIndex;
-                int ofx = Direction.DOWN.getOffsetX(), ofy = Direction.DOWN.getOffsetY(), ofz = Direction.DOWN.getOffsetZ();
-                BlockHitResult bhr = new BlockHitResult(new Vec3d(current.getX(), current.getY(), current.getZ()).add(.5, .5, .5).add(ofx, ofy, ofz), Direction.DOWN, current, false);
-                assert Cornos.minecraft.interactionManager != null;
-                Cornos.minecraft.interactionManager.interactBlock(Cornos.minecraft.player, Cornos.minecraft.world,
-                        Hand.MAIN_HAND, bhr);
+                STL.interactWithItemInHotbar(isIndex,current);
                 Cornos.minecraft.getNetworkHandler().sendPacket(new HandSwingC2SPacket(Hand.MAIN_HAND));
-                Cornos.minecraft.player.inventory.selectedSlot = prevIndex;
+
             }
         }
         super.onExecute();
