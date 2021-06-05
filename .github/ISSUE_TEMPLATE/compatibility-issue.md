@@ -1,6 +1,9 @@
 ---
-name: Compatibility Issue about: Oh no Cornos doesn't work with other mod title: 'Compatibility: '
-labels: bug, compatibility issue assignees: ''
+name: Compatibility Issue
+about: Oh no Cornos doesn't work with other mod
+title: 'Compatibility: '
+labels: bug, compatibility issue
+assignees: ''
 
 ---
 

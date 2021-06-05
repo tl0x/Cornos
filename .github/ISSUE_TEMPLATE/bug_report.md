@@ -1,6 +1,9 @@
 ---
-name: Bug report about: Oh no Cornos did something it shouldn't have title: 'Bug: '
-labels: bug assignees: ''
+name: Bug report
+about: Oh no Cornos did something it shouldn't have
+title: 'Bug: '
+labels: bug
+assignees: ''
 
 ---
 

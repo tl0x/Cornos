@@ -1,6 +1,9 @@
 ---
-name: Crash report about: Oh no Cornos died suddenly title: 'Crash: '
-labels: bug, crash assignees: ''
+name: Crash report
+about: Oh no Cornos died suddenly
+title: 'Crash: '
+labels: bug, crash
+assignees: ''
 
 ---
 

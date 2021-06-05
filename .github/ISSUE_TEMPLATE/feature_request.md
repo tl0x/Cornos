@@ -1,6 +1,9 @@
 ---
-name: Feature request about: I want Cornos to do this or do this better title: 'Enhancement: '
-labels: enhancement assignees: ''
+name: Feature request
+about: I want Cornos to do this or do this better
+title: 'Enhancement: '
+labels: enhancement
+assignees: ''
 
 ---
 Please search in [the issues page](https://github.com/AriliusClient/Cornos/issues?q=) to make sure this isn't a
