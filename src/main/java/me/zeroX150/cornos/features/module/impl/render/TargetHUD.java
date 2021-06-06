@@ -82,7 +82,7 @@ public class TargetHUD extends Module {
             Renderer.renderLineScreen(new Vec3d(x2, y1, 0), new Vec3d(x2, y2, 0), Hud.themeColor.getColor(), 2);
             Renderer.renderLineScreen(new Vec3d(x2, y2, 0), new Vec3d(x1, y2, 0), Hud.themeColor.getColor(), 2);
             Renderer.renderLineScreen(new Vec3d(x1, y2, 0), new Vec3d(x1, y1, 0), Hud.themeColor.getColor(), 2);
-            InventoryScreen.drawEntity(x1 + 10, y1 + 40, 20, (float) -(w1 / 10), (float) -(h / 10), current);
+            InventoryScreen.drawEntity(x1 + 10, y1 + 38, 18, (float) -(w1 / 10), (float) -(h / 10), current);
             DrawableHelper.drawCenteredString(ms, Cornos.minecraft.textRenderer, uname, x1 + (width / 2), y1 + 2,
                     0xFFFFFF);
             GL11.glScaled(innerCompScale, innerCompScale, innerCompScale);

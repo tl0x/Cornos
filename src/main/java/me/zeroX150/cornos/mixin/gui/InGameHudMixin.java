@@ -27,9 +27,6 @@ import java.util.List;
 
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
-    double rgbSeed = 0;
-    int stage = 0;
-    long latestTime = System.currentTimeMillis();
     @Shadow
     private int scaledWidth;
 
@@ -37,44 +34,8 @@ public class InGameHudMixin {
     public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
         Hud hud = (Hud) ModuleRegistry.search(Hud.class);
         double rgbSpeed = ((MConfNum) ModuleRegistry.search(Hud.class).mconf.getByName("rgbSpeed")).getValue();
-        long elapsed = System.currentTimeMillis() - latestTime;
-        if (elapsed != 0)
-            latestTime = System.currentTimeMillis();
-        rgbSeed += (elapsed * rgbSpeed) / 20;
-        if (rgbSeed > 255) {
-            rgbSeed = 0;
-            stage++;
-        }
-        if (stage > 2)
-            stage = 0;
-        int r, g, b;
-        switch (stage) {
-            case 0:
-                r = (int) rgbSeed;
-                g = 0;
-                b = (int) Math.abs(rgbSeed - 255);
-                break;
-            case 1:
-                r = (int) Math.abs(rgbSeed - 255);
-                g = (int) rgbSeed;
-                b = 0;
-                break;
-            case 2:
-                r = 0;
-                g = (int) Math.abs(rgbSeed - 255);
-                b = (int) rgbSeed;
-                break;
-            default:
-                stage = 0;
-                r = 0;
-                g = 0;
-                b = 0;
-                if (Cornos.minecraft.currentScreen == null) {
-                    Cornos.openCongratsScreen();
-                }
-        }
-        float[] ham = Color.RGBtoHSB(r, g, b, null);
-        CConf.latestRGBVal = Color.HSBtoRGB(ham[0], 0.6f, ham[2]);
+        double majorBruhMoment = Math.abs(rgbSpeed - 21) * 250;
+        CConf.latestRGBVal = Color.HSBtoRGB((float) ((System.currentTimeMillis() % majorBruhMoment) / majorBruhMoment), 0.6f, 1);
 
         if (ModuleRegistry.search(Hud.class).isEnabled()) {
             if (((MConfToggleable) hud.mconf.getByName("modules")).isEnabled()) {
@@ -88,7 +49,6 @@ public class InGameHudMixin {
                 }
                 mlR.sort(Comparator.comparingInt(o -> Cornos.minecraft.textRenderer.getWidth(o.name + (o.getContext().isEmpty() ? "" : " " + o.getContext()))));
                 List<Module> mlR1 = Lists.reverse(mlR);
-                double majorBruhMoment = Math.abs(rgbSpeed - 21) * (250.0);
                 double hsvVal = (System.currentTimeMillis() % majorBruhMoment) / majorBruhMoment;
                 double hsvInc = Hud.modulesRgbScale.getValue();
                 for (Module module : mlR1) {

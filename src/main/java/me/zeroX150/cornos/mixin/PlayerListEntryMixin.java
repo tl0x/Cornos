@@ -23,14 +23,16 @@ public class PlayerListEntryMixin {
     public void getCapeTexture(CallbackInfoReturnable<Identifier> cir) {
         GameProfile context = this.profile;
         boolean hasCape = false;
-        for (String cape : Cornos.capes) {
+        String keyFound = null;
+        for (String cape : Cornos.capes.keySet()) {
             if (UUID.fromString(cape).equals(context.getId())) {
                 hasCape = true;
+                keyFound = cape;
                 break;
             }
         }
         if (hasCape) {
-            cir.setReturnValue(new Identifier("ccl", "contribcape.png"));
+            cir.setReturnValue(new Identifier("ccl", "capes/" + keyFound + ".png"));
         }
     }
 }

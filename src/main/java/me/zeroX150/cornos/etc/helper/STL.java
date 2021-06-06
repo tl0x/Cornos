@@ -30,8 +30,8 @@ import java.net.Proxy;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class STL {
@@ -119,7 +119,7 @@ public class STL {
                 if (parent.exists()) {
                     trash = parent.delete();
                 }
-                dlU("https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar", parent.getAbsolutePath());
+                downloadFile("https://github.com/AriliusClient/Cornos/raw/master/builds/latest.jar", parent.getAbsolutePath());
                 HashCode hc = Files.asByteSource(f).hash(Hashing.crc32());
                 HashCode hc1 = Files.asByteSource(parent).hash(Hashing.crc32());
                 if (!hc.equals(hc1)) {
@@ -138,7 +138,7 @@ public class STL {
         }).start();
     }
 
-    private static void dlU(String urlStr, String file) throws IOException {
+    public static void downloadFile(String urlStr, String file) throws IOException {
         URL url = new URL(urlStr);
         ReadableByteChannel rbc = Channels.newChannel(url.openStream());
         FileOutputStream fos = new FileOutputStream(file);
@@ -155,18 +155,25 @@ public class STL {
         Cornos.minecraft.getNetworkHandler().sendPacket(p);
     }
 
-    public static List<String> downloadCapes() throws IOException {
+    public static Map<String, String> downloadCapes() throws IOException {
         URL u = new URL(
-                "https://raw.githubusercontent.com/AriliusClient/ariliusclient.github.io/master/contributors.txt");
+                "https://raw.githubusercontent.com/cornos/cornos.github.io/master/contributors.txt");
         HttpURLConnection huc = (HttpURLConnection) u.openConnection();
         huc.setInstanceFollowRedirects(true);
         huc.connect();
         InputStream response = huc.getInputStream();
         BufferedReader r = new BufferedReader(new InputStreamReader(response));
-        List<String> resp = new ArrayList<>();
+        Map<String, String> resp = new HashMap<>();
         String current;
         while ((current = r.readLine()) != null) {
-            resp.add(current);
+            String[] cH = current.split(" ");
+            if (cH.length < 1) continue;
+            String username, cape;
+            username = cH[0];
+            if (cH.length == 1) {
+                cape = "https://raw.githubusercontent.com/cornos/cornos-files/master/contribcape.png";
+            } else cape = cH[1];
+            resp.put(username, cape);
         }
         r.close();
         response.close();
@@ -190,7 +197,8 @@ public class STL {
     }
 
     public static void interactWithItemInHotbar(int slot, BlockPos position) {
-        if (slot < 0 || slot > 8 || Cornos.minecraft.player == null || Cornos.minecraft.interactionManager == null) return;
+        if (slot < 0 || slot > 8 || Cornos.minecraft.player == null || Cornos.minecraft.interactionManager == null)
+            return;
         int prev = Cornos.minecraft.player.inventory.selectedSlot;
         Cornos.minecraft.player.inventory.selectedSlot = slot;
         int ofx = Direction.DOWN.getOffsetX(), ofy = Direction.DOWN.getOffsetY(), ofz = Direction.DOWN.getOffsetZ();

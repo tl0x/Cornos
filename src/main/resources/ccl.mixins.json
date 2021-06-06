@@ -32,6 +32,7 @@
     "gui.AbstractButtonWidgetMixin",
     "gui.ChatScreenMixin",
     "gui.CreativeInventoryScreenMixin",
+    "gui.DefaultResourcePackMixin",
     "gui.EditGameRulesScreenMixin",
     "gui.EntryListWidgetMixin",
     "gui.GameRendererMixin",

@@ -14,24 +14,21 @@ import me.zeroX150.cornos.features.module.impl.external.ClientConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Cornos implements ModInitializer {
 
@@ -54,7 +51,7 @@ public class Cornos implements ModInitializer {
     public static Thread fastUpdater;
     public static NotificationManager notifMan;
     public static FriendsManager friendsManager;
-    public static List<String> capes = new ArrayList<>();
+    public static Map<String, String> capes = new HashMap<>();
     public static ClientConfig config;
 
     public static void log(Level level, String message) {
@@ -66,27 +63,6 @@ public class Cornos implements ModInitializer {
             InputStream inputStream = Cornos.class.getClassLoader().getResourceAsStream("assets/ccl/icon1.png");
             Cornos.minecraft.getWindow().setIcon(inputStream, inputStream);
         }
-    }
-
-    public static void openCongratsScreen() {
-        ConfirmScreen cs1 = new ConfirmScreen(t -> {
-            if (t) {
-                Util.getOperatingSystem()
-                        .open("https://github.com/AriliusClient/Cornos/issues/new?title=Broke%20the%20client");
-            } else
-                Cornos.minecraft.openScreen(null);
-        }, Text.of("Congrats!"), Text.of("You broke the client! Dare to tell me how you did it?"));
-        Cornos.minecraft.openScreen(cs1);
-    }
-
-    // had to do this because yes
-    private static String rndAscii(int size) {
-        StringBuilder end = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            // 97+25
-            end.append((char) (new Random().nextInt(25) + 97));
-        }
-        return end.toString();
     }
 
     @Override
@@ -112,8 +88,12 @@ public class Cornos implements ModInitializer {
             log(Level.INFO, "Getting capes");
             capes = STL.downloadCapes();
             log(Level.INFO, "Contributor UUIDs:");
-            for (String cape : capes) {
-                log(Level.INFO, "  " + cape);
+            File cornosCapes = new File(minecraft.runDirectory.getAbsolutePath() + "/cornosCapes/");
+            if (!cornosCapes.exists()) cornosCapes.mkdir();
+            for (String cape : capes.keySet()) {
+                log(Level.INFO, "  " + cape + " has cape " + capes.get(cape));
+                log(Level.INFO, "  - DOWNLOAD " + capes.get(cape));
+                STL.downloadFile(capes.get(cape), cornosCapes.getAbsolutePath() + "/" + cape + ".png");
             }
         } catch (IOException e) {
             log(Level.INFO, "Failed to download capes.");

@@ -12,8 +12,6 @@ import me.zeroX150.cornos.Cornos;
 import me.zeroX150.cornos.etc.helper.STL;
 import me.zeroX150.cornos.features.module.Module;
 import me.zeroX150.cornos.features.module.ModuleType;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 
 public class Debug extends Module {
     public Debug() {
@@ -22,7 +20,7 @@ public class Debug extends Module {
 
     @Override
     public void onExecute() {
-        STL.notifyUser("[D] VEL: "+Cornos.minecraft.player.getVelocity().toString());
+        STL.notifyUser("[D] VEL: " + Cornos.minecraft.player.getVelocity().toString());
 
         super.onExecute();
     }

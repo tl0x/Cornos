@@ -11,10 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.c2s.play.HandSwingC2SPacket;
 import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 
 public class Scaffold extends Module {
     public static MConfToggleable preventFalling = new MConfToggleable("preventFall", true, "Prevent falling down");
@@ -65,7 +62,7 @@ public class Scaffold extends Module {
                 }
                 if (isIndex == -1)
                     return;
-                STL.interactWithItemInHotbar(isIndex,current);
+                STL.interactWithItemInHotbar(isIndex, current);
                 Cornos.minecraft.getNetworkHandler().sendPacket(new HandSwingC2SPacket(Hand.MAIN_HAND));
 
             }
