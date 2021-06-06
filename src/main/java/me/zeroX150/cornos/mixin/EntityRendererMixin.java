@@ -1,8 +1,10 @@
 package me.zeroX150.cornos.mixin;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import me.zeroX150.cornos.Cornos;
 import me.zeroX150.cornos.features.module.ModuleRegistry;
 import me.zeroX150.cornos.features.module.impl.external.AntiBlockban;
+import me.zeroX150.cornos.features.module.impl.external.Chams;
 import me.zeroX150.cornos.features.module.impl.external.NameTags;
 import me.zeroX150.cornos.features.module.impl.external.NoRender;
 import net.minecraft.client.render.Frustum;
@@ -65,11 +67,23 @@ public abstract class EntityRendererMixin<T extends Entity> {
         if (entity.getType().equals(EntityType.AREA_EFFECT_CLOUD)
                 && ModuleRegistry.search(AntiBlockban.class).isEnabled())
             ci.cancel();
-        if (entity.getType().equals(EntityType.ITEM_FRAME) && NoRender.maps.isEnabled()) {
+        if (entity.getType().equals(EntityType.ITEM_FRAME) && NoRender.maps.isEnabled() && ModuleRegistry.search(NoRender.class).isEnabled()) {
             ItemFrameEntity current = (ItemFrameEntity) entity;
             if (current.getHeldItemStack().getItem() == Items.FILLED_MAP) {
                 ci.cancel();
             }
+        }
+        if (ModuleRegistry.search(Chams.class).isEnabled()) {
+            GlStateManager.enablePolygonOffset();
+            GlStateManager.polygonOffset(1, -1500000);
+        }
+    }
+
+    @Inject(method = "render", at = @At("RETURN"))
+    public void render1(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
+        if (ModuleRegistry.search(Chams.class).isEnabled()) {
+            GlStateManager.disablePolygonOffset();
+            GlStateManager.polygonOffset(1, 1500000);
         }
     }
 }

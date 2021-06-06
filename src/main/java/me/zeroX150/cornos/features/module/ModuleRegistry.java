@@ -125,6 +125,7 @@ public class ModuleRegistry {
         ml.add(new AutoSneak());
         ml.add(new AutoMLG());
         ml.add(new AirJump());
+        ml.add(new Chams());
 
         ml.add(budgetGraphicsInstance);
         tabManager = new TabManager();

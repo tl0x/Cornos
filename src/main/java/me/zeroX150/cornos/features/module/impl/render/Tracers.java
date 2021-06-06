@@ -9,6 +9,7 @@ PLEASE READ THE COPYRIGHT NOTICE IN THE PROJECT ROOT, IF EXISTENT
 package me.zeroX150.cornos.features.module.impl.render;
 
 import me.zeroX150.cornos.Cornos;
+import me.zeroX150.cornos.etc.config.MConfMultiOption;
 import me.zeroX150.cornos.etc.config.MConfNum;
 import me.zeroX150.cornos.etc.config.MConfToggleable;
 import me.zeroX150.cornos.etc.helper.Renderer;
@@ -29,10 +30,12 @@ public class Tracers extends Module {
     MConfToggleable entities = new MConfToggleable("Entities", true, "show entities");
     MConfToggleable players = new MConfToggleable("Players", true, "show players");
     MConfToggleable tracers = new MConfToggleable("Tracers", true, "show tracers + boxes");
+    MConfMultiOption boxMode = new MConfMultiOption("BoxMode", "outline", new String[]{"outline", "box", "none"}, "The mode to render the outline of the entity after");
     MConfNum dist = new MConfNum("Distance", 100, 1000, 10, "max distance to stop tracking");
 
     public Tracers() {
         super("Tracers", "Tired of getting creeped up against?", ModuleType.RENDER);
+        mconf.add(boxMode);
         this.mconf.add(entities);
         this.mconf.add(players);
         this.mconf.add(dist);
@@ -62,8 +65,12 @@ public class Tracers extends Module {
                 Vec3d off = new Vec3d(currE.getWidth(), currE.getHeight(), currE.getWidth());
                 Vec3d currEV = currE.getPos();
 
-                Renderer.renderBlockOutline(currEV.add(off.multiply(-.5)).add(0, off.y / 2, 0), off, gInit,
-                        (int) rInit2, 50, 255);
+                if (boxMode.value.equalsIgnoreCase("box"))
+                    Renderer.renderBlockOutline(currEV.add(off.multiply(-.5)).add(0, off.y / 2, 0), off, gInit,
+                            (int) rInit2, 50, 255);
+                else if (boxMode.value.equalsIgnoreCase("outline")) Renderer.renderOutline(currE);
+
+
                 // RenderHelper.addToQueue(rb);
                 if (((MConfToggleable) this.mconf.getByName("Tracers")).isEnabled()
                         && !ModuleRegistry.budgetGraphicsInstance.isEnabled()) {
