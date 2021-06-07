@@ -43,6 +43,7 @@ public class CommandRegistry {
         cl.add(new RandomBook());
         cl.add(new DataDump());
         cl.add(new Filler());
+        cl.add(new Poof2());
     }
 
     public static List<Command> getAll() {
