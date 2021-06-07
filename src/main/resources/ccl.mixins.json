@@ -53,6 +53,7 @@
     "gui.WorldRendererMixin",
     "packet.ChatMessageC2SPacketMixin",
     "packet.CombatEventS2CPacketMixin",
+    "packet.CustomPayloadC2SPacketAccessor",
     "packet.EntitySpawnS2CPacketMixin",
     "packet.ExplosionS2CPacketMixin",
     "packet.LoginHelloC2SPacketMixin",
