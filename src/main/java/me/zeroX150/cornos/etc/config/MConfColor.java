@@ -40,9 +40,7 @@ public class MConfColor extends MConf.ConfigKey {
     }
 
     public int getRGB() {
-        Color finalcol = new Color(CConf.latestRGBVal);
-        if (!rainbow)
-            finalcol = c;
+        Color finalcol = isRainbow() ? new Color(CConf.latestRGBVal) : c;
         return finalcol.getRGB();
     }
 

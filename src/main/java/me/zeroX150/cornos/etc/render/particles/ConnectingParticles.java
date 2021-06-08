@@ -2,6 +2,7 @@ package me.zeroX150.cornos.etc.render.particles;
 
 import me.zeroX150.cornos.Cornos;
 import me.zeroX150.cornos.etc.helper.Renderer;
+import me.zeroX150.cornos.features.module.ModuleRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.util.Window;
@@ -17,7 +18,7 @@ public class ConnectingParticles extends Particles {
 
     @Override
     public void tick() {
-        if (!Cornos.config.particles.isEnabled())
+        if (!Cornos.config.particles.isEnabled() || ModuleRegistry.budgetGraphicsInstance.isEnabled())
             return;
         Window w = MinecraftClient.getInstance().getWindow();
         maxDist = Math.sqrt(w.getScaledWidth() * w.getScaledWidth() + w.getScaledHeight() * w.getScaledHeight()) / 9;
@@ -65,7 +66,7 @@ public class ConnectingParticles extends Particles {
 
     @Override
     public void render() {
-        if (!Cornos.config.particles.isEnabled())
+        if (!Cornos.config.particles.isEnabled() || ModuleRegistry.budgetGraphicsInstance.isEnabled())
             return;
         for (Particle particle : particles) {
             for (Particle particle1 : particles) {

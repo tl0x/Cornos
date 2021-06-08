@@ -35,7 +35,7 @@ public class InGameHudMixin {
         Hud hud = (Hud) ModuleRegistry.search(Hud.class);
         double rgbSpeed = ((MConfNum) ModuleRegistry.search(Hud.class).mconf.getByName("rgbSpeed")).getValue();
         double majorBruhMoment = Math.abs(rgbSpeed - 21) * 250;
-        CConf.latestRGBVal = Color.HSBtoRGB((float) ((System.currentTimeMillis() % majorBruhMoment) / majorBruhMoment), 0.6f, 1);
+        CConf.latestRGBVal = Hud.themeColor.isRainbow() ? Color.HSBtoRGB((float) ((System.currentTimeMillis() % majorBruhMoment) / majorBruhMoment), 0.6f, 1) : Hud.themeColor.getRGB();
 
         if (ModuleRegistry.search(Hud.class).isEnabled()) {
             if (((MConfToggleable) hud.mconf.getByName("modules")).isEnabled()) {

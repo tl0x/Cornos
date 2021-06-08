@@ -15,7 +15,6 @@ import me.zeroX150.cornos.etc.config.MConfNum;
 import me.zeroX150.cornos.etc.config.MConfToggleable;
 import me.zeroX150.cornos.etc.helper.Renderer;
 import me.zeroX150.cornos.features.module.Module;
-import me.zeroX150.cornos.features.module.ModuleRegistry;
 import me.zeroX150.cornos.features.module.ModuleType;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.util.math.MatrixStack;
@@ -54,24 +53,19 @@ public class Confuse extends Module {
             if (Cornos.friendsManager.getFriends().containsKey(target.getEntityName())) {
                 return;
             }
-            boolean flag = ModuleRegistry.budgetGraphicsInstance.isEnabled();
             Vec3d last = null;
-            addition += flag ? 0 : 1.0;
+            addition += 1.0;
             if (addition > 360)
                 addition = 0;
-            for (int i = 0; i < 360; i += flag ? 7 : 1) {
+            for (int i = 0; i < 360; i += 1) {
                 Color c1;
-                if (flag)
-                    c1 = Color.GREEN;
-                else {
-                    double rot = (255.0 * 3) * (((((double) i) + addition) % 360) / 360.0);
-                    int seed = (int) Math.floor(rot / 255.0);
-                    double current = rot % 255;
-                    double red = seed == 0 ? current : (seed == 1 ? Math.abs(current - 255) : 0);
-                    double green = seed == 1 ? current : (seed == 2 ? Math.abs(current - 255) : 0);
-                    double blue = seed == 2 ? current : (seed == 0 ? Math.abs(current - 255) : 0);
-                    c1 = new Color((int) red, (int) green, (int) blue);
-                }
+                double rot = (255.0 * 3) * (((((double) i) + addition) % 360) / 360.0);
+                int seed = (int) Math.floor(rot / 255.0);
+                double current = rot % 255;
+                double red = seed == 0 ? current : (seed == 1 ? Math.abs(current - 255) : 0);
+                double green = seed == 1 ? current : (seed == 2 ? Math.abs(current - 255) : 0);
+                double blue = seed == 2 ? current : (seed == 0 ? Math.abs(current - 255) : 0);
+                c1 = new Color((int) red, (int) green, (int) blue);
                 Vec3d tp = target.getPos();
                 double rad = Math.toRadians(i);
                 double sin = Math.sin(rad) * 3;

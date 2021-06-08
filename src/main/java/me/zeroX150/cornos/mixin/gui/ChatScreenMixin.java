@@ -22,7 +22,7 @@ public class ChatScreenMixin {
     @Inject(at = {@At("HEAD")}, method = "render")
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (CConf.chatScreenParticles == null)
-            CConf.chatScreenParticles = new ConnectingParticles(100);
+            CConf.chatScreenParticles = new ConnectingParticles(40);
         CConf.chatScreenParticles.render();
         if (chatField.getText().toCharArray().length > 0) {
             if (chatField.getText().toCharArray()[0] == Cornos.config.mconf.getByName("prefix").value

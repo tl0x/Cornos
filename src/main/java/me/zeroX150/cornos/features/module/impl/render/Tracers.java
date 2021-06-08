@@ -14,7 +14,6 @@ import me.zeroX150.cornos.etc.config.MConfNum;
 import me.zeroX150.cornos.etc.config.MConfToggleable;
 import me.zeroX150.cornos.etc.helper.Renderer;
 import me.zeroX150.cornos.features.module.Module;
-import me.zeroX150.cornos.features.module.ModuleRegistry;
 import me.zeroX150.cornos.features.module.ModuleType;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
@@ -72,8 +71,7 @@ public class Tracers extends Module {
 
 
                 // RenderHelper.addToQueue(rb);
-                if (((MConfToggleable) this.mconf.getByName("Tracers")).isEnabled()
-                        && !ModuleRegistry.budgetGraphicsInstance.isEnabled()) {
+                if (((MConfToggleable) this.mconf.getByName("Tracers")).isEnabled()) {
                     Color c = Color.GREEN;
                     if (TargetHUD.current != null && TargetHUD.current.getUuid().equals(currE.getUuid()))
                         c = new Color(0, 255, 136);

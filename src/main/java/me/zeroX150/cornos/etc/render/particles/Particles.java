@@ -1,6 +1,7 @@
 package me.zeroX150.cornos.etc.render.particles;
 
 import me.zeroX150.cornos.Cornos;
+import me.zeroX150.cornos.features.module.ModuleRegistry;
 import net.minecraft.client.util.Window;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class Particles {
     }
 
     public void tick() {
-        if (!Cornos.config.particles.isEnabled())
+        if (!Cornos.config.particles.isEnabled() || ModuleRegistry.budgetGraphicsInstance.isEnabled())
             return;
         Window w = Cornos.minecraft.getWindow();
         for (Particle particle : particles) {

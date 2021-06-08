@@ -2,6 +2,7 @@ package me.zeroX150.cornos.etc.render.particles;
 
 import me.zeroX150.cornos.Cornos;
 import me.zeroX150.cornos.etc.helper.Renderer;
+import me.zeroX150.cornos.features.module.ModuleRegistry;
 
 import java.awt.*;
 import java.util.Random;
@@ -24,7 +25,7 @@ public class LargeParticles extends Particles {
 
     @Override
     public void render() {
-        if (!Cornos.config.particles.isEnabled())
+        if (!Cornos.config.particles.isEnabled() || ModuleRegistry.budgetGraphicsInstance.isEnabled())
             return;
         for (Particle particle : particles) {
             Renderer.renderCircle(particle.posX, particle.posY, particle.cache.get(0), particle.color, 2);
