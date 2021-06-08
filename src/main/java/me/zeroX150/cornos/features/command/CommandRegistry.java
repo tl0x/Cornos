@@ -44,6 +44,7 @@ public class CommandRegistry {
         cl.add(new DataDump());
         cl.add(new Filler());
         cl.add(new Poof2());
+        cl.add(new ServerInfo());
     }
 
     public static List<Command> getAll() {
